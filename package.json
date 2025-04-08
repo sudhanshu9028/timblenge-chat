@@ -1,0 +1,36 @@
+{
+  "name": "timblenge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@next/eslint-plugin-next": "^15.2.4",
+    "@react-spring/web": "^9.7.5",
+    "express": "^5.1.0",
+    "firebase": "^11.6.0",
+    "next": "15.2.4",
+    "prettier": "^3.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-tinder-card": "^1.6.4",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9.23.0",
+    "eslint-config-next": "15.2.4",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.6",
+    "sass": "^1.86.1",
+    "tailwindcss": "^4",
+    "typescript": "^5.8.2"
+  }
+}
