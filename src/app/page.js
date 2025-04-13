@@ -52,6 +52,12 @@ export default function HomePage() {
             Other
           </label>
         </div>
+        <h2 className={styles.tagline}>
+          The best friendships start with <span className={styles.highlight}>‘hi’</span>
+        </h2>
+        {/* <p className={styles.subtext}>
+          Connect instantly with a random stranger — no login, no hassle.
+        </p> */}
 
         <button className={styles.button} onClick={handleStartChat}>
           Start Chat

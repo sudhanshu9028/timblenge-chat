@@ -28,8 +28,11 @@ export default function ChatPage() {
   };
 
   const handleStop = () => {
-    if (!connected) return;
-    setMessages((prev) => [...prev, { from: 'system', text: 'You left the chat.' }]);
+    if (!connected) {
+      setMessages(() => [{ from: 'system', text: 'Disconnected.' }]);
+    } else {
+      setMessages((prev) => [...prev, { from: 'system', text: 'You left the chat.' }]);
+    }
     disconnectSocket();
     setConnected(false);
     setShowReconnectButton(true);
@@ -122,9 +125,7 @@ export default function ChatPage() {
         </div>
 
         <div className={styles.actions}>
-          <button onClick={handleStop} disabled={!connected}>
-            Stop Chat
-          </button>
+          <button onClick={handleStop}>Stop Chat</button>
           <button onClick={handleNext}>Next Chat</button>
         </div>
       </div>
