@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const geistSans = Geist({
@@ -33,6 +34,9 @@ export const metadata = {
   ],
   alternates: {
     canonical: 'https://timblenge.com/',
+  },
+  other: {
+    'google-site-verification': 'Jan32HbrGFwV4y6NG4m_lPyn8F9rl6luy7f8srKkfrM',
   },
   authors: [{ name: 'Anonymous', url: 'https://timblenge.com' }],
   metadataBase: new URL('https://timblenge.com'),
@@ -73,6 +77,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7LNMKJ3NBQ"
+          strategy="afterInteractive"
+        />
+
+        <Script id="ga-setup" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7LNMKJ3NBQ');
+  `}
+        </Script>
+
         <meta name="publisher" content="Timblenge" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
