@@ -11,6 +11,23 @@ export default function ChatPage() {
   const [isSearching, setIsSearching] = useState(true); // show "Finding..." initially
   const [showReconnectButton, setShowReconnectButton] = useState(false);
   const chatRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const input = inputRef.current;
+
+    const handleFocus = () => {
+      setTimeout(() => {
+        input?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }, 200); // slight delay for keyboard animation
+    };
+
+    input?.addEventListener('focus', handleFocus);
+
+    return () => {
+      input?.removeEventListener('focus', handleFocus);
+    };
+  }, []);
 
   const sendMessage = () => {
     if (!input.trim() || !connected) return;
@@ -115,6 +132,7 @@ export default function ChatPage() {
         <div className={styles.inputArea}>
           <input
             type="text"
+            ref={inputRef}
             placeholder={connected ? 'Type a message...' : 'Waiting for a stranger...'}
             value={input}
             disabled={!connected}
