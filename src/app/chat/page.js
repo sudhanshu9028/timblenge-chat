@@ -84,7 +84,7 @@ export default function ChatPage() {
   }, [messages]);
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <div className={styles.chatContainer}>
         <div className={styles.chatBox} ref={chatRef}>
           {isSearching && <p className={styles.system}>Finding a stranger...</p>}
@@ -121,14 +121,20 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
           />
-          <button onClick={sendMessage}>Send</button>
+          <div onClick={sendMessage} className={styles.sendBtn}>
+            Send
+          </div>
         </div>
 
         <div className={styles.actions}>
-          <button onClick={handleStop}>Stop Chat</button>
-          <button onClick={handleNext}>Next Chat</button>
+          <div onClick={handleStop} className={styles.stopBtn}>
+            Stop Chat
+          </div>
+          <div onClick={handleNext} className={styles.nextBtn}>
+            Next Chat
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,7 +1,8 @@
 .main {
     height: 100vh;
     display: flex;
-    align-items: center;
+    // align-items: center;
+    padding-top: 50px;
     justify-content: center;
     background: linear-gradient(135deg, #f9e0ff, #d4fcff);
     font-family: 'Segoe UI', sans-serif;
@@ -72,26 +73,28 @@
       padding: 0.75rem 1rem;
       border-radius: 0.75rem;
       border: 1px solid #ccc;
+      color: rgb(19, 18, 18);
     }
 
     input:disabled {
       background: #f0f0f0;
-      color: #aaa;
+      color: rgb(19, 18, 18);
       cursor: not-allowed;
     }
   
-    button {
+    .sendBtn {
       background: #e670b5;
       border: none;
-      padding: 0 1.25rem;
+      padding: 10px;
       color: white;
       font-weight: 500;
       border-radius: 0.75rem;
       cursor: pointer;
       transition: all 0.2s ease;
-      flex-shrink: 0;
-      white-space: nowrap;
-      padding: 0.75rem 1.25rem;
+      // flex-shrink: 0;
+      // white-space: nowrap;
+      display: flex;
+      justify-content: center;
   
       &:hover {
         background: #d2569d;
@@ -102,6 +105,21 @@
   .actions {
     display: flex;
     justify-content: space-between;
+
+    .stopBtn, .nextBtn {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 0.5rem 1.2rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      color: black;
+  
+      &:hover {
+        background: #eee;
+      }
+    }
   
     button {
       background: #f5f5f5;
