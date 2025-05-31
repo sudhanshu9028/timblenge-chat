@@ -12,15 +12,18 @@
   "dependencies": {
     "@next/eslint-plugin-next": "^15.2.4",
     "@react-spring/web": "^9.7.5",
+    "cloudinary": "^2.6.1",
     "express": "^5.1.0",
     "firebase": "^11.6.0",
     "next": "15.2.4",
+    "next-cloudinary": "^6.16.0",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-tinder-card": "^1.6.4",
     "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.8.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

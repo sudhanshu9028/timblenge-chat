@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styles from '@/styles/home.module.scss';
 
 export default function HomePage() {
@@ -13,8 +14,11 @@ export default function HomePage() {
       alert('Please select a gender before starting.');
       return;
     }
+    const uniqueChatId = uuidv4();
+    sessionStorage.setItem('chatInitiated', 'true');
+    sessionStorage.setItem('uniqueChatId', uniqueChatId);
     sessionStorage.setItem('gender', gender);
-    router.push('/chat');
+    router.push(`/chat/${uniqueChatId}`);
   };
 
   return (

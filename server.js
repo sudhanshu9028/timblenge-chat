@@ -100,6 +100,13 @@ app.prepare().then(() => {
       console.log('User disconnected:', socket.id);
       console.log('--sudhanshu disconnect--', waitingUsers);
     });
+
+    socket.on('image', (base64Image) => {
+      const partnerId = userSocketMap.get(socket.id);
+      if (partnerId) {
+        io.to(partnerId).emit('image', base64Image);
+      }
+    });
   });
 
   server.all(/(.*)/, (req, res) => {

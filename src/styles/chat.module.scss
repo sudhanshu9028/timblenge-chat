@@ -1,77 +1,127 @@
 .main {
-    height: 100%;
-    display: flex;
-    // align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    justify-content: center;
-    background: linear-gradient(135deg, #f9e0ff, #d4fcff);
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-  }
-  
-  .chatContainer {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    height: 100%;
-    border-radius: 1.25rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .chatBox {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex-grow: 1;
-    min-height: 0;
-    overflow-y: auto;
-    padding: 1rem;
-    border: 1px solid #eee;
+  height: 100%;
+  display: flex;
+  // align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  justify-content: center;
+  background: linear-gradient(135deg, #f9e0ff, #d4fcff);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.chatContainer {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  height: 100%;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  background: #fefefe;
+
+  .myMsg,
+  .theirMsg,
+  .system {
+    display: inline-block;
+    max-width: 80%;
+    padding: 0.5rem 0.75rem;
     border-radius: 1rem;
-    margin-bottom: 1rem;
-    background: #fefefe;
-  
-    .myMsg, .theirMsg, .system {
-      display: inline-block;
-      max-width: 80%;
-      padding: 0.5rem 0.75rem;
-      border-radius: 1rem;
-      word-break: break-word;
+    word-break: break-word;
+  }
+
+  .myMsg {
+    align-self: flex-start; // 👈 left aligned
+    background: #e670b5;
+    color: white;
+    border-radius: 1rem 1rem 1rem 0.2rem;
+  }
+
+  .theirMsg {
+    align-self: flex-end; // 👈 also left aligned (for now)
+    background: #ddd;
+    color: #333;
+    border-radius: 1rem 1rem 0.2rem 1rem;
+  }
+
+  .system {
+    align-self: center;
+    font-size: 0.85rem;
+    color: #999;
+  }
+}
+
+.inputArea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  align-items: center;
+
+  .inputWrapper {
+    position: relative;
+    flex: 1;
+    .textInput {
+      width: 100%;
+      padding: 0.75rem 3rem 0.75rem 1rem; // right padding for icon space
+      border-radius: 0.75rem;
+      border: 1px solid #ccc;
+      color: rgb(19, 18, 18);
     }
-  
-    .myMsg {
-      align-self: flex-start; // 👈 left aligned
+
+    .textInput:disabled {
+      background: #f0f0f0;
+      color: rgb(19, 18, 18);
+      cursor: not-allowed;
+    }
+    .imageBtn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 35px;
       background: #e670b5;
       color: white;
-      border-radius: 1rem 1rem 1rem 0.2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke: white;
+      }
+
+      &:hover {
+        background: #d2569d;
+      }
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
     }
-  
-    .theirMsg {
-      align-self: flex-end; // 👈 also left aligned (for now)
-      background: #ddd;
-      color: #333;
-      border-radius: 1rem 1rem 0.2rem 1rem;
-    }
-  
-    .system {
-      align-self: center;
-      font-size: 0.85rem;
-      color: #999;
-    }
-  }
-  
-  
-  .inputArea {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-  
     input {
       flex: 1 1 auto;
       min-width: 0;
@@ -86,92 +136,121 @@
       color: rgb(19, 18, 18);
       cursor: not-allowed;
     }
-  
-    .sendBtn {
-      background: #e670b5;
-      border: none;
-      padding: 10px;
-      color: white;
-      font-weight: 500;
-      border-radius: 0.75rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      // flex-shrink: 0;
-      // white-space: nowrap;
-      display: flex;
-      justify-content: center;
-  
-      &:hover {
-        background: #d2569d;
-      }
-    }
-  }
-  
-  .actions {
-    display: flex;
-    justify-content: space-between;
-
-    .stopBtn, .nextBtn {
-      background: #f5f5f5;
-      border: 1px solid #ccc;
-      padding: 0.5rem 1.2rem;
-      border-radius: 0.75rem;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      color: black;
-  
-      &:hover {
-        background: #eee;
-      }
-    }
-  
-    button {
-      background: #f5f5f5;
-      border: 1px solid #ccc;
-      padding: 0.5rem 1.2rem;
-      border-radius: 0.75rem;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s ease;
-  
-      &:hover {
-        background: #eee;
-      }
-    }
   }
 
-  .findNewBtn {
+  .sendBtn {
     background: #e670b5;
-    color: white;
     border: none;
-    padding: 0.7rem 1.5rem;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
     border-radius: 0.75rem;
     cursor: pointer;
-    font-weight: 500;
     transition: all 0.2s ease;
-  
+    // flex-shrink: 0;
+    // white-space: nowrap;
+    display: flex;
+    justify-content: center;
+
     &:hover {
       background: #d2569d;
     }
   }
+}
 
-  .actions button:disabled {
-    background: #eee;
-    color: #999;
-    cursor: not-allowed;
+.actions {
+  display: flex;
+  justify-content: space-between;
+
+  .stopBtn,
+  .nextBtn {
+    background: #f5f5f5;
     border: 1px solid #ccc;
-  }
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: black;
 
-  @media (max-width: 480px) {
-    .inputArea {
-      flex-direction: column;
-      gap: 0.25rem;
-  
-      button {
-        width: 100%;
-      }
+    &:hover {
+      background: #eee;
     }
   }
-  
-  
+
+  button {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #eee;
+    }
+  }
+}
+
+.findNewBtn {
+  background: #e670b5;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #d2569d;
+  }
+}
+
+.actions button:disabled {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 480px) {
+  .inputArea {
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .inputWrapper {
+      width: 100%;
+
+      .textInput {
+        width: 100%;
+      }
+
+      .imageBtn {
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .sendBtn {
+      width: 100%;
+    }
+  }
+}
+
+.imageUploading {
+  font-style: italic;
+  color: white;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 200px;
+  height: auto;
+
+  img {
+    border-radius: 10px;
+  }
+}
