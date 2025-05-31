@@ -228,7 +228,7 @@ export default function ChatPage() {
             <input
               type="file"
               accept="image/*"
-              capture="environment"
+              //   capture="environment"
               style={{ display: 'none' }}
               ref={fileInputRef}
               onChange={handleImageUpload}
