@@ -107,6 +107,13 @@ app.prepare().then(() => {
         io.to(partnerId).emit('image', base64Image);
       }
     });
+
+    socket.on('typing', () => {
+      const partnerId = userSocketMap.get(socket.id);
+      if (partnerId) {
+        io.to(partnerId).emit('stranger-typing');
+      }
+    });
   });
 
   server.all(/(.*)/, (req, res) => {

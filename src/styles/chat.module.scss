@@ -66,6 +66,16 @@
     font-size: 0.85rem;
     color: #999;
   }
+
+  .typingIndicator {
+    bottom: 2px;
+    left: 5px;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 4px;
+    text-align: center;
+  }
 }
 
 .inputArea {
@@ -90,21 +100,20 @@
       color: rgb(19, 18, 18);
       cursor: not-allowed;
     }
-    .imageBtn {
+    .iconBtn {
       position: absolute;
-      right: 8px;
       top: 50%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 35px;
+      width: 38px;
+      height: 38px;
       background: #e670b5;
       color: white;
-      font-size: 1.2rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-left: 6px;
       cursor: pointer;
       transition: all 0.2s ease;
 
@@ -114,13 +123,17 @@
         stroke: white;
       }
 
-      &:hover {
-        background: #d2569d;
-      }
       &:disabled {
-        background: #ccc;
+        background: #f0a7d1;
         cursor: not-allowed;
       }
+    }
+    .cameraBtn {
+      right: 48px;
+    }
+
+    .arrowBtn {
+      right: 6px;
     }
     input {
       flex: 1 1 auto;

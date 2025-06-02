@@ -13,6 +13,8 @@ export default function ChatPage() {
   const [connected, setConnected] = useState(false);
   const [isSearching, setIsSearching] = useState(true); // show "Finding..." initially
   const [showReconnectButton, setShowReconnectButton] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
   const chatRef = useRef(null);
   const inputRef = useRef(null);
   const router = useRouter();
@@ -36,7 +38,7 @@ export default function ChatPage() {
       });
 
       const data = await res.json();
-      console.log('Uploaded image URL:', data.url);
+      //   console.log('Uploaded image URL:', data.url);
 
       if (res.ok && data.url) {
         setMessages((prev) =>
@@ -131,6 +133,10 @@ export default function ChatPage() {
   useEffect(() => {
     const socket = connectSocket();
 
+    if (typeof window !== 'undefined') {
+      window.connectSocket = connectSocket;
+    }
+
     socket.emit('join');
 
     socket.on('matched', () => {
@@ -154,10 +160,30 @@ export default function ChatPage() {
       setMessages((prev) => [...prev, { from: 'stranger', image: base64 }]);
     });
 
+    socket.on('stranger-typing', () => {
+      setIsTyping(true);
+      // Auto-clear after short time
+      clearTimeout(socket.typingTimeout);
+      socket.typingTimeout = setTimeout(() => {
+        setIsTyping(false);
+      }, 1500); // Adjust time
+    });
+
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  function handleTyping() {
+    if (connected) {
+      const socket = connectSocket();
+      if (socket && socket.connected) {
+        socket.emit('typing');
+      } else {
+        console.warn('⚠️ Socket not connected');
+      }
+    }
+  }
 
   useEffect(() => {
     // Auto scroll to latest message
@@ -211,6 +237,7 @@ export default function ChatPage() {
               )}
             </div>
           ))}
+          {isTyping && <div className={styles.typingIndicator}>Stranger is typing...</div>}
         </div>
 
         <div className={styles.inputArea}>
@@ -221,7 +248,10 @@ export default function ChatPage() {
               placeholder={connected ? 'Type a message...' : 'Waiting for a stranger...'}
               value={input}
               disabled={!connected}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                handleTyping();
+              }}
               onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
               className={styles.textInput}
             />
@@ -235,7 +265,7 @@ export default function ChatPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className={styles.imageBtn}
+              className={`${styles.iconBtn} ${styles.cameraBtn}`}
               disabled={!connected}
             >
               <svg
@@ -254,6 +284,28 @@ export default function ChatPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={sendMessage}
+              className={`${styles.iconBtn} ${styles.arrowBtn}`}
+              disabled={!connected}
+            >
+              {/* Send Arrow Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="white"
+                width="22"
+                height="22"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12h15m0 0l-6.75 6.75M19.5 12l-6.75-6.75"
                 />
               </svg>
             </button>
