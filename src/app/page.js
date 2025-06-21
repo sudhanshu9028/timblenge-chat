@@ -21,6 +21,18 @@ export default function HomePage() {
     router.push(`/chat/${uniqueChatId}`);
   };
 
+  const handleStartVideo = () => {
+    if (!gender) {
+      alert('Please select a gender before starting.');
+      return;
+    }
+    const uniqueVideoId = uuidv4();
+    sessionStorage.setItem('videoInitiated', 'true');
+    sessionStorage.setItem('uniqueVideoId', uniqueVideoId);
+    sessionStorage.setItem('gender', gender);
+    router.push(`/video/${uniqueVideoId}`);
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.card}>
@@ -62,10 +74,15 @@ export default function HomePage() {
         {/* <p className={styles.subtext}>
           Connect instantly with a random stranger — no login, no hassle.
         </p> */}
+        <div className={styles.buttons}>
+          <button className={styles.button} onClick={handleStartVideo}>
+            Start Video
+          </button>
 
-        <button className={styles.button} onClick={handleStartChat}>
-          Start Chat
-        </button>
+          <button className={styles.button} onClick={handleStartChat}>
+            Start Chat
+          </button>
+        </div>
       </div>
     </main>
   );
