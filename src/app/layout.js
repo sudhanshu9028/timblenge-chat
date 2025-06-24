@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { SocketProvider } from '@/context/SocketProvider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -95,7 +96,9 @@ export default function RootLayout({ children }) {
         <meta name="publisher" content="Timblenge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SocketProvider>{children}</SocketProvider>
+      </body>
     </html>
   );
 }

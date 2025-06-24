@@ -105,7 +105,7 @@ app.prepare().then(() => {
 
       // Handle video disconnect
       const videoPartnerId = videoUserSocketMap.get(socket.id);
-      if (videoPartnerId) {
+      if (videoPartnerId && videoWaitingUsers.has(videoPartnerId)) {
         io.to(videoPartnerId).emit('video-partner-left');
         videoUserSocketMap.delete(socket.id);
         videoUserSocketMap.delete(videoPartnerId);
@@ -131,7 +131,7 @@ app.prepare().then(() => {
       }
     });
 
-    socket.on('join-video', (chatId) => {
+    socket.on('join-video', () => {
       console.log('=== VIDEO JOIN REQUEST ===');
       console.log('User joining video queue:', socket.id);
       console.log('Current video waiting users:', Array.from(videoWaitingUsers));
@@ -183,6 +183,12 @@ app.prepare().then(() => {
         videoUserSocketMap.delete(partnerId);
       }
       videoWaitingUsers.delete(socket.id);
+    });
+    socket.on('video-ready', () => {
+      const partnerId = videoUserSocketMap.get(socket.id);
+      if (partnerId) {
+        io.to(partnerId).emit('video-peer-ready');
+      }
     });
   });
 

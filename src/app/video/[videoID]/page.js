@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { connectSocket, disconnectSocket } from '@/lib/socket';
+import { useSocket } from '@/context/SocketProvider';
 import styles from '@/styles/video.module.scss';
 
 export default function VideoPage() {
@@ -17,6 +17,9 @@ export default function VideoPage() {
   const [isSearching, setIsSearching] = useState(true);
   const [connected, setConnected] = useState(false);
   const [error, setError] = useState('');
+  const socket = useSocket();
+  const [isConnected, setIsConnected] = useState(false);
+  const [localStreamReady, setLocalStreamReady] = useState(false);
 
   useEffect(() => {
     // guard direct access
@@ -37,6 +40,7 @@ export default function VideoPage() {
         if (localVideoRef.current) {
           localVideoRef.current.srcObject = stream;
         }
+        setLocalStreamReady(true);
         console.log('Video stream initialized successfully');
       } catch (err) {
         setError('Could not access camera/microphone.');
@@ -53,23 +57,30 @@ export default function VideoPage() {
   }, []);
 
   useEffect(() => {
-    const socket = connectSocket();
+    if (!socket || !localStreamReady) return;
     socketRef.current = socket;
+
+    const handleConnect = () => {
+      setIsConnected(true);
+      console.log('Socket connected, joining video queue with videoID:', videoID);
+      socket.emit('join-video');
+    };
+
+    const handleDisconnect = () => {
+      setIsConnected(false);
+      console.log('Socket disconnected');
+    };
 
     console.log('Socket connection status:', socket.connected);
     console.log('Socket ID:', socket.id);
 
-    // Wait for socket to be connected
+    socket.on('connect', handleConnect);
+    socket.on('disconnect', handleDisconnect);
+
     if (socket.connected) {
-      console.log('Joining video queue with videoID:', videoID);
-      socket.emit('join-video', videoID);
-    } else {
-      console.log('Socket not connected, waiting for connection...');
-      socket.on('connect', () => {
-        console.log('Socket connected, now joining video queue with videoID:', videoID);
-        socket.emit('join-video', videoID);
-      });
+      handleConnect();
     }
+
     console.log('Socket ID:', socket.id);
 
     // when matched, start WebRTC handshake
@@ -81,7 +92,13 @@ export default function VideoPage() {
       try {
         console.log('Creating RTCPeerConnection...');
         pcRef.current = new RTCPeerConnection({
-          iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+          iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'stun:stun1.l.google.com:19302' },
+            { urls: 'stun:stun2.l.google.com:19302' },
+            // Add your TURN server if available
+            // { urls: 'turn:your-turn-server.com', username: 'user', credential: 'pass' }
+          ],
         });
 
         console.log('RTCPeerConnection created');
@@ -102,20 +119,28 @@ export default function VideoPage() {
           }
         };
 
-        // add local tracks to peer connection
+        pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
+        pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
+
         if (localStreamRef.current) {
           localStreamRef.current
             .getTracks()
             .forEach((t) => pcRef.current.addTrack(t, localStreamRef.current));
         }
 
-        // if initiator => create offer
         if (initiator) {
-          console.log('I am the initiator, creating offer');
-          const offer = await pcRef.current.createOffer();
-          await pcRef.current.setLocalDescription(offer);
-          socket.emit('video-offer', { to: peerId, sdp: offer });
+          console.log('Creating offer manually as initiator');
+          try {
+            const offer = await pcRef.current.createOffer();
+            await pcRef.current.setLocalDescription(offer);
+            socket.emit('video-offer', { to: peerId, sdp: offer });
+            console.log('Offer sent to', peerId);
+          } catch (err) {
+            console.error('Error creating/sending offer:', err);
+          }
         }
+
+        // add local tracks to peer connection
       } catch (err) {
         console.error('Error setting up WebRTC:', err);
         setError('Failed to establish video connection');
@@ -126,31 +151,6 @@ export default function VideoPage() {
     socket.on('video-offer', async ({ from, sdp }) => {
       console.log('Received offer from:', from);
       try {
-        if (!pcRef.current) {
-          pcRef.current = new RTCPeerConnection({
-            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
-          });
-
-          pcRef.current.onicecandidate = (e) => {
-            if (e.candidate) {
-              socket.emit('new-ice-candidate', { to: from, candidate: e.candidate });
-            }
-          };
-
-          pcRef.current.ontrack = (e) => {
-            console.log('Received remote stream');
-            if (remoteVideoRef.current) {
-              remoteVideoRef.current.srcObject = e.streams[0];
-            }
-          };
-
-          if (localStreamRef.current) {
-            localStreamRef.current
-              .getTracks()
-              .forEach((t) => pcRef.current.addTrack(t, localStreamRef.current));
-          }
-        }
-
         await pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
         const answer = await pcRef.current.createAnswer();
         await pcRef.current.setLocalDescription(answer);
@@ -192,10 +192,16 @@ export default function VideoPage() {
     });
 
     return () => {
-      socket.disconnect();
+      socket.off('connect', handleConnect);
+      socket.off('disconnect', handleDisconnect);
+      socket.off('video-matched');
+      socket.off('video-offer');
+      socket.off('video-answer');
+      socket.off('new-ice-candidate');
+      socket.off('video-partner-left');
       endCall();
     };
-  }, [videoID]);
+  }, [localStreamReady, socket, videoID]);
 
   const endCall = () => {
     setConnected(false);
