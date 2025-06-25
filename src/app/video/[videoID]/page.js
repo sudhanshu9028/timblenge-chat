@@ -20,6 +20,7 @@ export default function VideoPage() {
   const socket = useSocket();
   const [isConnected, setIsConnected] = useState(false);
   const [localStreamReady, setLocalStreamReady] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     // guard direct access
@@ -38,9 +39,15 @@ export default function VideoPage() {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         localStreamRef.current = stream;
         if (localVideoRef.current) {
+          console.log('Setting local stream');
           localVideoRef.current.srcObject = stream;
         }
         setLocalStreamReady(true);
+        if (socket && !videoReady) {
+          socket.emit('video-ready');
+          console.log('Sent video-ready');
+          setVideoReady(true);
+        }
         console.log('Video stream initialized successfully');
       } catch (err) {
         setError('Could not access camera/microphone.');
@@ -55,6 +62,17 @@ export default function VideoPage() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (localStreamReady && socket && !videoReady) {
+      socket.emit('video-ready');
+      setVideoReady(true);
+    }
+    if (socket && videoReady && !connected && isConnected) {
+      console.log('🎯 Joining video queue after ready');
+      socket.emit('join-video');
+    }
+  }, [connected, isConnected, localStreamReady, socket, videoReady]);
 
   useEffect(() => {
     if (!socket || !localStreamReady) return;
@@ -83,13 +101,13 @@ export default function VideoPage() {
 
     console.log('Socket ID:', socket.id);
 
-    // when matched, start WebRTC handshake
     socket.on('video-matched', async ({ peerId, initiator }) => {
       console.log('Video matched with peer:', peerId);
       setIsSearching(false);
       setConnected(true);
 
       try {
+        // when matched, start WebRTC handshake
         console.log('Creating RTCPeerConnection...');
         pcRef.current = new RTCPeerConnection({
           iceServers: [
@@ -103,7 +121,9 @@ export default function VideoPage() {
 
         console.log('RTCPeerConnection created');
 
-        // send ICE candidates
+        // pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
+        // pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
+        // // send ICE candidates
         pcRef.current.onicecandidate = (e) => {
           if (e.candidate) {
             console.log('Sending ICE candidate to:', peerId);
@@ -111,22 +131,21 @@ export default function VideoPage() {
           }
         };
 
-        // display remote stream
-        pcRef.current.ontrack = (e) => {
-          console.log('Received remote stream');
-          if (remoteVideoRef.current) {
-            remoteVideoRef.current.srcObject = e.streams[0];
-          }
-        };
-
-        pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
-        pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
-
         if (localStreamRef.current) {
           localStreamRef.current
             .getTracks()
             .forEach((t) => pcRef.current.addTrack(t, localStreamRef.current));
         }
+        // display remote stream
+        console.log('Adding ontrack handler', remoteVideoRef.current);
+        console.log('pc ref', pcRef.current);
+        pcRef.current.ontrack = (e) => {
+          console.log('Received remote stream');
+          if (remoteVideoRef.current) {
+            console.log('Setting remote stream');
+            remoteVideoRef.current.srcObject = e.streams[0];
+          }
+        };
 
         if (initiator) {
           console.log('Creating offer manually as initiator');
@@ -151,6 +170,46 @@ export default function VideoPage() {
     socket.on('video-offer', async ({ from, sdp }) => {
       console.log('Received offer from:', from);
       try {
+        if (!pcRef.current) {
+          console.log('Creating RTCPeerConnection...');
+          pcRef.current = new RTCPeerConnection({
+            iceServers: [
+              { urls: 'stun:stun.l.google.com:19302' },
+              { urls: 'stun:stun1.l.google.com:19302' },
+              { urls: 'stun:stun2.l.google.com:19302' },
+              // Add your TURN server if available
+              // { urls: 'turn:your-turn-server.com', username: 'user', credential: 'pass' }
+            ],
+          });
+
+          console.log('RTCPeerConnection created');
+
+          pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
+          pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
+          // send ICE candidates
+          pcRef.current.onicecandidate = (e) => {
+            if (e.candidate) {
+              console.log('Sending ICE candidate to:', from);
+              socket.emit('new-ice-candidate', { to: from, candidate: e.candidate });
+            }
+          };
+
+          // display remote stream
+          console.log('Adding ontrack handler', remoteVideoRef.current);
+          pcRef.current.ontrack = (e) => {
+            console.log('Received remote stream');
+            if (remoteVideoRef.current) {
+              console.log('Setting remote stream');
+              remoteVideoRef.current.srcObject = e.streams[0];
+            }
+          };
+
+          if (localStreamRef.current) {
+            localStreamRef.current
+              .getTracks()
+              .forEach((t) => pcRef.current.addTrack(t, localStreamRef.current));
+          }
+        }
         await pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
         const answer = await pcRef.current.createAnswer();
         await pcRef.current.setLocalDescription(answer);

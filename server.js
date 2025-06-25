@@ -12,6 +12,7 @@ const handle = app.getRequestHandler();
 // In-memory queue and user pairing
 const waitingUsers = new Set();
 const userSocketMap = new Map();
+const videoUserReady = new Set();
 
 // Video call waiting queue
 const videoWaitingUsers = new Set();
@@ -132,40 +133,38 @@ app.prepare().then(() => {
     });
 
     socket.on('join-video', () => {
-      console.log('=== VIDEO JOIN REQUEST ===');
-      console.log('User joining video queue:', socket.id);
-      console.log('Current video waiting users:', Array.from(videoWaitingUsers));
-      console.log('Current video user socket map:', Array.from(videoUserSocketMap.entries()));
+      console.log('User joined video queue:', socket.id);
 
-      // Make sure the user isn't already in the video queue
-      if (videoWaitingUsers.has(socket.id)) {
-        console.log('User already in video queue, ignoring');
-        return;
-      }
+      // Add user to waiting list
+      videoWaitingUsers.add(socket.id);
+      videoUserReady.delete(socket.id); // ensure clean state
+    });
 
-      // Try to find someone else to pair with for video
-      const peerId = Array.from(videoWaitingUsers).find((id) => id !== socket.id);
-      console.log('Looking for peer, found:', peerId);
+    socket.on('video-ready', () => {
+      console.log('video-ready received from', socket.id);
+      videoUserReady.add(socket.id);
+
+      // Find a peer who's ready
+      const peerId = Array.from(videoWaitingUsers).find(
+        (id) => id !== socket.id && videoUserReady.has(id)
+      );
 
       if (peerId) {
-        console.log('MATCHING USERS:', socket.id, 'with', peerId);
         videoWaitingUsers.delete(peerId);
+        videoWaitingUsers.delete(socket.id);
+
         videoUserSocketMap.set(socket.id, peerId);
         videoUserSocketMap.set(peerId, socket.id);
 
-        // notify both peers they're matched
         socket.emit('video-matched', { peerId, initiator: true });
         io.to(peerId).emit('video-matched', { peerId: socket.id, initiator: false });
-        console.log(`✅ Video matched: ${socket.id} with ${peerId}`);
-      } else {
-        videoWaitingUsers.add(socket.id);
-        console.log('➕ User added to video queue:', socket.id);
-      }
-      console.log('Updated video waiting users:', Array.from(videoWaitingUsers));
-      console.log('Updated video user socket map:', Array.from(videoUserSocketMap.entries()));
-      console.log('=== END VIDEO JOIN ===');
-    });
 
+        videoUserReady.delete(peerId);
+        videoUserReady.delete(socket.id);
+
+        console.log(`✅ Both ready: matched ${socket.id} ↔ ${peerId}`);
+      }
+    });
     socket.on('video-offer', ({ to, sdp }) =>
       io.to(to).emit('video-offer', { from: socket.id, sdp })
     );
@@ -183,12 +182,6 @@ app.prepare().then(() => {
         videoUserSocketMap.delete(partnerId);
       }
       videoWaitingUsers.delete(socket.id);
-    });
-    socket.on('video-ready', () => {
-      const partnerId = videoUserSocketMap.get(socket.id);
-      if (partnerId) {
-        io.to(partnerId).emit('video-peer-ready');
-      }
     });
   });
 
