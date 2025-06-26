@@ -137,7 +137,6 @@ app.prepare().then(() => {
 
       // Add user to waiting list
       videoWaitingUsers.add(socket.id);
-      videoUserReady.delete(socket.id); // ensure clean state
     });
 
     socket.on('video-ready', () => {
@@ -148,6 +147,8 @@ app.prepare().then(() => {
       const peerId = Array.from(videoWaitingUsers).find(
         (id) => id !== socket.id && videoUserReady.has(id)
       );
+
+      console.log('Peer Id in video-ready signal: ', peerId);
 
       if (peerId) {
         videoWaitingUsers.delete(peerId);
