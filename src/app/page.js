@@ -33,6 +33,14 @@ export default function HomePage() {
     router.push(`/video/${uniqueVideoId}`);
   };
 
+  const handlePlayLudo = () => {
+    if (!gender) {
+      alert('Please select a gender before starting.');
+      return;
+    }
+    router.push('/ludo');
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.card}>
@@ -78,9 +86,11 @@ export default function HomePage() {
           <button className={styles.button} onClick={handleStartVideo}>
             Start Video
           </button>
-
           <button className={styles.button} onClick={handleStartChat}>
             Start Chat
+          </button>
+          <button className={styles.button} onClick={handlePlayLudo}>
+            Play Ludo
           </button>
         </div>
       </div>
