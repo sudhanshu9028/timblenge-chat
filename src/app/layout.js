@@ -98,6 +98,17 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SocketProvider>{children}</SocketProvider>
+        <footer
+          style={{ textAlign: 'center', padding: '5px', fontSize: '0.875rem', color: '#888' }}
+        >
+          Found a bug or have a suggestion? Email us at{' '}
+          <a
+            href="mailto:timblenge.contact@gmail.com"
+            style={{ color: '#555', textDecoration: 'underline' }}
+          >
+            timblenge@gmail.com
+          </a>
+        </footer>
       </body>
     </html>
   );
