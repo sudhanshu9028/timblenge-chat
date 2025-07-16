@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
         >
           Found a bug or have a suggestion? Email us at{' '}
           <a
-            href="mailto:timblenge.contact@gmail.com"
+            href="mailto:timblenge@gmail.com"
             style={{ color: '#555', textDecoration: 'underline' }}
           >
             timblenge@gmail.com
