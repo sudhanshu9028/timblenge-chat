@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { useSocket } from '@/context/SocketProvider';
+import { connectSocket, disconnectSocket } from '@/lib/socket';
 import styles from '@/styles/video.module.scss';
 
 export default function VideoPage() {
@@ -17,7 +17,7 @@ export default function VideoPage() {
   const [isSearching, setIsSearching] = useState(true);
   const [connected, setConnected] = useState(false);
   const [error, setError] = useState('');
-  const socket = useSocket();
+  const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
   const [localStreamReady, setLocalStreamReady] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
@@ -31,6 +31,17 @@ export default function VideoPage() {
     }
     sessionStorage.removeItem('videoInitiated');
   }, [videoID, router]);
+
+  // Connect socket only when needed (on video page)
+  useEffect(() => {
+    const s = connectSocket();
+    setSocket(s);
+    socketRef.current = s;
+
+    return () => {
+      disconnectSocket();
+    };
+  }, []);
 
   // Initialize video stream immediately
   useEffect(() => {

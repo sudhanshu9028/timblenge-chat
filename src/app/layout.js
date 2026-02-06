@@ -1,16 +1,19 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
-import { SocketProvider } from '@/context/SocketProvider';
 import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
+  preload: false, // Only preload the primary font
 });
 
 export const metadata = {
@@ -90,13 +93,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* <!-- Google tag (gtag.js) --> */}
+        {/* Preconnect only to domains we actually use */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+        {/* <!-- Google tag (gtag.js) - Deferred to improve LCP --> */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-7LNMKJ3NBQ"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
-        <Script id="ga-setup" strategy="afterInteractive">
+        <Script id="ga-setup" strategy="lazyOnload">
           {`
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -109,7 +115,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SocketProvider>{children}</SocketProvider>
+        {children}
         <footer
           style={{ textAlign: 'center', padding: '5px', fontSize: '0.875rem', color: '#94a3b8' }}
         >
