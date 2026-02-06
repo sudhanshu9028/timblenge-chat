@@ -22,10 +22,6 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Enable experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-  },
   // Modern JavaScript support - don't transpile modern features
   transpilePackages: [],
   // Headers for performance and security
