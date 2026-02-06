@@ -14,16 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Timblenge | Chat with Strangers',
+  title: 'Timblenge | Chat with Strangers, Make Friends Online',
   description:
-    'Timblenge lets you instantly chat with random strangers without any login or tracking. Perfect for Mobile chats, Stranger chats, Making new friends. Simple, private, anonymous conversations – just like Omegle, but better.',
+    'Talk to strangers and make friends online with Timblenge - the best random chat alternative. Experience anonymous chat, video chat with strangers, and text chat without registration. Meet new people from around the world and turn strangers into friends. Perfect Omegle alternative for safe, fun conversations.',
   keywords: [
     'chat with strangers',
-    'stranger chat',
-    'omegle alternative',
+    'talk to strangers',
     'random chat',
     'anonymous chat',
-    'talk to strangers',
+    'omegle alternative',
+    'video chat with strangers',
+    'text chat',
+    'meet new people',
+    'make friends online',
+    'chat with strangers online',
+    'stranger chat',
     'chat anonymously',
     'free chat rooms',
     'chat without registration',
@@ -31,6 +36,12 @@ export const metadata = {
     'omegle replacement',
     'chat online',
     'stranger text chat',
+    'random video chat',
+    'anonymous video chat',
+    'talk to strangers online',
+    'meet strangers online',
+    'chat with random people',
+    'online chat platform',
     'timblenge',
   ],
   alternates: {
@@ -42,19 +53,19 @@ export const metadata = {
   authors: [{ name: 'Anonymous', url: 'https://timblenge.com' }],
   metadataBase: new URL('https://timblenge.com'),
   openGraph: {
-    title: 'Timblenge | Chat with Strangers',
+    title: 'Timblenge | Chat with Strangers, Make Friends Online',
     description:
-      'Find someone to talk to on Timblenge – no login, no pressure, just pure anonymous conversations.',
+      'Talk to strangers and make friends online. Experience anonymous chat, video chat, and text chat with random people from around the world. No registration required - start chatting instantly!',
     url: 'https://timblenge.com',
     siteName: 'Timblenge',
     type: 'website',
     locale: 'en_US',
     images: [
       {
-        url: '/logo.png', // Replace with your real logo
+        url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Timblenge logo',
+        alt: 'Timblenge - Chat with Strangers, Make Friends Online',
       },
     ],
   },
@@ -68,9 +79,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timblenge | Chat with Strangers',
-    description: 'Chat anonymously with random people around the world. No login required.',
-    images: ['/logo.png'], // Replace if needed
+    title: 'Timblenge | Chat with Strangers, Make Friends Online',
+    description:
+      'Talk to strangers and make friends online. Video chat and text chat with random people worldwide. No registration required - start chatting instantly!',
+    images: ['/logo.png'],
   },
 };
 
@@ -99,12 +111,12 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SocketProvider>{children}</SocketProvider>
         <footer
-          style={{ textAlign: 'center', padding: '5px', fontSize: '0.875rem', color: '#888' }}
+          style={{ textAlign: 'center', padding: '5px', fontSize: '0.875rem', color: '#94a3b8' }}
         >
           Found a bug or have a suggestion? Email us at{' '}
           <a
             href="mailto:timblenge@gmail.com"
-            style={{ color: '#555', textDecoration: 'underline' }}
+            style={{ color: '#cbd5e1', textDecoration: 'underline' }}
           >
             timblenge@gmail.com
           </a>

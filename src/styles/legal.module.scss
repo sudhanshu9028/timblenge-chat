@@ -1,0 +1,156 @@
+@import './variables';
+
+.legalPage {
+  min-height: 94vh;
+  padding: $padding-3xl $margin-lg;
+  background: $gradient-primary;
+  font-family: $font-family-primary;
+  color: $color-text-primary;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(51, 65, 85, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: $padding-3xl;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+}
+
+.header {
+  margin-bottom: $margin-xl;
+  text-align: center;
+  padding-bottom: $margin-base;
+  border-bottom: 2px solid $color-border-dark;
+}
+
+.title {
+  font-size: $font-size-8xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.lastUpdated {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-style: italic;
+}
+
+.content {
+  line-height: $line-height-relaxed;
+}
+
+.intro {
+  font-size: $font-size-xl;
+  color: $color-text-secondary;
+  margin-bottom: $margin-xl;
+  padding: $padding-lg;
+  background: $bg-secondary;
+  border-radius: $radius-base;
+  border-left: 4px solid $color-accent-primary;
+}
+
+.section {
+  margin-bottom: $margin-xl;
+}
+
+.sectionTitle {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  margin-top: $margin-lg;
+}
+
+.sectionContent {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-md;
+  line-height: $line-height-relaxed;
+}
+
+.list {
+  margin: $spacing-md 0;
+  padding-left: $margin-lg;
+  color: $color-text-secondary;
+}
+
+.listItem {
+  margin-bottom: $spacing-sm;
+  line-height: $line-height-relaxed;
+}
+
+.strong {
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.highlight {
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: $font-weight-semibold;
+}
+
+.link {
+  color: $color-accent-primary;
+  text-decoration: underline;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $color-accent-primary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  margin-bottom: $margin-lg;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-accent-hover;
+    text-decoration: underline;
+  }
+}
+
+.contactInfo {
+  background: $bg-secondary;
+  padding: $padding-lg;
+  border-radius: $radius-base;
+  margin-top: $margin-xl;
+  border-left: 4px solid $color-accent-primary;
+}
+
+@media (max-width: $breakpoint-md) {
+  .legalPage {
+    padding: $padding-lg $margin-base;
+  }
+
+  .container {
+    padding: $padding-xl $padding-lg;
+  }
+
+  .title {
+    font-size: $font-size-6xl;
+  }
+
+  .sectionTitle {
+    font-size: $font-size-4xl;
+  }
+
+  .intro {
+    font-size: $font-size-base;
+    padding: $padding-md;
+  }
+}
+

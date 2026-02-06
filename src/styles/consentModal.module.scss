@@ -1,0 +1,246 @@
+@import './variables';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $margin-base;
+}
+
+.modalContent {
+  background: rgba(51, 65, 85, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-xl;
+  padding: $padding-lg $padding-xl;
+  max-width: 500px;
+  width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: $shadow-lg;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitle {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+  text-align: center;
+}
+
+.modalSubtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-md;
+  text-align: center;
+}
+
+.genderSection {
+  margin-bottom: $spacing-md;
+}
+
+.genderLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.genderButtonsRow {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.genderButton {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  padding: $padding-sm $spacing-sm;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.genderButtonActive {
+  background: rgba(236, 72, 153, 0.2);
+  border-color: rgba(236, 72, 153, 0.5);
+  color: $color-text-white;
+  box-shadow: $shadow-pink;
+
+  &:hover {
+    background: rgba(236, 72, 153, 0.25);
+    border-color: rgba(236, 72, 153, 0.6);
+    box-shadow: $shadow-pink;
+  }
+}
+
+.genderIcon {
+  font-size: $font-size-2xl;
+}
+
+.genderWarning {
+  font-size: 0.7rem;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
+.divider {
+  height: 1px;
+  background: $color-border-dark;
+  margin: $spacing-md 0;
+}
+
+.consentSection {
+  margin-bottom: $spacing-md;
+}
+
+.consentCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-xs;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    margin-top: 2px;
+    accent-color: $color-accent-primary;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+.consentText {
+  font-size: 0.75rem;
+  color: $color-text-primary;
+  line-height: $line-height-tight;
+}
+
+.ageHighlight {
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: $font-weight-semibold;
+}
+
+.link {
+  color: $color-accent-primary;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+}
+
+.proceedButton {
+  width: 100%;
+  background: $gradient-accent;
+  border: none;
+  border-radius: $radius-base;
+  padding: $padding-sm $padding-base;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: $transition-fast;
+  margin-bottom: $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  box-shadow: $shadow-pink-lg;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: $gradient-accent-hover;
+    transform: translateY($transform-translate-y);
+    box-shadow: $shadow-pink;
+
+    &::before {
+      transform: translateY(0);
+    }
+  }
+
+  &:disabled {
+    background: $color-border-dark;
+    color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: none;
+    box-shadow: none;
+
+    &::before {
+      display: none;
+    }
+
+    &:hover {
+      background: $color-border-dark;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.loginPrompt {
+  text-align: center;
+  font-size: 0.7rem;
+  color: $color-text-secondary;
+  margin-top: $spacing-xs;
+
+  .link {
+    color: $color-accent-primary;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .modalContent {
+    padding: $padding-lg $padding-md;
+  }
+
+  .modalTitle {
+    font-size: $font-size-4xl;
+  }
+
+  .genderButtonsRow {
+    flex-direction: column;
+  }
+}
+

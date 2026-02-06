@@ -1,0 +1,183 @@
+// ============================================
+// Theme Variables
+// ============================================
+
+// Colors - Dark Theme
+$color-primary-dark: #0f172a; // slate-900
+$color-secondary-dark: #1e293b; // slate-800
+$color-card-dark: #334155; // slate-700
+$color-border-dark: #475569; // slate-600
+$color-hover-dark: #64748b; // slate-500
+
+// Accent Colors - Pink/Violet
+$color-accent-primary: #ec4899; // pink-500
+$color-accent-hover: #db2777; // pink-600
+$color-accent-light: #f472b6; // pink-400
+$color-accent-violet: #a855f7; // violet-500
+$color-accent-violet-dark: #9333ea; // violet-600
+$color-accent-violet-light: #c084fc; // violet-400
+$color-accent-indigo: #818cf8; // indigo-400
+
+// Text Colors
+$color-text-primary: #f1f5f9; // slate-100
+$color-text-secondary: #cbd5e1; // slate-300
+$color-text-muted: #94a3b8; // slate-400
+$color-text-white: #ffffff;
+
+// Background Colors
+$bg-primary: $color-primary-dark;
+$bg-secondary: $color-secondary-dark;
+$bg-card: rgba(51, 65, 85, 0.4); // glass morphism effect
+$bg-card-solid: $color-card-dark;
+$bg-input: $color-secondary-dark;
+$bg-input-disabled: $color-card-dark;
+$bg-button-secondary: rgba(255, 255, 255, 0.05);
+$bg-button-disabled: $color-card-dark;
+$bg-glass: rgba(15, 23, 42, 0.4);
+
+// Message Colors
+$color-message-user: $color-accent-primary;
+$color-message-other: $color-border-dark;
+$color-message-system: $color-text-muted;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $color-primary-dark, $color-secondary-dark);
+$gradient-accent: linear-gradient(to right, $color-accent-primary, $color-accent-violet);
+$gradient-accent-hover: linear-gradient(to right, $color-accent-hover, $color-accent-violet-dark);
+$gradient-text: linear-gradient(to right, $color-accent-light, $color-accent-violet-light);
+$gradient-text-alt: linear-gradient(to right, $color-accent-violet-light, $color-accent-indigo);
+
+// Fonts
+$font-family-primary: 'Segoe UI', sans-serif;
+$font-family-body: Arial, Helvetica, sans-serif;
+
+// Font Sizes
+$font-size-xs: 0.85rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.1rem;
+$font-size-xl: 1.2rem;
+$font-size-2xl: 1.25rem;
+$font-size-3xl: 1.3rem;
+$font-size-4xl: 1.4rem;
+$font-size-5xl: 1.5rem;
+$font-size-6xl: 1.8rem;
+$font-size-7xl: 2rem;
+$font-size-8xl: 2.5rem;
+$font-size-9xl: 3rem;
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.2;
+$line-height-normal: 1.4;
+$line-height-relaxed: 1.6;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 0.75rem;
+$spacing-base: 1rem;
+$spacing-lg: 1.2rem;
+$spacing-xl: 1.5rem;
+$spacing-2xl: 2rem;
+$spacing-3xl: 2.5rem;
+$spacing-4xl: 3rem;
+$spacing-5xl: 4rem;
+
+// Padding
+$padding-xs: 0.5rem;
+$padding-sm: 0.75rem;
+$padding-base: 1rem;
+$padding-md: 1.5rem;
+$padding-lg: 2rem;
+$padding-xl: 2.5rem;
+$padding-2xl: 3rem;
+$padding-3xl: 4rem;
+
+// Margin
+$margin-xs: 0.5rem;
+$margin-sm: 1rem;
+$margin-base: 1.5rem;
+$margin-lg: 2rem;
+$margin-xl: 3rem;
+
+// Border Radius
+$radius-sm: 0.5rem;
+$radius-base: 0.75rem;
+$radius-md: 1rem;
+$radius-lg: 1.25rem;
+$radius-xl: 1.5rem;
+$radius-full: 50%;
+$radius-image: 10px;
+
+// Box Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$shadow-base: 0 4px 12px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+$shadow-xl: 0 8px 20px rgba(0, 0, 0, 0.5);
+$shadow-accent: 0 4px 12px rgba(236, 72, 153, 0.4);
+$shadow-accent-sm: 0 1px 3px rgba(236, 72, 153, 0.3);
+$shadow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
+$shadow-pink-sm: 0 4px 12px rgba(236, 72, 153, 0.25);
+$shadow-pink-lg: 0 8px 25px rgba(236, 72, 153, 0.25);
+
+// Transitions
+$transition-fast: all 0.2s ease;
+$transition-base: all 0.3s ease;
+$transition-slow: all 0.4s ease;
+
+// Z-Index
+$z-index-base: 1;
+$z-index-dropdown: 10;
+$z-index-modal: 100;
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Container Widths
+$container-sm: 300px;
+$container-md: 500px;
+$container-lg: 700px;
+$container-xl: 800px;
+$container-2xl: 1000px;
+$container-3xl: 1200px;
+
+// Heights
+$height-full: 100%;
+$height-screen: 100vh;
+$height-main: 94vh;
+$height-chat-main: 94%;
+
+// Specific Values
+$tagline-font-size: 14px;
+$tagline-padding-bottom: 14px;
+$card-min-width: 300px;
+$hero-min-height: 60vh;
+$hero-min-height-mobile: 50vh;
+$step-number-size: 60px;
+$icon-btn-size: 38px;
+$icon-size: 20px;
+$image-wrapper-width: 200px;
+$video-border-width: 2px;
+$chat-padding-top: 50px;
+$chat-padding-bottom: 50px;
+$video-local-height-mobile: 150px;
+$video-local-width-mobile: 120px;
+$border-radius-small: 0.2rem;
+$position-offset-xs: 2px;
+$position-offset-sm: 4px;
+$position-offset-md: 6px;
+$position-offset-lg: 10px;
+$position-offset-xl: 48px;
+$transform-translate-y: -1px;
+$transform-translate-y-lg: -4px;
+

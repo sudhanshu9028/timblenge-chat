@@ -1,9 +1,11 @@
+@import './variables';
+
 .main {
-    height: 94%;
+    height: $height-chat-main;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f9e0ff, #d4fcff);
+    padding: $margin-lg;
+    background: $gradient-primary;
     align-items: center;
     justify-content: center;
   }
@@ -15,79 +17,88 @@
     // max-width: 600px;
     aspect-ratio: 16/9;
     // background: black;
-    border-radius: 1rem;
+    border-radius: $radius-md;
     overflow: hidden;
-    margin-bottom: 1rem;
+    margin-bottom: $margin-base;
   
     .system {
       position: absolute;
       top: 50%;
       left: 25%;
       transform: translate(-50%, -50%);
-      color: #fff;
+      color: $color-text-white;
       font-style: italic;
-      z-index: 2;
+      z-index: $z-index-base;
     }
   
     video {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: $height-full;
+      height: $height-full;
       object-fit: cover;
     }
   
     .local {
       width: 48%;
       height: 94%;
-      bottom: 1rem;
-      right: 1rem;
+      bottom: $margin-base;
+      right: $margin-base;
       position: absolute;
-      border: 2px solid #fff;
-      border-radius: 0.5rem;
+      border: $video-border-width solid $color-text-white;
+      border-radius: $radius-sm;
       background: black;
-      z-index: 10;
+      z-index: $z-index-dropdown;
     }
     .remote {
         width: 48%;
         height: 94%;
-        bottom: 1rem;
-        left: 1rem;
+        bottom: $margin-base;
+        left: $margin-base;
         position: absolute;
-        border: 2px solid #fff;
-        border-radius: 0.5rem;
+        border: $video-border-width solid $color-text-white;
+        border-radius: $radius-sm;
         background: black;
       }
   }
   
   .actions {
     display: flex;
-    gap: 1rem;
+    gap: $margin-base;
     button {
-      background: #e670b5;
-      color: #fff;
+      background: $gradient-accent;
+      color: $color-text-white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.75rem;
+      padding: $padding-md $spacing-xl;
+      border-radius: $radius-base;
       cursor: pointer;
-      &:hover { background: #d2569d; }
-      &:disabled { background: #ccc; cursor: not-allowed; }
+      box-shadow: $shadow-pink-sm;
+      transition: $transition-fast;
+      &:hover { 
+        background: $gradient-accent-hover; 
+        box-shadow: $shadow-pink;
+      }
+      &:disabled { 
+        background: $color-border-dark; 
+        cursor: not-allowed; 
+        box-shadow: none;
+      }
     }
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     .videoContainer {
         height: 80%;
-        width: 100%;
+        width: $height-full;
         .local {
-            height: 150px;
-            width: 120px;
+            height: $video-local-height-mobile;
+            width: $video-local-width-mobile;
         }
         .remote {
             position: static;
-            width: 100%;
-            height: 100%;
+            width: $height-full;
+            height: $height-full;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: $radius-sm;
             background: black;
           }
           .system {
