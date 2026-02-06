@@ -5,6 +5,23 @@ export const metadata = {
   title: 'Terms of Service | Timblenge',
   description:
     'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+  keywords: [
+    'terms of service',
+    'terms and conditions',
+    'timblenge terms',
+    'chat platform terms',
+    'user agreement',
+  ],
+  alternates: {
+    canonical: 'https://timblenge.com/terms',
+  },
+  openGraph: {
+    title: 'Terms of Service | Timblenge',
+    description:
+      'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+    url: 'https://timblenge.com/terms',
+    type: 'website',
+  },
 };
 
 export default function TermsPage() {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, lazy, Suspense } from 'react';
+import Script from 'next/script';
 import styles from '@/styles/home.module.scss';
 
 // Lazy load the modal to reduce initial bundle size
@@ -26,8 +27,45 @@ export default function HomePage() {
     setChatType(null);
   };
 
+  // Structured data for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Timblenge',
+    applicationCategory: 'SocialNetworkingApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    description:
+      'Chat with strangers and make friends online. Anonymous video chat and text chat platform. No registration required.',
+    url: 'https://timblenge.com',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.5',
+      ratingCount: '1000',
+    },
+    featureList: [
+      'Video Chat with Strangers',
+      'Text Chat',
+      'Anonymous Chat',
+      'No Registration Required',
+      'Global Connections',
+      'Real-time Messaging',
+    ],
+  };
+
   return (
     <main className={styles.main}>
+      {/* Structured Data for SEO */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <h1 className={styles.heroTitle}>

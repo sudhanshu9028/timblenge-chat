@@ -5,6 +5,24 @@ export const metadata = {
   title: 'Privacy Policy | Timblenge',
   description:
     'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+  keywords: [
+    'privacy policy',
+    'data protection',
+    'timblenge privacy',
+    'chat privacy',
+    'user privacy',
+    'data collection',
+  ],
+  alternates: {
+    canonical: 'https://timblenge.com/privacy-policy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | Timblenge',
+    description:
+      'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+    url: 'https://timblenge.com/privacy-policy',
+    type: 'website',
+  },
 };
 
 export default function PrivacyPolicyPage() {
