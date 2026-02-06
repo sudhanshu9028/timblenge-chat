@@ -3,7 +3,8 @@ import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
   title: 'Terms of Service | Timblenge',
-  description: 'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+  description:
+    'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
 };
 
 export default function TermsPage() {
@@ -16,7 +17,14 @@ export default function TermsPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Terms of Service</h1>
-          <p className={styles.lastUpdated}>Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p className={styles.lastUpdated}>
+            Last Updated:{' '}
+            {new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
         </div>
 
         <div className={styles.content}>
@@ -69,12 +77,8 @@ export default function TermsPage() {
               You are solely responsible for your conduct while using Timblenge. You agree to:
             </p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Use the service in a lawful and respectful manner
-              </li>
-              <li className={styles.listItem}>
-                Respect the privacy and anonymity of other users
-              </li>
+              <li className={styles.listItem}>Use the service in a lawful and respectful manner</li>
+              <li className={styles.listItem}>Respect the privacy and anonymity of other users</li>
               <li className={styles.listItem}>
                 Not share personal information that could identify you
               </li>
@@ -86,9 +90,7 @@ export default function TermsPage() {
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>5. Prohibited Activities</h2>
-            <p className={styles.sectionContent}>
-              You are strictly prohibited from:
-            </p>
+            <p className={styles.sectionContent}>You are strictly prohibited from:</p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
                 Sharing, transmitting, or displaying any content that is illegal, harmful,
@@ -125,22 +127,16 @@ export default function TermsPage() {
               However, we cannot guarantee that all inappropriate content or behavior will be
               prevented or removed immediately. You use the service at your own risk.
             </p>
-            <p className={styles.sectionContent}>
-              We reserve the right to:
-            </p>
+            <p className={styles.sectionContent}>We reserve the right to:</p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
                 Monitor, review, and moderate conversations and content
               </li>
-              <li className={styles.listItem}>
-                Remove or block users who violate these terms
-              </li>
+              <li className={styles.listItem}>Remove or block users who violate these terms</li>
               <li className={styles.listItem}>
                 Terminate access to the service without notice for violations
               </li>
-              <li className={styles.listItem}>
-                Report illegal activities to law enforcement
-              </li>
+              <li className={styles.listItem}>Report illegal activities to law enforcement</li>
             </ul>
           </section>
 
@@ -163,9 +159,9 @@ export default function TermsPage() {
               USE, GOODWILL, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF THE SERVICE.
             </p>
             <p className={styles.sectionContent}>
-              We do not guarantee the availability, accuracy, or quality of the service. The
-              service may be unavailable due to maintenance, technical issues, or other reasons
-              beyond our control.
+              We do not guarantee the availability, accuracy, or quality of the service. The service
+              may be unavailable due to maintenance, technical issues, or other reasons beyond our
+              control.
             </p>
           </section>
 
@@ -219,4 +215,3 @@ export default function TermsPage() {
     </div>
   );
 }
-

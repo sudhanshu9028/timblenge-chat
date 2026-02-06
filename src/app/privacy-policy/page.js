@@ -3,7 +3,8 @@ import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
   title: 'Privacy Policy | Timblenge',
-  description: 'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+  description:
+    'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -16,7 +17,14 @@ export default function PrivacyPolicyPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>
-          <p className={styles.lastUpdated}>Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p className={styles.lastUpdated}>
+            Last Updated:{' '}
+            {new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
         </div>
 
         <div className={styles.content}>
@@ -42,8 +50,8 @@ export default function PrivacyPolicyPage() {
               </li>
               <li className={styles.listItem}>
                 <span className={styles.strong}>Technical Data:</span> We automatically collect
-                technical information such as IP address, browser type, device information, and usage
-                patterns for service functionality and security purposes.
+                technical information such as IP address, browser type, device information, and
+                usage patterns for service functionality and security purposes.
               </li>
               <li className={styles.listItem}>
                 <span className={styles.strong}>Chat Content:</span> Messages and video streams are
@@ -69,12 +77,8 @@ export default function PrivacyPolicyPage() {
               <li className={styles.listItem}>
                 To match you with other users based on gender preferences
               </li>
-              <li className={styles.listItem}>
-                To ensure platform security and prevent abuse
-              </li>
-              <li className={styles.listItem}>
-                To analyze usage patterns and improve our service
-              </li>
+              <li className={styles.listItem}>To ensure platform security and prevent abuse</li>
+              <li className={styles.listItem}>To analyze usage patterns and improve our service</li>
               <li className={styles.listItem}>
                 To comply with legal obligations and respond to law enforcement requests
               </li>
@@ -84,9 +88,9 @@ export default function PrivacyPolicyPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>3. Data Storage and Retention</h2>
             <p className={styles.sectionContent}>
-              <span className={styles.strong}>Chat Messages:</span> Text messages and video
-              streams are transmitted in real-time and are not stored on our servers. Once a
-              conversation ends, the content is not retained.
+              <span className={styles.strong}>Chat Messages:</span> Text messages and video streams
+              are transmitted in real-time and are not stored on our servers. Once a conversation
+              ends, the content is not retained.
             </p>
             <p className={styles.sectionContent}>
               <span className={styles.strong}>Session Data:</span> Gender preferences and session
@@ -112,12 +116,8 @@ export default function PrivacyPolicyPage() {
               <li className={styles.listItem}>
                 Secure socket connections for real-time chat and video
               </li>
-              <li className={styles.listItem}>
-                Regular security assessments and updates
-              </li>
-              <li className={styles.listItem}>
-                Access controls and monitoring systems
-              </li>
+              <li className={styles.listItem}>Regular security assessments and updates</li>
+              <li className={styles.listItem}>Access controls and monitoring systems</li>
             </ul>
             <p className={styles.sectionContent}>
               However, no method of transmission over the internet is 100% secure. While we strive
@@ -137,9 +137,9 @@ export default function PrivacyPolicyPage() {
                 data.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Hosting:</span> Our service is hosted on
-                third-party infrastructure. These providers have their own privacy policies
-                regarding data handling.
+                <span className={styles.strong}>Hosting:</span> Our service is hosted on third-party
+                infrastructure. These providers have their own privacy policies regarding data
+                handling.
               </li>
             </ul>
             <p className={styles.sectionContent}>
@@ -180,8 +180,8 @@ export default function PrivacyPolicyPage() {
                 service at any time
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Browser Controls:</span> You can clear your
-                browser data to remove session information
+                <span className={styles.strong}>Browser Controls:</span> You can clear your browser
+                data to remove session information
               </li>
               <li className={styles.listItem}>
                 <span className={styles.strong}>Contact Us:</span> You can contact us with privacy
@@ -193,10 +193,12 @@ export default function PrivacyPolicyPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>8. Children&apos;s Privacy</h2>
             <p className={styles.sectionContent}>
-              <span className={styles.highlight}>Timblenge is strictly for users 18 years and
-              older.</span> We do not knowingly collect information from individuals under 18 years
-              of age. If we become aware that we have collected information from someone under 18,
-              we will take steps to delete such information immediately.
+              <span className={styles.highlight}>
+                Timblenge is strictly for users 18 years and older.
+              </span>{' '}
+              We do not knowingly collect information from individuals under 18 years of age. If we
+              become aware that we have collected information from someone under 18, we will take
+              steps to delete such information immediately.
             </p>
             <p className={styles.sectionContent}>
               If you are a parent or guardian and believe your child has provided us with
@@ -230,8 +232,8 @@ export default function PrivacyPolicyPage() {
             <h2 className={styles.sectionTitle}>10. International Users</h2>
             <p className={styles.sectionContent}>
               Timblenge is accessible worldwide. By using our service, you acknowledge that your
-              information may be transferred to and processed in countries other than your own.
-              We take steps to ensure your information is protected regardless of location.
+              information may be transferred to and processed in countries other than your own. We
+              take steps to ensure your information is protected regardless of location.
             </p>
           </section>
 
@@ -247,9 +249,9 @@ export default function PrivacyPolicyPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>12. Data Breach Notification</h2>
             <p className={styles.sectionContent}>
-              In the unlikely event of a data breach that compromises your information, we will
-              take appropriate measures to notify affected users and relevant authorities as
-              required by applicable law.
+              In the unlikely event of a data breach that compromises your information, we will take
+              appropriate measures to notify affected users and relevant authorities as required by
+              applicable law.
             </p>
           </section>
 
@@ -271,4 +273,3 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
-
