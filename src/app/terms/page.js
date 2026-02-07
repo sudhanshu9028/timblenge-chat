@@ -2,24 +2,24 @@ import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
-  title: 'Terms of Service | Timblenge',
+  title: 'Terms of Service | Anoniz',
   description:
-    'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+    'Terms of Service for Anoniz - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
   keywords: [
     'terms of service',
     'terms and conditions',
-    'timblenge terms',
+    'anoniz terms',
     'chat platform terms',
     'user agreement',
   ],
   alternates: {
-    canonical: 'https://timblenge.com/terms',
+    canonical: 'https://anoniz.com/terms',
   },
   openGraph: {
-    title: 'Terms of Service | Timblenge',
+    title: 'Terms of Service | Anoniz',
     description:
-      'Terms of Service for Timblenge - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
-    url: 'https://timblenge.com/terms',
+      'Terms of Service for Anoniz - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+    url: 'https://anoniz.com/terms',
     type: 'website',
   },
 };
@@ -47,15 +47,15 @@ export default function TermsPage() {
         <div className={styles.content}>
           <div className={styles.intro}>
             <p>
-              Welcome to Timblenge. By accessing or using our platform, you agree to be bound by
-              these Terms of Service. Please read them carefully before using our service.
+              Welcome to Anoniz. By accessing or using our platform, you agree to be bound by these
+              Terms of Service. Please read them carefully before using our service.
             </p>
           </div>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>1. Acceptance of Terms</h2>
             <p className={styles.sectionContent}>
-              By accessing or using Timblenge, you acknowledge that you have read, understood, and
+              By accessing or using Anoniz, you acknowledge that you have read, understood, and
               agree to be bound by these Terms of Service and our Privacy Policy. If you do not
               agree to these terms, you must not use our service.
             </p>
@@ -65,17 +65,17 @@ export default function TermsPage() {
             <h2 className={styles.sectionTitle}>2. Eligibility</h2>
             <p className={styles.sectionContent}>
               <span className={styles.highlight}>You must be at least 18 years old</span> to use
-              Timblenge. By using our service, you represent and warrant that you are of legal age
-              to form a binding contract and meet all eligibility requirements. We reserve the right
-              to verify your age at any time.
+              Anoniz. By using our service, you represent and warrant that you are of legal age to
+              form a binding contract and meet all eligibility requirements. We reserve the right to
+              verify your age at any time.
             </p>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>3. Service Description</h2>
             <p className={styles.sectionContent}>
-              Timblenge is an anonymous chat and video chat platform that connects users with
-              strangers for text and video conversations. Our service allows you to:
+              Anoniz is an anonymous chat and video chat platform that connects users with strangers
+              for text and video conversations. Our service allows you to:
             </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>Engage in anonymous text chats with random users</li>
@@ -91,7 +91,7 @@ export default function TermsPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>4. User Conduct and Responsibilities</h2>
             <p className={styles.sectionContent}>
-              You are solely responsible for your conduct while using Timblenge. You agree to:
+              You are solely responsible for your conduct while using Anoniz. You agree to:
             </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>Use the service in a lawful and respectful manner</li>
@@ -160,20 +160,19 @@ export default function TermsPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>7. Privacy and Anonymity</h2>
             <p className={styles.sectionContent}>
-              Timblenge is designed to facilitate anonymous conversations. However, complete
-              anonymity cannot be guaranteed. We collect minimal data as described in our Privacy
-              Policy. You are responsible for protecting your own privacy and not sharing personal
-              information.
+              Anoniz is designed to facilitate anonymous conversations. However, complete anonymity
+              cannot be guaranteed. We collect minimal data as described in our Privacy Policy. You
+              are responsible for protecting your own privacy and not sharing personal information.
             </p>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>8. Limitation of Liability</h2>
             <p className={styles.sectionContent}>
-              TO THE MAXIMUM EXTENT PERMITTED BY LAW, TIMBLENGE SHALL NOT BE LIABLE FOR ANY
-              INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF
-              PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA,
-              USE, GOODWILL, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF THE SERVICE.
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, ANONIZ SHALL NOT BE LIABLE FOR ANY INDIRECT,
+              INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR
+              REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL,
+              OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF THE SERVICE.
             </p>
             <p className={styles.sectionContent}>
               We do not guarantee the availability, accuracy, or quality of the service. The service
@@ -185,9 +184,9 @@ export default function TermsPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>9. No Registration Required</h2>
             <p className={styles.sectionContent}>
-              Timblenge does not require user registration or account creation. You can use the
-              service anonymously without providing personal information. However, this means we
-              cannot provide account recovery or personalized services.
+              Anoniz does not require user registration or account creation. You can use the service
+              anonymously without providing personal information. However, this means we cannot
+              provide account recovery or personalized services.
             </p>
           </section>
 
@@ -222,8 +221,8 @@ export default function TermsPage() {
             <h3 className={styles.sectionTitle}>Contact Us</h3>
             <p className={styles.sectionContent}>
               If you have any questions about these Terms of Service, please contact us at:{' '}
-              <a href="mailto:timblenge@gmail.com" className={styles.link}>
-                timblenge@gmail.com
+              <a href="mailto:support@anoniz.com" className={styles.link}>
+                support@anoniz.com
               </a>
             </p>
           </div>

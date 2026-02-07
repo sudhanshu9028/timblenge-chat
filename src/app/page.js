@@ -31,7 +31,7 @@ export default function HomePage() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Timblenge',
+    name: 'Anoniz',
     applicationCategory: 'SocialNetworkingApplication',
     operatingSystem: 'Web',
     offers: {
@@ -41,7 +41,7 @@ export default function HomePage() {
     },
     description:
       'Chat with strangers and make friends online. Anonymous video chat and text chat platform. No registration required.',
-    url: 'https://timblenge.com',
+    url: 'https://anoniz.com',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.5',

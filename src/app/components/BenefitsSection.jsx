@@ -3,7 +3,7 @@ import styles from '@/styles/home.module.scss';
 export default function BenefitsSection() {
   return (
     <section className={styles.benefits}>
-      <h2 className={styles.sectionTitle}>Why Choose Timblenge?</h2>
+      <h2 className={styles.sectionTitle}>Why Choose Anoniz?</h2>
       <div className={styles.benefitsContent}>
         <article className={styles.benefitItem}>
           <h3 className={styles.benefitTitle}>Anonymous Chat, Meet New People</h3>

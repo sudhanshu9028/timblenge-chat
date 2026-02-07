@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Timblenge | Chat with Strangers, Make Friends Online',
+  title: 'Anoniz | Chat with Strangers, Make Friends Online',
   description:
-    'Talk to strangers and make friends online with Timblenge - the best random chat alternative. Experience anonymous chat, video chat with strangers, and text chat without registration. Meet new people from around the world and turn strangers into friends. Perfect Omegle alternative for safe, fun conversations.',
+    'Talk to strangers and make friends online with Anoniz - the best random chat alternative. Experience anonymous chat, video chat with strangers, and text chat without registration. Meet new people from around the world and turn strangers into friends. Perfect Omegle alternative for safe, fun conversations.',
   keywords: [
     'chat with strangers',
     'talk to strangers',
@@ -45,22 +45,22 @@ export const metadata = {
     'meet strangers online',
     'chat with random people',
     'online chat platform',
-    'timblenge',
+    'anoniz',
   ],
   alternates: {
-    canonical: 'https://timblenge.com/',
+    canonical: 'https://anoniz.com/',
   },
   other: {
     'google-site-verification': 'Jan32HbrGFwV4y6NG4m_lPyn8F9rl6luy7f8srKkfrM',
   },
-  authors: [{ name: 'Anonymous', url: 'https://timblenge.com' }],
-  metadataBase: new URL('https://timblenge.com'),
+  authors: [{ name: 'Anonymous', url: 'https://anoniz.com' }],
+  metadataBase: new URL('https://anoniz.com'),
   openGraph: {
-    title: 'Timblenge | Chat with Strangers, Make Friends Online',
+    title: 'Anoniz | Chat with Strangers, Make Friends Online',
     description:
       'Talk to strangers and make friends online. Experience anonymous chat, video chat, and text chat with random people from around the world. No registration required - start chatting instantly!',
-    url: 'https://timblenge.com',
-    siteName: 'Timblenge',
+    url: 'https://anoniz.com',
+    siteName: 'Anoniz',
     type: 'website',
     locale: 'en_US',
     images: [
@@ -68,7 +68,7 @@ export const metadata = {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Timblenge - Chat with Strangers, Make Friends Online',
+        alt: 'Anoniz - Chat with Strangers, Make Friends Online',
       },
     ],
   },
@@ -82,7 +82,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timblenge | Chat with Strangers, Make Friends Online',
+    title: 'Anoniz | Chat with Strangers, Make Friends Online',
     description:
       'Talk to strangers and make friends online. Video chat and text chat with random people worldwide. No registration required - start chatting instantly!',
     images: ['/logo.png'],
@@ -111,7 +111,7 @@ export default function RootLayout({ children }) {
   `}
         </Script>
 
-        <meta name="publisher" content="Timblenge" />
+        <meta name="publisher" content="Anoniz" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -121,10 +121,10 @@ export default function RootLayout({ children }) {
         >
           Found a bug or have a suggestion? Email us at{' '}
           <a
-            href="mailto:timblenge@gmail.com"
+            href="mailto:support@anoniz.com"
             style={{ color: '#cbd5e1', textDecoration: 'underline' }}
           >
-            timblenge@gmail.com
+            support@anoniz.com
           </a>
         </footer>
       </body>

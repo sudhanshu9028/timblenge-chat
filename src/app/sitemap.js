@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://timblenge.com';
+  const baseUrl = 'https://anoniz.com';
   const currentDate = new Date().toISOString();
 
   return [

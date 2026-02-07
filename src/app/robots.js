@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/chat/', '/video/'], // Don't index dynamic chat/video pages
       },
     ],
-    sitemap: 'https://timblenge.com/sitemap.xml',
+    sitemap: 'https://anoniz.com/sitemap.xml',
   };
 }

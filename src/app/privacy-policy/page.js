@@ -2,25 +2,25 @@ import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
-  title: 'Privacy Policy | Timblenge',
+  title: 'Privacy Policy | Anoniz',
   description:
-    'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+    'Privacy Policy for Anoniz - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
   keywords: [
     'privacy policy',
     'data protection',
-    'timblenge privacy',
+    'anoniz privacy',
     'chat privacy',
     'user privacy',
     'data collection',
   ],
   alternates: {
-    canonical: 'https://timblenge.com/privacy-policy',
+    canonical: 'https://anoniz.com/privacy-policy',
   },
   openGraph: {
-    title: 'Privacy Policy | Timblenge',
+    title: 'Privacy Policy | Anoniz',
     description:
-      'Privacy Policy for Timblenge - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
-    url: 'https://timblenge.com/privacy-policy',
+      'Privacy Policy for Anoniz - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+    url: 'https://anoniz.com/privacy-policy',
     type: 'website',
   },
 };
@@ -48,16 +48,16 @@ export default function PrivacyPolicyPage() {
         <div className={styles.content}>
           <div className={styles.intro}>
             <p>
-              At Timblenge, we are committed to protecting your privacy. This Privacy Policy
-              explains how we collect, use, and safeguard your information when you use our
-              anonymous chat and video chat platform.
+              At Anoniz, we are committed to protecting your privacy. This Privacy Policy explains
+              how we collect, use, and safeguard your information when you use our anonymous chat
+              and video chat platform.
             </p>
           </div>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>1. Information We Collect</h2>
             <p className={styles.sectionContent}>
-              Timblenge is designed to be anonymous. We collect minimal information necessary to
+              Anoniz is designed to be anonymous. We collect minimal information necessary to
               provide our service:
             </p>
             <ul className={styles.list}>
@@ -212,7 +212,7 @@ export default function PrivacyPolicyPage() {
             <h2 className={styles.sectionTitle}>8. Children&apos;s Privacy</h2>
             <p className={styles.sectionContent}>
               <span className={styles.highlight}>
-                Timblenge is strictly for users 18 years and older.
+                Anoniz is strictly for users 18 years and older.
               </span>{' '}
               We do not knowingly collect information from individuals under 18 years of age. If we
               become aware that we have collected information from someone under 18, we will take
@@ -227,8 +227,8 @@ export default function PrivacyPolicyPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>9. Anonymous Nature of Service</h2>
             <p className={styles.sectionContent}>
-              Timblenge is designed to facilitate anonymous conversations. However, you should be
-              aware that:
+              Anoniz is designed to facilitate anonymous conversations. However, you should be aware
+              that:
             </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
@@ -249,7 +249,7 @@ export default function PrivacyPolicyPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>10. International Users</h2>
             <p className={styles.sectionContent}>
-              Timblenge is accessible worldwide. By using our service, you acknowledge that your
+              Anoniz is accessible worldwide. By using our service, you acknowledge that your
               information may be transferred to and processed in countries other than your own. We
               take steps to ensure your information is protected regardless of location.
             </p>
@@ -278,8 +278,8 @@ export default function PrivacyPolicyPage() {
             <p className={styles.sectionContent}>
               If you have any questions, concerns, or requests regarding this Privacy Policy or our
               data practices, please contact us at:{' '}
-              <a href="mailto:timblenge@gmail.com" className={styles.link}>
-                timblenge@gmail.com
+              <a href="mailto:support@anoniz.com" className={styles.link}>
+                support@anoniz.com
               </a>
             </p>
             <p className={styles.sectionContent}>

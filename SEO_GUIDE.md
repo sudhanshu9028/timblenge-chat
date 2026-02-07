@@ -1,11 +1,11 @@
-# SEO Guide for Timblenge
+# SEO Guide for Anoniz
 
 ## ✅ What's Already Implemented
 
 1. **Dynamic Sitemap** (`src/app/sitemap.js`)
    - Automatically includes all public pages
    - Updates automatically when you add new pages
-   - Accessible at: `https://timblenge.com/sitemap.xml`
+   - Accessible at: `https://anoniz.com/sitemap.xml`
 
 2. **Robots.txt** (`src/app/robots.js`)
    - Allows all search engines
@@ -28,7 +28,7 @@
 
 ### Step 1: Verify Your Site
 1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Add property: `https://timblenge.com`
+2. Add property: `https://anoniz.com`
 3. Verify using the meta tag (already in your code):
    - Meta tag: `Jan32HbrGFwV4y6NG4m_lPyn8F9rl6luy7f8srKkfrM`
    - This is already in your `layout.js` file
@@ -36,7 +36,7 @@
 ### Step 2: Submit Sitemap
 **You DON'T need to manually add pages!** Just submit the sitemap:
 1. In Google Search Console, go to "Sitemaps"
-2. Enter: `https://timblenge.com/sitemap.xml`
+2. Enter: `https://anoniz.com/sitemap.xml`
 3. Click "Submit"
 4. Google will automatically discover and index all pages listed in the sitemap
 
@@ -100,7 +100,7 @@ A: **No!** Just submit your sitemap once. Google will automatically discover and
 A: Usually 1-7 days after submitting the sitemap, but can take longer for new sites.
 
 **Q: How do I check if my pages are indexed?**
-A: Use Google Search Console → Coverage report, or search `site:timblenge.com` on Google.
+A: Use Google Search Console → Coverage report, or search `site:anoniz.com` on Google.
 
 **Q: What if I add a new page?**
 A: The sitemap updates automatically. Google will discover it on the next crawl (usually within days).
