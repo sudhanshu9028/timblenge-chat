@@ -26,20 +26,20 @@ function isSocketConnected(io, socketId) {
 // Helper function to clean up disconnected sockets from chat queues
 function cleanupChatQueues(io) {
   const disconnectedSockets = [];
-  
+
   // Check waiting users
   for (const socketId of waitingUsers) {
     if (!isSocketConnected(io, socketId)) {
       disconnectedSockets.push(socketId);
     }
   }
-  
+
   // Remove disconnected sockets from waiting users
   disconnectedSockets.forEach((socketId) => {
     waitingUsers.delete(socketId);
     userSocketMap.delete(socketId);
   });
-  
+
   // Clean up userSocketMap - remove entries where either socket is disconnected
   for (const [socketId, partnerId] of userSocketMap.entries()) {
     if (!isSocketConnected(io, socketId) || !isSocketConnected(io, partnerId)) {
@@ -50,21 +50,21 @@ function cleanupChatQueues(io) {
       }
     }
   }
-  
+
   return disconnectedSockets.length;
 }
 
 // Helper function to clean up disconnected sockets from video queues
 function cleanupVideoQueues(io) {
   const disconnectedSockets = [];
-  
+
   // Check video waiting users
   for (const socketId of videoWaitingUsers) {
     if (!isSocketConnected(io, socketId)) {
       disconnectedSockets.push(socketId);
     }
   }
-  
+
   // Remove disconnected sockets
   disconnectedSockets.forEach((socketId) => {
     videoWaitingUsers.delete(socketId);
@@ -78,7 +78,7 @@ function cleanupVideoQueues(io) {
       }
     }
   });
-  
+
   // Clean up videoUserSocketMap
   for (const [socketId, partnerId] of videoUserSocketMap.entries()) {
     if (!isSocketConnected(io, socketId) || !isSocketConnected(io, partnerId)) {
@@ -89,7 +89,7 @@ function cleanupVideoQueues(io) {
       }
     }
   }
-  
+
   return disconnectedSockets.length;
 }
 
@@ -99,7 +99,9 @@ function startPeriodicCleanup(io) {
     const chatCleaned = cleanupChatQueues(io);
     const videoCleaned = cleanupVideoQueues(io);
     if (chatCleaned > 0 || videoCleaned > 0) {
-      console.log(`Periodic cleanup: Removed ${chatCleaned} chat and ${videoCleaned} video disconnected sockets`);
+      console.log(
+        `Periodic cleanup: Removed ${chatCleaned} chat and ${videoCleaned} video disconnected sockets`
+      );
     }
   }, 30000); // Run every 30 seconds
 }

@@ -134,18 +134,18 @@ export default function ChatPage() {
       socket.emit('leave-chat');
     }
     disconnectSocket();
-    
+
     // Create new chat ID and navigate
     const newChatId = uuidv4();
     sessionStorage.setItem('chatInitiated', 'true');
     sessionStorage.setItem('uniqueChatId', newChatId);
-    
+
     // Reset state
     setMessages([]);
     setIsSearching(true);
     setShowReconnectButton(false);
     setConnected(false);
-    
+
     // Navigate to new chat - the useEffect will handle socket connection
     router.push(`/chat/${newChatId}`);
   };
