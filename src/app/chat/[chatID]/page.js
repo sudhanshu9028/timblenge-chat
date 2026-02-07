@@ -93,10 +93,17 @@ export default function ChatPage() {
 
   const handleNext = () => {
     setMessages([]);
-    connectSocket().emit('next');
+    const socket = connectSocket();
+    if (socket && socket.connected) {
+      socket.emit('next');
+    }
     setConnected(false);
     setIsSearching(true);
     setShowReconnectButton(false);
+    // Emit leave-chat before disconnecting
+    if (socket && socket.connected) {
+      socket.emit('leave-chat');
+    }
     disconnectSocket();
     const newChatId = uuidv4();
     sessionStorage.setItem('chatInitiated', 'true');
@@ -110,23 +117,36 @@ export default function ChatPage() {
     } else {
       setMessages((prev) => [...prev, { from: 'system', text: 'You left the chat.' }]);
     }
+    // Emit leave-chat before disconnecting
+    const socket = connectSocket();
+    if (socket && socket.connected) {
+      socket.emit('leave-chat');
+    }
     disconnectSocket();
     setConnected(false);
     setShowReconnectButton(true);
   };
 
   const handleFindNew = () => {
+    // Properly clean up existing socket connection
     const socket = connectSocket();
-    if (socket.disconnected) socket.connect();
-    socket.connect();
-    socket.emit('join');
-    setMessages([]);
-    setIsSearching(true);
-    setShowReconnectButton(false);
+    if (socket && socket.connected) {
+      socket.emit('leave-chat');
+    }
     disconnectSocket();
+    
+    // Create new chat ID and navigate
     const newChatId = uuidv4();
     sessionStorage.setItem('chatInitiated', 'true');
     sessionStorage.setItem('uniqueChatId', newChatId);
+    
+    // Reset state
+    setMessages([]);
+    setIsSearching(true);
+    setShowReconnectButton(false);
+    setConnected(false);
+    
+    // Navigate to new chat - the useEffect will handle socket connection
     router.push(`/chat/${newChatId}`);
   };
 
@@ -170,6 +190,10 @@ export default function ChatPage() {
     });
 
     return () => {
+      // Emit leave-chat before disconnecting
+      if (socket && socket.connected) {
+        socket.emit('leave-chat');
+      }
       socket.disconnect();
     };
   }, []);

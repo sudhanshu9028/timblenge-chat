@@ -48,6 +48,7 @@
       border-radius: $radius-sm;
       background: black;
       z-index: $z-index-dropdown;
+      transform: scaleX(-1);
     }
     .remote {
         width: 48%;
@@ -58,7 +59,33 @@
         border: $video-border-width solid $color-text-white;
         border-radius: $radius-sm;
         background: black;
+        transform: scaleX(-1);
       }
+
+    .remoteBlurred {
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+    }
+
+    .reconnectButtonContainer {
+      position: absolute;
+      width: 48%;
+      height: 94%;
+      bottom: $margin-base;
+      left: $margin-base;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: $radius-sm;
+      pointer-events: none;
+      box-sizing: border-box;
+      
+      button {
+        pointer-events: auto;
+      }
+    }
   }
   
   .actions {
@@ -84,6 +111,23 @@
       }
     }
   }
+
+  .findNewBtn {
+    background: $gradient-accent;
+    color: $color-text-white;
+    border: none;
+    padding: $padding-sm $spacing-xl;
+    border-radius: $radius-base;
+    cursor: pointer;
+    font-weight: $font-weight-medium;
+    transition: $transition-fast;
+    box-shadow: $shadow-pink-sm;
+
+    &:hover {
+      background: $gradient-accent-hover;
+      box-shadow: $shadow-pink;
+    }
+  }
   
   @media (max-width: $breakpoint-md) {
     .videoContainer {
@@ -92,6 +136,7 @@
         .local {
             height: $video-local-height-mobile;
             width: $video-local-width-mobile;
+            z-index: $z-index-dropdown;
         }
         .remote {
             position: static;
@@ -100,6 +145,26 @@
             border: none;
             border-radius: $radius-sm;
             background: black;
+            z-index: 1;
+          }
+          .remoteBlurred {
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+          }
+          .reconnectButtonContainer {
+            position: absolute;
+            width: $height-full;
+            height: $height-full;
+            bottom: 0;
+            left: 0;
+            border-radius: $radius-sm;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            
+            button {
+              pointer-events: auto;
+            }
           }
           .system {
             left: 50%;

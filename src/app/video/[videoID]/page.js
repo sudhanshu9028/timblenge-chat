@@ -21,6 +21,8 @@ export default function VideoPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [localStreamReady, setLocalStreamReady] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const [showReconnectButton, setShowReconnectButton] = useState(false);
+  const stoppedRef = useRef(false);
 
   useEffect(() => {
     // guard direct access
@@ -39,6 +41,10 @@ export default function VideoPage() {
     socketRef.current = s;
 
     return () => {
+      // Emit leave-video before disconnecting
+      if (s && s.connected) {
+        s.emit('leave-video');
+      }
       disconnectSocket();
     };
   }, []);
@@ -54,11 +60,7 @@ export default function VideoPage() {
           localVideoRef.current.srcObject = stream;
         }
         setLocalStreamReady(true);
-        if (socket && !videoReady) {
-          socket.emit('video-ready');
-          console.log('Sent video-ready');
-          setVideoReady(true);
-        }
+        // Don't emit video-ready here if stopped - let the useEffect handle it
         console.log('Video stream initialized successfully');
       } catch (err) {
         setError('Could not access camera/microphone.');
@@ -75,10 +77,16 @@ export default function VideoPage() {
   }, []);
 
   useEffect(() => {
+    // Don't do anything if stopped
+    if (stoppedRef.current) {
+      return;
+    }
+    // Only emit video-ready if not stopped
     if (localStreamReady && socket && !videoReady) {
       socket.emit('video-ready');
       setVideoReady(true);
     }
+    // Only auto-join if not stopped and conditions are met
     if (socket && videoReady && !connected && isConnected) {
       console.log('🎯 Joining video queue after ready');
       socket.emit('join-video');
@@ -91,8 +99,14 @@ export default function VideoPage() {
 
     const handleConnect = () => {
       setIsConnected(true);
-      console.log('Socket connected, joining video queue with videoID:', videoID);
-      socket.emit('join-video');
+      console.log('Socket connected, videoID:', videoID);
+      // Only auto-join if not stopped
+      if (!stoppedRef.current) {
+        console.log('Joining video queue');
+        socket.emit('join-video');
+      } else {
+        console.log('Not joining video queue - user has stopped');
+      }
     };
 
     const handleDisconnect = () => {
@@ -113,9 +127,16 @@ export default function VideoPage() {
     console.log('Socket ID:', socket.id);
 
     socket.on('video-matched', async ({ peerId, initiator }) => {
+      // Ignore matches if we've stopped
+      if (stoppedRef.current) {
+        console.log('Ignoring video match - user has stopped');
+        return;
+      }
       console.log('Video matched with peer:', peerId);
       setIsSearching(false);
       setConnected(true);
+      setShowReconnectButton(false);
+      stoppedRef.current = false; // Reset stopped flag when matched
 
       try {
         // when matched, start WebRTC handshake
@@ -258,10 +279,25 @@ export default function VideoPage() {
     // partner left or stopped
     socket.on('video-partner-left', () => {
       console.log('Partner left the video call');
+      // Set stopped flag FIRST to prevent any race conditions
+      stoppedRef.current = true;
+      // Reset videoReady to prevent auto-emission
+      setVideoReady(false);
+      // Set connected to false immediately
+      setConnected(false);
+      // Emit leave-video to ensure we're removed from server queues
+      if (socket && socket.connected) {
+        socket.emit('leave-video');
+      }
+      // End the call and show reconnect button
       endCall();
     });
 
     return () => {
+      // Emit leave-video before cleaning up
+      if (socket && socket.connected) {
+        socket.emit('leave-video');
+      }
       socket.off('connect', handleConnect);
       socket.off('disconnect', handleDisconnect);
       socket.off('video-matched');
@@ -275,7 +311,10 @@ export default function VideoPage() {
 
   const endCall = () => {
     setConnected(false);
-    setIsSearching(true);
+    setIsSearching(false);
+    setShowReconnectButton(true);
+    // Set stopped flag to prevent auto-rejoining
+    stoppedRef.current = true;
     if (pcRef.current) {
       pcRef.current.close();
       pcRef.current = null;
@@ -286,6 +325,14 @@ export default function VideoPage() {
   };
 
   const handleNext = () => {
+    // Set stopped flag to prevent auto-rejoining
+    stoppedRef.current = true;
+    // Emit video-stop to notify partner
+    if (socketRef.current && socketRef.current.connected) {
+      socketRef.current.emit('video-stop');
+      socketRef.current.emit('leave-video');
+    }
+    endCall();
     const newId = uuidv4();
     sessionStorage.setItem('videoInitiated', 'true');
     sessionStorage.setItem('uniqueVideoId', newId);
@@ -293,10 +340,47 @@ export default function VideoPage() {
   };
 
   const handleStop = () => {
-    if (socketRef.current) {
+    // Set stopped flag FIRST to prevent any race conditions
+    stoppedRef.current = true;
+    // Reset videoReady so it doesn't auto-emit video-ready again
+    setVideoReady(false);
+    // Set connected to false immediately to prevent any matching logic
+    setConnected(false);
+    // Set isSearching to false to stop showing "Finding stranger..."
+    setIsSearching(false);
+    // Emit video-stop to notify partner and remove from server queues
+    if (socketRef.current && socketRef.current.connected) {
       socketRef.current.emit('video-stop');
     }
+    // Also emit leave-video to ensure complete cleanup
+    if (socketRef.current && socketRef.current.connected) {
+      socketRef.current.emit('leave-video');
+    }
+    // Then call endCall to show button
     endCall();
+  };
+
+  const handleFindNew = () => {
+    // Reset stopped flag to allow matching again
+    stoppedRef.current = false;
+    // Properly clean up existing socket connection
+    if (socketRef.current && socketRef.current.connected) {
+      socketRef.current.emit('leave-video');
+    }
+
+    // Create new video ID and navigate
+    const newId = uuidv4();
+    sessionStorage.setItem('videoInitiated', 'true');
+    sessionStorage.setItem('uniqueVideoId', newId);
+
+    // Reset state
+    setShowReconnectButton(false);
+    setIsSearching(true);
+    setConnected(false);
+    setVideoReady(false);
+
+    // Navigate to new video - the useEffect will handle socket connection
+    router.push(`/video/${newId}`);
   };
 
   return (
@@ -305,11 +389,23 @@ export default function VideoPage() {
         {isSearching && <p className={styles.system}>Finding stranger…</p>}
         {error && <p className={styles.error}>{error}</p>}
         <video ref={localVideoRef} className={styles.local} autoPlay muted playsInline />
-        <video ref={remoteVideoRef} className={styles.remote} autoPlay playsInline />
+        <video
+          ref={remoteVideoRef}
+          className={`${styles.remote} ${showReconnectButton ? styles.remoteBlurred : ''}`}
+          autoPlay
+          playsInline
+        />
+        {showReconnectButton && (
+          <div className={styles.reconnectButtonContainer}>
+            <button onClick={handleFindNew} className={styles.findNewBtn}>
+              Find New Stranger
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.actions}>
-        <button onClick={handleStop} disabled={!connected}>
+        <button onClick={handleStop} disabled={showReconnectButton}>
           Stop
         </button>
         <button onClick={handleNext}>Next</button>
