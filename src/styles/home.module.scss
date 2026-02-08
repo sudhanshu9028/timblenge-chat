@@ -219,6 +219,9 @@
   position: relative;
   overflow: hidden;
   will-change: transform;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 
   &::before {
     content: '';

@@ -1,32 +1,16 @@
 'use client';
 
-import { useState, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
+import Link from 'next/link';
 import Script from 'next/script';
 import styles from '@/styles/home.module.scss';
-
-// Lazy load the modal to reduce initial bundle size
-const ConsentModal = lazy(() => import('./components/ConsentModal'));
 
 // Lazy load below-the-fold sections to improve LCP
 const FeaturesSection = lazy(() => import('./components/FeaturesSection'));
 const BenefitsSection = lazy(() => import('./components/BenefitsSection'));
 const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
-const CTASection = lazy(() => import('./components/CTASection'));
 
 export default function HomePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [chatType, setChatType] = useState(null);
-
-  const handleButtonClick = (type) => {
-    setChatType(type);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setChatType(null);
-  };
-
   // Structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
@@ -78,12 +62,12 @@ export default function HomePage() {
         </p>
         <div className={styles.heroCTA}>
           <div className={styles.actionButtons}>
-            <button className={styles.actionButton} onClick={() => handleButtonClick('text')}>
+            <Link href="/chat" className={styles.actionButton}>
               Text Chat
-            </button>
-            <button className={styles.actionButton} onClick={() => handleButtonClick('video')}>
+            </Link>
+            <Link href="/video" className={styles.actionButton}>
               Video Chat
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -100,16 +84,6 @@ export default function HomePage() {
       <Suspense fallback={null}>
         <HowItWorksSection />
       </Suspense>
-
-      <Suspense fallback={null}>
-        <CTASection onButtonClick={handleButtonClick} />
-      </Suspense>
-
-      {isModalOpen && (
-        <Suspense fallback={null}>
-          <ConsentModal isOpen={isModalOpen} onClose={handleCloseModal} chatType={chatType} />
-        </Suspense>
-      )}
     </main>
   );
 }

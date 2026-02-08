@@ -1,0 +1,76 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import AnonizLogo from './AnonizLogo';
+import styles from '@/styles/navigation.module.scss';
+
+export default function Navigation() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/support', label: 'Support' },
+  ];
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  return (
+    <nav className={styles.navbar}>
+      <div className={styles.navContainer}>
+        <Link href="/" className={styles.logoContainer}>
+          <div className={styles.logoWrapper}>
+            <AnonizLogo className={styles.logoIcon} />
+          </div>
+          <span className={styles.brandName}>Anoniz</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className={styles.navLinks}>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`${styles.navLink} ${pathname === link.href ? styles.active : ''}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className={styles.mobileMenuButton}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span className={isMobileMenuOpen ? styles.open : ''}></span>
+          <span className={isMobileMenuOpen ? styles.open : ''}></span>
+          <span className={isMobileMenuOpen ? styles.open : ''}></span>
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className={styles.mobileMenu}>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`${styles.mobileNavLink} ${pathname === link.href ? styles.active : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+}
+

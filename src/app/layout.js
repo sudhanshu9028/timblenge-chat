@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import './globals.css';
 
 const geistSans = Geist({
@@ -52,6 +54,13 @@ export const metadata = {
   },
   other: {
     'google-site-verification': 'Jan32HbrGFwV4y6NG4m_lPyn8F9rl6luy7f8srKkfrM',
+  },
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/logo.png', sizes: '180x180', type: 'image/png' }],
   },
   authors: [{ name: 'Anonymous', url: 'https://anoniz.com' }],
   metadataBase: new URL('https://anoniz.com'),
@@ -113,20 +122,14 @@ export default function RootLayout({ children }) {
 
         <meta name="publisher" content="Anoniz" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Navigation />
         {children}
-        <footer
-          style={{ textAlign: 'center', padding: '5px', fontSize: '0.875rem', color: '#94a3b8' }}
-        >
-          Found a bug or have a suggestion? Email us at{' '}
-          <a
-            href="mailto:support@anoniz.com"
-            style={{ color: '#cbd5e1', textDecoration: 'underline' }}
-          >
-            support@anoniz.com
-          </a>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

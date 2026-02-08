@@ -1,0 +1,184 @@
+@import './variables';
+
+.supportPage {
+  min-height: 94vh;
+  padding: $padding-3xl $margin-lg;
+  background: $gradient-primary;
+  font-family: $font-family-primary;
+  color: $color-text-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.supportPage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><filter id="blur"><feGaussianBlur stdDeviation="3"/></filter></defs><circle cx="50" cy="50" r="40" fill="rgba(168,85,247,0.1)" filter="url(%23blur)"/></svg>');
+  background-size: 200px 200px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.headerCard {
+  background: $gradient-accent;
+  padding: $padding-3xl;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+}
+
+.headerTitle {
+  font-size: $font-size-7xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: $spacing-md;
+}
+
+.headerDescription {
+  font-size: $font-size-lg;
+  color: $color-text-white;
+  line-height: $line-height-relaxed;
+  opacity: 0.95;
+}
+
+.emailCard {
+  background: rgba(168, 85, 247, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: $padding-3xl;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  text-align: center;
+}
+
+.iconContainer {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto $spacing-lg;
+  background: rgba(168, 85, 247, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: $radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.emailTitle {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: $spacing-md;
+}
+
+.emailDescription {
+  font-size: $font-size-base;
+  color: $color-text-white;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-xl;
+  opacity: 0.9;
+}
+
+.emailButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $padding-md $padding-xl;
+  background: $gradient-accent;
+  color: $color-text-white;
+  text-decoration: none;
+  border-radius: $radius-base;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-lg;
+  transition: $transition-fast;
+  box-shadow: $shadow-pink-sm;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: $transition-fast;
+  }
+
+  &:hover {
+    background: $gradient-accent-hover;
+    box-shadow: $shadow-pink;
+    transform: translateY(-2px);
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.backLink {
+  text-align: center;
+  margin-top: $margin-xl;
+}
+
+.backLink a {
+  color: $color-text-secondary;
+  text-decoration: none;
+  font-size: $font-size-base;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-accent-primary;
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .supportPage {
+    padding: $padding-lg $margin-base;
+  }
+
+  .headerCard {
+    padding: $padding-xl;
+  }
+
+  .headerTitle {
+    font-size: $font-size-5xl;
+  }
+
+  .emailCard {
+    padding: $padding-xl;
+  }
+
+  .emailTitle {
+    font-size: $font-size-4xl;
+  }
+
+  .iconContainer {
+    width: 64px;
+    height: 64px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+

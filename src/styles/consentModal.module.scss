@@ -28,6 +28,37 @@
   box-shadow: $shadow-lg;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: $padding-md;
+  right: $padding-md;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: $radius-full;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: $color-text-primary;
+  transition: $transition-fast;
+  z-index: 10;
+  padding: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .modalTitle {

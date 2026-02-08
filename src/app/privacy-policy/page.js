@@ -2,9 +2,9 @@ import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
-  title: 'Privacy Policy | Anoniz',
+  title: 'Privacy Policy | Anoniz - Data Protection & User Privacy Information',
   description:
-    'Privacy Policy for Anoniz - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+    'Read the Privacy Policy for Anoniz anonymous chat and video chat platform. Learn how we collect, use, protect, and handle your data. Understand our commitment to user privacy and data protection.',
   keywords: [
     'privacy policy',
     'data protection',
@@ -12,14 +12,17 @@ export const metadata = {
     'chat privacy',
     'user privacy',
     'data collection',
+    'anoniz data protection',
+    'anonymous chat privacy',
+    'video chat privacy',
   ],
   alternates: {
     canonical: 'https://anoniz.com/privacy-policy',
   },
   openGraph: {
-    title: 'Privacy Policy | Anoniz',
+    title: 'Privacy Policy | Anoniz - Data Protection & User Privacy Information',
     description:
-      'Privacy Policy for Anoniz - Learn how we collect, use, and protect your data on our anonymous chat and video chat platform.',
+      'Read the Privacy Policy for Anoniz anonymous chat and video chat platform. Learn how we collect, use, and protect your data.',
     url: 'https://anoniz.com/privacy-policy',
     type: 'website',
   },

@@ -1,0 +1,209 @@
+@import './variables';
+
+.aboutPage {
+  min-height: 94vh;
+  padding: $padding-3xl $margin-lg;
+  background: $gradient-primary;
+  font-family: $font-family-primary;
+  color: $color-text-primary;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $margin-xl;
+  padding-bottom: $margin-lg;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: $font-size-8xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: $font-size-xl;
+  color: $color-text-secondary;
+  font-style: italic;
+}
+
+.content {
+  line-height: $line-height-relaxed;
+}
+
+.section {
+  margin-bottom: $margin-xl;
+  background: rgba(51, 65, 85, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: $padding-xl;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+  margin-top: 0;
+}
+
+.sectionContent {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-md;
+  line-height: $line-height-relaxed;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.featureCard {
+  background: rgba(15, 23, 42, 0.5);
+  padding: $padding-lg;
+  border-radius: $radius-base;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-pink-sm;
+    border-color: rgba(236, 72, 153, 0.3);
+  }
+}
+
+.featureTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.featureDescription {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+.valuesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.valueItem {
+  padding: $padding-md;
+}
+
+.valueTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.valueDescription {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: $spacing-lg;
+  justify-content: center;
+  margin-top: $margin-lg;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: $padding-md $padding-xl;
+  background: $gradient-accent;
+  color: $color-text-white;
+  text-decoration: none;
+  border-radius: $radius-base;
+  font-weight: $font-weight-semibold;
+  transition: $transition-fast;
+  box-shadow: $shadow-pink-sm;
+
+  &:hover {
+    background: $gradient-accent-hover;
+    box-shadow: $shadow-pink;
+    transform: translateY(-2px);
+  }
+}
+
+.ctaButtonSecondary {
+  display: inline-block;
+  padding: $padding-md $padding-xl;
+  background: rgba(255, 255, 255, 0.1);
+  color: $color-text-white;
+  text-decoration: none;
+  border-radius: $radius-base;
+  font-weight: $font-weight-semibold;
+  transition: $transition-fast;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .aboutPage {
+    padding: $padding-lg $margin-base;
+  }
+
+  .title {
+    font-size: $font-size-6xl;
+  }
+
+  .sectionTitle {
+    font-size: $font-size-4xl;
+  }
+
+  .section {
+    padding: $padding-lg;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .valuesList {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ctaButton,
+  .ctaButtonSecondary {
+    text-align: center;
+  }
+}
+

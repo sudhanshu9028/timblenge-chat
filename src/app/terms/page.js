@@ -2,23 +2,26 @@ import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
 
 export const metadata = {
-  title: 'Terms of Service | Anoniz',
+  title: 'Terms of Service | Anoniz - User Agreement & Terms and Conditions',
   description:
-    'Terms of Service for Anoniz - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+    'Read the Terms of Service for Anoniz anonymous chat and video chat platform. Understand our user agreement, rules, guidelines, and terms and conditions before using our service to chat with strangers online.',
   keywords: [
     'terms of service',
     'terms and conditions',
     'anoniz terms',
     'chat platform terms',
     'user agreement',
+    'anoniz user agreement',
+    'chat terms',
+    'video chat terms',
   ],
   alternates: {
     canonical: 'https://anoniz.com/terms',
   },
   openGraph: {
-    title: 'Terms of Service | Anoniz',
+    title: 'Terms of Service | Anoniz - User Agreement & Terms and Conditions',
     description:
-      'Terms of Service for Anoniz - Anonymous chat and video chat platform. Read our terms and conditions before using our service.',
+      'Read the Terms of Service for Anoniz anonymous chat and video chat platform. Understand our user agreement and terms and conditions before using our service.',
     url: 'https://anoniz.com/terms',
     type: 'website',
   },
