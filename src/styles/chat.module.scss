@@ -53,18 +53,18 @@
   }
 
   .myMsg {
-    align-self: flex-start; // 👈 left aligned
-    background: $gradient-accent;
+    align-self: flex-end; // 👈 left aligned
+    background: $color-message-other;
     color: $color-text-white;
-    border-radius: $radius-md $radius-md $radius-md $border-radius-small;
-    box-shadow: $shadow-pink-sm;
+    border-radius: $radius-md $radius-md $border-radius-small $radius-md;
   }
 
   .theirMsg {
-    align-self: flex-end; // 👈 also left aligned (for now)
-    background: $color-message-other;
+    align-self: flex-start; // 👈 also left aligned (for now)
+    background: $gradient-accent;
     color: $color-text-primary;
-    border-radius: $radius-md $radius-md $border-radius-small $radius-md;
+    border-radius: $radius-md $radius-md $radius-md $border-radius-small;
+    box-shadow: $shadow-pink-sm;
   }
 
   .system {
@@ -286,7 +286,7 @@
 
 .imageWrapper {
   position: relative;
-  width: $image-wrapper-width;
+  width: auto;
   height: auto;
 
   img {
