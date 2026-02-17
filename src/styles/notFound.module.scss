@@ -1,0 +1,121 @@
+@use './variables' as *;
+
+.main {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $gradient-primary;
+  font-family: $font-family-primary;
+  padding: $padding-xl $padding-lg;
+}
+
+.container {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.errorCode {
+  display: block;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  height: clamp(4rem, 18vw, 8rem);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.errorTitle {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  margin: 0;
+  line-height: $line-height-tight;
+}
+
+.errorMessage {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  max-width: 500px;
+}
+
+.backButton {
+  display: inline-block;
+  background: $color-text-white;
+  color: $color-primary-dark;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  padding: $padding-md $padding-xl;
+  border-radius: $radius-base;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $transition-base;
+  margin-top: $spacing-sm;
+  border: none;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .main {
+    min-height: calc(84vh - 180px);
+    padding: $padding-lg $padding-md;
+  }
+
+  .container {
+    gap: $spacing-sm;
+  }
+
+  .errorCode {
+    height: 6rem;
+    max-width: 300px;
+  }
+
+  .errorTitle {
+    font-size: $font-size-2xl;
+  }
+
+  .errorMessage {
+    font-size: $font-size-sm;
+  }
+
+  .backButton {
+    padding: $padding-sm $padding-lg;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .errorCode {
+    height: 5rem;
+    max-width: 250px;
+  }
+
+  .errorTitle {
+    font-size: $font-size-xl;
+  }
+}
+

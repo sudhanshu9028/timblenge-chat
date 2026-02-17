@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Funnel Sans', var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -19,46 +19,10 @@
   }
 }
 
-@font-face {
-  font-family: 'Funnel Sans';
-  src: url('/fonts/FunnelSans-Regular.woff2') format('woff2'),
-    url('/fonts/FunnelSans-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Funnel Sans';
-  src: url('/fonts/FunnelSans-Medium.woff2') format('woff2'),
-    url('/fonts/FunnelSans-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Funnel Sans';
-  src: url('/fonts/FunnelSans-SemiBold.woff2') format('woff2'),
-    url('/fonts/FunnelSans-SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Funnel Sans';
-  src: url('/fonts/FunnelSans-Bold.woff2') format('woff2'),
-    url('/fonts/FunnelSans-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Funnel Sans', Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html, body {

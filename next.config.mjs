@@ -16,8 +16,6 @@ const nextConfig = {
   },
   // Enable compression
   compress: true,
-  // Optimize production builds
-  swcMinify: true,
   // Compiler options for modern JavaScript
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
