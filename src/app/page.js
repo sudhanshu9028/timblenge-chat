@@ -26,6 +26,7 @@ export default function HomePage() {
     description:
       'Chat with strangers and make friends online. Anonymous video chat and text chat platform. No registration required.',
     url: 'https://anoniz.com',
+    image: 'https://anoniz.com/logo.png',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.5',
@@ -41,6 +42,16 @@ export default function HomePage() {
     ],
   };
 
+  // Organization structured data for Google Knowledge Panel & logo
+  const organizationData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Anoniz',
+    url: 'https://anoniz.com',
+    logo: 'https://anoniz.com/logo.png',
+    sameAs: [],
+  };
+
   return (
     <main className={styles.main}>
       {/* Structured Data for SEO */}
@@ -48,6 +59,11 @@ export default function HomePage() {
         id="structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Script
+        id="organization-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
       />
 
       {/* Hero Section */}

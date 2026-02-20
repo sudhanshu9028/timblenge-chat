@@ -57,11 +57,15 @@ export const metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/logo.png', sizes: '32x32', type: 'image/png' },
       { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/logo.png', sizes: '192x192', type: 'image/png' },
+      { url: '/logo.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [{ url: '/logo.png', sizes: '180x180', type: 'image/png' }],
   },
+  manifest: '/manifest.json',
   authors: [{ name: 'Anonymous', url: 'https://anoniz.com' }],
   metadataBase: new URL('https://anoniz.com'),
   openGraph: {
@@ -121,10 +125,15 @@ export default function RootLayout({ children }) {
         </Script>
 
         <meta name="publisher" content="Anoniz" />
+        <meta name="theme-color" content="#A78BFA" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navigation />
