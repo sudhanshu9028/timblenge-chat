@@ -57,7 +57,7 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico' },
       { url: '/logo.png', sizes: '32x32', type: 'image/png' },
       { url: '/logo.png', sizes: '16x16', type: 'image/png' },
       { url: '/logo.png', sizes: '192x192', type: 'image/png' },
@@ -127,7 +127,7 @@ export default function RootLayout({ children }) {
         <meta name="publisher" content="Anoniz" />
         <meta name="theme-color" content="#A78BFA" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
