@@ -7,7 +7,9 @@ import styles from '@/styles/consentModal.module.scss';
 
 export default function ConsentModal({ isOpen, onClose, chatType }) {
   const [gender, setGender] = useState('');
+  const [interests, setInterests] = useState('');
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleClose = () => {
@@ -20,12 +22,21 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
 
   const handleProceed = () => {
     if (!gender) {
-      alert('Please select your gender.');
+      setError('Please select your gender.');
       return;
     }
     if (!isAgeConfirmed) {
-      alert('Please confirm that you are at least 18 years old.');
+      setError('Please confirm that you are at least 18 years old.');
       return;
+    }
+
+    setError('');
+
+    // Store interests if provided
+    if (interests.trim()) {
+      sessionStorage.setItem('interests', interests.trim());
+    } else {
+      sessionStorage.removeItem('interests');
     }
 
     if (chatType === 'video') {
@@ -72,14 +83,20 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
           <div className={styles.genderButtonsRow}>
             <button
               className={`${styles.genderButton} ${gender === 'male' ? styles.genderButtonActive : ''}`}
-              onClick={() => setGender('male')}
+              onClick={() => {
+                setGender('male');
+                setError('');
+              }}
             >
               <span className={styles.genderIcon}>♂</span>
               <span>Male</span>
             </button>
             <button
               className={`${styles.genderButton} ${gender === 'female' ? styles.genderButtonActive : ''}`}
-              onClick={() => setGender('female')}
+              onClick={() => {
+                setGender('female');
+                setError('');
+              }}
             >
               <span className={styles.genderIcon}>♀</span>
               <span>Female</span>
@@ -88,7 +105,10 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
           <div className={styles.genderButtonsRow}>
             <button
               className={`${styles.genderButton} ${gender === 'other' ? styles.genderButtonActive : ''}`}
-              onClick={() => setGender('other')}
+              onClick={() => {
+                setGender('other');
+                setError('');
+              }}
             >
               <span>Prefer not to say</span>
             </button>
@@ -100,12 +120,31 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
 
         <div className={styles.divider}></div>
 
+        <div className={styles.interestsSection}>
+          <p className={styles.interestsLabel}>Add interests (optional)</p>
+          <input
+            type="text"
+            className={styles.interestsInput}
+            placeholder="e.g. music, travel, gaming"
+            value={interests}
+            onChange={(e) => setInterests(e.target.value)}
+          />
+          <p className={styles.interestsHint}>
+            Separate interests with commas to find like-minded strangers.
+          </p>
+        </div>
+
+        <div className={styles.divider}></div>
+
         <div className={styles.consentSection}>
           <label className={styles.consentCheckbox}>
             <input
               type="checkbox"
               checked={isAgeConfirmed}
-              onChange={(e) => setIsAgeConfirmed(e.target.checked)}
+              onChange={(e) => {
+                setIsAgeConfirmed(e.target.checked);
+                if (e.target.checked) setError('');
+              }}
             />
             <span className={styles.consentText}>
               I&apos;m at least <strong className={styles.ageHighlight}>18 years old</strong> and
@@ -120,6 +159,12 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
             </span>
           </label>
         </div>
+
+        {error && (
+          <div className={styles.errorMessage}>
+            {error}
+          </div>
+        )}
 
         <button
           className={styles.proceedButton}

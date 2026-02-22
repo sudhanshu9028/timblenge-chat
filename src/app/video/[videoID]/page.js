@@ -83,12 +83,14 @@ export default function VideoPage() {
     }
     // Only emit video-ready if not stopped
     if (localStreamReady && socket && !videoReady) {
-      socket.emit('video-ready');
+      // Read interests from sessionStorage
+      const interestsStr = sessionStorage.getItem('interests') || '';
+      const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
+      socket.emit('video-ready', { interests });
       setVideoReady(true);
     }
     // Only auto-join if not stopped and conditions are met
     if (socket && videoReady && !connected && isConnected) {
-      console.log('🎯 Joining video queue after ready');
       socket.emit('join-video');
     }
   }, [connected, isConnected, localStreamReady, socket, videoReady]);
@@ -99,23 +101,15 @@ export default function VideoPage() {
 
     const handleConnect = () => {
       setIsConnected(true);
-      console.log('Socket connected, videoID:', videoID);
       // Only auto-join if not stopped
       if (!stoppedRef.current) {
-        console.log('Joining video queue');
         socket.emit('join-video');
-      } else {
-        console.log('Not joining video queue - user has stopped');
       }
     };
 
     const handleDisconnect = () => {
       setIsConnected(false);
-      console.log('Socket disconnected');
     };
-
-    console.log('Socket connection status:', socket.connected);
-    console.log('Socket ID:', socket.id);
 
     socket.on('connect', handleConnect);
     socket.on('disconnect', handleDisconnect);
@@ -124,15 +118,11 @@ export default function VideoPage() {
       handleConnect();
     }
 
-    console.log('Socket ID:', socket.id);
-
     socket.on('video-matched', async ({ peerId, initiator }) => {
       // Ignore matches if we've stopped
       if (stoppedRef.current) {
-        console.log('Ignoring video match - user has stopped');
         return;
       }
-      console.log('Video matched with peer:', peerId);
       setIsSearching(false);
       setConnected(true);
       setShowReconnectButton(false);
@@ -140,7 +130,6 @@ export default function VideoPage() {
 
       try {
         // when matched, start WebRTC handshake
-        console.log('Creating RTCPeerConnection...');
         pcRef.current = new RTCPeerConnection({
           iceServers: [
             { urls: 'stun:stun.l.google.com:19302' },
@@ -151,14 +140,8 @@ export default function VideoPage() {
           ],
         });
 
-        console.log('RTCPeerConnection created');
-
-        // pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
-        // pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
-        // // send ICE candidates
         pcRef.current.onicecandidate = (e) => {
           if (e.candidate) {
-            console.log('Sending ICE candidate to:', peerId);
             socket.emit('new-ice-candidate', { to: peerId, candidate: e.candidate });
           }
         };
@@ -169,23 +152,17 @@ export default function VideoPage() {
             .forEach((t) => pcRef.current.addTrack(t, localStreamRef.current));
         }
         // display remote stream
-        console.log('Adding ontrack handler', remoteVideoRef.current);
-        console.log('pc ref', pcRef.current);
         pcRef.current.ontrack = (e) => {
-          console.log('Received remote stream');
           if (remoteVideoRef.current) {
-            console.log('Setting remote stream');
             remoteVideoRef.current.srcObject = e.streams[0];
           }
         };
 
         if (initiator) {
-          console.log('Creating offer manually as initiator');
           try {
             const offer = await pcRef.current.createOffer();
             await pcRef.current.setLocalDescription(offer);
             socket.emit('video-offer', { to: peerId, sdp: offer });
-            console.log('Offer sent to', peerId);
           } catch (err) {
             console.error('Error creating/sending offer:', err);
           }
@@ -200,10 +177,8 @@ export default function VideoPage() {
 
     // receive offer
     socket.on('video-offer', async ({ from, sdp }) => {
-      console.log('Received offer from:', from);
       try {
         if (!pcRef.current) {
-          console.log('Creating RTCPeerConnection...');
           pcRef.current = new RTCPeerConnection({
             iceServers: [
               { urls: 'stun:stun.l.google.com:19302' },
@@ -214,24 +189,18 @@ export default function VideoPage() {
             ],
           });
 
-          console.log('RTCPeerConnection created');
-
           pcRef.current.addTransceiver('video', { direction: 'sendrecv' });
           pcRef.current.addTransceiver('audio', { direction: 'sendrecv' });
           // send ICE candidates
           pcRef.current.onicecandidate = (e) => {
             if (e.candidate) {
-              console.log('Sending ICE candidate to:', from);
               socket.emit('new-ice-candidate', { to: from, candidate: e.candidate });
             }
           };
 
           // display remote stream
-          console.log('Adding ontrack handler', remoteVideoRef.current);
           pcRef.current.ontrack = (e) => {
-            console.log('Received remote stream');
             if (remoteVideoRef.current) {
-              console.log('Setting remote stream');
               remoteVideoRef.current.srcObject = e.streams[0];
             }
           };
@@ -246,7 +215,6 @@ export default function VideoPage() {
         const answer = await pcRef.current.createAnswer();
         await pcRef.current.setLocalDescription(answer);
         socket.emit('video-answer', { to: from, sdp: answer });
-        console.log('Sent answer to:', from);
       } catch (err) {
         console.error('Error handling offer:', err);
       }
@@ -254,7 +222,6 @@ export default function VideoPage() {
 
     // receive answer
     socket.on('video-answer', async ({ sdp }) => {
-      console.log('Received answer');
       try {
         if (pcRef.current) {
           await pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
@@ -269,7 +236,6 @@ export default function VideoPage() {
       try {
         if (pcRef.current && candidate) {
           await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
-          console.log('Added ICE candidate from:', from);
         }
       } catch (e) {
         console.error('Error adding ICE candidate', e);
@@ -278,7 +244,6 @@ export default function VideoPage() {
 
     // partner left or stopped
     socket.on('video-partner-left', () => {
-      console.log('Partner left the video call');
       // Set stopped flag FIRST to prevent any race conditions
       stoppedRef.current = true;
       // Reset videoReady to prevent auto-emission
@@ -308,6 +273,26 @@ export default function VideoPage() {
       endCall();
     };
   }, [localStreamReady, socket, videoID]);
+
+  // 60-second search timeout
+  useEffect(() => {
+    let timeoutId;
+    if (isSearching && !connected) {
+      timeoutId = setTimeout(() => {
+        // Set stopped flag to prevent auto-rejoining
+        stoppedRef.current = true;
+        setIsSearching(false);
+        setShowReconnectButton(true);
+        setError('No stranger found. Please try again.');
+        if (socketRef.current && socketRef.current.connected) {
+          socketRef.current.emit('leave-video');
+        }
+      }, 60000);
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isSearching, connected]);
 
   const endCall = () => {
     setConnected(false);

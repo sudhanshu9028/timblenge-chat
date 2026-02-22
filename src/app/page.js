@@ -11,6 +11,14 @@ const BenefitsSection = lazy(() => import('./components/BenefitsSection'));
 const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
 
 export default function HomePage() {
+  // GA4 click tracking helper
+  const trackClick = (buttonName) => {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      const platform = window.innerWidth <= 768 ? 'mweb' : 'web';
+      window.gtag('event', `home_${buttonName}`, { platform });
+    }
+  };
+
   // Structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
@@ -78,10 +86,10 @@ export default function HomePage() {
         </p>
         <div className={styles.heroCTA}>
           <div className={styles.actionButtons}>
-            <Link href="/chat" className={styles.actionButton}>
+            <Link href="/chat" className={styles.actionButton} onClick={() => trackClick('text_chat')}>
               Text Chat
             </Link>
-            <Link href="/video" className={styles.actionButton}>
+            <Link href="/video" className={styles.actionButton} onClick={() => trackClick('video_chat')}>
               Video Chat
             </Link>
           </div>

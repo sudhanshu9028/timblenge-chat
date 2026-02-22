@@ -95,7 +95,7 @@
     flex: 1;
     .textInput {
       width: $height-full;
-      padding: $padding-md $spacing-3xl $padding-md $margin-base; // right padding for icon space
+      padding: $padding-md $spacing-2xl $padding-md $margin-base; // right padding for camera icon
       border-radius: $radius-base;
       border: 1px solid $color-border-dark;
       background: $bg-input;
@@ -143,10 +143,6 @@
       }
     }
     .cameraBtn {
-      right: $position-offset-xl;
-    }
-
-    .arrowBtn {
       right: $position-offset-md;
     }
     input {

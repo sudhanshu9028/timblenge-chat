@@ -10,6 +10,14 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // GA4 click tracking
+  const trackClick = (section, label) => {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      const platform = window.innerWidth <= 768 ? 'mweb' : 'web';
+      window.gtag('event', `${section}_${label}`, { platform });
+    }
+  };
+
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
@@ -23,7 +31,7 @@ export default function Navigation() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <Link href="/" className={styles.logoContainer}>
+        <Link href="/" className={styles.logoContainer} onClick={() => trackClick('nav', 'logo')}>
           <div className={styles.logoWrapper}>
             <AnonizLogo className={styles.logoIcon} />
           </div>
@@ -37,6 +45,7 @@ export default function Navigation() {
               key={link.href}
               href={link.href}
               className={`${styles.navLink} ${pathname === link.href ? styles.active : ''}`}
+              onClick={(e) => trackClick('nav', link.label.toLowerCase())}
             >
               {link.label}
             </Link>
@@ -63,7 +72,10 @@ export default function Navigation() {
               key={link.href}
               href={link.href}
               className={`${styles.mobileNavLink} ${pathname === link.href ? styles.active : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackClick('nav', link.label.toLowerCase());
+                setIsMobileMenuOpen(false);
+              }}
             >
               {link.label}
             </Link>

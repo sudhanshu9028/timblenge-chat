@@ -18,6 +18,9 @@ const videoUserReady = new Set();
 const videoWaitingUsers = new Set();
 const videoUserSocketMap = new Map();
 
+// Interest storage for matching
+const userInterests = new Map(); // socketId -> string[]
+
 // Helper function to check if socket is still connected
 function isSocketConnected(io, socketId) {
   return io.sockets.sockets.has(socketId);
@@ -93,15 +96,41 @@ function cleanupVideoQueues(io) {
   return disconnectedSockets.length;
 }
 
+// Helper function to find a peer with shared interests
+function findInterestMatchedPeer(waitingSet, socketId, io, interests) {
+  const myInterests = interests || [];
+  let bestPeer = null;
+  let bestScore = 0;
+  let fallbackPeer = null;
+
+  for (const peerId of waitingSet) {
+    if (peerId === socketId || !isSocketConnected(io, peerId)) continue;
+
+    if (!fallbackPeer) fallbackPeer = peerId;
+
+    if (myInterests.length > 0) {
+      const peerInterests = userInterests.get(peerId) || [];
+      const sharedCount = myInterests.filter((i) =>
+        peerInterests.includes(i)
+      ).length;
+      if (sharedCount > bestScore) {
+        bestScore = sharedCount;
+        bestPeer = peerId;
+      }
+    }
+  }
+
+  // Return interest-matched peer if found, otherwise fallback to any available peer
+  return bestPeer || fallbackPeer;
+}
+
 // Periodic cleanup function
 function startPeriodicCleanup(io) {
   setInterval(() => {
     const chatCleaned = cleanupChatQueues(io);
     const videoCleaned = cleanupVideoQueues(io);
     if (chatCleaned > 0 || videoCleaned > 0) {
-      console.log(
-        `Periodic cleanup: Removed ${chatCleaned} chat and ${videoCleaned} video disconnected sockets`
-      );
+      // Keep only cleanup summary logs
     }
   }, 30000); // Run every 30 seconds
 }
@@ -119,11 +148,9 @@ app.prepare().then(() => {
   startPeriodicCleanup(io);
 
   io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
 
     // Leave chat handler - properly remove from chat queues
     socket.on('leave-chat', () => {
-      console.log('User leaving chat:', socket.id);
       const partnerId = userSocketMap.get(socket.id);
       if (partnerId) {
         io.to(partnerId).emit('partner-left');
@@ -131,11 +158,11 @@ app.prepare().then(() => {
       }
       waitingUsers.delete(socket.id);
       userSocketMap.delete(socket.id);
+      userInterests.delete(socket.id);
     });
 
     // Leave video handler - properly remove from video queues
     socket.on('leave-video', () => {
-      console.log('User leaving video:', socket.id);
       const partnerId = videoUserSocketMap.get(socket.id);
       if (partnerId) {
         io.to(partnerId).emit('video-partner-left');
@@ -144,28 +171,28 @@ app.prepare().then(() => {
       }
       videoWaitingUsers.delete(socket.id);
       videoUserReady.delete(socket.id);
+      userInterests.delete(socket.id);
     });
 
     // Join queue
-    socket.on('join', () => {
-      console.log('User joining:', socket.id);
-
+    socket.on('join', (data) => {
       // Validate socket is still connected
-      if (!isSocketConnected(io, socket.id)) {
-        console.log('Socket not connected, ignoring join');
-        return;
-      }
+      if (!isSocketConnected(io, socket.id)) return;
 
       // Make sure the user isn't already in the queue
       if (waitingUsers.has(socket.id)) return;
 
+      // Store interests if provided
+      const interests = (data && data.interests) || [];
+      if (interests.length > 0) {
+        userInterests.set(socket.id, interests.map((i) => i.toLowerCase().trim()));
+      }
+
       // Remove socket from queue before finding peer (prevents self-matching)
       waitingUsers.delete(socket.id);
 
-      // Try to find someone else to pair with (validate peer exists and is connected)
-      const peerId = Array.from(waitingUsers).find(
-        (id) => id !== socket.id && isSocketConnected(io, id)
-      );
+      // Try to find someone with shared interests first, fallback to random
+      const peerId = findInterestMatchedPeer(waitingUsers, socket.id, io, userInterests.get(socket.id));
 
       if (peerId && isSocketConnected(io, peerId)) {
         waitingUsers.delete(peerId);
@@ -178,7 +205,6 @@ app.prepare().then(() => {
         // No valid peer found, add to queue
         waitingUsers.add(socket.id);
       }
-      console.log('--sudhanshu join--', waitingUsers);
     });
 
     socket.on('message', (msg) => {
@@ -188,12 +214,9 @@ app.prepare().then(() => {
       }
     });
 
-    socket.on('next', () => {
+    socket.on('next', (data) => {
       // Validate socket is still connected
-      if (!isSocketConnected(io, socket.id)) {
-        console.log('Socket not connected, ignoring next');
-        return;
-      }
+      if (!isSocketConnected(io, socket.id)) return;
 
       const partnerId = userSocketMap.get(socket.id);
 
@@ -205,15 +228,19 @@ app.prepare().then(() => {
 
       userSocketMap.delete(socket.id);
 
+      // Update interests if provided
+      const interests = (data && data.interests) || [];
+      if (interests.length > 0) {
+        userInterests.set(socket.id, interests.map((i) => i.toLowerCase().trim()));
+      }
+
       // Remove old entry if present before re-adding
       waitingUsers.delete(socket.id);
 
       socket.emit('rejoined');
 
-      // Try to pair with a non-self peer (validate peer exists and is connected)
-      const peerId = Array.from(waitingUsers).find(
-        (id) => id !== socket.id && isSocketConnected(io, id)
-      );
+      // Try to pair with interest-matched peer first, fallback to random
+      const peerId = findInterestMatchedPeer(waitingUsers, socket.id, io, userInterests.get(socket.id));
 
       if (peerId && isSocketConnected(io, peerId)) {
         waitingUsers.delete(peerId);
@@ -227,7 +254,6 @@ app.prepare().then(() => {
         // No valid peer found, add to queue
         waitingUsers.add(socket.id);
       }
-      console.log('--sudhanshu next--', waitingUsers);
     });
 
     socket.on('disconnect', () => {
@@ -236,7 +262,6 @@ app.prepare().then(() => {
       if (partnerId && isSocketConnected(io, partnerId)) {
         io.to(partnerId).emit('partner-left');
         waitingUsers.delete(partnerId);
-        console.log('Partner disconnected:', partnerId);
         userSocketMap.delete(partnerId);
       }
       waitingUsers.delete(socket.id);
@@ -251,10 +276,7 @@ app.prepare().then(() => {
       }
       videoWaitingUsers.delete(socket.id);
       videoUserReady.delete(socket.id);
-
-      console.log('User disconnected:', socket.id);
-      console.log('--sudhanshu disconnect--', waitingUsers);
-      console.log('Video waiting users:', videoWaitingUsers);
+      userInterests.delete(socket.id);
     });
 
     socket.on('image', (base64Image) => {
@@ -272,19 +294,18 @@ app.prepare().then(() => {
     });
 
     socket.on('join-video', () => {
-      console.log('User joined video queue:', socket.id);
-
       // Add user to waiting list
       videoWaitingUsers.add(socket.id);
     });
 
-    socket.on('video-ready', () => {
-      console.log('video-ready received from', socket.id);
-
+    socket.on('video-ready', (data) => {
       // Validate socket is still connected
-      if (!isSocketConnected(io, socket.id)) {
-        console.log('Socket not connected, ignoring video-ready');
-        return;
+      if (!isSocketConnected(io, socket.id)) return;
+
+      // Store interests if provided
+      const interests = (data && data.interests) || [];
+      if (interests.length > 0) {
+        userInterests.set(socket.id, interests.map((i) => i.toLowerCase().trim()));
       }
 
       videoUserReady.add(socket.id);
@@ -292,12 +313,11 @@ app.prepare().then(() => {
       // Remove socket from waiting users before finding peer (prevents self-matching)
       videoWaitingUsers.delete(socket.id);
 
-      // Find a peer who's ready (validate peer exists and is connected)
-      const peerId = Array.from(videoWaitingUsers).find(
-        (id) => id !== socket.id && videoUserReady.has(id) && isSocketConnected(io, id)
+      // Find a peer who's ready — prefer interest-matched
+      const readyWaiting = new Set(
+        Array.from(videoWaitingUsers).filter((id) => videoUserReady.has(id))
       );
-
-      console.log('Peer Id in video-ready signal: ', peerId);
+      const peerId = findInterestMatchedPeer(readyWaiting, socket.id, io, userInterests.get(socket.id));
 
       if (peerId && isSocketConnected(io, peerId)) {
         videoWaitingUsers.delete(peerId);
@@ -311,8 +331,6 @@ app.prepare().then(() => {
 
         videoUserReady.delete(peerId);
         videoUserReady.delete(socket.id);
-
-        console.log(`✅ Both ready: matched ${socket.id} ↔ ${peerId}`);
       } else {
         // No valid peer found, ensure user is in waiting queue
         if (!videoWaitingUsers.has(socket.id)) {
@@ -330,7 +348,6 @@ app.prepare().then(() => {
       io.to(to).emit('new-ice-candidate', { from: socket.id, candidate })
     );
     socket.on('video-stop', () => {
-      console.log('User stopping video:', socket.id);
       const partnerId = videoUserSocketMap.get(socket.id);
       if (partnerId && isSocketConnected(io, partnerId)) {
         // Notify partner that they should stop too
@@ -344,7 +361,7 @@ app.prepare().then(() => {
       videoUserSocketMap.delete(socket.id);
       videoWaitingUsers.delete(socket.id);
       videoUserReady.delete(socket.id);
-      console.log('User removed from video queues:', socket.id);
+      userInterests.delete(socket.id);
     });
   });
 

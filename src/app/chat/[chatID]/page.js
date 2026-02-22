@@ -94,8 +94,11 @@ export default function ChatPage() {
   const handleNext = () => {
     setMessages([]);
     const socket = connectSocket();
+    // Read interests for re-matching
+    const interestsStr = sessionStorage.getItem('interests') || '';
+    const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
     if (socket && socket.connected) {
-      socket.emit('next');
+      socket.emit('next', { interests });
     }
     setConnected(false);
     setIsSearching(true);
@@ -153,11 +156,11 @@ export default function ChatPage() {
   useEffect(() => {
     const socket = connectSocket();
 
-    if (typeof window !== 'undefined') {
-      window.connectSocket = connectSocket;
-    }
+    // Read interests from sessionStorage
+    const interestsStr = sessionStorage.getItem('interests') || '';
+    const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
 
-    socket.emit('join');
+    socket.emit('join', { interests });
 
     socket.on('matched', () => {
       setConnected(true);
@@ -197,6 +200,29 @@ export default function ChatPage() {
       socket.disconnect();
     };
   }, []);
+
+  // 60-second search timeout
+  useEffect(() => {
+    let timeoutId;
+    if (isSearching && !connected) {
+      timeoutId = setTimeout(() => {
+        setIsSearching(false);
+        setShowReconnectButton(true);
+        setMessages((prev) => [
+          ...prev,
+          { from: 'system', text: 'No stranger found. Please try again.' },
+        ]);
+        const socket = connectSocket();
+        if (socket && socket.connected) {
+          socket.emit('leave-chat');
+        }
+        disconnectSocket();
+      }, 60000);
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isSearching, connected]);
 
   function handleTyping() {
     if (connected) {
@@ -308,28 +334,6 @@ export default function ChatPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={sendMessage}
-              className={`${styles.iconBtn} ${styles.arrowBtn}`}
-              disabled={!connected}
-            >
-              {/* Send Arrow Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="white"
-                width="22"
-                height="22"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12h15m0 0l-6.75 6.75M19.5 12l-6.75-6.75"
                 />
               </svg>
             </button>

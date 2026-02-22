@@ -140,6 +140,47 @@
   margin-top: $spacing-xs;
 }
 
+.interestsSection {
+  margin-bottom: $spacing-md;
+}
+
+.interestsLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.interestsInput {
+  width: 100%;
+  padding: $padding-sm $padding-base;
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  transition: $transition-fast;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: rgba(236, 72, 153, 0.5);
+    box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.15);
+  }
+}
+
+.interestsHint {
+  font-size: 0.7rem;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
 .divider {
   height: 1px;
   background: $color-border-dark;
@@ -259,6 +300,26 @@
   .link {
     color: $color-accent-primary;
   }
+}
+
+.errorMessage {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: $radius-sm;
+  padding: $padding-xs $padding-sm;
+  margin-bottom: $spacing-md;
+  color: #fca5a5;
+  font-size: 0.8rem;
+  text-align: center;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
 }
 
 @media (max-width: $breakpoint-sm) {
