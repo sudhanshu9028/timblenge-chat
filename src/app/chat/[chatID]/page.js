@@ -96,7 +96,12 @@ export default function ChatPage() {
     const socket = connectSocket();
     // Read interests for re-matching
     const interestsStr = sessionStorage.getItem('interests') || '';
-    const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
+    const interests = interestsStr
+      ? interestsStr
+          .split(',')
+          .map((i) => i.trim())
+          .filter(Boolean)
+      : [];
     if (socket && socket.connected) {
       socket.emit('next', { interests });
     }
@@ -158,7 +163,12 @@ export default function ChatPage() {
 
     // Read interests from sessionStorage
     const interestsStr = sessionStorage.getItem('interests') || '';
-    const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
+    const interests = interestsStr
+      ? interestsStr
+          .split(',')
+          .map((i) => i.trim())
+          .filter(Boolean)
+      : [];
 
     socket.emit('join', { interests });
 

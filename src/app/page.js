@@ -86,10 +86,18 @@ export default function HomePage() {
         </p>
         <div className={styles.heroCTA}>
           <div className={styles.actionButtons}>
-            <Link href="/chat" className={styles.actionButton} onClick={() => trackClick('text_chat')}>
+            <Link
+              href="/chat"
+              className={styles.actionButton}
+              onClick={() => trackClick('text_chat')}
+            >
               Text Chat
             </Link>
-            <Link href="/video" className={styles.actionButton} onClick={() => trackClick('video_chat')}>
+            <Link
+              href="/video"
+              className={styles.actionButton}
+              onClick={() => trackClick('video_chat')}
+            >
               Video Chat
             </Link>
           </div>

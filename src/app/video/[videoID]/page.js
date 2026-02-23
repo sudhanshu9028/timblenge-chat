@@ -85,7 +85,12 @@ export default function VideoPage() {
     if (localStreamReady && socket && !videoReady) {
       // Read interests from sessionStorage
       const interestsStr = sessionStorage.getItem('interests') || '';
-      const interests = interestsStr ? interestsStr.split(',').map((i) => i.trim()).filter(Boolean) : [];
+      const interests = interestsStr
+        ? interestsStr
+            .split(',')
+            .map((i) => i.trim())
+            .filter(Boolean)
+        : [];
       socket.emit('video-ready', { interests });
       setVideoReady(true);
     }
