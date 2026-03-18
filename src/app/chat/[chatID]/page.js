@@ -38,7 +38,6 @@ export default function ChatPage() {
       });
 
       const data = await res.json();
-      //   console.log('Uploaded image URL:', data.url);
 
       if (res.ok && data.url) {
         setMessages((prev) =>
@@ -48,8 +47,7 @@ export default function ChatPage() {
       } else {
         throw new Error('Upload failed');
       }
-    } catch (err) {
-      console.error('Upload error:', err);
+    } catch {
       setMessages((prev) =>
         prev.map((msg) =>
           msg.tempId === tempId ? { from: 'system', text: 'Image upload failed 😓' } : msg
@@ -240,7 +238,6 @@ export default function ChatPage() {
       if (socket && socket.connected) {
         socket.emit('typing');
       } else {
-        console.warn('⚠️ Socket not connected');
       }
     }
   }

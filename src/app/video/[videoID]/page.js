@@ -56,15 +56,12 @@ export default function VideoPage() {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         localStreamRef.current = stream;
         if (localVideoRef.current) {
-          console.log('Setting local stream');
           localVideoRef.current.srcObject = stream;
         }
         setLocalStreamReady(true);
         // Don't emit video-ready here if stopped - let the useEffect handle it
-        console.log('Video stream initialized successfully');
-      } catch (err) {
+      } catch {
         setError('Could not access camera/microphone.');
-        console.error('Video access error:', err);
       }
     }
     initializeVideo();
@@ -168,14 +165,11 @@ export default function VideoPage() {
             const offer = await pcRef.current.createOffer();
             await pcRef.current.setLocalDescription(offer);
             socket.emit('video-offer', { to: peerId, sdp: offer });
-          } catch (err) {
-            console.error('Error creating/sending offer:', err);
-          }
+          } catch {}
         }
 
         // add local tracks to peer connection
-      } catch (err) {
-        console.error('Error setting up WebRTC:', err);
+      } catch {
         setError('Failed to establish video connection');
       }
     });
@@ -220,9 +214,7 @@ export default function VideoPage() {
         const answer = await pcRef.current.createAnswer();
         await pcRef.current.setLocalDescription(answer);
         socket.emit('video-answer', { to: from, sdp: answer });
-      } catch (err) {
-        console.error('Error handling offer:', err);
-      }
+      } catch {}
     });
 
     // receive answer
@@ -231,20 +223,16 @@ export default function VideoPage() {
         if (pcRef.current) {
           await pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
         }
-      } catch (err) {
-        console.error('Error handling answer:', err);
-      }
+      } catch {}
     });
 
     // receive ICE candidate
-    socket.on('new-ice-candidate', async ({ from, candidate }) => {
+    socket.on('new-ice-candidate', async ({ candidate }) => {
       try {
         if (pcRef.current && candidate) {
           await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
         }
-      } catch (e) {
-        console.error('Error adding ICE candidate', e);
-      }
+      } catch {}
     });
 
     // partner left or stopped

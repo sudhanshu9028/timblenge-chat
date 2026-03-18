@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Script from 'next/script';
 import { getBlogBySlug, getAllSlugs } from '@/lib/blogRegistry';
 import BLOG_CONTENT from '@/lib/blogContent';
 import styles from '@/styles/blogPost.module.scss';
@@ -66,54 +65,49 @@ export default function BlogPostPage({ params }) {
 
   const ContentComponent = contentData.component;
 
-  // JSON-LD structured data for this blog post
-  const structuredData = {
+  // Combined JSON-LD structured data for this blog post
+  const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.description,
-    datePublished: post.publishedDate,
-    dateModified: post.modifiedDate,
-    author: {
-      '@type': 'Organization',
-      name: post.author,
-      url: 'https://anoniz.com',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Anoniz',
-      url: 'https://anoniz.com',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://anoniz.com/logo.png',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.description,
+        datePublished: post.publishedDate,
+        dateModified: post.modifiedDate,
+        author: {
+          '@type': 'Organization',
+          name: post.author,
+          url: 'https://anoniz.com',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Anoniz',
+          url: 'https://anoniz.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://anoniz.com/logo.png',
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://anoniz.com/blog/${post.slug}`,
+        },
+        image: 'https://anoniz.com/logo.png',
+        keywords: post.keywords.join(', '),
       },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://anoniz.com/blog/${post.slug}`,
-    },
-    image: 'https://anoniz.com/logo.png',
-    keywords: post.keywords.join(', '),
-  };
-
-  // FAQ structured data (for Google rich results)
-  const faqData = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: getFaqItems(params.slug),
+      {
+        '@type': 'FAQPage',
+        mainEntity: getFaqItems(params.slug),
+      },
+    ],
   };
 
   return (
     <div className={styles.blogPostPage}>
-      <Script
-        id="blog-structured-data"
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <Script
-        id="faq-structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <div className={styles.container}>

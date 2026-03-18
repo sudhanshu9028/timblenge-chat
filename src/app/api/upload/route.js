@@ -1,13 +1,8 @@
+/* eslint-disable camelcase */
 import { v2 as cloudinary } from 'cloudinary';
 import { Readable } from 'stream';
 
 export const dynamic = 'force-dynamic'; // Ensures this route isn't statically cached
-
-console.log('Cloudinary ENV:', {
-  name: process.env.CLOUDINARY_CLOUD_NAME,
-  key: process.env.CLOUDINARY_API_KEY,
-  secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

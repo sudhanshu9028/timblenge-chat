@@ -1,22 +1,13 @@
-import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: false, // Disabled - font not used, we're using system fonts
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: false, // Only preload the primary font
-});
+export const viewport = {
+  themeColor: '#A78BFA',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata = {
   title: 'Anoniz | Chat with Strangers, Make Friends Online',
@@ -68,6 +59,7 @@ export const metadata = {
   manifest: '/manifest.json',
   authors: [{ name: 'Anonymous', url: 'https://anoniz.com' }],
   metadataBase: new URL('https://anoniz.com'),
+  publisher: 'Anoniz',
   openGraph: {
     title: 'Anoniz | Chat with Strangers, Make Friends Online',
     description:
@@ -89,9 +81,6 @@ export const metadata = {
     index: true,
     follow: true,
     nocache: false,
-  },
-  alternates: {
-    canonical: '/',
   },
   twitter: {
     card: 'summary_large_image',
@@ -123,19 +112,8 @@ export default function RootLayout({ children }) {
     gtag('config', 'G-7LNMKJ3NBQ');
   `}
         </Script>
-
-        <meta name="publisher" content="Anoniz" />
-        <meta name="theme-color" content="#A78BFA" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/logo.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
-        <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         <Navigation />
         {children}
         <Footer />
