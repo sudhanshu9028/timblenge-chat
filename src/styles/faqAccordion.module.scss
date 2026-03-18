@@ -1,0 +1,77 @@
+@use './variables' as *;
+
+.faqList {
+  width: 100%;
+}
+
+.faqItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  padding: $spacing-xl 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  font-family: $font-family-primary;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-accent-light;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: $color-text-muted;
+  transition: transform 0.3s ease;
+
+  .open & {
+    transform: rotate(180deg);
+  }
+}
+
+.faqAnswerWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease;
+  opacity: 0;
+
+  .open & {
+    max-height: 300px;
+    opacity: 1;
+  }
+}
+
+.faqAnswer {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  padding-bottom: $spacing-xl;
+}
+
+@media (max-width: $breakpoint-md) {
+  .faqQuestion {
+    font-size: $font-size-lg;
+  }
+}

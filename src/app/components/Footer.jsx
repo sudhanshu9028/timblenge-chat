@@ -36,13 +36,24 @@ export default function Footer() {
 
         {/* Navigation Links */}
         <nav className={styles.navLinks}>
-          <Link href="/privacy-policy" className={styles.navLink} onClick={() => trackClick('privacy_policy')}>
+          <Link href="/blog" className={styles.navLink} onClick={() => trackClick('blog')}>
+            Blog
+          </Link>
+          <Link
+            href="/privacy-policy"
+            className={styles.navLink}
+            onClick={() => trackClick('privacy_policy')}
+          >
             Privacy Policy
           </Link>
           <Link href="/terms" className={styles.navLink} onClick={() => trackClick('terms')}>
             Terms
           </Link>
-          <a href="mailto:support@anoniz.com" className={styles.contactButton} onClick={() => trackClick('contact_us')}>
+          <a
+            href="mailto:support@anoniz.com"
+            className={styles.contactButton}
+            onClick={() => trackClick('contact_us')}
+          >
             Contact Us
           </a>
         </nav>
@@ -50,4 +61,3 @@ export default function Footer() {
     </footer>
   );
 }
-

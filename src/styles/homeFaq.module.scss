@@ -1,0 +1,39 @@
+@use './variables' as *;
+
+.faqSection {
+  padding: $padding-3xl $margin-lg;
+  background: $gradient-primary;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: $font-size-8xl;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+  color: $color-text-primary;
+}
+
+.faqContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(51, 65, 85, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  padding: $spacing-lg $padding-xl;
+}
+
+@media (max-width: $breakpoint-md) {
+  .faqSection {
+    padding: $padding-2xl $margin-base;
+  }
+
+  .sectionTitle {
+    font-size: $font-size-7xl;
+  }
+
+  .faqContainer {
+    padding: $spacing-md $padding-lg;
+  }
+}

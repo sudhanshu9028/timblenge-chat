@@ -9,6 +9,7 @@ import styles from '@/styles/home.module.scss';
 const FeaturesSection = lazy(() => import('./components/FeaturesSection'));
 const BenefitsSection = lazy(() => import('./components/BenefitsSection'));
 const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
+const HomeFaqSection = lazy(() => import('./components/HomeFaqSection'));
 
 export default function HomePage() {
   // GA4 click tracking helper
@@ -115,6 +116,10 @@ export default function HomePage() {
 
       <Suspense fallback={null}>
         <HowItWorksSection />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <HomeFaqSection />
       </Suspense>
     </main>
   );
