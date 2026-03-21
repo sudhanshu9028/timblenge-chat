@@ -376,3 +376,31 @@
     text-align: center;
   }
 }
+
+/* Custom Question Blocks for specific articles */
+.questionBlock {
+  background: rgba(236, 72, 153, 0.08); /* slight pink tint */
+  border-left: 3px solid #ec4899; /* $color-accent-primary */
+  border-radius: 0 0.5rem 0.5rem 0; /* $radius-base */
+  padding: 1rem 1.5rem; /* $spacing-md $spacing-lg */
+  margin: 1rem 0;
+  font-size: 1.125rem; /* $font-size-lg */
+  font-weight: 500;
+  color: #f8fafc; /* $color-text-primary */
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(236, 72, 153, 0.12);
+    transform: translateX(4px);
+  }
+
+  &::before {
+    content: 'Q:';
+    color: #ec4899;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+}
