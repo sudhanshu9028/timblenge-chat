@@ -251,26 +251,57 @@
 }
 
 @media (max-width: $breakpoint-sm) {
-  .inputArea {
-    flex-direction: column;
+  .main {
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    height: calc(100dvh - 64px);
+    box-sizing: border-box;
+  }
+
+  .chatContainer {
+    width: 95%;
+    padding: $spacing-sm;
+    border-radius: $radius-base;
+  }
+
+  .chatBox {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
     gap: $spacing-xs;
+  }
+
+  .inputArea {
+    flex-direction: row;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-xs;
 
     .inputWrapper {
-      width: $height-full;
+      flex: 1;
 
       .textInput {
-        width: $height-full;
+        padding: $padding-sm $spacing-2xl $padding-sm $padding-sm;
       }
 
-      .imageBtn {
-        right: $position-offset-lg;
+      .iconBtn {
+        width: 32px;
+        height: 32px;
+        margin-left: 4px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .cameraBtn {
+        right: 8px;
         top: 50%;
         transform: translateY(-50%);
       }
     }
 
     .sendBtn {
-      width: $height-full;
+      padding: $padding-sm $spacing-md;
     }
   }
 }

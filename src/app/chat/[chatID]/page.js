@@ -11,9 +11,12 @@ export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [connected, setConnected] = useState(false);
-  const [isSearching, setIsSearching] = useState(true); // show "Finding..." initially
+  const [isSearching, setIsSearching] = useState(true);
   const [showReconnectButton, setShowReconnectButton] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+
+  // Bot state
+  const [isBotChat, setIsBotChat] = useState(false);
 
   const chatRef = useRef(null);
   const inputRef = useRef(null);
@@ -22,6 +25,25 @@ export default function ChatPage() {
   const { chatID } = params;
   const fileInputRef = useRef(null);
 
+  // Disconnect the bot chat cleanly
+  const disconnectBotChat = () => {
+    setIsBotChat(false);
+    setConnected(false);
+    setIsSearching(false);
+    setShowReconnectButton(true);
+    setIsTyping(false);
+    setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
+  };
+
+  // Send message to AI bot via socket (server handles Gemini API)
+  const sendBotMessage = (userText) => {
+    const socket = connectSocket();
+    if (socket && socket.connected) {
+      setIsTyping(true);
+      socket.emit('bot-message', userText);
+    }
+  };
+
   const handleImageUpload = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -29,12 +51,12 @@ export default function ChatPage() {
     const tempId = Date.now();
     setMessages((prev) => [...prev, { from: 'me', loading: true, tempId }]);
     const formData = new FormData();
-    formData.append('file', file); // 👈 This must match the backend .get('file')
+    formData.append('file', file);
 
     try {
       const res = await fetch('/api/upload', {
         method: 'POST',
-        body: formData, // ✅ Do NOT set Content-Type manually!
+        body: formData,
       });
 
       const data = await res.json();
@@ -43,7 +65,13 @@ export default function ChatPage() {
         setMessages((prev) =>
           prev.map((msg) => (msg.tempId === tempId ? { from: 'me', image: data.url } : msg))
         );
-        connectSocket().emit('image', data.url);
+
+        if (isBotChat) {
+          // Let bot react to the image
+          sendBotMessage('[user sent an image]');
+        } else {
+          connectSocket().emit('image', data.url);
+        }
       } else {
         throw new Error('Upload failed');
       }
@@ -57,42 +85,50 @@ export default function ChatPage() {
   };
 
   useEffect(() => {
-    // const isValidEntry = sessionStorage.getItem('chatInitiated');
     const uniqueChatId = sessionStorage.getItem('uniqueChatId');
     if (uniqueChatId && uniqueChatId !== chatID) {
       router.replace('/');
     } else {
-      sessionStorage.removeItem('chatInitiated'); // prevent reuse
+      sessionStorage.removeItem('chatInitiated');
     }
   }, [chatID, router]);
 
   useEffect(() => {
-    const input = inputRef.current;
+    const inputEl = inputRef.current;
 
     const handleFocus = () => {
       setTimeout(() => {
-        input?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }, 200); // slight delay for keyboard animation
+        inputEl?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }, 200);
     };
 
-    input?.addEventListener('focus', handleFocus);
+    inputEl?.addEventListener('focus', handleFocus);
 
     return () => {
-      input?.removeEventListener('focus', handleFocus);
+      inputEl?.removeEventListener('focus', handleFocus);
     };
   }, []);
 
   const sendMessage = () => {
     if (!input.trim() || !connected) return;
     setMessages((prev) => [...prev, { from: 'me', text: input }]);
-    connectSocket().emit('message', input);
+
+    if (isBotChat) {
+      // Send to AI bot instead of socket
+      sendBotMessage(input);
+    } else {
+      connectSocket().emit('message', input);
+    }
+
     setInput('');
   };
 
   const handleNext = () => {
     setMessages([]);
+    // Reset bot state
+    setIsBotChat(false);
+
     const socket = connectSocket();
-    // Read interests for re-matching
     const interestsStr = sessionStorage.getItem('interests') || '';
     const interests = interestsStr
       ? interestsStr
@@ -106,7 +142,6 @@ export default function ChatPage() {
     setConnected(false);
     setIsSearching(true);
     setShowReconnectButton(false);
-    // Emit leave-chat before disconnecting
     if (socket && socket.connected) {
       socket.emit('leave-chat');
     }
@@ -118,12 +153,14 @@ export default function ChatPage() {
   };
 
   const handleStop = () => {
+    // Reset bot state
+    setIsBotChat(false);
+
     if (!connected) {
       setMessages(() => [{ from: 'system', text: 'Disconnected.' }]);
     } else {
       setMessages((prev) => [...prev, { from: 'system', text: 'You left the chat.' }]);
     }
-    // Emit leave-chat before disconnecting
     const socket = connectSocket();
     if (socket && socket.connected) {
       socket.emit('leave-chat');
@@ -134,32 +171,30 @@ export default function ChatPage() {
   };
 
   const handleFindNew = () => {
-    // Properly clean up existing socket connection
+    // Reset bot state
+    setIsBotChat(false);
+
     const socket = connectSocket();
     if (socket && socket.connected) {
       socket.emit('leave-chat');
     }
     disconnectSocket();
 
-    // Create new chat ID and navigate
     const newChatId = uuidv4();
     sessionStorage.setItem('chatInitiated', 'true');
     sessionStorage.setItem('uniqueChatId', newChatId);
 
-    // Reset state
     setMessages([]);
     setIsSearching(true);
     setShowReconnectButton(false);
     setConnected(false);
 
-    // Navigate to new chat - the useEffect will handle socket connection
     router.push(`/chat/${newChatId}`);
   };
 
   useEffect(() => {
     const socket = connectSocket();
 
-    // Read interests from sessionStorage
     const interestsStr = sessionStorage.getItem('interests') || '';
     const interests = interestsStr
       ? interestsStr
@@ -171,10 +206,66 @@ export default function ChatPage() {
     socket.emit('join', { interests });
 
     socket.on('matched', () => {
+      // Real user matched — clear any bot state
+      setIsBotChat(false);
+
       setConnected(true);
       setIsSearching(false);
       setShowReconnectButton(false);
       setMessages((prev) => [...prev, { from: 'system', text: 'Stranger connected.' }]);
+    });
+
+    // Bot matched — AI fallback when no real users available
+    socket.on('bot-matched', () => {
+      setIsBotChat(true);
+      setConnected(true);
+      setIsSearching(false);
+      setShowReconnectButton(false);
+
+      setMessages((prev) => [...prev, { from: 'system', text: 'Stranger connected.' }]);
+
+      // Request greeting from server (server calls Gemini)
+      const greetDelay = 800 + Math.random() * 1500;
+      setTimeout(() => {
+        setIsTyping(true);
+        socket.emit('bot-request-greeting');
+      }, greetDelay);
+    });
+
+    // Bot greeting received from server
+    socket.on('bot-greeting', (greeting) => {
+      setTimeout(
+        () => {
+          setIsTyping(false);
+          setMessages((prev) => [...prev, { from: 'stranger', text: greeting }]);
+        },
+        600 + Math.random() * 800
+      );
+    });
+
+    // Bot greeting failed — send 'Hi M' and disconnect after 3s
+    socket.on('bot-greeting-failed', () => {
+      setIsTyping(false);
+      setMessages((prev) => [...prev, { from: 'stranger', text: 'Hi M' }]);
+      setTimeout(() => {
+        disconnectBotChat();
+      }, 3000);
+    });
+
+    // Bot reply to user message (from server-side Gemini call)
+    socket.on('bot-reply', (reply) => {
+      setIsTyping(false);
+      setMessages((prev) => [...prev, { from: 'stranger', text: reply }]);
+    });
+
+    // Bot auto-disconnected after 3-5 minutes
+    socket.on('bot-disconnected', () => {
+      setIsBotChat(false);
+      setConnected(false);
+      setIsSearching(false);
+      setShowReconnectButton(true);
+      setIsTyping(false);
+      setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
     });
 
     socket.on('message', (msg) => {
@@ -193,15 +284,13 @@ export default function ChatPage() {
 
     socket.on('stranger-typing', () => {
       setIsTyping(true);
-      // Auto-clear after short time
       clearTimeout(socket.typingTimeout);
       socket.typingTimeout = setTimeout(() => {
         setIsTyping(false);
-      }, 1500); // Adjust time
+      }, 1500);
     });
 
     return () => {
-      // Emit leave-chat before disconnecting
       if (socket && socket.connected) {
         socket.emit('leave-chat');
       }
@@ -209,7 +298,7 @@ export default function ChatPage() {
     };
   }, []);
 
-  // 60-second search timeout
+  // 60-second search timeout (only for real user search — bot should kick in by 3s)
   useEffect(() => {
     let timeoutId;
     if (isSearching && !connected) {
@@ -233,17 +322,15 @@ export default function ChatPage() {
   }, [isSearching, connected]);
 
   function handleTyping() {
-    if (connected) {
+    if (connected && !isBotChat) {
       const socket = connectSocket();
       if (socket && socket.connected) {
         socket.emit('typing');
-      } else {
       }
     }
   }
 
   useEffect(() => {
-    // Auto scroll to latest message
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
@@ -281,14 +368,14 @@ export default function ChatPage() {
                     src={msg.image}
                     alt="shared"
                     width={200}
-                    height={0} // allow auto height
+                    height={0}
                     style={{
                       width: '100%',
                       height: 'auto',
                       borderRadius: '10px',
                       objectFit: 'contain',
                     }}
-                    unoptimized // required for base64 data URLs
+                    unoptimized
                   />
                 </div>
               )}
@@ -315,7 +402,6 @@ export default function ChatPage() {
             <input
               type="file"
               accept="image/*"
-              //   capture="environment"
               style={{ display: 'none' }}
               ref={fileInputRef}
               onChange={handleImageUpload}
