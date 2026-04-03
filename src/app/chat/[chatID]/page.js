@@ -243,10 +243,12 @@ export default function ChatPage() {
       );
     });
 
-    // Bot greeting failed — send 'Hi M' and disconnect after 3s
+    // Bot greeting failed — send fallback greeting and disconnect after 3s
     socket.on('bot-greeting-failed', () => {
+      const fallbacks = ['Hi M', 'Hii', 'Heyy', 'yo', 'Helloo'];
+      const fallback = fallbacks[Math.floor(Math.random() * fallbacks.length)];
       setIsTyping(false);
-      setMessages((prev) => [...prev, { from: 'stranger', text: 'Hi M' }]);
+      setMessages((prev) => [...prev, { from: 'stranger', text: fallback }]);
       setTimeout(() => {
         disconnectBotChat();
       }, 3000);
