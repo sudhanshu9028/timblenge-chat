@@ -12,6 +12,15 @@ import OvercomingSocialAnxiety, {
 import QuestionsToAskStrangers, {
   frontmatter as questionsFm,
 } from './best-questions-to-ask-strangers';
+import WhyOmegleShutDown, { frontmatter as omegleShutDownFm } from './why-omegle-shut-down';
+import BestRandomChatAppsMobile, {
+  frontmatter as mobileAppsFm,
+} from './best-random-chat-apps-mobile';
+import LateNightChatWithStrangers, {
+  frontmatter as lateNightFm,
+} from './late-night-chat-with-strangers';
+import TextChatVsVideoChat, { frontmatter as textVsVideoFm } from './text-chat-vs-video-chat';
+
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
     component: BestOmegleAlternatives,
@@ -36,6 +45,22 @@ const BLOG_CONTENT = {
   '50-best-questions-to-ask-strangers-online-to-keep-conversations-going': {
     component: QuestionsToAskStrangers,
     frontmatter: questionsFm,
+  },
+  'why-did-omegle-shut-down-where-everyone-went-2026': {
+    component: WhyOmegleShutDown,
+    frontmatter: omegleShutDownFm,
+  },
+  'best-random-chat-apps-android-iphone-no-signup': {
+    component: BestRandomChatAppsMobile,
+    frontmatter: mobileAppsFm,
+  },
+  'cant-sleep-late-night-chat-with-strangers': {
+    component: LateNightChatWithStrangers,
+    frontmatter: lateNightFm,
+  },
+  'text-chat-vs-video-chat-which-is-better': {
+    component: TextChatVsVideoChat,
+    frontmatter: textVsVideoFm,
   },
 };
 

@@ -11,10 +11,12 @@
 
 import BLOG_CONTENT from '@/lib/blogContent';
 
-export const BLOG_POSTS = Object.entries(BLOG_CONTENT).map(([slug, data]) => ({
-  slug,
-  ...data.frontmatter,
-}));
+export const BLOG_POSTS = Object.entries(BLOG_CONTENT)
+  .map(([slug, data]) => ({
+    slug,
+    ...data.frontmatter,
+  }))
+  .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 
 /**
  * Get a blog post by its slug.

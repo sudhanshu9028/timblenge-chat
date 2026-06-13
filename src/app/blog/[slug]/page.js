@@ -284,6 +284,220 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'fun-things-to-do-online-when-bored-random-chat': [
+      {
+        '@type': 'Question',
+        name: 'Is chatting with strangers a good way to cure boredom?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Absolutely. Unlike passively watching videos, chatting requires active participation. The unpredictability of meeting someone new from across the globe naturally stimulates your brain and makes time fly by.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I have to use my webcam?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not at all! Many platforms, including Anoniz, offer dedicated text-only chat rooms. You can enjoy great conversations completely anonymously without ever turning on your camera.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I find people with similar interests?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Anoniz features an interest-matching system. Before joining a chat, simply type in topics you enjoy (e.g., "movies", "gaming", "anime"), and the algorithm will pair you with someone who entered the same tags.',
+        },
+      },
+    ],
+    'how-to-practice-social-skills-and-overcome-anxiety-online': [
+      {
+        '@type': 'Question',
+        name: 'Is it normal to feel nervous before starting a random chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, it is completely normal! Even people without social anxiety feel a flutter of nerves before talking to a stranger. Accept the nervousness as part of the process.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What if an interaction goes poorly?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The beauty of anonymous chat is the "Next" button. If a conversation is awkward, rude, or uncomfortable, simply disconnect. There are no real-world consequences or awkward run-ins later.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does chatting online actually help with real-life anxiety?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Exposure therapy is a common treatment for anxiety. By practicing conversations in a low-stakes online environment, you build cognitive muscle memory that makes real-world interactions feel less daunting.',
+        },
+      },
+    ],
+    '50-best-questions-to-ask-strangers-online-to-keep-conversations-going': [
+      {
+        '@type': 'Question',
+        name: 'What do I do if they answer with just "yes" or "no"?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Follow up with a "Why?" or transition to a wildly different, hypothetical question to jolt the conversation awake. If they remain unresponsive, just politely say goodbye and match with someone new!',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are there any topics I should avoid?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'When first meeting a stranger, it is generally best to avoid deeply polarizing topics like heavy politics, extremely personal financial questions, or anything overly explicit.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I smoothly transition from an icebreaker to a normal chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Listen carefully to their answer and find a "hook." If you ask about their favorite movie and they mention a sci-fi film, ask them what they think the future will actually look like in 50 years. Let the conversation branch naturally.',
+        },
+      },
+    ],
+    'why-did-omegle-shut-down-where-everyone-went-2026': [
+      {
+        '@type': 'Question',
+        name: 'Why did Omegle shut down?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Omegle's founder, Leif K-Brooks, shut the site down voluntarily in November 2023. In his farewell post, he explained that moderating an anonymous video chat platform at scale had become an impossible task — a small minority of users exploited the platform for illegal or harmful purposes, which drew intense legal and media scrutiny that made running the site no longer 'sustainable, financially nor psychologically.'",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is Omegle coming back?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'There are no official plans for Omegle to return. The founder described the shutdown as final and said he considered the matter closed. Any site claiming to be a relaunched "official Omegle" should be treated with suspicion — it is very likely a copycat or scam.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What replaced Omegle?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'A new generation of random chat platforms filled the gap, including Anoniz. These newer platforms were built with moderation and safety as a starting point rather than an afterthought — using AI-powered filtering, instant reporting, and interest-based matching that Omegle never had.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is random video chat still safe in 2026?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Generally, yes — on reputable platforms. The best modern alternatives use proactive content moderation, do not require personal information, and give users instant tools to disconnect and report. As always, avoid sharing identifying details with strangers regardless of which platform you use.',
+        },
+      },
+    ],
+    'best-random-chat-apps-android-iphone-no-signup': [
+      {
+        '@type': 'Question',
+        name: 'Do I need to download an app for random video chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "No. Anoniz and most of the platforms on this list work directly in your phone's browser — just open the site, tap to start, and you're connected. There's nothing to install, update, or delete later.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is random chat safe to use on mobile data?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Text chat uses almost no data. Video chat is more data-intensive, similar to a video call app, so if you have a limited data plan it's worth connecting to Wi-Fi for longer video sessions.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does Anoniz work on iPhone Safari and Android Chrome?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Anoniz is fully browser-based and works across modern mobile browsers, including Safari on iPhone and Chrome on Android, without any app installation.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What's the best free random chat app with no sign-up for mobile?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Anoniz is built specifically for this — instant text and video chat from any mobile browser, no account required, with interest-based matching to find better conversations faster.',
+        },
+      },
+    ],
+    'cant-sleep-late-night-chat-with-strangers': [
+      {
+        '@type': 'Question',
+        name: 'Is it normal to feel lonely or anxious late at night?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes, it's extremely common. With fewer distractions and a natural dip in mood regulation overnight, many people find that worries and overthinking feel much louder after midnight than they do during the day. You're far from the only one awake feeling this way.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can talking to a stranger online actually help me feel better?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "For a lot of people, yes — at least in the moment. A real conversation gives your mind something active to focus on, which can interrupt a spiral of repetitive late-night thoughts. It's not a cure for anything, but a few minutes of genuine human connection can take the edge off and make it easier to relax.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is anonymous chat available 24/7?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes. Anoniz has no opening hours — because it connects you with people all over the world, there's always someone online, no matter what time zone you're in.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What if I'm dealing with serious sleep or mental health issues?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Anonymous chat can be a nice way to feel less alone in the moment, but it isn't a substitute for professional support. If sleep problems, anxiety, or low mood are persistent, please talk to a doctor or therapist. If you're ever having thoughts of harming yourself, contact a crisis line or emergency services in your country right away.",
+        },
+      },
+    ],
+    'text-chat-vs-video-chat-which-is-better': [
+      {
+        '@type': 'Question',
+        name: 'Is text chat more anonymous than video chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes. Text chat reveals nothing about your appearance, voice, accent, or surroundings, which makes it the more anonymous option. Video chat still doesn't require any personal information, but it naturally shows more of who you are.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which is better for making friends — text or video chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Both can lead to real friendships, but they tend to work differently. Text chat lets a connection build slowly through conversation alone, while video chat often builds rapport faster because tone and body language come through immediately. Many people find a mix of both works best.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I switch from text chat to video chat mid-conversation?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'On Anoniz, text and video are separate chat modes, so you would start a new chat in the other mode. If a text conversation is going well and you both want to continue with video, you can simply move to a video chat together.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is video chat with strangers safe?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'On a platform with active moderation, reporting tools, and no requirement to share personal details, video chat is generally safe for the vast majority of users. As with any chat with strangers, avoid showing identifying details in your background and never share personal information like your address or financial details.',
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];
