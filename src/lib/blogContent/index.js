@@ -20,6 +20,12 @@ import LateNightChatWithStrangers, {
   frontmatter as lateNightFm,
 } from './late-night-chat-with-strangers';
 import TextChatVsVideoChat, { frontmatter as textVsVideoFm } from './text-chat-vs-video-chat';
+import AiCompanionVsRealPerson, {
+  frontmatter as aiCompanionFm,
+} from './ai-companion-vs-real-person';
+import DatingAppBurnoutRandomChat, {
+  frontmatter as datingBurnoutFm,
+} from './dating-app-burnout-random-chat';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -61,6 +67,14 @@ const BLOG_CONTENT = {
   'text-chat-vs-video-chat-which-is-better': {
     component: TextChatVsVideoChat,
     frontmatter: textVsVideoFm,
+  },
+  'ai-companion-vs-real-person-which-helps-loneliness': {
+    component: AiCompanionVsRealPerson,
+    frontmatter: aiCompanionFm,
+  },
+  'dating-app-burnout-why-people-are-trying-random-chat-instead': {
+    component: DatingAppBurnoutRandomChat,
+    frontmatter: datingBurnoutFm,
   },
 };
 

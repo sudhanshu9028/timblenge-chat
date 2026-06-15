@@ -498,6 +498,74 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'ai-companion-vs-real-person-which-helps-loneliness': [
+      {
+        '@type': 'Question',
+        name: 'Are AI companions bad for you?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not inherently. Research suggests AI companion chats can ease loneliness in the short term about as much as talking to a real person. The concern is over-reliance — heavy, exclusive use has been linked to increased signs of distress over time, and it can quietly crowd out the slower work of building real-world connections.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can talking to AI really reduce loneliness?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "For many people, yes, at least in the moment. A Harvard Business School study found AI companion conversations eased loneliness about as much as a conversation with a real person, and more than passive activities like watching videos. The key phrase is 'in the moment' — it's a tool, not a cure.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What's better for practicing social skills, AI or real conversation?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Real conversation. An AI companion is designed to keep you comfortable, which means it never gives you the genuinely unpredictable reactions, tangents, or mismatches you get from a person who has their own day, mood, and opinions. Those small adjustments are exactly what build social skills.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is anonymous chat a good middle ground between AI companions and real-life friends?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes. Like an AI companion, anonymous chat is available on demand, judgment-free, and doesn't require an existing relationship. But unlike AI, the person on the other end is real — genuinely curious, genuinely unpredictable, and genuinely choosing to be in the conversation with you.",
+        },
+      },
+    ],
+    'dating-app-burnout-why-people-are-trying-random-chat-instead': [
+      {
+        '@type': 'Question',
+        name: 'Is Anoniz a dating app?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "No. Anoniz is an anonymous random chat platform for conversation — there's no profile, no photos, no matching based on looks, and no romantic framing. It's simply a way to talk to someone new.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why are so many people burned out on dating apps?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Surveys show more than half of Gen Z feels burned out on dating apps often or always — a higher rate than any other age group. The exhaustion comes from constantly curating a profile, treating every match as a fresh audition, and the steady drip of ghosting and low-effort conversations.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can random chat help with dating app burnout?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'For many people, yes — not as a replacement for dating, but as a low-pressure way to remember what an unscripted, unscored conversation feels like, without a profile, a photo, or an outcome attached to it.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What's the actual difference between random chat and a dating app?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Random chat has no profiles, no photos, and no matching algorithm based on appearance or romantic compatibility. You\'re connected instantly to another person for a conversation, with no "looking for" framing — and you\'re free to disconnect whenever you want.',
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];
