@@ -26,6 +26,10 @@ import AiCompanionVsRealPerson, {
 import DatingAppBurnoutRandomChat, {
   frontmatter as datingBurnoutFm,
 } from './dating-app-burnout-random-chat';
+import ScienceOfTalkingToStrangers, {
+  frontmatter as scienceStrangersFm,
+} from './science-of-talking-to-strangers';
+import WorkingFromHomeLonely, { frontmatter as wfhLonelyFm } from './working-from-home-lonely';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -75,6 +79,14 @@ const BLOG_CONTENT = {
   'dating-app-burnout-why-people-are-trying-random-chat-instead': {
     component: DatingAppBurnoutRandomChat,
     frontmatter: datingBurnoutFm,
+  },
+  'science-of-talking-to-strangers-research-benefits': {
+    component: ScienceOfTalkingToStrangers,
+    frontmatter: scienceStrangersFm,
+  },
+  'working-from-home-lonely-remote-work-loneliness-solutions': {
+    component: WorkingFromHomeLonely,
+    frontmatter: wfhLonelyFm,
   },
 };
 

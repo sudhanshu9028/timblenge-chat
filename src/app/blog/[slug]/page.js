@@ -566,6 +566,74 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'science-of-talking-to-strangers-research-benefits': [
+      {
+        '@type': 'Question',
+        name: 'Is it weird to talk to strangers online?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not at all — and the research backs this up. Studies consistently show people enjoy conversations with strangers more than they expect, and worry about awkwardness far more than the actual experience warrants. The hesitation is in our heads; the enjoyment is real.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why does talking to a stranger make you feel better?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Brief social interactions — even with people you will never see again — activate the same reward pathways as longer-term social contact, reducing cortisol and lifting mood. Chicago commuter studies found that people who spoke to strangers on their commute were significantly happier by the end of it than those who kept to themselves.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is it true people enjoy talking to us more than we think?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Yes — this is called the 'liking gap,' documented by researchers at Cornell, Harvard, Yale, and the University of Essex. People consistently underestimate how much their conversation partner enjoys talking with them, and overestimate how awkward the other person found it. The gap persists even after the conversation ends.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What's the easiest way to practice talking to strangers?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Anonymous chat platforms are ideal for low-stakes practice: there's no shared history, no face-to-face pressure, and both people are there voluntarily. You get all the psychological benefit of a real conversation — mood lift, social connection, cognitive engagement — with a fraction of the perceived risk of rejection.",
+        },
+      },
+    ],
+    'working-from-home-lonely-remote-work-loneliness-solutions': [
+      {
+        '@type': 'Question',
+        name: 'Is it normal to feel lonely working from home?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Very — a major 2026 study published in Science, covering 588,000 Americans over more than a decade, found that remote work accounts for roughly a third of the increase in mental distress Americans experienced after the pandemic's peak. If you feel it, you're in large company.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why is working from home lonelier than most people expected?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Remote work eliminates 'ambient socialization' — the low-level social contact that happens without effort in a shared workspace: hallway chats, coffee machine exchanges, the background energy of other people. Most people didn't notice how much that contact was doing for them until it was gone.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can online chat really help with WFH loneliness?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "As a supplement, yes. It replicates the informal, unplanned, no-agenda human contact that disappears in remote work — the kind that a Zoom call or a Slack message can't replicate because both carry professional stakes. A few minutes of genuine conversation with no outcome attached can meaningfully shift your mood and energy.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What's the best way to stay socially connected while working remotely?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Prioritize unstructured, unpressured social contact — not more work calls. A walk with a neighbor, a call with a friend, an anonymous chat between meetings: anything where you're talking to another person with no agenda or professional outcome attached. Research shows it's the informal contact, not the formal check-ins, that buffers work-related loneliness most effectively.",
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];
