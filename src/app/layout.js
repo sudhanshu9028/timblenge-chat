@@ -98,10 +98,13 @@ export default function RootLayout({ children }) {
         {/* Preconnect only to domains we actually use */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        {/* DebugBear RUM Analytics */}
-        <Script id="debugbear-rum" strategy="beforeInteractive">
-          {`(function(){var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a=addEventListener,scr=o.createElement("script");scr.async=!0;w[d]=w[d]||[];w[d].push(["presampling",dbpr]);["error","unhandledrejection"].forEach(function(t){a(t,function(e){w[d].push([t,e])});});scr.src="https://cdn.debugbear.com/g6IK9JNgMqjz.js";o.head.appendChild(scr);}})()`}
-        </Script>
+        {/* Lighthouse CrUX Report */}
+        <Script
+          src="https://lighthouse-crux-report.vercel.app/beacon.js"
+          data-site="2e17dc4a-39e4-471b-9565-786b3ce54b6c"
+          strategy="afterInteractive"
+          async
+        />
 
         {/* <!-- Google tag (gtag.js) - Deferred to improve LCP --> */}
         <Script
