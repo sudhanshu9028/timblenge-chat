@@ -30,6 +30,17 @@ import ScienceOfTalkingToStrangers, {
   frontmatter as scienceStrangersFm,
 } from './science-of-talking-to-strangers';
 import WorkingFromHomeLonely, { frontmatter as wfhLonelyFm } from './working-from-home-lonely';
+import SocialMediaDetoxRealConversations, {
+  frontmatter as socialDetoxFm,
+} from './social-media-detox-real-conversations';
+import LonelyInCollegeMeetPeople, {
+  frontmatter as lonelyCollegeFm,
+} from './lonely-in-college-meet-people';
+import SpotRedFlagsVideoChat, { frontmatter as redFlagsFm } from './spot-red-flags-video-chat';
+import MonkModeDeletedApps, { frontmatter as monkModeFm } from './monk-mode-deleted-apps';
+import StrangerBetterThanGroupChat, {
+  frontmatter as strangerGroupChatFm,
+} from './stranger-better-than-group-chat';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -87,6 +98,26 @@ const BLOG_CONTENT = {
   'working-from-home-lonely-remote-work-loneliness-solutions': {
     component: WorkingFromHomeLonely,
     frontmatter: wfhLonelyFm,
+  },
+  'social-media-detox-real-conversations-2026': {
+    component: SocialMediaDetoxRealConversations,
+    frontmatter: socialDetoxFm,
+  },
+  'lonely-in-college-meet-people-online-2026': {
+    component: LonelyInCollegeMeetPeople,
+    frontmatter: lonelyCollegeFm,
+  },
+  'spot-red-flags-random-video-chat-safety-2026': {
+    component: SpotRedFlagsVideoChat,
+    frontmatter: redFlagsFm,
+  },
+  'monk-mode-deleted-apps-now-what-2026': {
+    component: MonkModeDeletedApps,
+    frontmatter: monkModeFm,
+  },
+  'talking-to-stranger-better-than-group-chat': {
+    component: StrangerBetterThanGroupChat,
+    frontmatter: strangerGroupChatFm,
   },
 };
 

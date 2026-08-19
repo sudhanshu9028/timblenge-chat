@@ -634,6 +634,136 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'social-media-detox-real-conversations-2026': [
+      {
+        '@type': 'Question',
+        name: 'Is anonymous chat really better for mental health than social media?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "They serve different purposes, but the key difference is that anonymous chat is active and reciprocal — you're talking with someone, not performing for an audience. There's no follower count, no likes, and no algorithm deciding what you see. For many people, that shift alone makes a noticeable difference in how they feel afterward.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I do a social media detox without being completely offline?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Absolutely. A detox doesn't mean going off-grid. It means replacing passive, algorithm-driven screen time with something more intentional. Chatting with a stranger, reading a book, or calling a friend all count. The goal is to break the scroll-and-swipe autopilot, not to abandon technology entirely.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Won't I feel more isolated without social media?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Most people report the opposite. Studies consistently show that heavy social media use correlates with increased loneliness, not less. The first few days of a detox can feel quiet, but the discomfort usually fades quickly — especially if you replace scrolling with real interaction, even brief anonymous conversations.',
+        },
+      },
+    ],
+    'lonely-in-college-meet-people-online-2026': [
+      {
+        '@type': 'Question',
+        name: 'Is it normal to feel lonely in college?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Extremely. A 2026 Georgetown study found that over 54% of college students report feeling lonely — with freshmen and students under 25 being the most affected. If you're feeling it, you are genuinely in the majority, not the minority.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can talking to strangers online actually help with college loneliness?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "It can supplement real-world connection, yes. Anonymous chat gives you low-stakes social practice and immediate human contact when your dorm room feels too quiet. It's not a replacement for campus friendships, but it can bridge the gap while you're still building them.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Isn't it weird to chat with random strangers instead of making campus friends?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Not at all. Think of it as warming up before the game. Many students use anonymous chat to practice conversation, ease social anxiety, or simply feel less alone on a Friday night when plans fell through. It's a tool, not a substitute.",
+        },
+      },
+    ],
+    'spot-red-flags-random-video-chat-safety-2026': [
+      {
+        '@type': 'Question',
+        name: 'Can someone really use a deepfake on a live video chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes — real-time face-swapping software exists and has become more accessible in 2026. However, it\'s still imperfect. Look for subtle glitches: unnatural lip sync, edges that shimmer around the jawline or hair, lighting that doesn\'t match the background, and expressions that feel slightly "off." If something looks uncanny, trust your instinct.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What should I do if someone threatens me on a random chat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Disconnect immediately. Do not engage, do not negotiate, and do not send anything they ask for. Use the platform's report feature to flag the user. If the threat involves blackmail or illegal content, report it to local law enforcement as well.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are random video chat platforms safe to use in 2026?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "On reputable platforms with active AI moderation, reporting tools, and no requirement to share personal details — yes, they're generally safe for the vast majority of users. The key is choosing a platform that was built with safety as a core feature, not an afterthought.",
+        },
+      },
+    ],
+    'monk-mode-deleted-apps-now-what-2026': [
+      {
+        '@type': 'Question',
+        name: "What is 'Monk Mode'?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Monk Mode is a trending lifestyle approach where people intentionally cut out digital distractions — particularly social media, dating apps, and endless content feeds — to focus on personal growth, mental clarity, and real-world presence. It's less about rejecting technology and more about using it with intention.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is it normal to feel lonely after deleting social media?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Very. Social media, for all its downsides, does provide a passive sense of connection — even if it's a shallow one. Removing it creates a noticeable gap. The feeling usually passes within a week or two, especially if you actively replace scrolling with real interaction rather than just sitting with the absence.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Isn't chatting with strangers just another form of screen addiction?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "It can be if you use it the same way — mindlessly and for hours. But a five-minute conversation with a real person is fundamentally different from an hour of algorithmic scrolling. One requires you to be present and engaged; the other doesn't. The key is intention.",
+        },
+      },
+    ],
+    'talking-to-stranger-better-than-group-chat': [
+      {
+        '@type': 'Question',
+        name: 'Why is it sometimes easier to talk to a stranger than a friend?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Because there's nothing at stake. With friends, you filter yourself — consciously or not — to maintain the relationship, avoid judgment, or fit the role the group expects you to play. A stranger has no prior image of you, so there's nothing to manage. You can just... talk.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does talking to strangers actually reduce loneliness?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Research says yes. Studies from the University of Chicago found that people who spoke to strangers during their daily commute were significantly happier than those who kept to themselves — and this held true even for self-described introverts who predicted they'd dislike it.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What are 'weak ties' and why do they matter?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Weak ties are the casual, low-commitment social connections you have — a barista you chat with, a stranger on a train, someone you met once at an event. Research from Stanford sociologist Mark Granovetter shows that these seemingly minor connections contribute disproportionately to well-being, new ideas, and even career opportunities.',
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];
