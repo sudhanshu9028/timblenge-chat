@@ -41,6 +41,13 @@ import MonkModeDeletedApps, { frontmatter as monkModeFm } from './monk-mode-dele
 import StrangerBetterThanGroupChat, {
   frontmatter as strangerGroupChatFm,
 } from './stranger-better-than-group-chat';
+import BedRottingBrainNeeds, { frontmatter as bedRottingFm } from './bed-rotting-brain-needs';
+import ScreenAddictionIndiaCrisis, {
+  frontmatter as screenAddictionFm,
+} from './screen-addiction-india-crisis';
+import PracticeEnglishSpeakingOnline, {
+  frontmatter as practiceEnglishFm,
+} from './practice-english-speaking-online';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -118,6 +125,18 @@ const BLOG_CONTENT = {
   'talking-to-stranger-better-than-group-chat': {
     component: StrangerBetterThanGroupChat,
     frontmatter: strangerGroupChatFm,
+  },
+  'bed-rotting-what-your-brain-needs-instead': {
+    component: BedRottingBrainNeeds,
+    frontmatter: bedRottingFm,
+  },
+  'screen-addiction-india-crisis-fix': {
+    component: ScreenAddictionIndiaCrisis,
+    frontmatter: screenAddictionFm,
+  },
+  'practice-english-speaking-online-strangers': {
+    component: PracticeEnglishSpeakingOnline,
+    frontmatter: practiceEnglishFm,
   },
 };
 

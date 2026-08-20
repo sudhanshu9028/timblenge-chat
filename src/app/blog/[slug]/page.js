@@ -764,6 +764,84 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'bed-rotting-what-your-brain-needs-instead': [
+      {
+        '@type': 'Question',
+        name: 'Is bed rotting actually bad for you?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Occasionally, no — everyone needs a recovery day. The concern arises when it becomes the default weekend pattern. Therapists at Therapy Group DC noted in mid-2026 that chronic bed rotting can cross from genuine rest into avoidance behavior, disrupting sleep cycles and making even small social efforts feel disproportionately hard over time.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How is chatting with a stranger different from scrolling in bed?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Scrolling is passive — your brain is receiving stimulation but not generating any. A conversation, even a short one with a stranger, forces you to listen, think, and respond. That shift from consumption to participation is what breaks the loop and usually leaves you feeling more alert rather than more drained.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What if I bed rot because I genuinely have no energy to socialize?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "That's exactly why low-effort options matter. You don't have to get dressed, leave the house, or even turn on a camera. A five-minute text chat from the same bed you're lying in requires almost no activation energy — but it gives your brain something that four hours of scrolling never will: a real, reciprocal human interaction.",
+        },
+      },
+    ],
+    'screen-addiction-india-crisis-fix': [
+      {
+        '@type': 'Question',
+        name: 'What did the Economic Survey actually say about screen addiction?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "The Economic Survey 2025-26, tabled in India's Parliament in January 2026, flagged compulsive smartphone and social media use among youth aged 15–29 as a public health concern impacting mental health, productivity, and sleep. It recommended digital wellness curricula in schools, platform accountability, and expanded mental health services like Tele-MANAS and NIMHANS's SHUT Clinic.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Isn't chatting online just more screen time?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Technically, yes — but not all screen time is created equal. Passively scrolling a feed for an hour and having a five-minute conversation with another person activate very different parts of your brain. The problem the Economic Survey describes isn't screens themselves — it's the passive, compulsive, algorithmic loop. A real conversation breaks that loop.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I actually reduce screen addiction as a young person in India?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Start with substitution, not subtraction. Deleting apps without replacing the habit creates a vacuum most people fill within a week. Replace your highest-volume passive app with something active — a text chat with a stranger, a phone call with a friend, or a walk. The goal is to shift from consuming content to doing something that requires your participation.',
+        },
+      },
+    ],
+    'practice-english-speaking-online-strangers': [
+      {
+        '@type': 'Question',
+        name: 'Can I really improve my English by chatting with random strangers?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes — if you do it consistently. Language acquisition research shows that unstructured, real-time conversation builds fluency faster than textbook drills because it forces you to think and respond under pressure. Even 10 minutes a day of text chat in English trains your brain to produce language actively, not just receive it passively.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "What if my English isn't good enough and the other person disconnects?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "That's fine — and it happens to native speakers too. The beauty of anonymous chat is that disconnection has zero social cost. You lose nothing. The next person might be more patient, or might be a non-native speaker themselves who's happy to practice together. There's no grade, no judgment, and no audience.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is anonymous chat better than a paid English tutor?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "They solve different problems. A tutor corrects your grammar and explains rules. Anonymous chat builds the one thing a tutor usually can't: real-time confidence under pressure, with no script and no safety net. The ideal combination is both — but if you can only afford one, free daily conversation practice will do more for your fluency than a weekly grammar lesson.",
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];
