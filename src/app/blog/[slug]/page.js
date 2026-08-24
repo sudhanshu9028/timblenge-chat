@@ -842,6 +842,32 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'instant-stranger-matching-anonymous-identity': [
+      {
+        '@type': 'Question',
+        name: 'How does instant stranger matching work?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'When you tap "Start," the platform scans its pool of active users and pairs you with someone available — usually within seconds. There is no profile to review, no swipe mechanic, no queue. The system connects you to a real person for a live text or video conversation, and either of you can end it and re-match at any time.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is it safe to chat with an anonymous identity?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'On moderated platforms, yes. Anonymity protects your personal information by default — no name, no photo, no social links are shared. Reputable platforms add AI moderation, report tools, and content filtering on top of that. The result is a space where you can be honest without being exposed.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why would someone choose anonymous matching over a regular social app?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Because regular social apps make you perform. Every message, every post, every reaction is tied to a persistent identity that follows you around. Anonymous matching removes that pressure entirely. You are not your follower count, your profile photo, or your most recent story. You are just a person, talking to another person, right now.',
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];

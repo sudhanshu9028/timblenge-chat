@@ -48,6 +48,9 @@ import ScreenAddictionIndiaCrisis, {
 import PracticeEnglishSpeakingOnline, {
   frontmatter as practiceEnglishFm,
 } from './practice-english-speaking-online';
+import InstantStrangerMatchingAnonymous, {
+  frontmatter as instantMatchingFm,
+} from './instant-stranger-matching-anonymous';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -137,6 +140,10 @@ const BLOG_CONTENT = {
   'practice-english-speaking-online-strangers': {
     component: PracticeEnglishSpeakingOnline,
     frontmatter: practiceEnglishFm,
+  },
+  'instant-stranger-matching-anonymous-identity': {
+    component: InstantStrangerMatchingAnonymous,
+    frontmatter: instantMatchingFm,
   },
 };
 
