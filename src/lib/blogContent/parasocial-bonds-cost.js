@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'parasocial-relationships-streamer-not-friend',
   title: "Your Favorite Streamer Isn't Your Friend — The Cost of Parasocial Bonds",
   description:
     "Parasocial relationships feel like real friendships but only go one way. Here's what they actually cost you — and what a two-way conversation offers instead.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Psychology',
 };
 
-export default function ParasocialBondsCost({ styles }) {
-  const faqItems = [
-    {
-      question: 'What is a parasocial relationship?',
-      answer:
-        "A parasocial relationship is a one-sided emotional bond where you feel connected to someone — a streamer, YouTuber, podcaster, or influencer — who doesn't know you exist. Your brain processes their content as social interaction, releasing some of the same neurochemicals as a real conversation, but the connection only flows in one direction.",
-    },
-    {
-      question: 'Are parasocial relationships always bad?',
-      answer:
-        "Not inherently. Casually enjoying a creator's content and feeling a sense of connection is normal and usually harmless. The concern arises when parasocial bonds become a primary source of social contact — when watching a streamer replaces talking to real people, and the one-sided comfort quietly crowds out the two-sided relationships that build social skills and genuine belonging.",
-    },
-    {
-      question: 'How do I know if my parasocial relationships are replacing real ones?',
-      answer:
-        "A useful test: think about the last time you had a conversation where the other person genuinely didn't know what you were going to say next. If most of your \"social\" time is spent watching, listening, or reading — consuming someone else's output — without producing any of your own, the balance has likely tipped. The fix isn't quitting your favorite creator. It's adding real, two-way interaction alongside them.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What is a parasocial relationship?',
+    answer:
+      "A parasocial relationship is a one-sided emotional bond where you feel connected to someone — a streamer, YouTuber, podcaster, or influencer — who doesn't know you exist. Your brain processes their content as social interaction, releasing some of the same neurochemicals as a real conversation, but the connection only flows in one direction.",
+  },
+  {
+    question: 'Are parasocial relationships always bad?',
+    answer:
+      "Not inherently. Casually enjoying a creator's content and feeling a sense of connection is normal and usually harmless. The concern arises when parasocial bonds become a primary source of social contact — when watching a streamer replaces talking to real people, and the one-sided comfort quietly crowds out the two-sided relationships that build social skills and genuine belonging.",
+  },
+  {
+    question: 'How do I know if my parasocial relationships are replacing real ones?',
+    answer:
+      "A useful test: think about the last time you had a conversation where the other person genuinely didn't know what you were going to say next. If most of your \"social\" time is spent watching, listening, or reading — consuming someone else's output — without producing any of your own, the balance has likely tipped. The fix isn't quitting your favorite creator. It's adding real, two-way interaction alongside them.",
+  },
+];
 
+export default function ParasocialBondsCost({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

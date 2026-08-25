@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'third-places-gen-z-online',
   title: 'No Place to Hang Out? Gen Z Is Building Third Places Online',
   description:
     'Physical third places are vanishing. Gen Z is replacing coffee shops and parks with free, anonymous online spaces where you can just exist and talk.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Culture',
 };
 
-export default function ThirdPlacesOnline({ styles }) {
-  const faqItems = [
-    {
-      question: 'What is a "third place"?',
-      answer:
-        'A third place is any social space that isn\'t your home (first place) or your work/school (second place). Coffee shops, parks, libraries, barbershops, community centers — anywhere you can show up, exist around other people, and socialize without spending much money or committing to a formal plan. The term comes from sociologist Ray Oldenburg\'s 1989 book "The Great Good Place."',
-    },
-    {
-      question: 'Why are third places disappearing?',
-      answer:
-        'Three main forces: rising costs have turned casual hangout spots into pay-to-stay venues, remote work has eliminated the incidental social contact of shared offices, and post-pandemic closures permanently removed many small businesses and community venues that served as free gathering points. The result is that "just hanging out" now requires more money, more planning, and more effort than it used to.',
-    },
-    {
-      question: 'Can an online chat platform really replace a physical third place?',
-      answer:
-        "Not entirely — nothing fully replicates the experience of being physically present with others. But an anonymous chat platform can replicate one of the most important qualities of a third place: low-stakes, unstructured social contact with people you don't already know. It's free, requires no planning, and carries no social obligation — which is exactly what makes a good third place work.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What is a "third place"?',
+    answer:
+      'A third place is any social space that isn\'t your home (first place) or your work/school (second place). Coffee shops, parks, libraries, barbershops, community centers — anywhere you can show up, exist around other people, and socialize without spending much money or committing to a formal plan. The term comes from sociologist Ray Oldenburg\'s 1989 book "The Great Good Place."',
+  },
+  {
+    question: 'Why are third places disappearing?',
+    answer:
+      'Three main forces: rising costs have turned casual hangout spots into pay-to-stay venues, remote work has eliminated the incidental social contact of shared offices, and post-pandemic closures permanently removed many small businesses and community venues that served as free gathering points. The result is that "just hanging out" now requires more money, more planning, and more effort than it used to.',
+  },
+  {
+    question: 'Can an online chat platform really replace a physical third place?',
+    answer:
+      "Not entirely — nothing fully replicates the experience of being physically present with others. But an anonymous chat platform can replicate one of the most important qualities of a third place: low-stakes, unstructured social contact with people you don't already know. It's free, requires no planning, and carries no social obligation — which is exactly what makes a good third place work.",
+  },
+];
 
+export default function ThirdPlacesOnline({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

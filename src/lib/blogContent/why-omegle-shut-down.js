@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'why-did-omegle-shut-down-where-everyone-went-2026',
   title: 'Why Did Omegle Shut Down? The Real Story (and Where Everyone Went in 2026)',
   description:
     'Omegle shut down for good in November 2023 after 14 years online. Here is the real story behind its closure, whether it is coming back, and where its millions of users went next.',
@@ -23,30 +24,30 @@ export const frontmatter = {
   category: 'Comparisons',
 };
 
-export default function WhyOmegleShutDown({ styles }) {
-  const faqItems = [
-    {
-      question: 'Why did Omegle shut down?',
-      answer:
-        "Omegle's founder, Leif K-Brooks, shut the site down voluntarily in November 2023. In his farewell post, he explained that moderating an anonymous video chat platform at scale had become an impossible task — a small minority of users exploited the platform for illegal or harmful purposes, which drew intense legal and media scrutiny that made running the site no longer 'sustainable, financially nor psychologically.'",
-    },
-    {
-      question: 'Is Omegle coming back?',
-      answer:
-        'There are no official plans for Omegle to return. The founder described the shutdown as final and said he considered the matter closed. Any site claiming to be a relaunched "official Omegle" should be treated with suspicion — it is very likely a copycat or scam.',
-    },
-    {
-      question: 'What replaced Omegle?',
-      answer:
-        'A new generation of random chat platforms filled the gap, including Anoniz. These newer platforms were built with moderation and safety as a starting point rather than an afterthought — using AI-powered filtering, instant reporting, and interest-based matching that Omegle never had.',
-    },
-    {
-      question: 'Is random video chat still safe in 2026?',
-      answer:
-        'Generally, yes — on reputable platforms. The best modern alternatives use proactive content moderation, do not require personal information, and give users instant tools to disconnect and report. As always, avoid sharing identifying details with strangers regardless of which platform you use.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Why did Omegle shut down?',
+    answer:
+      "Omegle's founder, Leif K-Brooks, shut the site down voluntarily in November 2023. In his farewell post, he explained that moderating an anonymous video chat platform at scale had become an impossible task — a small minority of users exploited the platform for illegal or harmful purposes, which drew intense legal and media scrutiny that made running the site no longer 'sustainable, financially nor psychologically.'",
+  },
+  {
+    question: 'Is Omegle coming back?',
+    answer:
+      'There are no official plans for Omegle to return. The founder described the shutdown as final and said he considered the matter closed. Any site claiming to be a relaunched "official Omegle" should be treated with suspicion — it is very likely a copycat or scam.',
+  },
+  {
+    question: 'What replaced Omegle?',
+    answer:
+      'A new generation of random chat platforms filled the gap, including Anoniz. These newer platforms were built with moderation and safety as a starting point rather than an afterthought — using AI-powered filtering, instant reporting, and interest-based matching that Omegle never had.',
+  },
+  {
+    question: 'Is random video chat still safe in 2026?',
+    answer:
+      'Generally, yes — on reputable platforms. The best modern alternatives use proactive content moderation, do not require personal information, and give users instant tools to disconnect and report. As always, avoid sharing identifying details with strangers regardless of which platform you use.',
+  },
+];
 
+export default function WhyOmegleShutDown({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

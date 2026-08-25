@@ -2,6 +2,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'how-to-stay-safe-chatting-with-strangers-online',
   title: 'How to Stay Safe While Chatting with Strangers Online',
   description:
     'Essential safety tips for chatting with strangers online. Learn how to protect your privacy on random video chat platforms and anonymous chat sites in 2026.',
@@ -24,30 +25,30 @@ export const frontmatter = {
   category: 'Safety',
 };
 
-export default function StaySafeChatting({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it dangerous to chat with strangers online?',
-      answer:
-        'Chatting with strangers carries some inherent risk, but using a reputable platform with moderation features and following basic safety practices dramatically reduces that risk. Millions of people chat with strangers daily without issues.',
-    },
-    {
-      question: 'Can someone find my location through random video chat?',
-      answer:
-        'On reputable platforms, your IP address is not exposed to other users. However, clues in your video background or personal details you share verbally could give away your location. Using a VPN and being mindful of your surroundings adds extra protection.',
-    },
-    {
-      question: 'What should I do if someone harasses me on a chat platform?',
-      answer:
-        "Disconnect immediately and use the platform's report feature to flag the user. Do not engage with harassment. If the behavior is severe or threatening, consider reporting it to local authorities as well.",
-    },
-    {
-      question: 'Are anonymous chat platforms really anonymous?',
-      answer:
-        "The best platforms don't require personal information and don't store chat logs. However, your anonymity also depends on what you choose to share during conversations. Never reveal identifying information, and consider using a VPN for additional privacy.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it dangerous to chat with strangers online?',
+    answer:
+      'Chatting with strangers carries some inherent risk, but using a reputable platform with moderation features and following basic safety practices dramatically reduces that risk. Millions of people chat with strangers daily without issues.',
+  },
+  {
+    question: 'Can someone find my location through random video chat?',
+    answer:
+      'On reputable platforms, your IP address is not exposed to other users. However, clues in your video background or personal details you share verbally could give away your location. Using a VPN and being mindful of your surroundings adds extra protection.',
+  },
+  {
+    question: 'What should I do if someone harasses me on a chat platform?',
+    answer:
+      "Disconnect immediately and use the platform's report feature to flag the user. Do not engage with harassment. If the behavior is severe or threatening, consider reporting it to local authorities as well.",
+  },
+  {
+    question: 'Are anonymous chat platforms really anonymous?',
+    answer:
+      "The best platforms don't require personal information and don't store chat logs. However, your anonymity also depends on what you choose to share during conversations. Never reveal identifying information, and consider using a VPN for additional privacy.",
+  },
+];
 
+export default function StaySafeChatting({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

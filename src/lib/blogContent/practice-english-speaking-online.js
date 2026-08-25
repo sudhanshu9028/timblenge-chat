@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'practice-english-speaking-online-strangers',
   title: 'Want to Improve Your English? Talk to a Stranger (Seriously)',
   description:
     'You read English fine but freeze when speaking. Random chat with strangers is the free, zero-pressure way to build fluency — no tutor required.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Tips',
 };
 
-export default function PracticeEnglishSpeakingOnline({ styles }) {
-  const faqItems = [
-    {
-      question: 'Can I really improve my English by chatting with random strangers?',
-      answer:
-        'Yes — if you do it consistently. Language acquisition research shows that unstructured, real-time conversation builds fluency faster than textbook drills because it forces you to think and respond under pressure. Even 10 minutes a day of text chat in English trains your brain to produce language actively, not just receive it passively.',
-    },
-    {
-      question: "What if my English isn't good enough and the other person disconnects?",
-      answer:
-        "That's fine — and it happens to native speakers too. The beauty of anonymous chat is that disconnection has zero social cost. You lose nothing. The next person might be more patient, or might be a non-native speaker themselves who's happy to practice together. There's no grade, no judgment, and no audience.",
-    },
-    {
-      question: 'Is anonymous chat better than a paid English tutor?',
-      answer:
-        "They solve different problems. A tutor corrects your grammar and explains rules. Anonymous chat builds the one thing a tutor usually can't: real-time confidence under pressure, with no script and no safety net. The ideal combination is both — but if you can only afford one, free daily conversation practice will do more for your fluency than a weekly grammar lesson.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Can I really improve my English by chatting with random strangers?',
+    answer:
+      'Yes — if you do it consistently. Language acquisition research shows that unstructured, real-time conversation builds fluency faster than textbook drills because it forces you to think and respond under pressure. Even 10 minutes a day of text chat in English trains your brain to produce language actively, not just receive it passively.',
+  },
+  {
+    question: "What if my English isn't good enough and the other person disconnects?",
+    answer:
+      "That's fine — and it happens to native speakers too. The beauty of anonymous chat is that disconnection has zero social cost. You lose nothing. The next person might be more patient, or might be a non-native speaker themselves who's happy to practice together. There's no grade, no judgment, and no audience.",
+  },
+  {
+    question: 'Is anonymous chat better than a paid English tutor?',
+    answer:
+      "They solve different problems. A tutor corrects your grammar and explains rules. Anonymous chat builds the one thing a tutor usually can't: real-time confidence under pressure, with no script and no safety net. The ideal combination is both — but if you can only afford one, free daily conversation practice will do more for your fluency than a weekly grammar lesson.",
+  },
+];
 
+export default function PracticeEnglishSpeakingOnline({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

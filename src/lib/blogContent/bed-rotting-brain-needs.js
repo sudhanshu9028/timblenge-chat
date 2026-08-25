@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'bed-rotting-what-your-brain-needs-instead',
   title: "Bed Rotting All Weekend? Here's What Your Brain Actually Needs Instead",
   description:
     "Bed rotting feels like rest but leaves you emptier. Here's why your brain craves active connection — and how a 5-minute anonymous chat can break the cycle.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function BedRottingBrainNeeds({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is bed rotting actually bad for you?',
-      answer:
-        'Occasionally, no — everyone needs a recovery day. The concern arises when it becomes the default weekend pattern. Therapists at Therapy Group DC noted in mid-2026 that chronic bed rotting can cross from genuine rest into avoidance behavior, disrupting sleep cycles and making even small social efforts feel disproportionately hard over time.',
-    },
-    {
-      question: 'How is chatting with a stranger different from scrolling in bed?',
-      answer:
-        'Scrolling is passive — your brain is receiving stimulation but not generating any. A conversation, even a short one with a stranger, forces you to listen, think, and respond. That shift from consumption to participation is what breaks the loop and usually leaves you feeling more alert rather than more drained.',
-    },
-    {
-      question: 'What if I bed rot because I genuinely have no energy to socialize?',
-      answer:
-        "That's exactly why low-effort options matter. You don't have to get dressed, leave the house, or even turn on a camera. A five-minute text chat from the same bed you're lying in requires almost no activation energy — but it gives your brain something that four hours of scrolling never will: a real, reciprocal human interaction.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is bed rotting actually bad for you?',
+    answer:
+      'Occasionally, no — everyone needs a recovery day. The concern arises when it becomes the default weekend pattern. Therapists at Therapy Group DC noted in mid-2026 that chronic bed rotting can cross from genuine rest into avoidance behavior, disrupting sleep cycles and making even small social efforts feel disproportionately hard over time.',
+  },
+  {
+    question: 'How is chatting with a stranger different from scrolling in bed?',
+    answer:
+      'Scrolling is passive — your brain is receiving stimulation but not generating any. A conversation, even a short one with a stranger, forces you to listen, think, and respond. That shift from consumption to participation is what breaks the loop and usually leaves you feeling more alert rather than more drained.',
+  },
+  {
+    question: 'What if I bed rot because I genuinely have no energy to socialize?',
+    answer:
+      "That's exactly why low-effort options matter. You don't have to get dressed, leave the house, or even turn on a camera. A five-minute text chat from the same bed you're lying in requires almost no activation energy — but it gives your brain something that four hours of scrolling never will: a real, reciprocal human interaction.",
+  },
+];
 
+export default function BedRottingBrainNeeds({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

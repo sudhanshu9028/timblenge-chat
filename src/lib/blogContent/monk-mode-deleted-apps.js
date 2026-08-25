@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'monk-mode-deleted-apps-now-what-2026',
   title: "The 'Monk Mode' Paradox — You Deleted Your Apps, Now What?",
   description:
     "You went Monk Mode and deleted social media. But now you're bored and weirdly lonely. Here's how to fill the gap without going back to the feed.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function MonkModeDeletedApps({ styles }) {
-  const faqItems = [
-    {
-      question: "What is 'Monk Mode'?",
-      answer:
-        "Monk Mode is a trending lifestyle approach where people intentionally cut out digital distractions — particularly social media, dating apps, and endless content feeds — to focus on personal growth, mental clarity, and real-world presence. It's less about rejecting technology and more about using it with intention.",
-    },
-    {
-      question: 'Is it normal to feel lonely after deleting social media?',
-      answer:
-        "Very. Social media, for all its downsides, does provide a passive sense of connection — even if it's a shallow one. Removing it creates a noticeable gap. The feeling usually passes within a week or two, especially if you actively replace scrolling with real interaction rather than just sitting with the absence.",
-    },
-    {
-      question: "Isn't chatting with strangers just another form of screen addiction?",
-      answer:
-        "It can be if you use it the same way — mindlessly and for hours. But a five-minute conversation with a real person is fundamentally different from an hour of algorithmic scrolling. One requires you to be present and engaged; the other doesn't. The key is intention.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: "What is 'Monk Mode'?",
+    answer:
+      "Monk Mode is a trending lifestyle approach where people intentionally cut out digital distractions — particularly social media, dating apps, and endless content feeds — to focus on personal growth, mental clarity, and real-world presence. It's less about rejecting technology and more about using it with intention.",
+  },
+  {
+    question: 'Is it normal to feel lonely after deleting social media?',
+    answer:
+      "Very. Social media, for all its downsides, does provide a passive sense of connection — even if it's a shallow one. Removing it creates a noticeable gap. The feeling usually passes within a week or two, especially if you actively replace scrolling with real interaction rather than just sitting with the absence.",
+  },
+  {
+    question: "Isn't chatting with strangers just another form of screen addiction?",
+    answer:
+      "It can be if you use it the same way — mindlessly and for hours. But a five-minute conversation with a real person is fundamentally different from an hour of algorithmic scrolling. One requires you to be present and engaged; the other doesn't. The key is intention.",
+  },
+];
 
+export default function MonkModeDeletedApps({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

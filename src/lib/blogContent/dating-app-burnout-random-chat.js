@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'dating-app-burnout-why-people-are-trying-random-chat-instead',
   title: "Dating App Burnout Is Real in 2026 — Here's Why People Are Trying Random Chat Instead",
   description:
     'More than half of Gen Z feels burned out on dating apps. Discover why a no-profile, no-pressure space for conversation is striking such a nerve in 2026.',
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function DatingAppBurnoutRandomChat({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is Anoniz a dating app?',
-      answer:
-        "No. Anoniz is an anonymous random chat platform for conversation — there's no profile, no photos, no matching based on looks, and no romantic framing. It's simply a way to talk to someone new.",
-    },
-    {
-      question: 'Why are so many people burned out on dating apps?',
-      answer:
-        'Surveys show more than half of Gen Z feels burned out on dating apps often or always — a higher rate than any other age group. The exhaustion comes from constantly curating a profile, treating every match as a fresh audition, and the steady drip of ghosting and low-effort conversations.',
-    },
-    {
-      question: 'Can random chat help with dating app burnout?',
-      answer:
-        'For many people, yes — not as a replacement for dating, but as a low-pressure way to remember what an unscripted, unscored conversation feels like, without a profile, a photo, or an outcome attached to it.',
-    },
-    {
-      question: "What's the actual difference between random chat and a dating app?",
-      answer:
-        'Random chat has no profiles, no photos, and no matching algorithm based on appearance or romantic compatibility. You\'re connected instantly to another person for a conversation, with no "looking for" framing — and you\'re free to disconnect whenever you want.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is Anoniz a dating app?',
+    answer:
+      "No. Anoniz is an anonymous random chat platform for conversation — there's no profile, no photos, no matching based on looks, and no romantic framing. It's simply a way to talk to someone new.",
+  },
+  {
+    question: 'Why are so many people burned out on dating apps?',
+    answer:
+      'Surveys show more than half of Gen Z feels burned out on dating apps often or always — a higher rate than any other age group. The exhaustion comes from constantly curating a profile, treating every match as a fresh audition, and the steady drip of ghosting and low-effort conversations.',
+  },
+  {
+    question: 'Can random chat help with dating app burnout?',
+    answer:
+      'For many people, yes — not as a replacement for dating, but as a low-pressure way to remember what an unscripted, unscored conversation feels like, without a profile, a photo, or an outcome attached to it.',
+  },
+  {
+    question: "What's the actual difference between random chat and a dating app?",
+    answer:
+      'Random chat has no profiles, no photos, and no matching algorithm based on appearance or romantic compatibility. You\'re connected instantly to another person for a conversation, with no "looking for" framing — and you\'re free to disconnect whenever you want.',
+  },
+];
 
+export default function DatingAppBurnoutRandomChat({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'talking-to-stranger-better-than-group-chat',
   title: 'Why Talking to a Stranger Feels Better Than Texting Your Group Chat',
   description:
     "Your group chat has 47 unread messages and you still feel lonely. Here's the psychology behind why a five-minute conversation with a stranger can do what your friends' memes can't.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Psychology',
 };
 
-export default function StrangerBetterThanGroupChat({ styles }) {
-  const faqItems = [
-    {
-      question: 'Why is it sometimes easier to talk to a stranger than a friend?',
-      answer:
-        "Because there's nothing at stake. With friends, you filter yourself — consciously or not — to maintain the relationship, avoid judgment, or fit the role the group expects you to play. A stranger has no prior image of you, so there's nothing to manage. You can just... talk.",
-    },
-    {
-      question: 'Does talking to strangers actually reduce loneliness?',
-      answer:
-        "Research says yes. Studies from the University of Chicago found that people who spoke to strangers during their daily commute were significantly happier than those who kept to themselves — and this held true even for self-described introverts who predicted they'd dislike it.",
-    },
-    {
-      question: "What are 'weak ties' and why do they matter?",
-      answer:
-        'Weak ties are the casual, low-commitment social connections you have — a barista you chat with, a stranger on a train, someone you met once at an event. Research from Stanford sociologist Mark Granovetter shows that these seemingly minor connections contribute disproportionately to well-being, new ideas, and even career opportunities.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Why is it sometimes easier to talk to a stranger than a friend?',
+    answer:
+      "Because there's nothing at stake. With friends, you filter yourself — consciously or not — to maintain the relationship, avoid judgment, or fit the role the group expects you to play. A stranger has no prior image of you, so there's nothing to manage. You can just... talk.",
+  },
+  {
+    question: 'Does talking to strangers actually reduce loneliness?',
+    answer:
+      "Research says yes. Studies from the University of Chicago found that people who spoke to strangers during their daily commute were significantly happier than those who kept to themselves — and this held true even for self-described introverts who predicted they'd dislike it.",
+  },
+  {
+    question: "What are 'weak ties' and why do they matter?",
+    answer:
+      'Weak ties are the casual, low-commitment social connections you have — a barista you chat with, a stranger on a train, someone you met once at an event. Research from Stanford sociologist Mark Granovetter shows that these seemingly minor connections contribute disproportionately to well-being, new ideas, and even career opportunities.',
+  },
+];
 
+export default function StrangerBetterThanGroupChat({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'how-to-make-friends-online-talk-to-strangers',
   title: 'How to Make Friends Online — Talk to Strangers Without the Awkwardness',
   description:
     'Struggle with making friends online? Learn practical tips for talking to strangers, overcoming social anxiety, and building genuine connections on random chat platforms.',
@@ -24,30 +25,30 @@ export const frontmatter = {
   category: 'Community',
 };
 
-export default function MakeFriendsOnline({ styles }) {
-  const faqItems = [
-    {
-      question: 'Can you actually make real friends through random chat?',
-      answer:
-        "Absolutely. While most random conversations are brief, the sheer volume of interactions means you'll regularly land on people you genuinely connect with. Interest-based matching improves the odds significantly.",
-    },
-    {
-      question: 'Is random chat good for social anxiety?',
-      answer:
-        'Many people find random chat helpful for managing social anxiety because it provides low-stakes social practice. The anonymity removes the fear of judgment, and the ability to disconnect at any time eliminates the feeling of being trapped in a conversation.',
-    },
-    {
-      question: "What's the best way to start a conversation with a stranger online?",
-      answer:
-        'Ask an open-ended question or share something about yourself. Avoid generic greetings like "hi" — they give the other person nothing to work with. Show genuine curiosity, keep it light, and don\'t take rejection personally.',
-    },
-    {
-      question: 'How do I go from a random chat to an actual friendship?',
-      answer:
-        'If a conversation clicks, let the idea of staying in touch come up naturally. Exchange a social handle or messaging app contact, then follow up within a day or two. Consistency is what turns a single conversation into a friendship.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Can you actually make real friends through random chat?',
+    answer:
+      "Absolutely. While most random conversations are brief, the sheer volume of interactions means you'll regularly land on people you genuinely connect with. Interest-based matching improves the odds significantly.",
+  },
+  {
+    question: 'Is random chat good for social anxiety?',
+    answer:
+      'Many people find random chat helpful for managing social anxiety because it provides low-stakes social practice. The anonymity removes the fear of judgment, and the ability to disconnect at any time eliminates the feeling of being trapped in a conversation.',
+  },
+  {
+    question: "What's the best way to start a conversation with a stranger online?",
+    answer:
+      'Ask an open-ended question or share something about yourself. Avoid generic greetings like "hi" — they give the other person nothing to work with. Show genuine curiosity, keep it light, and don\'t take rejection personally.',
+  },
+  {
+    question: 'How do I go from a random chat to an actual friendship?',
+    answer:
+      'If a conversation clicks, let the idea of staying in touch come up naturally. Exchange a social handle or messaging app contact, then follow up within a day or two. Consistency is what turns a single conversation into a friendship.',
+  },
+];
 
+export default function MakeFriendsOnline({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

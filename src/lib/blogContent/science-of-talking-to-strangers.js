@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'science-of-talking-to-strangers-research-benefits',
   title: "Science Says We Should Talk to Strangers More — Here's the Research That Proves It",
   description:
     "Research consistently shows we underestimate how much strangers enjoy talking to us — and how good it makes us feel. Here's what the science actually says.",
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Guides',
 };
 
-export default function ScienceOfTalkingToStrangers({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it weird to talk to strangers online?',
-      answer:
-        'Not at all — and the research backs this up. Studies consistently show people enjoy conversations with strangers more than they expect, and worry about awkwardness far more than the actual experience warrants. The hesitation is in our heads; the enjoyment is real.',
-    },
-    {
-      question: 'Why does talking to a stranger make you feel better?',
-      answer:
-        'Brief social interactions — even with people you will never see again — activate the same reward pathways as longer-term social contact, reducing cortisol and lifting mood. Chicago commuter studies found that people who spoke to strangers on their commute were significantly happier by the end of it than those who kept to themselves.',
-    },
-    {
-      question: 'Is it true people enjoy talking to us more than we think?',
-      answer:
-        "Yes — this is called the 'liking gap,' documented by researchers at Cornell, Harvard, Yale, and the University of Essex. People consistently underestimate how much their conversation partner enjoys talking with them, and overestimate how awkward the other person found it. The gap persists even after the conversation ends.",
-    },
-    {
-      question: "What's the easiest way to practice talking to strangers?",
-      answer:
-        "Anonymous chat platforms are ideal for low-stakes practice: there's no shared history, no face-to-face pressure, and both people are there voluntarily. You get all the psychological benefit of a real conversation — mood lift, social connection, cognitive engagement — with a fraction of the perceived risk of rejection.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it weird to talk to strangers online?',
+    answer:
+      'Not at all — and the research backs this up. Studies consistently show people enjoy conversations with strangers more than they expect, and worry about awkwardness far more than the actual experience warrants. The hesitation is in our heads; the enjoyment is real.',
+  },
+  {
+    question: 'Why does talking to a stranger make you feel better?',
+    answer:
+      'Brief social interactions — even with people you will never see again — activate the same reward pathways as longer-term social contact, reducing cortisol and lifting mood. Chicago commuter studies found that people who spoke to strangers on their commute were significantly happier by the end of it than those who kept to themselves.',
+  },
+  {
+    question: 'Is it true people enjoy talking to us more than we think?',
+    answer:
+      "Yes — this is called the 'liking gap,' documented by researchers at Cornell, Harvard, Yale, and the University of Essex. People consistently underestimate how much their conversation partner enjoys talking with them, and overestimate how awkward the other person found it. The gap persists even after the conversation ends.",
+  },
+  {
+    question: "What's the easiest way to practice talking to strangers?",
+    answer:
+      "Anonymous chat platforms are ideal for low-stakes practice: there's no shared history, no face-to-face pressure, and both people are there voluntarily. You get all the psychological benefit of a real conversation — mood lift, social connection, cognitive engagement — with a fraction of the perceived risk of rejection.",
+  },
+];
 
+export default function ScienceOfTalkingToStrangers({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

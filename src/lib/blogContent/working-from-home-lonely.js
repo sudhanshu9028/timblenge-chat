@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'working-from-home-lonely-remote-work-loneliness-solutions',
   title: "Working From Home Is Lonelier Than Anyone Admits — Here's What's Actually Helping",
   description:
     "A 2026 study across 588,000 Americans found remote work accounts for a third of post-pandemic mental distress. Here's why WFH loneliness hits so differently — and what works.",
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function WorkingFromHomeLonely({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it normal to feel lonely working from home?',
-      answer:
-        "Very — a major 2026 study published in Science, covering 588,000 Americans over more than a decade, found that remote work accounts for roughly a third of the increase in mental distress Americans experienced after the pandemic's peak. If you feel it, you're in large company.",
-    },
-    {
-      question: 'Why is working from home lonelier than most people expected?',
-      answer:
-        'Remote work eliminates "ambient socialization" — the low-level social contact that happens without effort in a shared workspace: hallway chats, coffee machine exchanges, the background energy of other people. Most people didn\'t notice how much that contact was doing for them until it was gone.',
-    },
-    {
-      question: 'Can online chat really help with WFH loneliness?',
-      answer:
-        "As a supplement, yes. It replicates the informal, unplanned, no-agenda human contact that disappears in remote work — the kind that a Zoom call or a Slack message can't replicate because both carry professional stakes. A few minutes of genuine conversation with no outcome attached can meaningfully shift your mood and energy.",
-    },
-    {
-      question: "What's the best way to stay socially connected while working remotely?",
-      answer:
-        "Prioritize unstructured, unpressured social contact — not more work calls. A walk with a neighbor, a call with a friend, an anonymous chat between meetings: anything where you're talking to another person with no agenda or professional outcome attached. Research shows it's the informal contact, not the formal check-ins, that buffers work-related loneliness most effectively.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it normal to feel lonely working from home?',
+    answer:
+      "Very — a major 2026 study published in Science, covering 588,000 Americans over more than a decade, found that remote work accounts for roughly a third of the increase in mental distress Americans experienced after the pandemic's peak. If you feel it, you're in large company.",
+  },
+  {
+    question: 'Why is working from home lonelier than most people expected?',
+    answer:
+      'Remote work eliminates "ambient socialization" — the low-level social contact that happens without effort in a shared workspace: hallway chats, coffee machine exchanges, the background energy of other people. Most people didn\'t notice how much that contact was doing for them until it was gone.',
+  },
+  {
+    question: 'Can online chat really help with WFH loneliness?',
+    answer:
+      "As a supplement, yes. It replicates the informal, unplanned, no-agenda human contact that disappears in remote work — the kind that a Zoom call or a Slack message can't replicate because both carry professional stakes. A few minutes of genuine conversation with no outcome attached can meaningfully shift your mood and energy.",
+  },
+  {
+    question: "What's the best way to stay socially connected while working remotely?",
+    answer:
+      "Prioritize unstructured, unpressured social contact — not more work calls. A walk with a neighbor, a call with a friend, an anonymous chat between meetings: anything where you're talking to another person with no agenda or professional outcome attached. Research shows it's the informal contact, not the formal check-ins, that buffers work-related loneliness most effectively.",
+  },
+];
 
+export default function WorkingFromHomeLonely({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

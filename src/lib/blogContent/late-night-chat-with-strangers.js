@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'cant-sleep-late-night-chat-with-strangers',
   title: "Can't Sleep? Why So Many People Chat with Strangers at 2AM (and Why It Helps)",
   description:
     "Wide awake at 2AM with your mind racing? You're not alone. Discover why late-night conversations with strangers are surprisingly common, and how they can actually help.",
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Wellness',
 };
 
-export default function LateNightChatWithStrangers({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it normal to feel lonely or anxious late at night?',
-      answer:
-        "Yes, it's extremely common. With fewer distractions and a natural dip in mood regulation overnight, many people find that worries and overthinking feel much louder after midnight than they do during the day. You're far from the only one awake feeling this way.",
-    },
-    {
-      question: 'Can talking to a stranger online actually help me feel better?',
-      answer:
-        "For a lot of people, yes — at least in the moment. A real conversation gives your mind something active to focus on, which can interrupt a spiral of repetitive late-night thoughts. It's not a cure for anything, but a few minutes of genuine human connection can take the edge off and make it easier to relax.",
-    },
-    {
-      question: 'Is anonymous chat available 24/7?',
-      answer:
-        "Yes. Anoniz has no opening hours — because it connects you with people all over the world, there's always someone online, no matter what time zone you're in.",
-    },
-    {
-      question: "What if I'm dealing with serious sleep or mental health issues?",
-      answer:
-        "Anonymous chat can be a nice way to feel less alone in the moment, but it isn't a substitute for professional support. If sleep problems, anxiety, or low mood are persistent, please talk to a doctor or therapist. If you're ever having thoughts of harming yourself, contact a crisis line or emergency services in your country right away.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it normal to feel lonely or anxious late at night?',
+    answer:
+      "Yes, it's extremely common. With fewer distractions and a natural dip in mood regulation overnight, many people find that worries and overthinking feel much louder after midnight than they do during the day. You're far from the only one awake feeling this way.",
+  },
+  {
+    question: 'Can talking to a stranger online actually help me feel better?',
+    answer:
+      "For a lot of people, yes — at least in the moment. A real conversation gives your mind something active to focus on, which can interrupt a spiral of repetitive late-night thoughts. It's not a cure for anything, but a few minutes of genuine human connection can take the edge off and make it easier to relax.",
+  },
+  {
+    question: 'Is anonymous chat available 24/7?',
+    answer:
+      "Yes. Anoniz has no opening hours — because it connects you with people all over the world, there's always someone online, no matter what time zone you're in.",
+  },
+  {
+    question: "What if I'm dealing with serious sleep or mental health issues?",
+    answer:
+      "Anonymous chat can be a nice way to feel less alone in the moment, but it isn't a substitute for professional support. If sleep problems, anxiety, or low mood are persistent, please talk to a doctor or therapist. If you're ever having thoughts of harming yourself, contact a crisis line or emergency services in your country right away.",
+  },
+];
 
+export default function LateNightChatWithStrangers({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

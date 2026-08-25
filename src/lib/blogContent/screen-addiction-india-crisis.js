@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'screen-addiction-india-crisis-fix',
   title: 'Screen Addiction in India: The Fix Nobody Mentions',
   description:
     "India's Economic Survey flagged digital addiction as a crisis. Every article covers the problem — here's the one alternative nobody's talking about.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Wellness',
 };
 
-export default function ScreenAddictionIndiaCrisis({ styles }) {
-  const faqItems = [
-    {
-      question: 'What did the Economic Survey actually say about screen addiction?',
-      answer:
-        "The Economic Survey 2025-26, tabled in India's Parliament in January 2026, flagged compulsive smartphone and social media use among youth aged 15–29 as a public health concern impacting mental health, productivity, and sleep. It recommended digital wellness curricula in schools, platform accountability, and expanded mental health services like Tele-MANAS and NIMHANS's SHUT Clinic.",
-    },
-    {
-      question: "Isn't chatting online just more screen time?",
-      answer:
-        "Technically, yes — but not all screen time is created equal. Passively scrolling a feed for an hour and having a five-minute conversation with another person activate very different parts of your brain. The problem the Economic Survey describes isn't screens themselves — it's the passive, compulsive, algorithmic loop. A real conversation breaks that loop.",
-    },
-    {
-      question: 'How do I actually reduce screen addiction as a young person in India?',
-      answer:
-        'Start with substitution, not subtraction. Deleting apps without replacing the habit creates a vacuum most people fill within a week. Replace your highest-volume passive app with something active — a text chat with a stranger, a phone call with a friend, or a walk. The goal is to shift from consuming content to doing something that requires your participation.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What did the Economic Survey actually say about screen addiction?',
+    answer:
+      "The Economic Survey 2025-26, tabled in India's Parliament in January 2026, flagged compulsive smartphone and social media use among youth aged 15–29 as a public health concern impacting mental health, productivity, and sleep. It recommended digital wellness curricula in schools, platform accountability, and expanded mental health services like Tele-MANAS and NIMHANS's SHUT Clinic.",
+  },
+  {
+    question: "Isn't chatting online just more screen time?",
+    answer:
+      "Technically, yes — but not all screen time is created equal. Passively scrolling a feed for an hour and having a five-minute conversation with another person activate very different parts of your brain. The problem the Economic Survey describes isn't screens themselves — it's the passive, compulsive, algorithmic loop. A real conversation breaks that loop.",
+  },
+  {
+    question: 'How do I actually reduce screen addiction as a young person in India?',
+    answer:
+      'Start with substitution, not subtraction. Deleting apps without replacing the habit creates a vacuum most people fill within a week. Replace your highest-volume passive app with something active — a text chat with a stranger, a phone call with a friend, or a walk. The goal is to shift from consuming content to doing something that requires your participation.',
+  },
+];
 
+export default function ScreenAddictionIndiaCrisis({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

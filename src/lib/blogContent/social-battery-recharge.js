@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'social-battery-dead-lowest-effort-recharge',
   title: "Your Social Battery Is Dead — Here's the Lowest-Effort Way to Recharge",
   description:
     "Your social battery is drained but you still feel lonely. Here's why anonymous chat is the lowest-energy way to get real human connection without the performance.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Wellness',
 };
 
-export default function SocialBatteryRecharge({ styles }) {
-  const faqItems = [
-    {
-      question: 'What does "social battery" actually mean?',
-      answer:
-        'Your social battery is the finite amount of mental and emotional energy you have for social interaction. When it runs out, even enjoyable socializing starts to feel draining. The term originated in introvert communities but is now used by people of all personality types to describe the exhaustion that comes from being constantly "on" — whether in person or online.',
-    },
-    {
-      question: 'Can you recharge your social battery while still talking to someone?',
-      answer:
-        'Yes — if the interaction is low-pressure enough. The key is removing performance: no profile to curate, no history to maintain, no obligation to be interesting. A short anonymous text chat requires so little social energy that many people find it recharging rather than draining, because the conversation is genuine without any of the usual overhead.',
-    },
-    {
-      question: 'Is it normal for extroverts to have a drained social battery too?',
-      answer:
-        'Completely. The social battery concept applies to everyone, not just introverts. Extroverts recharge through social contact, but the wrong kind — performative, algorithmic, or obligation-heavy interaction — drains them just as fast. What matters is the quality and pressure level of the interaction, not your personality type.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What does "social battery" actually mean?',
+    answer:
+      'Your social battery is the finite amount of mental and emotional energy you have for social interaction. When it runs out, even enjoyable socializing starts to feel draining. The term originated in introvert communities but is now used by people of all personality types to describe the exhaustion that comes from being constantly "on" — whether in person or online.',
+  },
+  {
+    question: 'Can you recharge your social battery while still talking to someone?',
+    answer:
+      'Yes — if the interaction is low-pressure enough. The key is removing performance: no profile to curate, no history to maintain, no obligation to be interesting. A short anonymous text chat requires so little social energy that many people find it recharging rather than draining, because the conversation is genuine without any of the usual overhead.',
+  },
+  {
+    question: 'Is it normal for extroverts to have a drained social battery too?',
+    answer:
+      'Completely. The social battery concept applies to everyone, not just introverts. Extroverts recharge through social contact, but the wrong kind — performative, algorithmic, or obligation-heavy interaction — drains them just as fast. What matters is the quality and pressure level of the interaction, not your personality type.',
+  },
+];
 
+export default function SocialBatteryRecharge({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

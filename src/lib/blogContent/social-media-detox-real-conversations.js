@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'social-media-detox-real-conversations-2026',
   title: 'Social Media Detox in 2026 — Why Gen Z Is Choosing Real Conversations Over Doomscrolling',
   description:
     'Tired of doomscrolling? Discover why millions are swapping curated feeds for real, anonymous conversations with strangers — and why it actually works.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function SocialMediaDetoxRealConversations({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is anonymous chat really better for mental health than social media?',
-      answer:
-        "They serve different purposes, but the key difference is that anonymous chat is active and reciprocal — you're talking with someone, not performing for an audience. There's no follower count, no likes, and no algorithm deciding what you see. For many people, that shift alone makes a noticeable difference in how they feel afterward.",
-    },
-    {
-      question: 'Can I do a social media detox without being completely offline?',
-      answer:
-        "Absolutely. A detox doesn't mean going off-grid. It means replacing passive, algorithm-driven screen time with something more intentional. Chatting with a stranger, reading a book, or calling a friend all count. The goal is to break the scroll-and-swipe autopilot, not to abandon technology entirely.",
-    },
-    {
-      question: "Won't I feel more isolated without social media?",
-      answer:
-        'Most people report the opposite. Studies consistently show that heavy social media use correlates with increased loneliness, not less. The first few days of a detox can feel quiet, but the discomfort usually fades quickly — especially if you replace scrolling with real interaction, even brief anonymous conversations.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is anonymous chat really better for mental health than social media?',
+    answer:
+      "They serve different purposes, but the key difference is that anonymous chat is active and reciprocal — you're talking with someone, not performing for an audience. There's no follower count, no likes, and no algorithm deciding what you see. For many people, that shift alone makes a noticeable difference in how they feel afterward.",
+  },
+  {
+    question: 'Can I do a social media detox without being completely offline?',
+    answer:
+      "Absolutely. A detox doesn't mean going off-grid. It means replacing passive, algorithm-driven screen time with something more intentional. Chatting with a stranger, reading a book, or calling a friend all count. The goal is to break the scroll-and-swipe autopilot, not to abandon technology entirely.",
+  },
+  {
+    question: "Won't I feel more isolated without social media?",
+    answer:
+      'Most people report the opposite. Studies consistently show that heavy social media use correlates with increased loneliness, not less. The first few days of a detox can feel quiet, but the discomfort usually fades quickly — especially if you replace scrolling with real interaction, even brief anonymous conversations.',
+  },
+];
 
+export default function SocialMediaDetoxRealConversations({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

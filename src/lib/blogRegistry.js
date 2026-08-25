@@ -1,22 +1,25 @@
 /**
  * Blog Registry - Central source of truth for all blog posts.
  *
- * To add a new blog post:
- * 1. Add an entry to the BLOG_POSTS array below
- * 2. Add the corresponding content component in the blog [slug] page
- * 3. Run `next build` to generate the static page
+ * To add a new blog post, add a single file to src/lib/blogContent/ — it is
+ * picked up automatically. See that folder's index.js for the required exports.
  *
- * Only slugs registered here will resolve. Everything else returns 404.
+ * Only slugs declared in a post's frontmatter will resolve; everything else 404s.
  */
 
 import BLOG_CONTENT from '@/lib/blogContent';
 
+// Newest first. Many posts share a publishedDate, so the slug tiebreaker is
+// what keeps the listing order stable — without it the order would silently
+// follow the order posts happen to be discovered in.
 export const BLOG_POSTS = Object.entries(BLOG_CONTENT)
   .map(([slug, data]) => ({
     slug,
     ...data.frontmatter,
   }))
-  .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+  .sort(
+    (a, b) => new Date(b.publishedDate) - new Date(a.publishedDate) || a.slug.localeCompare(b.slug)
+  );
 
 /**
  * Get a blog post by its slug.

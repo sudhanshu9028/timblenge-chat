@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'how-to-practice-social-skills-and-overcome-anxiety-online',
   title: 'How to Overcome Social Anxiety by Chatting Anonymously',
   description:
     'Struggling with social anxiety? Learn how anonymous text and video chat platforms provide a safe, low-pressure environment for practicing social skills and building confidence.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Wellness',
 };
 
-export default function OvercomingSocialAnxiety({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it normal to feel nervous before starting a random chat?',
-      answer:
-        'Yes, it is completely normal! Even people without social anxiety feel a flutter of nerves before talking to a stranger. Accept the nervousness as part of the process.',
-    },
-    {
-      question: 'What if an interaction goes poorly?',
-      answer:
-        'The beauty of anonymous chat is the "Next" button. If a conversation is awkward, rude, or uncomfortable, simply disconnect. There are no real-world consequences or awkward run-ins later.',
-    },
-    {
-      question: 'Does chatting online actually help with real-life anxiety?',
-      answer:
-        'Yes. Exposure therapy is a common treatment for anxiety. By practicing conversations in a low-stakes online environment, you build cognitive muscle memory that makes real-world interactions feel less daunting.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it normal to feel nervous before starting a random chat?',
+    answer:
+      'Yes, it is completely normal! Even people without social anxiety feel a flutter of nerves before talking to a stranger. Accept the nervousness as part of the process.',
+  },
+  {
+    question: 'What if an interaction goes poorly?',
+    answer:
+      'The beauty of anonymous chat is the "Next" button. If a conversation is awkward, rude, or uncomfortable, simply disconnect. There are no real-world consequences or awkward run-ins later.',
+  },
+  {
+    question: 'Does chatting online actually help with real-life anxiety?',
+    answer:
+      'Yes. Exposure therapy is a common treatment for anxiety. By practicing conversations in a low-stakes online environment, you build cognitive muscle memory that makes real-world interactions feel less daunting.',
+  },
+];
 
+export default function OvercomingSocialAnxiety({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

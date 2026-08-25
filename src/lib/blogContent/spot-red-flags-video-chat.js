@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'spot-red-flags-random-video-chat-safety-2026',
   title: 'Deepfakes, Catfish, and Creeps — How to Spot Red Flags on Random Video Chat in 2026',
   description:
     'Real-time deepfakes are getting scarily good. Learn how to spot fake people, catfish, and manipulation tactics on random video chat — and what safe platforms do differently.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Safety',
 };
 
-export default function SpotRedFlagsVideoChat({ styles }) {
-  const faqItems = [
-    {
-      question: 'Can someone really use a deepfake on a live video chat?',
-      answer:
-        'Yes — real-time face-swapping software exists and has become more accessible in 2026. However, it\'s still imperfect. Look for subtle glitches: unnatural lip sync, edges that shimmer around the jawline or hair, lighting that doesn\'t match the background, and expressions that feel slightly "off." If something looks uncanny, trust your instinct.',
-    },
-    {
-      question: 'What should I do if someone threatens me on a random chat?',
-      answer:
-        "Disconnect immediately. Do not engage, do not negotiate, and do not send anything they ask for. Use the platform's report feature to flag the user. If the threat involves blackmail or illegal content, report it to local law enforcement as well.",
-    },
-    {
-      question: 'Are random video chat platforms safe to use in 2026?',
-      answer:
-        "On reputable platforms with active AI moderation, reporting tools, and no requirement to share personal details — yes, they're generally safe for the vast majority of users. The key is choosing a platform that was built with safety as a core feature, not an afterthought.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Can someone really use a deepfake on a live video chat?',
+    answer:
+      'Yes — real-time face-swapping software exists and has become more accessible in 2026. However, it\'s still imperfect. Look for subtle glitches: unnatural lip sync, edges that shimmer around the jawline or hair, lighting that doesn\'t match the background, and expressions that feel slightly "off." If something looks uncanny, trust your instinct.',
+  },
+  {
+    question: 'What should I do if someone threatens me on a random chat?',
+    answer:
+      "Disconnect immediately. Do not engage, do not negotiate, and do not send anything they ask for. Use the platform's report feature to flag the user. If the threat involves blackmail or illegal content, report it to local law enforcement as well.",
+  },
+  {
+    question: 'Are random video chat platforms safe to use in 2026?',
+    answer:
+      "On reputable platforms with active AI moderation, reporting tools, and no requirement to share personal details — yes, they're generally safe for the vast majority of users. The key is choosing a platform that was built with safety as a core feature, not an afterthought.",
+  },
+];
 
+export default function SpotRedFlagsVideoChat({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

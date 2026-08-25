@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'lonely-in-college-meet-people-online-2026',
   title: 'Lonely in College? How to Meet People Online When Campus Life Feels Isolating',
   description:
     "Over half of college students report feeling lonely in 2026. If campus life isn't clicking, here's how to find real connection online — no awkward mixers required.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Lifestyle',
 };
 
-export default function LonelyInCollegeMeetPeople({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is it normal to feel lonely in college?',
-      answer:
-        "Extremely. A 2026 Georgetown study found that over 54% of college students report feeling lonely — with freshmen and students under 25 being the most affected. If you're feeling it, you are genuinely in the majority, not the minority.",
-    },
-    {
-      question: 'Can talking to strangers online actually help with college loneliness?',
-      answer:
-        "It can supplement real-world connection, yes. Anonymous chat gives you low-stakes social practice and immediate human contact when your dorm room feels too quiet. It's not a replacement for campus friendships, but it can bridge the gap while you're still building them.",
-    },
-    {
-      question: "Isn't it weird to chat with random strangers instead of making campus friends?",
-      answer:
-        "Not at all. Think of it as warming up before the game. Many students use anonymous chat to practice conversation, ease social anxiety, or simply feel less alone on a Friday night when plans fell through. It's a tool, not a substitute.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is it normal to feel lonely in college?',
+    answer:
+      "Extremely. A 2026 Georgetown study found that over 54% of college students report feeling lonely — with freshmen and students under 25 being the most affected. If you're feeling it, you are genuinely in the majority, not the minority.",
+  },
+  {
+    question: 'Can talking to strangers online actually help with college loneliness?',
+    answer:
+      "It can supplement real-world connection, yes. Anonymous chat gives you low-stakes social practice and immediate human contact when your dorm room feels too quiet. It's not a replacement for campus friendships, but it can bridge the gap while you're still building them.",
+  },
+  {
+    question: "Isn't it weird to chat with random strangers instead of making campus friends?",
+    answer:
+      "Not at all. Think of it as warming up before the game. Many students use anonymous chat to practice conversation, ease social anxiety, or simply feel less alone on a Friday night when plans fell through. It's a tool, not a substitute.",
+  },
+];
 
+export default function LonelyInCollegeMeetPeople({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'best-random-chat-apps-android-iphone-no-signup',
   title: 'Best Random Chat Apps for Android & iPhone in 2026 (No Download, No Sign-Up)',
   description:
     'Want to video chat with strangers from your phone? Compare the best mobile-friendly random chat apps for Android and iPhone in 2026 — no downloads or sign-up required.',
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Comparisons',
 };
 
-export default function BestRandomChatAppsMobile({ styles }) {
-  const faqItems = [
-    {
-      question: 'Do I need to download an app for random video chat?',
-      answer:
-        "No. Anoniz and most of the platforms on this list work directly in your phone's browser — just open the site, tap to start, and you're connected. There's nothing to install, update, or delete later.",
-    },
-    {
-      question: 'Is random chat safe to use on mobile data?',
-      answer:
-        "Text chat uses almost no data. Video chat is more data-intensive, similar to a video call app, so if you have a limited data plan it's worth connecting to Wi-Fi for longer video sessions.",
-    },
-    {
-      question: 'Does Anoniz work on iPhone Safari and Android Chrome?',
-      answer:
-        'Yes. Anoniz is fully browser-based and works across modern mobile browsers, including Safari on iPhone and Chrome on Android, without any app installation.',
-    },
-    {
-      question: "What's the best free random chat app with no sign-up for mobile?",
-      answer:
-        'Anoniz is built specifically for this — instant text and video chat from any mobile browser, no account required, with interest-based matching to find better conversations faster.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Do I need to download an app for random video chat?',
+    answer:
+      "No. Anoniz and most of the platforms on this list work directly in your phone's browser — just open the site, tap to start, and you're connected. There's nothing to install, update, or delete later.",
+  },
+  {
+    question: 'Is random chat safe to use on mobile data?',
+    answer:
+      "Text chat uses almost no data. Video chat is more data-intensive, similar to a video call app, so if you have a limited data plan it's worth connecting to Wi-Fi for longer video sessions.",
+  },
+  {
+    question: 'Does Anoniz work on iPhone Safari and Android Chrome?',
+    answer:
+      'Yes. Anoniz is fully browser-based and works across modern mobile browsers, including Safari on iPhone and Chrome on Android, without any app installation.',
+  },
+  {
+    question: "What's the best free random chat app with no sign-up for mobile?",
+    answer:
+      'Anoniz is built specifically for this — instant text and video chat from any mobile browser, no account required, with interest-based matching to find better conversations faster.',
+  },
+];
 
+export default function BestRandomChatAppsMobile({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

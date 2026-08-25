@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: '50-best-questions-to-ask-strangers-online-to-keep-conversations-going',
   title: '50 Best Questions to Ask Strangers Online to Keep the Conversation Going',
   description:
     'Never run out of things to say! Explore our curated list of the best icebreakers, deep questions, and fun conversation starters to ask strangers in random chats.',
@@ -86,25 +87,25 @@ const wouldYouRatherQuestions = [
   'Would you rather be universally respected but alone, or loved by a few but widely misunderstood?',
 ];
 
-export default function QuestionsToAskStrangers({ styles }) {
-  const faqItems = [
-    {
-      question: 'What do I do if they answer with just "yes" or "no"?',
-      answer:
-        'Follow up with a "Why?" or transition to a wildly different, hypothetical question to jolt the conversation awake. If they remain unresponsive, just politely say goodbye and match with someone new!',
-    },
-    {
-      question: 'Are there any topics I should avoid?',
-      answer:
-        'When first meeting a stranger, it is generally best to avoid deeply polarizing topics like heavy politics, extremely personal financial questions, or anything overly explicit.',
-    },
-    {
-      question: 'How do I smoothly transition from an icebreaker to a normal chat?',
-      answer:
-        'Listen carefully to their answer and find a "hook." If you ask about their favorite movie and they mention a sci-fi film, ask them what they think the future will actually look like in 50 years. Let the conversation branch naturally.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What do I do if they answer with just "yes" or "no"?',
+    answer:
+      'Follow up with a "Why?" or transition to a wildly different, hypothetical question to jolt the conversation awake. If they remain unresponsive, just politely say goodbye and match with someone new!',
+  },
+  {
+    question: 'Are there any topics I should avoid?',
+    answer:
+      'When first meeting a stranger, it is generally best to avoid deeply polarizing topics like heavy politics, extremely personal financial questions, or anything overly explicit.',
+  },
+  {
+    question: 'How do I smoothly transition from an icebreaker to a normal chat?',
+    answer:
+      'Listen carefully to their answer and find a "hook." If you ask about their favorite movie and they mention a sci-fi film, ask them what they think the future will actually look like in 50 years. Let the conversation branch naturally.',
+  },
+];
 
+export default function QuestionsToAskStrangers({ styles }) {
   const renderQuestions = (questionsArray) => (
     <div className={styles.questionList}>
       {questionsArray.map((q, idx) => (

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'text-chat-vs-video-chat-which-is-better',
   title: 'Text Chat vs. Video Chat: Which Should You Choose to Meet Strangers Online?',
   description:
     'Not sure whether to start with text or video chat when meeting new people online? We break down the pros, cons, and best use cases for each so you can pick the right one.',
@@ -22,30 +23,30 @@ export const frontmatter = {
   category: 'Guides',
 };
 
-export default function TextChatVsVideoChat({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is text chat more anonymous than video chat?',
-      answer:
-        "Yes. Text chat reveals nothing about your appearance, voice, accent, or surroundings, which makes it the more anonymous option. Video chat still doesn't require any personal information, but it naturally shows more of who you are.",
-    },
-    {
-      question: 'Which is better for making friends — text or video chat?',
-      answer:
-        'Both can lead to real friendships, but they tend to work differently. Text chat lets a connection build slowly through conversation alone, while video chat often builds rapport faster because tone and body language come through immediately. Many people find a mix of both works best.',
-    },
-    {
-      question: 'Can I switch from text chat to video chat mid-conversation?',
-      answer:
-        'On Anoniz, text and video are separate chat modes, so you would start a new chat in the other mode. If a text conversation is going well and you both want to continue with video, you can simply move to a video chat together.',
-    },
-    {
-      question: 'Is video chat with strangers safe?',
-      answer:
-        'On a platform with active moderation, reporting tools, and no requirement to share personal details, video chat is generally safe for the vast majority of users. As with any chat with strangers, avoid showing identifying details in your background and never share personal information like your address or financial details.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is text chat more anonymous than video chat?',
+    answer:
+      "Yes. Text chat reveals nothing about your appearance, voice, accent, or surroundings, which makes it the more anonymous option. Video chat still doesn't require any personal information, but it naturally shows more of who you are.",
+  },
+  {
+    question: 'Which is better for making friends — text or video chat?',
+    answer:
+      'Both can lead to real friendships, but they tend to work differently. Text chat lets a connection build slowly through conversation alone, while video chat often builds rapport faster because tone and body language come through immediately. Many people find a mix of both works best.',
+  },
+  {
+    question: 'Can I switch from text chat to video chat mid-conversation?',
+    answer:
+      'On Anoniz, text and video are separate chat modes, so you would start a new chat in the other mode. If a text conversation is going well and you both want to continue with video, you can simply move to a video chat together.',
+  },
+  {
+    question: 'Is video chat with strangers safe?',
+    answer:
+      'On a platform with active moderation, reporting tools, and no requirement to share personal details, video chat is generally safe for the vast majority of users. As with any chat with strangers, avoid showing identifying details in your background and never share personal information like your address or financial details.',
+  },
+];
 
+export default function TextChatVsVideoChat({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

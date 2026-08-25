@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'fun-things-to-do-online-when-bored-random-chat',
   title: 'Ultimate Guide to Curing Boredom: Fun Things to Do Online in 2026',
   description:
     "Discover engaging and fun things to do online when you're bored. Learn how talking to random strangers can instantly cure boredom and spark exciting conversations.",
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Entertainment',
 };
 
-export default function CuringBoredom({ styles }) {
-  const faqItems = [
-    {
-      question: 'Is chatting with strangers a good way to cure boredom?',
-      answer:
-        'Absolutely. Unlike passively watching videos, chatting requires active participation. The unpredictability of meeting someone new from across the globe naturally stimulates your brain and makes time fly by.',
-    },
-    {
-      question: 'Do I have to use my webcam?',
-      answer:
-        'Not at all! Many platforms, including Anoniz, offer dedicated text-only chat rooms. You can enjoy great conversations completely anonymously without ever turning on your camera.',
-    },
-    {
-      question: 'How do I find people with similar interests?',
-      answer:
-        'Anoniz features an interest-matching system. Before joining a chat, simply type in topics you enjoy (e.g., "movies", "gaming", "anime"), and the algorithm will pair you with someone who entered the same tags.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Is chatting with strangers a good way to cure boredom?',
+    answer:
+      'Absolutely. Unlike passively watching videos, chatting requires active participation. The unpredictability of meeting someone new from across the globe naturally stimulates your brain and makes time fly by.',
+  },
+  {
+    question: 'Do I have to use my webcam?',
+    answer:
+      'Not at all! Many platforms, including Anoniz, offer dedicated text-only chat rooms. You can enjoy great conversations completely anonymously without ever turning on your camera.',
+  },
+  {
+    question: 'How do I find people with similar interests?',
+    answer:
+      'Anoniz features an interest-matching system. Before joining a chat, simply type in topics you enjoy (e.g., "movies", "gaming", "anime"), and the algorithm will pair you with someone who entered the same tags.',
+  },
+];
 
+export default function CuringBoredom({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

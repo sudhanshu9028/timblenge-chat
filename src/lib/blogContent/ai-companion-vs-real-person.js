@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'ai-companion-vs-real-person-which-helps-loneliness',
   title: 'AI Companion vs. Real Person: Which Actually Helps with Loneliness in 2026?',
   description:
     'AI companion apps have exploded in 2026 — but do they really ease loneliness, or just delay it? We compare AI chat to talking with a real stranger.',
@@ -22,31 +23,30 @@ export const frontmatter = {
   category: 'Wellness',
 };
 
-export default function AiCompanionVsRealPerson({ styles }) {
-  const faqItems = [
-    {
-      question: 'Are AI companions bad for you?',
-      answer:
-        'Not inherently. Research suggests AI companion chats can ease loneliness in the short term about as much as talking to a real person. The concern is over-reliance — heavy, exclusive use has been linked to increased signs of distress over time, and it can quietly crowd out the slower work of building real-world connections.',
-    },
-    {
-      question: 'Can talking to AI really reduce loneliness?',
-      answer:
-        "For many people, yes, at least in the moment. A Harvard Business School study found AI companion conversations eased loneliness about as much as a conversation with a real person, and more than passive activities like watching videos. The key phrase is 'in the moment' — it's a tool, not a cure.",
-    },
-    {
-      question: "What's better for practicing social skills, AI or real conversation?",
-      answer:
-        'Real conversation. An AI companion is designed to keep you comfortable, which means it never gives you the genuinely unpredictable reactions, tangents, or mismatches you get from a person who has their own day, mood, and opinions. Those small adjustments are exactly what build social skills.',
-    },
-    {
-      question:
-        'Is anonymous chat a good middle ground between AI companions and real-life friends?',
-      answer:
-        "Yes. Like an AI companion, anonymous chat is available on demand, judgment-free, and doesn't require an existing relationship. But unlike AI, the person on the other end is real — genuinely curious, genuinely unpredictable, and genuinely choosing to be in the conversation with you.",
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'Are AI companions bad for you?',
+    answer:
+      'Not inherently. Research suggests AI companion chats can ease loneliness in the short term about as much as talking to a real person. The concern is over-reliance — heavy, exclusive use has been linked to increased signs of distress over time, and it can quietly crowd out the slower work of building real-world connections.',
+  },
+  {
+    question: 'Can talking to AI really reduce loneliness?',
+    answer:
+      "For many people, yes, at least in the moment. A Harvard Business School study found AI companion conversations eased loneliness about as much as a conversation with a real person, and more than passive activities like watching videos. The key phrase is 'in the moment' — it's a tool, not a cure.",
+  },
+  {
+    question: "What's better for practicing social skills, AI or real conversation?",
+    answer:
+      'Real conversation. An AI companion is designed to keep you comfortable, which means it never gives you the genuinely unpredictable reactions, tangents, or mismatches you get from a person who has their own day, mood, and opinions. Those small adjustments are exactly what build social skills.',
+  },
+  {
+    question: 'Is anonymous chat a good middle ground between AI companions and real-life friends?',
+    answer:
+      "Yes. Like an AI companion, anonymous chat is available on demand, judgment-free, and doesn't require an existing relationship. But unlike AI, the person on the other end is real — genuinely curious, genuinely unpredictable, and genuinely choosing to be in the conversation with you.",
+  },
+];
 
+export default function AiCompanionVsRealPerson({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

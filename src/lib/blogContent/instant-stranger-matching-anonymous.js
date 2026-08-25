@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'instant-stranger-matching-anonymous-identity',
   title: 'Instant Stranger Matching: Why Anonymous Identity Changes Everything',
   description:
     'Instant stranger matching with anonymous identity flips the script on online connection. No profile, no history, no performance — just a real conversation.',
@@ -23,25 +24,25 @@ export const frontmatter = {
   category: 'Culture',
 };
 
-export default function InstantStrangerMatchingAnonymous({ styles }) {
-  const faqItems = [
-    {
-      question: 'How does instant stranger matching work?',
-      answer:
-        'When you tap "Start," the platform scans its pool of active users and pairs you with someone available — usually within seconds. There is no profile to review, no swipe mechanic, no queue. The system connects you to a real person for a live text or video conversation, and either of you can end it and re-match at any time.',
-    },
-    {
-      question: 'Is it safe to chat with an anonymous identity?',
-      answer:
-        'On moderated platforms, yes. Anonymity protects your personal information by default — no name, no photo, no social links are shared. Reputable platforms add AI moderation, report tools, and content filtering on top of that. The result is a space where you can be honest without being exposed.',
-    },
-    {
-      question: 'Why would someone choose anonymous matching over a regular social app?',
-      answer:
-        'Because regular social apps make you perform. Every message, every post, every reaction is tied to a persistent identity that follows you around. Anonymous matching removes that pressure entirely. You are not your follower count, your profile photo, or your most recent story. You are just a person, talking to another person, right now.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'How does instant stranger matching work?',
+    answer:
+      'When you tap "Start," the platform scans its pool of active users and pairs you with someone available — usually within seconds. There is no profile to review, no swipe mechanic, no queue. The system connects you to a real person for a live text or video conversation, and either of you can end it and re-match at any time.',
+  },
+  {
+    question: 'Is it safe to chat with an anonymous identity?',
+    answer:
+      'On moderated platforms, yes. Anonymity protects your personal information by default — no name, no photo, no social links are shared. Reputable platforms add AI moderation, report tools, and content filtering on top of that. The result is a space where you can be honest without being exposed.',
+  },
+  {
+    question: 'Why would someone choose anonymous matching over a regular social app?',
+    answer:
+      'Because regular social apps make you perform. Every message, every post, every reaction is tied to a persistent identity that follows you around. Anonymous matching removes that pressure entirely. You are not your follower count, your profile photo, or your most recent story. You are just a person, talking to another person, right now.',
+  },
+];
 
+export default function InstantStrangerMatchingAnonymous({ styles }) {
   return (
     <>
       <nav className={styles.toc}>

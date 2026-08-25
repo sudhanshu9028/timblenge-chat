@@ -2,6 +2,7 @@ import Link from 'next/link';
 import FaqAccordion from '@/app/components/FaqAccordion';
 
 export const frontmatter = {
+  slug: 'best-omegle-alternatives-safe-free-random-chat',
   title: 'Best Omegle Alternatives in 2026 — Safe & Free Random Chat Sites',
   description:
     'Looking for the best Omegle alternatives in 2026? Discover safe, free random chat sites for anonymous video chat and text chat with strangers. No signup required.',
@@ -24,35 +25,35 @@ export const frontmatter = {
   category: 'Comparisons',
 };
 
-export default function BestOmegleAlternatives({ styles }) {
-  const faqItems = [
-    {
-      question: 'What is the best Omegle alternative in 2026?',
-      answer:
-        'Based on our testing, Anoniz is the best overall Omegle alternative in 2026. It offers instant anonymous video and text chat with no registration, interest-based matching, and a clean, ad-free interface.',
-    },
-    {
-      question: 'Are Omegle alternatives safe to use?',
-      answer:
-        'The safety varies significantly between platforms. The best ones use AI-powered moderation, content filtering, and clear community guidelines. Always avoid sharing personal information and use platforms that offer reporting tools.',
-    },
-    {
-      question: 'Can I use random chat platforms without signing up?',
-      answer:
-        "Yes. Many top platforms including Anoniz let you start chatting immediately without creating an account or providing any personal information. That's part of what makes random chat appealing — it's instant and anonymous.",
-    },
-    {
-      question: 'Is random video chat free?',
-      answer:
-        'Most random chat platforms offer free video and text chat. Some charge for premium features like gender filters or ad removal, but the core chat experience is typically free.',
-    },
-    {
-      question: 'Which Omegle alternative is best for making friends?',
-      answer:
-        'Platforms with interest-based matching tend to produce better conversations and real friendships. Anoniz and Emerald Chat both offer this feature, making it easier to find people you genuinely connect with.',
-    },
-  ];
+export const faqItems = [
+  {
+    question: 'What is the best Omegle alternative in 2026?',
+    answer:
+      'Based on our testing, Anoniz is the best overall Omegle alternative in 2026. It offers instant anonymous video and text chat with no registration, interest-based matching, and a clean, ad-free interface.',
+  },
+  {
+    question: 'Are Omegle alternatives safe to use?',
+    answer:
+      'The safety varies significantly between platforms. The best ones use AI-powered moderation, content filtering, and clear community guidelines. Always avoid sharing personal information and use platforms that offer reporting tools.',
+  },
+  {
+    question: 'Can I use random chat platforms without signing up?',
+    answer:
+      "Yes. Many top platforms including Anoniz let you start chatting immediately without creating an account or providing any personal information. That's part of what makes random chat appealing — it's instant and anonymous.",
+  },
+  {
+    question: 'Is random video chat free?',
+    answer:
+      'Most random chat platforms offer free video and text chat. Some charge for premium features like gender filters or ad removal, but the core chat experience is typically free.',
+  },
+  {
+    question: 'Which Omegle alternative is best for making friends?',
+    answer:
+      'Platforms with interest-based matching tend to produce better conversations and real friendships. Anoniz and Emerald Chat both offer this feature, making it easier to find people you genuinely connect with.',
+  },
+];
 
+export default function BestOmegleAlternatives({ styles }) {
   return (
     <>
       {/* Table of Contents */}
