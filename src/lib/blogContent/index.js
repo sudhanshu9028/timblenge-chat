@@ -51,6 +51,9 @@ import PracticeEnglishSpeakingOnline, {
 import InstantStrangerMatchingAnonymous, {
   frontmatter as instantMatchingFm,
 } from './instant-stranger-matching-anonymous';
+import SocialBatteryRecharge, { frontmatter as socialBatteryFm } from './social-battery-recharge';
+import ThirdPlacesOnline, { frontmatter as thirdPlacesFm } from './third-places-online-gen-z';
+import ParasocialBondsCost, { frontmatter as parasocialFm } from './parasocial-bonds-cost';
 
 const BLOG_CONTENT = {
   'best-omegle-alternatives-safe-free-random-chat': {
@@ -144,6 +147,18 @@ const BLOG_CONTENT = {
   'instant-stranger-matching-anonymous-identity': {
     component: InstantStrangerMatchingAnonymous,
     frontmatter: instantMatchingFm,
+  },
+  'social-battery-dead-lowest-effort-recharge': {
+    component: SocialBatteryRecharge,
+    frontmatter: socialBatteryFm,
+  },
+  'third-places-gen-z-online': {
+    component: ThirdPlacesOnline,
+    frontmatter: thirdPlacesFm,
+  },
+  'parasocial-relationships-streamer-not-friend': {
+    component: ParasocialBondsCost,
+    frontmatter: parasocialFm,
   },
 };
 

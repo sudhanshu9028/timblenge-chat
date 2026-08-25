@@ -868,6 +868,84 @@ function getFaqItems(slug) {
         },
       },
     ],
+    'social-battery-dead-lowest-effort-recharge': [
+      {
+        '@type': 'Question',
+        name: 'What does "social battery" actually mean?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Your social battery is the finite amount of mental and emotional energy you have for social interaction. When it runs out, even enjoyable socializing starts to feel draining. The term originated in introvert communities but is now used by people of all personality types to describe the exhaustion that comes from being constantly "on" — whether in person or online.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can you recharge your social battery while still talking to someone?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes — if the interaction is low-pressure enough. The key is removing performance: no profile to curate, no history to maintain, no obligation to be interesting. A short anonymous text chat requires so little social energy that many people find it recharging rather than draining, because the conversation is genuine without any of the usual overhead.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is it normal for extroverts to have a drained social battery too?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Completely. The social battery concept applies to everyone, not just introverts. Extroverts recharge through social contact, but the wrong kind — performative, algorithmic, or obligation-heavy interaction — drains them just as fast. What matters is the quality and pressure level of the interaction, not your personality type.',
+        },
+      },
+    ],
+    'third-places-gen-z-online': [
+      {
+        '@type': 'Question',
+        name: 'What is a "third place"?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'A third place is any social space that isn\'t your home (first place) or your work/school (second place). Coffee shops, parks, libraries, barbershops, community centers — anywhere you can show up, exist around other people, and socialize without spending much money or committing to a formal plan. The term comes from sociologist Ray Oldenburg\'s 1989 book "The Great Good Place."',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Why are third places disappearing?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Three main forces: rising costs have turned casual hangout spots into pay-to-stay venues, remote work has eliminated the incidental social contact of shared offices, and post-pandemic closures permanently removed many small businesses and community venues that served as free gathering points. The result is that "just hanging out" now requires more money, more planning, and more effort than it used to.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can an online chat platform really replace a physical third place?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Not entirely — nothing fully replicates the experience of being physically present with others. But an anonymous chat platform can replicate one of the most important qualities of a third place: low-stakes, unstructured social contact with people you don't already know. It's free, requires no planning, and carries no social obligation — which is exactly what makes a good third place work.",
+        },
+      },
+    ],
+    'parasocial-relationships-streamer-not-friend': [
+      {
+        '@type': 'Question',
+        name: 'What is a parasocial relationship?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "A parasocial relationship is a one-sided emotional bond where you feel connected to someone — a streamer, YouTuber, podcaster, or influencer — who doesn't know you exist. Your brain processes their content as social interaction, releasing some of the same neurochemicals as a real conversation, but the connection only flows in one direction.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are parasocial relationships always bad?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Not inherently. Casually enjoying a creator's content and feeling a sense of connection is normal and usually harmless. The concern arises when parasocial bonds become a primary source of social contact — when watching a streamer replaces talking to real people, and the one-sided comfort quietly crowds out the two-sided relationships that build social skills and genuine belonging.",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I know if my parasocial relationships are replacing real ones?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "A useful test: think about the last time you had a conversation where the other person genuinely didn't know what you were going to say next. If most of your \"social\" time is spent watching, listening, or reading — consuming someone else's output — without producing any of your own, the balance has likely tipped. The fix isn't quitting your favorite creator. It's adding real, two-way interaction alongside them.",
+        },
+      },
+    ],
   };
 
   return faqs[slug] || [];

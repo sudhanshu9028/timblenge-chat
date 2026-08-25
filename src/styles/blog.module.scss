@@ -116,6 +116,81 @@
   }
 }
 
+// Pagination
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  margin-top: $margin-xl;
+  padding-top: $margin-lg;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.pageBtn {
+  background: rgba(51, 65, 85, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $color-text-secondary;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-family: $font-family-primary;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover:not(:disabled) {
+    background: rgba(51, 65, 85, 0.6);
+    border-color: rgba(236, 72, 153, 0.3);
+    color: $color-text-primary;
+  }
+}
+
+.pageBtnDisabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pageNumber {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: $color-text-muted;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-family: $font-family-primary;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    background: rgba(51, 65, 85, 0.4);
+    color: $color-text-primary;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.pageNumberActive {
+  background: rgba(236, 72, 153, 0.2);
+  border-color: $color-accent-primary;
+  color: $color-accent-light;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background: rgba(236, 72, 153, 0.3);
+    color: $color-accent-light;
+    border-color: $color-accent-primary;
+  }
+}
+
 @media (max-width: $breakpoint-md) {
   .blogPage {
     padding: $padding-lg $margin-base;
@@ -131,5 +206,20 @@
 
   .postTitle {
     font-size: $font-size-4xl;
+  }
+
+  .pagination {
+    gap: $spacing-md;
+  }
+
+  .pageBtn {
+    padding: 0.4rem 0.75rem;
+    font-size: $font-size-xs;
+  }
+
+  .pageNumber {
+    width: 2rem;
+    height: 2rem;
+    font-size: $font-size-xs;
   }
 }

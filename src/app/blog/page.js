@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { BLOG_POSTS } from '@/lib/blogRegistry';
 import styles from '@/styles/blog.module.scss';
+import BlogList from './BlogList';
 
 export const metadata = {
   title: 'Blog | Anoniz — Tips, Guides & Insights on Random Chat',
@@ -40,25 +40,7 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <div className={styles.postsGrid}>
-          {BLOG_POSTS.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.postCard}>
-              <div className={styles.postCategory}>{post.category}</div>
-              <h2 className={styles.postTitle}>{post.title}</h2>
-              <p className={styles.postDescription}>{post.description}</p>
-              <div className={styles.postMeta}>
-                <span className={styles.postDate}>
-                  {new Date(post.publishedDate).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </span>
-                <span className={styles.postReadTime}>{post.readTime}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <BlogList posts={BLOG_POSTS} />
       </div>
     </div>
   );
