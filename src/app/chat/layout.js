@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Text Chat with Strangers | Anoniz - Anonymous Text Chat Platform',
+  title: 'Text Chat with Strangers – Free Anonymous Chat | Anoniz',
   description:
-    'Start anonymous text chat with strangers online. Chat with random people worldwide through secure, real-time messaging. No registration required - begin chatting instantly on Anoniz.',
+    'Start anonymous text chat with strangers online. Real-time messaging with random people worldwide — no download, no sign-up, nothing stored afterwards.',
   keywords: [
     'text chat',
     'text chat with strangers',
@@ -18,7 +18,6 @@ export const metadata = {
     'start chatting',
     'age verification',
     'consent page',
-    'adult chat',
   ],
   alternates: {
     canonical: 'https://anoniz.com/chat',

@@ -136,9 +136,10 @@ export default function LonelyInCollegeMeetPeople({ styles }) {
           in your 9 a.m. lecture if things get awkward. Think of it as a social warm-up.
         </li>
         <li>
-          <strong>Use interest tags.</strong> On <Link href="/">Anoniz</Link>, you can enter topics
-          you care about before matching. Type in your major, a hobby, or a show you're watching —
-          you'd be surprised how many other students are online doing exactly the same thing.
+          <strong>Use interest tags.</strong> When you{' '}
+          <Link href="/">meet people through random chat</Link>, you can enter topics you care about
+          before matching. Type in your major, a hobby, or a show you're watching — you'd be
+          surprised how many other students are online doing exactly the same thing.
         </li>
         <li>
           <strong>Show up repeatedly.</strong> Friendship takes roughly 50 hours of shared time.

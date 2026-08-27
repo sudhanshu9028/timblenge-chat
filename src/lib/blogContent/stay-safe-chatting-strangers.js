@@ -131,8 +131,9 @@ export default function StaySafeChatting({ styles }) {
       </p>
       <p>
         Before choosing a platform, check whether it has clear community guidelines, an active
-        moderation team, and automated safety features. Platforms like <Link href="/">Anoniz</Link>{' '}
-        prioritize safety without sacrificing the spontaneous feel of random chat.
+        moderation team, and automated safety features.{' '}
+        <Link href="/">Safe random chat platforms</Link> like Anoniz prioritize safety without
+        sacrificing the spontaneous feel of random chat.
       </p>
 
       <h3>3. Be Careful with Your Camera</h3>

@@ -223,10 +223,10 @@ export default function TextChatVsVideoChat({ styles }) {
         becomes a much smaller leap.
       </p>
       <p>
-        On <Link href="/">Anoniz</Link>, both modes use the same interest-based matching, so
-        switching between them doesn't mean starting over — it just changes how the conversation
-        feels. If you're dealing with social anxiety and want a more structured way to work up to
-        video chat, our{' '}
+        In <Link href="/">text and video chat on Anoniz</Link>, both modes use the same
+        interest-based matching, so switching between them doesn't mean starting over — it just
+        changes how the conversation feels. If you're dealing with social anxiety and want a more
+        structured way to work up to video chat, our{' '}
         <Link href="/blog/how-to-practice-social-skills-and-overcome-anxiety-online">
           guide to overcoming social anxiety online
         </Link>{' '}

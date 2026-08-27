@@ -3,52 +3,51 @@ import styles from '@/styles/home.module.scss';
 export default function FeaturesSection() {
   return (
     <section className={styles.features}>
-      <h2 className={styles.sectionTitle}>Platform Features</h2>
+      <h2 className={styles.sectionTitle}>What You Get on Anoniz</h2>
       <div className={styles.featuresGrid}>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>Video Chat with Strangers</h3>
+          <h3 className={styles.featureTitle}>Random Video Chat with Strangers</h3>
           <p className={styles.featureDescription}>
-            Connect face-to-face with random people through our secure video chat platform. Start
-            a video chat with strangers and make new friends instantly.
+            Talk face-to-face with a random person in your browser — no plugin, no download, no
+            store listing. Camera access is asked for once and you can end the call at any moment.
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>Text Chat</h3>
+          <h3 className={styles.featureTitle}>Anonymous Text Chat</h3>
           <p className={styles.featureDescription}>
-            Enjoy real-time text messaging with strangers. Chat anonymously and make meaningful
-            connections through our simple and fun text chat interface.
+            Prefer to keep the camera off? Text chat pairs you with a stranger for real-time
+            messaging, with no profile attached and no message history left behind.
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>Safety & Moderation</h3>
+          <h3 className={styles.featureTitle}>Interest-Based Matching</h3>
           <p className={styles.featureDescription}>
-            Our platform prioritizes your safety with built-in moderation tools. Chat with
-            strangers in a secure and monitored environment.
+            Add topics you actually care about — music, gaming, travel, language exchange — and
+            Anoniz tries to pair you with someone who shares them instead of pairing at random.
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>No Registration Required</h3>
+          <h3 className={styles.featureTitle}>No App, No Sign-Up</h3>
           <p className={styles.featureDescription}>
-            Start chatting immediately without creating an account. No email, no sign-up, just
-            instant access to chat with strangers online.
+            There is nothing to install and no account to create. App-based chat platforms now face
+            age-gating and removal from app stores; a browser tab has neither problem.
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>Global Connections</h3>
+          <h3 className={styles.featureTitle}>Nothing Stored</h3>
           <p className={styles.featureDescription}>
-            Meet new people from around the world. Our platform connects you with strangers from
-            different countries and cultures.
+            Anoniz does not store, record, or log your conversations. When you disconnect, the
+            conversation is gone — there is no archive to search and nothing to leak later.
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>Real-time Messaging</h3>
+          <h3 className={styles.featureTitle}>18+, Moderated, Ad-Free</h3>
           <p className={styles.featureDescription}>
-            Experience instant messaging with no delays. Our real-time chat technology ensures
-            smooth conversations with strangers.
+            Every chat starts behind an age confirmation, with content moderation and reporting
+            tools in place. No ads, no premium tier, no upsell mid-conversation.
           </p>
         </article>
       </div>
     </section>
   );
 }
-

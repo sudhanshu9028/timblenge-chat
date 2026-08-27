@@ -251,8 +251,8 @@ export default function AiCompanionVsRealPerson({ styles }) {
       <p>
         Whether you've been talking to an AI companion, scrolling alone at night, or you're just
         curious what an unscripted conversation with a real person feels like,{' '}
-        <Link href="/">Anoniz</Link> is free, anonymous, and available right now — no profile, no
-        app to download, no history to manage.
+        <Link href="/">talking to a stranger on Anoniz</Link> is free, anonymous, and available
+        right now — no profile, no app to download, no history to manage.
       </p>
 
       <div className={styles.faqSection}>

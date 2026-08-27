@@ -107,10 +107,10 @@ export default function MonkModeDeletedApps({ styles }) {
       </p>
       <ul>
         <li>
-          <strong>Talk to a stranger.</strong> Not on social media. On a platform like{' '}
-          <Link href="/">Anoniz</Link> where there's no profile, no followers, and no feed — just a
-          conversation. Five minutes of genuine back-and-forth with another person is worth more to
-          your brain than an hour of scrolling ever was.
+          <strong>Talk to a stranger.</strong> Not on social media — try{' '}
+          <Link href="/">anonymous chat with a stranger</Link>, where there's no profile, no
+          followers, and no feed. Just a conversation. Five minutes of genuine back-and-forth with
+          another person is worth more to your brain than an hour of scrolling ever was.
         </li>
         <li>
           <strong>Use interest tags to make it meaningful.</strong> Enter what you're actually into

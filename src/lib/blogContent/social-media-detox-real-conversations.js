@@ -127,9 +127,9 @@ export default function SocialMediaDetoxRealConversations({ styles }) {
         </li>
       </ul>
       <p>
-        This is exactly why platforms like <Link href="/">Anoniz</Link> have seen a surge during the
-        detox movement. No profiles. No followers. No feed. Just a conversation with another human
-        being — and a "Next" button when you're done.
+        This is exactly why <Link href="/">free anonymous chat platforms</Link> like Anoniz have
+        seen a surge during the detox movement. No profiles. No followers. No feed. Just a
+        conversation with another human being — and a "Next" button when you're done.
       </p>
 
       <h2 id="how-to-start">How to Start Your Own Detox Today</h2>

@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Video Chat with Strangers | Anoniz - Anonymous Video Chat Platform',
+  title: 'Video Chat with Strangers – Free Random Video Chat | Anoniz',
   description:
-    'Start anonymous video chat with strangers online. Connect face-to-face with random people worldwide through secure, real-time video calls. No registration required - begin video chatting instantly on Anoniz.',
+    'Start anonymous video chat with strangers online. Face-to-face random video chat in your browser — no download, no sign-up, free on any device.',
   keywords: [
     'video chat',
     'video chat with strangers',
@@ -19,7 +19,6 @@ export const metadata = {
     'start video chat',
     'age verification',
     'consent page',
-    'adult video chat',
   ],
   alternates: {
     canonical: 'https://anoniz.com/video',

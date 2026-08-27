@@ -278,7 +278,10 @@
   padding: $margin-lg;
   border-radius: $radius-md;
   box-shadow: $shadow-base;
-  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base,
+    border-color $transition-base;
   will-change: transform;
 
   &:hover {
@@ -324,7 +327,9 @@
   padding: $margin-lg;
   border-radius: $radius-md;
   box-shadow: $shadow-base;
-  transition: border-color $transition-base, background $transition-base;
+  transition:
+    border-color $transition-base,
+    background $transition-base;
   will-change: background, border-color;
 
   &:hover {
@@ -482,5 +487,81 @@
   .actionButton {
     width: auto;
     min-width: auto;
+  }
+}
+
+// Comparison Section
+.comparison {
+  padding: $padding-3xl $margin-lg;
+  background: $bg-secondary;
+  width: $height-full;
+}
+
+.comparisonIntro {
+  max-width: $container-lg;
+  margin: 0 auto $spacing-3xl;
+  text-align: center;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+// Horizontal scroll container so wide tables never break the page on mobile
+.comparisonTableWrapper {
+  max-width: $container-3xl;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-md;
+  background: rgba(51, 65, 85, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: $shadow-base;
+}
+
+.comparisonTable {
+  width: $height-full;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+
+  th,
+  td {
+    padding: $padding-base $margin-base;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: $line-height-normal;
+  }
+
+  thead th {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-lg;
+    background: rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+  }
+
+  tbody th {
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.comparisonHighlight {
+  color: $color-accent-light;
+  font-weight: $font-weight-medium;
+}
+
+@media (max-width: $breakpoint-md) {
+  .comparisonTable {
+    font-size: $font-size-sm;
   }
 }

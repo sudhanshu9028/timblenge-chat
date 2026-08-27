@@ -132,7 +132,7 @@ export default function LateNightChatWithStrangers({ styles }) {
         conversation as you are.
       </p>
       <p>
-        On a platform like <Link href="/">Anoniz</Link>, you're matched with people from all over
+        On <Link href="/">a platform like Anoniz</Link>, you're matched with people from all over
         the world, which means "2AM" is really just a local inconvenience, not a global one. There
         is, quite literally, always someone awake and willing to chat — you just need to be matched
         with them.

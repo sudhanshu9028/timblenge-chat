@@ -127,9 +127,10 @@ export default function ScreenAddictionIndiaCrisis({ styles }) {
           an actual person does more for your mood than thirty minutes of Reels.
         </li>
         <li>
-          <strong>Use interest tags.</strong> On <Link href="/">Anoniz</Link>, you can match with
-          someone who shares a specific interest — cricket, coding, a show you're watching — which
-          means the conversation starts with something you already care about.
+          <strong>Use interest tags.</strong> You can{' '}
+          <Link href="/">match with a stranger online</Link> who shares a specific interest —
+          cricket, coding, a show you're watching — which means the conversation starts with
+          something you already care about.
         </li>
         <li>
           <strong>No signup, no download.</strong> The barrier needs to be as low as the thing

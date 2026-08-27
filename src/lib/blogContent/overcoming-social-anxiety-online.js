@@ -86,8 +86,8 @@ export default function OvercomingSocialAnxiety({ styles }) {
 
       <h2 id="why-anonymous">Why Anonymous Chat is the Perfect Practice Ground</h2>
       <p>
-        Platforms like <Link href="/">Anoniz</Link> offer a unique environment for exposure therapy.
-        Here is why it works:
+        <Link href="/">Anonymous chat platforms</Link> like Anoniz offer a unique environment for
+        exposure therapy. Here is why it works:
       </p>
       <ul>
         <li>

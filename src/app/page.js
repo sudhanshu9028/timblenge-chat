@@ -3,10 +3,35 @@ import styles from '@/styles/home.module.scss';
 import HeroCTA from './components/HeroCTA';
 import { HOME_FAQ_ITEMS } from '@/lib/homeFaqData';
 
+// Homepage-specific metadata. The root layout only supplies site-wide defaults,
+// so keeping this here is what lets the homepage target its own head terms.
+export const metadata = {
+  title: 'Talk to Strangers Online – Free Anonymous Chat | Anoniz',
+  description:
+    'Talk to strangers online with no app and no sign-up. Free anonymous text and video chat with random people worldwide — open a tab and start talking.',
+  alternates: {
+    canonical: 'https://anoniz.com/',
+  },
+  openGraph: {
+    title: 'Talk to Strangers Online – Free Anonymous Chat | Anoniz',
+    description:
+      'Free anonymous text and video chat with random people worldwide. No app to install, no account to create, nothing stored after you disconnect.',
+    url: 'https://anoniz.com',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Talk to Strangers Online – Free Anonymous Chat | Anoniz',
+    description:
+      'Free anonymous text and video chat with random people worldwide. No app, no account, nothing stored.',
+  },
+};
+
 // Dynamic load below-the-fold sections with SSR enabled to improve LCP without hurting SEO
 const FeaturesSection = dynamic(() => import('./components/FeaturesSection'), { ssr: true });
 const BenefitsSection = dynamic(() => import('./components/BenefitsSection'), { ssr: true });
 const HowItWorksSection = dynamic(() => import('./components/HowItWorksSection'), { ssr: true });
+const ComparisonSection = dynamic(() => import('./components/ComparisonSection'), { ssr: true });
 const HomeFaqSection = dynamic(() => import('./components/HomeFaqSection'), { ssr: true });
 
 export default function HomePage() {
@@ -74,12 +99,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <h1 className={styles.heroTitle}>
-          Chat with <span className={styles.gradientStrangers}>Strangers</span>, Make{' '}
-          <span className={styles.gradientFriends}>Friends</span> Online!
+          Talk to <span className={styles.gradientStrangers}>Strangers</span> Online, Make{' '}
+          <span className={styles.gradientFriends}>Friends</span> Anywhere
         </h1>
         <p className={styles.heroSubtitle}>
-          Try a random chat alternative to connect with people, find friends, and chat with
-          strangers worldwide!!
+          Free anonymous chat with random people worldwide — no app to install, no account to
+          create, and nothing stored once you disconnect. Text or video, straight from your browser.
         </p>
         <HeroCTA styles={styles} />
       </section>
@@ -88,6 +113,7 @@ export default function HomePage() {
       <FeaturesSection />
       <BenefitsSection />
       <HowItWorksSection />
+      <ComparisonSection />
       <HomeFaqSection />
     </main>
   );

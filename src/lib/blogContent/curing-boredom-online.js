@@ -102,11 +102,11 @@ export default function CuringBoredom({ styles }) {
 
       <h3>1. Try Interest-Matched Random Chat</h3>
       <p>
-        If the thought of completely random chat is too chaotic, use interest tags. Platforms like{' '}
-        <Link href="/">Anoniz</Link> allow you to enter your hobbies before matching. Try typing in
-        a niche topic you love—like a specific video game, a favorite band, or a weird hobby.
-        Finding a stranger who shares that exact same obscure interest feels like discovering hidden
-        treasure, and the resulting conversations can last for hours.
+        If the thought of completely random chat is too chaotic, use interest tags.{' '}
+        <Link href="/">Random chat with interest tags</Link> lets you enter your hobbies before
+        matching. Try typing in a niche topic you love—like a specific video game, a favorite band,
+        or a weird hobby. Finding a stranger who shares that exact same obscure interest feels like
+        discovering hidden treasure, and the resulting conversations can last for hours.
       </p>
 
       <h3>2. Play Co-op Browser Games with a Stranger</h3>

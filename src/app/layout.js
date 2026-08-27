@@ -10,7 +10,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Anoniz | Chat with Strangers, Make Friends Online',
+  title: 'Anoniz | Talk to Strangers Online – Free Anonymous Chat',
   description:
     'Talk to strangers and make friends online with Anoniz - the best random chat alternative. Experience anonymous chat, video chat with strangers, and text chat without registration. Meet new people from around the world and turn strangers into friends. Perfect Omegle alternative for safe, fun conversations.',
   keywords: [
@@ -61,7 +61,7 @@ export const metadata = {
   metadataBase: new URL('https://anoniz.com'),
   publisher: 'Anoniz',
   openGraph: {
-    title: 'Anoniz | Chat with Strangers, Make Friends Online',
+    title: 'Anoniz | Talk to Strangers Online – Free Anonymous Chat',
     description:
       'Talk to strangers and make friends online. Experience anonymous chat, video chat, and text chat with random people from around the world. No registration required - start chatting instantly!',
     url: 'https://anoniz.com',
@@ -84,7 +84,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anoniz | Chat with Strangers, Make Friends Online',
+    title: 'Anoniz | Talk to Strangers Online – Free Anonymous Chat',
     description:
       'Talk to strangers and make friends online. Video chat and text chat with random people worldwide. No registration required - start chatting instantly!',
     images: ['/logo.png'],

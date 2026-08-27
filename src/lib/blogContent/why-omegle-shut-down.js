@@ -205,10 +205,10 @@ export default function WhyOmegleShutDown({ styles }) {
           ending, with a report going to moderators immediately — no waiting, no friction.
         </li>
         <li>
-          <strong>Interest-based matching.</strong> Rather than pure randomness, platforms like{' '}
-          <Link href="/">Anoniz</Link> let you add topics you're into, so you're more likely to land
-          on someone who actually wants to talk about the same things — leading to better
-          conversations and fewer junk interactions.
+          <strong>Interest-based matching.</strong> Rather than pure randomness,{' '}
+          <Link href="/">Omegle alternatives like Anoniz</Link> let you add topics you're into, so
+          you're more likely to land on someone who actually wants to talk about the same things —
+          leading to better conversations and fewer junk interactions.
         </li>
         <li>
           <strong>No mandatory accounts, but smarter anonymity.</strong> You can still jump in

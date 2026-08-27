@@ -123,10 +123,11 @@ export default function BestRandomChatAppsMobile({ styles }) {
       </p>
       <ul>
         <li>
-          <strong>Browser-based platforms</strong> (like <Link href="/">Anoniz</Link>) run entirely
-          in Safari or Chrome. There's nothing to install, no storage taken up, no app to remember
-          to update, and no app icon sitting on your home screen advertising what it is. You open a
-          link, tap start, and you're chatting.
+          <strong>Browser-based platforms</strong> let you{' '}
+          <Link href="/">chat with strangers online</Link> right in Safari or Chrome. There's
+          nothing to install, no storage taken up, no app to remember to update, and no app icon
+          sitting on your home screen advertising what it is. You open a link, tap start, and you're
+          chatting.
         </li>
         <li>
           <strong>Native apps</strong> can feel slightly snappier and may offer push notifications,

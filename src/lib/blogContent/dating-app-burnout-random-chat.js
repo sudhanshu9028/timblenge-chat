@@ -227,9 +227,10 @@ export default function DatingAppBurnoutRandomChat({ styles }) {
       </div>
       <p>
         Whether you're taking a deliberate break from dating apps or just want to talk to someone
-        new without it meaning anything beyond the conversation itself, <Link href="/">Anoniz</Link>{' '}
-        is free, anonymous, and ready whenever you are — no profile required, ironically enough. And
-        if the goal is genuinely making new friends along the way, our guide to{' '}
+        new without it meaning anything beyond the conversation itself,{' '}
+        <Link href="/">a random chat with a stranger</Link> is free, anonymous, and ready whenever
+        you are — no profile required, ironically enough. And if the goal is genuinely making new
+        friends along the way, our guide to{' '}
         <Link href="/blog/how-to-make-friends-online-talk-to-strangers">
           making friends online without the awkwardness
         </Link>{' '}

@@ -150,10 +150,10 @@ export default function QuestionsToAskStrangers({ styles }) {
         all day.
       </p>
       <p>
-        If you want to have genuinely fun, memorable interactions on platforms like{' '}
-        <Link href="/">Anoniz</Link>, you need to upgrade your question game. We've compiled the
-        ultimate list of <strong>exactly 50 questions</strong> to ask strangers online, categorized
-        from casual icebreakers to deep late-night philosophy.
+        If you want genuinely fun, memorable interactions when you{' '}
+        <Link href="/">talk to strangers online</Link>, you need to upgrade your question game.
+        We've compiled the ultimate list of <strong>exactly 50 questions</strong> to ask strangers
+        online, categorized from casual icebreakers to deep late-night philosophy.
       </p>
 
       <h2 id="the-art">The Art of the Icebreaker</h2>

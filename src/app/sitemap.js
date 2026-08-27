@@ -42,6 +42,21 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      // Consent + age-verification landing pages. The dynamic session routes
+      // beneath them (/chat/[id], /video/[id]) stay out of the sitemap and are
+      // noindex — only these two are meant to rank.
+      url: `${baseUrl}/chat`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/video`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ];
 
   // Blog post pages
