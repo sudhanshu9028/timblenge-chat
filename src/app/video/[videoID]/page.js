@@ -1,10 +1,17 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { connectSocket, disconnectSocket } from '@/lib/socket';
+import SearchingState from '@/app/components/SearchingState';
+import DisconnectedPanel from '@/app/components/DisconnectedPanel';
+import WaitingOptions from '@/app/components/WaitingOptions';
 import styles from '@/styles/video.module.scss';
+
+// How long we search before offering something else to do. The search itself
+// keeps running — this is only when the options appear.
+const WAITING_OPTIONS_DELAY_MS = 60_000;
 
 export default function VideoPage() {
   const { videoID } = useParams();
@@ -22,7 +29,98 @@ export default function VideoPage() {
   const [localStreamReady, setLocalStreamReady] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [showReconnectButton, setShowReconnectButton] = useState(false);
+  const [onlineCount, setOnlineCount] = useState(0);
+  const [showWaitingOptions, setShowWaitingOptions] = useState(false);
+  const [notifyState, setNotifyState] = useState('idle');
+  // Why the call ended — 'Stranger disconnected' is wrong when the user
+  // pressed Stop, or when they were still searching.
+  const [exitTitle, setExitTitle] = useState('Call ended');
   const stoppedRef = useRef(false);
+  const notifyArmedRef = useRef(false);
+  const titleFlashRef = useRef(null);
+
+  // Ask once, on an explicit click — browsers ignore (and users resent)
+  // permission prompts that fire on page load.
+  const handleEnableNotify = async () => {
+    if (typeof Notification === 'undefined') {
+      setNotifyState('denied');
+      return;
+    }
+    try {
+      const permission =
+        Notification.permission === 'default'
+          ? await Notification.requestPermission()
+          : Notification.permission;
+
+      if (permission === 'granted') {
+        notifyArmedRef.current = true;
+        setNotifyState('granted');
+      } else {
+        setNotifyState('denied');
+      }
+    } catch {
+      setNotifyState('denied');
+    }
+  };
+
+  // Short beep via Web Audio, so this needs no audio file shipped.
+  const playChime = useCallback(() => {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.5);
+      setTimeout(() => ctx.close(), 800);
+    } catch {
+      // Audio is a nicety — never let it break the match.
+    }
+  }, []);
+
+  // Called when a match lands while the user is looking at another tab.
+  // Kept identity-stable so it can be a dependency of the signaling effect
+  // without tearing down the peer connection on every render.
+  const pingUser = useCallback(() => {
+    if (!notifyArmedRef.current) return;
+    try {
+      new Notification('Someone joined on Anoniz', {
+        body: 'Your video chat is ready — come back to the tab.',
+        icon: '/logo.png',
+        tag: 'anoniz-video-match',
+      });
+    } catch {
+      // Notification can throw on some mobile browsers; the chime still fires.
+    }
+    playChime();
+
+    if (!titleFlashRef.current) {
+      let on = false;
+      titleFlashRef.current = setInterval(() => {
+        document.title = on ? 'Anoniz' : '👋 Stranger connected!';
+        on = !on;
+      }, 900);
+    }
+  }, [playChime]);
+
+  const handleSwitchToText = () => {
+    stoppedRef.current = true;
+    if (socketRef.current && socketRef.current.connected) {
+      socketRef.current.emit('leave-video');
+    }
+    // Interests are already in sessionStorage, so text chat picks them up.
+    const newChatId = uuidv4();
+    sessionStorage.setItem('chatInitiated', 'true');
+    sessionStorage.setItem('uniqueChatId', newChatId);
+    router.push(`/chat/${newChatId}`);
+  };
 
   useEffect(() => {
     // guard direct access
@@ -120,14 +218,23 @@ export default function VideoPage() {
       handleConnect();
     }
 
+    socket.on('online-count', (count) => {
+      setOnlineCount(typeof count === 'number' ? count : 0);
+    });
+
     socket.on('video-matched', async ({ peerId, initiator }) => {
       // Ignore matches if we've stopped
       if (stoppedRef.current) {
         return;
       }
+      // They asked to be pinged and they're looking elsewhere — tell them.
+      if (typeof document !== 'undefined' && document.hidden) {
+        pingUser();
+      }
       setIsSearching(false);
       setConnected(true);
       setShowReconnectButton(false);
+      setShowWaitingOptions(false);
       stoppedRef.current = false; // Reset stopped flag when matched
 
       try {
@@ -239,6 +346,7 @@ export default function VideoPage() {
     socket.on('video-partner-left', () => {
       // Set stopped flag FIRST to prevent any race conditions
       stoppedRef.current = true;
+      setExitTitle('Stranger disconnected');
       // Reset videoReady to prevent auto-emission
       setVideoReady(false);
       // Set connected to false immediately
@@ -265,27 +373,37 @@ export default function VideoPage() {
       socket.off('video-partner-left');
       endCall();
     };
-  }, [localStreamReady, socket, videoID]);
+  }, [localStreamReady, socket, videoID, pingUser]);
 
-  // 60-second search timeout
+  // After a minute of searching, offer something else to do — but keep the
+  // search running. This used to eject the user from the queue entirely, which
+  // made video a guaranteed dead end whenever the site was quiet.
   useEffect(() => {
-    let timeoutId;
-    if (isSearching && !connected) {
-      timeoutId = setTimeout(() => {
-        // Set stopped flag to prevent auto-rejoining
-        stoppedRef.current = true;
-        setIsSearching(false);
-        setShowReconnectButton(true);
-        setError('No stranger found. Please try again.');
-        if (socketRef.current && socketRef.current.connected) {
-          socketRef.current.emit('leave-video');
-        }
-      }, 60000);
+    if (!isSearching || connected) {
+      setShowWaitingOptions(false);
+      return undefined;
     }
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    };
+    const timeoutId = setTimeout(() => setShowWaitingOptions(true), WAITING_OPTIONS_DELAY_MS);
+    return () => clearTimeout(timeoutId);
   }, [isSearching, connected]);
+
+  // Stop flashing the tab title as soon as the user comes back to it.
+  useEffect(() => {
+    const stopFlashing = () => {
+      if (titleFlashRef.current) {
+        clearInterval(titleFlashRef.current);
+        titleFlashRef.current = null;
+        document.title = 'Anoniz';
+      }
+    };
+    document.addEventListener('visibilitychange', stopFlashing);
+    window.addEventListener('focus', stopFlashing);
+    return () => {
+      document.removeEventListener('visibilitychange', stopFlashing);
+      window.removeEventListener('focus', stopFlashing);
+      stopFlashing();
+    };
+  }, []);
 
   const endCall = () => {
     setConnected(false);
@@ -320,6 +438,7 @@ export default function VideoPage() {
   const handleStop = () => {
     // Set stopped flag FIRST to prevent any race conditions
     stoppedRef.current = true;
+    setExitTitle(connected ? 'You ended the call' : 'Stopped searching');
     // Reset videoReady so it doesn't auto-emit video-ready again
     setVideoReady(false);
     // Set connected to false immediately to prevent any matching logic
@@ -364,8 +483,6 @@ export default function VideoPage() {
   return (
     <div className={styles.main}>
       <div className={styles.videoContainer}>
-        {isSearching && <p className={styles.system}>Finding stranger…</p>}
-        {error && <p className={styles.error}>{error}</p>}
         <video ref={localVideoRef} className={styles.local} autoPlay muted playsInline />
         <video
           ref={remoteVideoRef}
@@ -373,14 +490,37 @@ export default function VideoPage() {
           autoPlay
           playsInline
         />
-        {showReconnectButton && (
-          <div className={styles.reconnectButtonContainer}>
-            <button onClick={handleFindNew} className={styles.findNewBtn}>
-              Find New Stranger
-            </button>
+
+        {isSearching && (
+          <div className={styles.searchOverlay}>
+            <SearchingState mode="video" onlineCount={onlineCount} />
           </div>
         )}
+
+        {error && <p className={styles.error}>{error}</p>}
       </div>
+
+      {/* The search keeps running behind this card. */}
+      {isSearching && showWaitingOptions && !connected && (
+        <WaitingOptions
+          onSwitchToText={handleSwitchToText}
+          onNotify={handleEnableNotify}
+          notifyState={notifyState}
+          onDismiss={() => setShowWaitingOptions(false)}
+          onlineCount={onlineCount}
+        />
+      )}
+
+      {showReconnectButton && (
+        <div className={styles.reconnectButtonContainer}>
+          <DisconnectedPanel
+            mode="video"
+            title={exitTitle}
+            onFindNew={handleFindNew}
+            onlineCount={onlineCount}
+          />
+        </div>
+      )}
 
       <div className={styles.actions}>
         <button onClick={handleStop} disabled={showReconnectButton}>

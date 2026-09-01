@@ -2,23 +2,6 @@ export const metadata = {
   title: 'Text Chat with Strangers – Free Anonymous Chat | Anoniz',
   description:
     'Start anonymous text chat with strangers online. Real-time messaging with random people worldwide — no download, no sign-up, nothing stored afterwards.',
-  keywords: [
-    'text chat',
-    'text chat with strangers',
-    'anonymous text chat',
-    'chat with strangers',
-    'random text chat',
-    'stranger text chat',
-    'online text chat',
-    'free text chat',
-    'text chat platform',
-    'chat anonymously',
-    'anoniz text chat',
-    '18+ only',
-    'start chatting',
-    'age verification',
-    'consent page',
-  ],
   alternates: {
     canonical: 'https://anoniz.com/chat',
   },

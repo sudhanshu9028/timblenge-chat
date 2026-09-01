@@ -37,3 +37,35 @@ export function getBlogBySlug(slug) {
 export function getAllSlugs() {
   return BLOG_POSTS.map((post) => post.slug);
 }
+
+/**
+ * Posts surfaced in the chat/video panels — when a stranger leaves, while a
+ * video queue is still searching. Hand-picked for the moment they appear in:
+ * someone who has just lost a conversation, or is waiting for one.
+ */
+const PANEL_SLUGS = [
+  '50-best-questions-to-ask-strangers-online-to-keep-conversations-going',
+  'how-to-stay-safe-chatting-with-strangers-online',
+  'fun-things-to-do-online-when-bored-random-chat',
+  'text-chat-vs-video-chat-which-is-better',
+  'cant-sleep-late-night-chat-with-strangers',
+  'best-omegle-alternatives-safe-free-random-chat',
+];
+
+/**
+ * Pick posts for the in-chat panels. Shuffled so a user who sees the panel
+ * several times in one session isn't shown the same three articles.
+ *
+ * @param {number} count
+ * @returns {Array<{slug: string, title: string, readTime?: string}>}
+ */
+export function getPanelPosts(count = 3) {
+  const pool = PANEL_SLUGS.map(getBlogBySlug).filter(Boolean);
+
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+
+  return pool.slice(0, count);
+}

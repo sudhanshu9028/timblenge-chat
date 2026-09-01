@@ -5,6 +5,10 @@ import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { connectSocket, disconnectSocket } from '@/lib/socket';
+import SearchingState from '@/app/components/SearchingState';
+import DisconnectedPanel from '@/app/components/DisconnectedPanel';
+import AiBadge from '@/app/components/AiBadge';
+import { AI_DISPLAY_NAME } from '@/lib/aiIdentity';
 import styles from '@/styles/chat.module.scss';
 
 export default function ChatPage() {
@@ -12,13 +16,23 @@ export default function ChatPage() {
   const [input, setInput] = useState('');
   const [connected, setConnected] = useState(false);
   const [isSearching, setIsSearching] = useState(true);
+  // NOTE: this flag means "the conversation ended, show the exit panel". It is
+  // unrelated to the reconnect-with-last-stranger feature below.
   const [showReconnectButton, setShowReconnectButton] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [onlineCount, setOnlineCount] = useState(0);
+
+  // Reconnect-with-last-stranger: 'unavailable' | 'available' | 'pending'
+  const [reconnectState, setReconnectState] = useState('unavailable');
 
   // Bot state
   const [isBotChat, setIsBotChat] = useState(false);
+  // Who the conversation that just ended was with — the exit panel shouldn't
+  // call the AI a stranger.
+  const [endedWithAi, setEndedWithAi] = useState(false);
 
   const chatRef = useRef(null);
+  const exitPanelRef = useRef(null);
   const inputRef = useRef(null);
   const router = useRouter();
   const params = useParams();
@@ -28,11 +42,12 @@ export default function ChatPage() {
   // Disconnect the bot chat cleanly
   const disconnectBotChat = () => {
     setIsBotChat(false);
+    setEndedWithAi(true);
     setConnected(false);
     setIsSearching(false);
     setShowReconnectButton(true);
     setIsTyping(false);
-    setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
+    setMessages((prev) => [...prev, { from: 'system', text: `${AI_DISPLAY_NAME} left the chat.` }]);
   };
 
   // Send message to AI bot via socket (server handles Gemini API)
@@ -127,6 +142,7 @@ export default function ChatPage() {
     setMessages([]);
     // Reset bot state
     setIsBotChat(false);
+    setReconnectState('unavailable');
 
     const socket = connectSocket();
     const interestsStr = sessionStorage.getItem('interests') || '';
@@ -156,6 +172,9 @@ export default function ChatPage() {
     // Reset bot state
     setIsBotChat(false);
 
+    const wasWithRealPerson = connected && !isBotChat;
+    setEndedWithAi(isBotChat);
+
     if (!connected) {
       setMessages(() => [{ from: 'system', text: 'Disconnected.' }]);
     } else {
@@ -165,14 +184,29 @@ export default function ChatPage() {
     if (socket && socket.connected) {
       socket.emit('leave-chat');
     }
-    disconnectSocket();
+    // Deliberately staying connected: dropping the socket here would make this
+    // user unreachable, and reconnecting with the stranger they just left needs
+    // both sides online. The socket is cleaned up on unmount.
     setConnected(false);
+    setIsSearching(false);
     setShowReconnectButton(true);
+    setReconnectState(wasWithRealPerson ? 'available' : 'unavailable');
+  };
+
+  // Ask to be put back with the stranger we were just talking to. The server
+  // only reconnects when both sides ask, so this may sit in 'pending'.
+  const handleReconnect = () => {
+    const socket = connectSocket();
+    if (socket && socket.connected) {
+      socket.emit('reconnect-request');
+      setReconnectState('pending');
+    }
   };
 
   const handleFindNew = () => {
     // Reset bot state
     setIsBotChat(false);
+    setReconnectState('unavailable');
 
     const socket = connectSocket();
     if (socket && socket.connected) {
@@ -205,14 +239,63 @@ export default function ChatPage() {
 
     socket.emit('join', { interests });
 
+    socket.on('online-count', (count) => {
+      setOnlineCount(typeof count === 'number' ? count : 0);
+    });
+
     socket.on('matched', () => {
       // Real user matched — clear any bot state
       setIsBotChat(false);
+      setEndedWithAi(false);
 
       setConnected(true);
       setIsSearching(false);
       setShowReconnectButton(false);
+      setReconnectState('unavailable');
       setMessages((prev) => [...prev, { from: 'system', text: 'Stranger connected.' }]);
+    });
+
+    // A real person arrived while we were talking to the AI — hand over.
+    socket.on('bot-replaced', () => {
+      setIsBotChat(false);
+      setEndedWithAi(false);
+      setConnected(true);
+      setIsSearching(false);
+      setShowReconnectButton(false);
+      setIsTyping(false);
+      setReconnectState('unavailable');
+      // Drop the AI transcript: it belongs to a different conversation, and
+      // leaving it above a real stranger's messages is confusing.
+      setMessages([
+        {
+          from: 'system',
+          text: `Found you a real person — you're no longer with ${AI_DISPLAY_NAME}.`,
+        },
+        { from: 'system', text: 'Stranger connected.' },
+      ]);
+    });
+
+    // Reconnect handshake
+    socket.on('reconnect-offer', () => {
+      setReconnectState('available');
+      setMessages((prev) => [
+        ...prev,
+        { from: 'system', text: 'Your last stranger wants to reconnect.' },
+      ]);
+    });
+
+    socket.on('reconnect-pending', () => setReconnectState('pending'));
+
+    socket.on('reconnect-unavailable', () => setReconnectState('unavailable'));
+
+    socket.on('reconnected', () => {
+      setIsBotChat(false);
+      setEndedWithAi(false);
+      setConnected(true);
+      setIsSearching(false);
+      setShowReconnectButton(false);
+      setReconnectState('unavailable');
+      setMessages((prev) => [...prev, { from: 'system', text: 'Reconnected with your stranger.' }]);
     });
 
     // Bot matched — AI fallback when no real users available
@@ -221,8 +304,15 @@ export default function ChatPage() {
       setConnected(true);
       setIsSearching(false);
       setShowReconnectButton(false);
+      setReconnectState('unavailable');
 
-      setMessages((prev) => [...prev, { from: 'system', text: 'Stranger connected.' }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          from: 'system',
+          text: `No one's free right now — you're chatting with ${AI_DISPLAY_NAME}. We'll swap you to a real person as soon as one shows up.`,
+        },
+      ]);
 
       // Request greeting from server (server calls Gemini)
       const greetDelay = 800 + Math.random() * 1500;
@@ -263,21 +353,28 @@ export default function ChatPage() {
     // Bot auto-disconnected after 3-5 minutes
     socket.on('bot-disconnected', () => {
       setIsBotChat(false);
+      setEndedWithAi(true);
       setConnected(false);
       setIsSearching(false);
       setShowReconnectButton(true);
       setIsTyping(false);
-      setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
+      setMessages((prev) => [
+        ...prev,
+        { from: 'system', text: `${AI_DISPLAY_NAME} left the chat.` },
+      ]);
     });
 
     socket.on('message', (msg) => {
       setMessages((prev) => [...prev, { from: 'stranger', text: msg }]);
     });
 
-    socket.on('partner-left', () => {
+    socket.on('partner-left', (data) => {
+      setEndedWithAi(false);
       setConnected(false);
       setIsSearching(false);
       setShowReconnectButton(true);
+      // The server tells us whether they're still around to reconnect with.
+      setReconnectState(data && data.canReconnect ? 'available' : 'unavailable');
       setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
     });
     socket.on('image', (base64) => {
@@ -300,28 +397,10 @@ export default function ChatPage() {
     };
   }, []);
 
-  // 60-second search timeout (only for real user search — bot should kick in by 3s)
-  useEffect(() => {
-    let timeoutId;
-    if (isSearching && !connected) {
-      timeoutId = setTimeout(() => {
-        setIsSearching(false);
-        setShowReconnectButton(true);
-        setMessages((prev) => [
-          ...prev,
-          { from: 'system', text: 'No stranger found. Please try again.' },
-        ]);
-        const socket = connectSocket();
-        if (socket && socket.connected) {
-          socket.emit('leave-chat');
-        }
-        disconnectSocket();
-      }, 60000);
-    }
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [isSearching, connected]);
+  // There is deliberately no search timeout here any more. The server now
+  // waits a full minute for a real person and then hands the user to the AI,
+  // so searching always resolves — a client-side timeout would only race it
+  // and eject people out of a queue that was about to match them.
 
   function handleTyping() {
     if (connected && !isBotChat) {
@@ -332,25 +411,39 @@ export default function ChatPage() {
     }
   }
 
+  // The exit panel renders below the transcript, so it needs its own scroll
+  // target — scrolling to the very bottom would put its buttons above the fold.
   useEffect(() => {
-    if (chatRef.current) {
+    if (showReconnectButton && exitPanelRef.current && chatRef.current) {
+      // Relative scroll, so only the chat box moves. scrollIntoView would drag
+      // the whole page and push the site header off-screen.
+      const box = chatRef.current.getBoundingClientRect();
+      const panel = exitPanelRef.current.getBoundingClientRect();
+      chatRef.current.scrollTop += panel.top - box.top;
+    } else if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, showReconnectButton, isSearching]);
 
   return (
     <div className={styles.main}>
       <div className={styles.chatContainer}>
-        <div className={styles.chatBox} ref={chatRef}>
-          {isSearching && <p className={styles.system}>Finding a stranger...</p>}
+        <div className={styles.chatHeader}>
+          {/* The badge names the AI, so don't also call it a stranger. */}
+          <span className={styles.chatHeaderLabel}>
+            {isBotChat
+              ? 'Keeping you company'
+              : connected
+                ? 'Stranger'
+                : isSearching
+                  ? 'Searching…'
+                  : 'Not connected'}
+          </span>
+          {isBotChat && <AiBadge />}
+        </div>
 
-          {showReconnectButton && (
-            <div style={{ textAlign: 'center', margin: '1rem 0' }}>
-              <button onClick={handleFindNew} className={styles.findNewBtn}>
-                Find New Stranger
-              </button>
-            </div>
-          )}
+        <div className={styles.chatBox} ref={chatRef}>
+          {isSearching && <SearchingState mode="text" onlineCount={onlineCount} />}
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -383,7 +476,23 @@ export default function ChatPage() {
               )}
             </div>
           ))}
-          {isTyping && <div className={styles.typingIndicator}>Stranger is typing...</div>}
+          {isTyping && (
+            <div className={styles.typingIndicator}>
+              {isBotChat ? `${AI_DISPLAY_NAME} is typing...` : 'Stranger is typing...'}
+            </div>
+          )}
+          {showReconnectButton && (
+            <div ref={exitPanelRef}>
+              <DisconnectedPanel
+                mode="text"
+                title={endedWithAi ? `${AI_DISPLAY_NAME} left the chat` : 'Stranger disconnected'}
+                onFindNew={handleFindNew}
+                reconnectState={reconnectState}
+                onReconnect={handleReconnect}
+                onlineCount={onlineCount}
+              />
+            </div>
+          )}
         </div>
 
         <div className={styles.inputArea}>

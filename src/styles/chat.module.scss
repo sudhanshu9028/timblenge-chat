@@ -29,6 +29,25 @@
   position: relative;
 }
 
+// Identifies who you're talking to. Carries the AI badge, so it has to be
+// visible for the whole conversation rather than only at the start.
+.chatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: 0 $spacing-xs $spacing-sm;
+  margin-bottom: $spacing-xs;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 28px;
+}
+
+.chatHeaderLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
 .chatBox {
   display: flex;
   flex-direction: column;

@@ -53,11 +53,10 @@ export default function HomePage() {
           'Chat with strangers and make friends online. Anonymous video chat and text chat platform. No registration required.',
         url: 'https://anoniz.com',
         image: 'https://anoniz.com/logo.png',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.5',
-          ratingCount: '1000',
-        },
+        // No aggregateRating here on purpose. A rating with no reviews shown on
+        // the page is a self-serving rating under Google's structured data
+        // policy, and risks a manual action that would strip rich results
+        // site-wide. Add it back only alongside real, visible reviews.
         featureList: [
           'Video Chat with Strangers',
           'Text Chat',

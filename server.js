@@ -15,6 +15,25 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+// --- Matchmaking tunables -------------------------------------------------
+// Overridable by env so these can be tuned as traffic grows (and dropped right
+// down when testing) without a code change.
+const num = (name, fallback) => parseInt(process.env[name], 10) || fallback;
+
+// How long a user waits for a real human before the AI takes over. This used
+// to be 3s, which deleted them from the queue almost immediately and made it
+// nearly impossible for two real visitors to ever find each other.
+const BOT_FALLBACK_DELAY_MS = num('BOT_FALLBACK_DELAY_MS', 60_000);
+// A user already talking to the AI is handed back to a real human the moment
+// one shows up — unless they look genuinely engaged, in which case we leave
+// the conversation alone rather than yanking them out of it.
+const BOT_STEAL_MIN_AGE_MS = num('BOT_STEAL_MIN_AGE_MS', 90_000);
+const BOT_STEAL_MIN_MSGS = num('BOT_STEAL_MIN_MSGS', 4);
+// How long after a chat ends the two sides can still agree to reconnect.
+const RECONNECT_WINDOW_MS = num('RECONNECT_WINDOW_MS', 120_000);
+// Presence broadcast. Clients decide whether the number is worth showing.
+const ONLINE_BROADCAST_MS = num('ONLINE_BROADCAST_MS', 5_000);
+
 // In-memory queue and user pairing
 const waitingUsers = new Set();
 const userSocketMap = new Map();
@@ -35,6 +54,10 @@ const botConversations = new Map(); // socketId -> { personality, history: [] }
 const botMessageBuffers = new Map(); // socketId -> string[] (buffered messages)
 const botDebounceTimers = new Map(); // socketId -> timeoutId
 const botProcessing = new Set(); // socketIds currently waiting for API response
+
+// Reconnect-with-last-stranger state
+const lastPartner = new Map(); // socketId -> { partnerId, at }
+const reconnectWanted = new Set(); // socketIds that have asked to reconnect
 
 /**
  * Calculate a realistic typing delay based on reply length
@@ -74,7 +97,8 @@ function cleanupChatQueues(io) {
       userSocketMap.delete(socketId);
       userSocketMap.delete(partnerId);
       if (isSocketConnected(io, partnerId)) {
-        io.to(partnerId).emit('partner-left');
+        // The other side dropped off entirely, so there's nobody to reconnect to.
+        io.to(partnerId).emit('partner-left', { canReconnect: false });
       }
     }
   }
@@ -147,6 +171,84 @@ function findInterestMatchedPeer(waitingSet, socketId, io, interests) {
   return bestPeer || fallbackPeer;
 }
 
+/**
+ * Is this bot chat still interruptible?
+ * We steal a user back from the AI as soon as a real human is available, but
+ * not if they look genuinely invested in the conversation they're already in.
+ */
+function isStealableFromBot(socketId) {
+  const conv = botConversations.get(socketId);
+  if (!conv) return false;
+  const age = Date.now() - (conv.startedAt || 0);
+  // Counted as messages arrive, not from `history` — the bot handler debounces
+  // rapid messages into a single history entry, so a fast typer would otherwise
+  // read as barely engaged.
+  const userMsgs = conv.userMsgCount || 0;
+  return !(age > BOT_STEAL_MIN_AGE_MS && userMsgs >= BOT_STEAL_MIN_MSGS);
+}
+
+/**
+ * Find someone for this socket to talk to.
+ * Real users waiting in the queue always win. Only when there are none do we
+ * pull someone out of an AI chat — which is what lets two visitors arriving a
+ * minute apart still meet each other.
+ *
+ * @returns {{ peerId: string, fromBot: boolean } | null}
+ */
+function findAnyPeer(io, socketId, interests) {
+  const waiting = findInterestMatchedPeer(waitingUsers, socketId, io, interests);
+  if (waiting) return { peerId: waiting, fromBot: false };
+
+  const stealable = new Set(
+    Array.from(botUsers).filter((id) => isSocketConnected(io, id) && isStealableFromBot(id))
+  );
+  const stolen = findInterestMatchedPeer(stealable, socketId, io, interests);
+  return stolen ? { peerId: stolen, fromBot: true } : null;
+}
+
+/**
+ * Can `socketId` still reconnect with the person they were last talking to?
+ * Both sides have to still point at each other, the ex has to be online and
+ * unpaired, and the window has to be open.
+ */
+function getReconnectableEx(io, socketId) {
+  const record = lastPartner.get(socketId);
+  if (!record) return null;
+
+  const { partnerId, at } = record;
+  if (Date.now() - at > RECONNECT_WINDOW_MS) return null;
+  if (!isSocketConnected(io, partnerId)) return null;
+  if (userSocketMap.has(partnerId)) return null;
+
+  // Symmetry check — blocks a stale one-sided claim after the ex moved on.
+  const theirs = lastPartner.get(partnerId);
+  if (!theirs || theirs.partnerId !== socketId) return null;
+
+  return partnerId;
+}
+
+/** Remember a finished pairing so both sides can offer to reconnect. */
+function rememberPartners(a, b) {
+  const at = Date.now();
+  lastPartner.set(a, { partnerId: b, at });
+  lastPartner.set(b, { partnerId: a, at });
+}
+
+/**
+ * This socket is no longer reconnectable (left, or matched with someone else).
+ * Tell whoever was waiting on them so the button disappears.
+ */
+function cancelReconnect(io, socketId) {
+  reconnectWanted.delete(socketId);
+  const record = lastPartner.get(socketId);
+  if (record && reconnectWanted.has(record.partnerId)) {
+    reconnectWanted.delete(record.partnerId);
+    if (isSocketConnected(io, record.partnerId)) {
+      io.to(record.partnerId).emit('reconnect-unavailable');
+    }
+  }
+}
+
 // Periodic cleanup function
 function startPeriodicCleanup(io) {
   setInterval(() => {
@@ -170,7 +272,20 @@ app.prepare().then(() => {
   // Start periodic cleanup
   startPeriodicCleanup(io);
 
+  // Presence. The socket only connects on /chat and /video, so this is a
+  // genuine count of people in a conversation or a queue right now.
+  const getOnlineCount = () => io.engine.clientsCount;
+  const broadcastOnlineCount = () => io.emit('online-count', getOnlineCount());
+  setInterval(broadcastOnlineCount, ONLINE_BROADCAST_MS);
+
+  server.get('/api/online', (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    res.json({ count: getOnlineCount() });
+  });
+
   io.on('connection', (socket) => {
+    socket.emit('online-count', getOnlineCount());
+    broadcastOnlineCount();
     // Helper to clear bot timers for a socket
     function clearBotTimers(socketId) {
       if (botTimers.has(socketId)) {
@@ -198,7 +313,14 @@ app.prepare().then(() => {
           waitingUsers.delete(socketId);
           const { personality, index } = getRandomPersonality();
           botUsers.add(socketId);
-          botConversations.set(socketId, { personality, history: [] });
+          botConversations.set(socketId, {
+            personality,
+            history: [],
+            startedAt: Date.now(),
+            userMsgCount: 0,
+          });
+          // They're in a conversation now, so they can't be reconnected with.
+          cancelReconnect(io, socketId);
           socket.emit('bot-matched', { personalityIndex: index });
 
           // Auto-end bot chat after 3-5 minutes
@@ -211,8 +333,30 @@ app.prepare().then(() => {
           }, getAutoDisconnectTime());
           botAutoEndTimers.set(socketId, autoEndTimer);
         }
-      }, 3000); // 3 second wait before bot fallback
+      }, BOT_FALLBACK_DELAY_MS);
       botTimers.set(socketId, timerId);
+    }
+
+    /**
+     * Pair two sockets and tell them both. When the peer was mid-AI-chat we
+     * send `bot-replaced` instead, so their client can frame it as an upgrade
+     * rather than a partner walking out.
+     */
+    function pairSockets(socketId, peerId, { fromBot = false } = {}) {
+      waitingUsers.delete(socketId);
+      waitingUsers.delete(peerId);
+
+      clearBotTimers(socketId);
+      clearBotTimers(peerId);
+
+      cancelReconnect(io, socketId);
+      cancelReconnect(io, peerId);
+
+      userSocketMap.set(socketId, peerId);
+      userSocketMap.set(peerId, socketId);
+
+      io.to(socketId).emit('matched');
+      io.to(peerId).emit(fromBot ? 'bot-replaced' : 'matched');
     }
 
     // Leave chat handler - properly remove from chat queues
@@ -220,7 +364,9 @@ app.prepare().then(() => {
       clearBotTimers(socket.id);
       const partnerId = userSocketMap.get(socket.id);
       if (partnerId) {
-        io.to(partnerId).emit('partner-left');
+        // Both sides are still online here, so either can offer to reconnect.
+        rememberPartners(socket.id, partnerId);
+        io.to(partnerId).emit('partner-left', { canReconnect: true });
         userSocketMap.delete(partnerId);
       }
       waitingUsers.delete(socket.id);
@@ -239,6 +385,40 @@ app.prepare().then(() => {
       videoWaitingUsers.delete(socket.id);
       videoUserReady.delete(socket.id);
       userInterests.delete(socket.id);
+    });
+
+    // Reconnect with the last stranger — only fires when both sides ask.
+    socket.on('reconnect-request', () => {
+      const exId = getReconnectableEx(io, socket.id);
+      if (!exId) {
+        socket.emit('reconnect-unavailable');
+        reconnectWanted.delete(socket.id);
+        return;
+      }
+
+      if (reconnectWanted.has(exId)) {
+        // They asked first — put them back together.
+        reconnectWanted.delete(exId);
+        reconnectWanted.delete(socket.id);
+
+        waitingUsers.delete(socket.id);
+        waitingUsers.delete(exId);
+        clearBotTimers(socket.id);
+        clearBotTimers(exId);
+
+        userSocketMap.set(socket.id, exId);
+        userSocketMap.set(exId, socket.id);
+        lastPartner.delete(socket.id);
+        lastPartner.delete(exId);
+
+        io.to(socket.id).emit('reconnected');
+        io.to(exId).emit('reconnected');
+      } else {
+        // Wait for them, and nudge them so they know the offer is open.
+        reconnectWanted.add(socket.id);
+        socket.emit('reconnect-pending');
+        io.to(exId).emit('reconnect-offer');
+      }
     });
 
     // Join queue
@@ -261,25 +441,11 @@ app.prepare().then(() => {
       // Remove socket from queue before finding peer (prevents self-matching)
       waitingUsers.delete(socket.id);
 
-      // Try to find someone with shared interests first, fallback to random
-      const peerId = findInterestMatchedPeer(
-        waitingUsers,
-        socket.id,
-        io,
-        userInterests.get(socket.id)
-      );
+      // Real waiting users first, then anyone we can pull out of an AI chat
+      const match = findAnyPeer(io, socket.id, userInterests.get(socket.id));
 
-      if (peerId && isSocketConnected(io, peerId)) {
-        waitingUsers.delete(peerId);
-        userSocketMap.set(socket.id, peerId);
-        userSocketMap.set(peerId, socket.id);
-
-        // Cancel bot timers for both users since they matched with a real person
-        clearBotTimers(socket.id);
-        clearBotTimers(peerId);
-
-        socket.emit('matched');
-        io.to(peerId).emit('matched');
+      if (match) {
+        pairSockets(socket.id, match.peerId, { fromBot: match.fromBot });
       } else {
         // No valid peer found, add to queue
         waitingUsers.add(socket.id);
@@ -298,10 +464,15 @@ app.prepare().then(() => {
     // Bot message handler — debounces rapid messages and simulates typing speed
     socket.on('bot-message', (msg) => {
       if (!botUsers.has(socket.id)) return;
-      if (!botConversations.has(socket.id)) {
+      const conv = botConversations.get(socket.id);
+      if (!conv) {
         socket.emit('bot-disconnected');
         return;
       }
+
+      // Tracked here rather than from history, which merges debounced messages.
+      // This is what the steal guard reads to judge engagement.
+      conv.userMsgCount = (conv.userMsgCount || 0) + 1;
 
       // Buffer the message
       if (!botMessageBuffers.has(socket.id)) {
@@ -344,33 +515,11 @@ app.prepare().then(() => {
       const reply = await callGeminiAPI(buildSystemPrompt(conv.personality), conv.history);
 
       if (!reply) {
-        // API returned null (likely safety filter) — send a denial first, then disconnect
-        const denials = [
-          'lmao what no im just a person',
-          'bruh no 💀 why would u think that',
-          'no lol im real',
-          'haha nah im definitely not an AI',
-          'umm no? im literally a real person',
-          'nooo lol thats funny tho',
-        ];
-        const denial = denials[Math.floor(Math.random() * denials.length)];
-        conv.history.push({ role: 'bot', text: denial });
-
-        // Simulate typing delay for the denial
-        const denialDelay = getTypingDelay(denial);
-        await new Promise((resolve) => setTimeout(resolve, denialDelay));
-
-        socket.emit('bot-reply', denial);
+        // API returned nothing (usually a safety filter). End the chat cleanly
+        // rather than faking an offended human — the AI is labelled now.
         botProcessing.delete(socket.id);
-
-        // Disconnect after 3-5 seconds (acts like the "person" got annoyed and left)
-        const leaveDelay = 3000 + Math.random() * 2000;
-        setTimeout(() => {
-          if (botUsers.has(socket.id)) {
-            clearBotTimers(socket.id);
-            socket.emit('bot-disconnected');
-          }
-        }, leaveDelay);
+        clearBotTimers(socket.id);
+        socket.emit('bot-disconnected');
         return;
       }
 
@@ -427,7 +576,8 @@ app.prepare().then(() => {
       const partnerId = userSocketMap.get(socket.id);
 
       if (partnerId && isSocketConnected(io, partnerId)) {
-        io.to(partnerId).emit('partner-left');
+        // This user chose someone new, so they aren't reconnectable.
+        io.to(partnerId).emit('partner-left', { canReconnect: false });
         waitingUsers.delete(partnerId);
         userSocketMap.delete(partnerId);
       }
@@ -451,26 +601,15 @@ app.prepare().then(() => {
       // Clear any existing bot timers
       clearBotTimers(socket.id);
 
-      // Try to pair with interest-matched peer first, fallback to random
-      const peerId = findInterestMatchedPeer(
-        waitingUsers,
-        socket.id,
-        io,
-        userInterests.get(socket.id)
-      );
+      // Moving on means giving up the reconnect offer
+      cancelReconnect(io, socket.id);
+      lastPartner.delete(socket.id);
 
-      if (peerId && isSocketConnected(io, peerId)) {
-        waitingUsers.delete(peerId);
-        waitingUsers.delete(socket.id);
-        userSocketMap.set(socket.id, peerId);
-        userSocketMap.set(peerId, socket.id);
+      // Real waiting users first, then anyone we can pull out of an AI chat
+      const match = findAnyPeer(io, socket.id, userInterests.get(socket.id));
 
-        // Cancel bot timers for both users
-        clearBotTimers(socket.id);
-        clearBotTimers(peerId);
-
-        socket.emit('matched');
-        io.to(peerId).emit('matched');
+      if (match) {
+        pairSockets(socket.id, match.peerId, { fromBot: match.fromBot });
       } else {
         // No valid peer found, add to queue
         waitingUsers.add(socket.id);
@@ -483,10 +622,14 @@ app.prepare().then(() => {
       // Clear bot timers
       clearBotTimers(socket.id);
 
+      // They closed the tab — anyone holding a reconnect offer needs to know.
+      cancelReconnect(io, socket.id);
+      lastPartner.delete(socket.id);
+
       // Handle chat disconnect
       const partnerId = userSocketMap.get(socket.id);
       if (partnerId && isSocketConnected(io, partnerId)) {
-        io.to(partnerId).emit('partner-left');
+        io.to(partnerId).emit('partner-left', { canReconnect: false });
         waitingUsers.delete(partnerId);
         userSocketMap.delete(partnerId);
       }
@@ -503,6 +646,8 @@ app.prepare().then(() => {
       videoWaitingUsers.delete(socket.id);
       videoUserReady.delete(socket.id);
       userInterests.delete(socket.id);
+
+      broadcastOnlineCount();
     });
 
     socket.on('image', (base64Image) => {
