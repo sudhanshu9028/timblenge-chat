@@ -3,11 +3,17 @@
 import { useEffect, useState } from 'react';
 import styles from '@/styles/chatPanels.module.scss';
 import { AI_DISPLAY_NAME } from '@/lib/aiIdentity';
+import RiddleGame from './RiddleGame';
+import PrimeTimeBanner from './PrimeTimeBanner';
+import { getPrimeTimeState } from '@/lib/primeTime';
 
 // Only show a real number once there are enough people for it to read as
 // "this place is alive" rather than "you are almost alone". Below this we say
 // nothing — an honest silence beats an inflated counter.
 const ONLINE_COUNT_MIN = 5;
+
+// Long enough that a fast match isn't interrupted by a game appearing.
+const RIDDLE_AFTER_SECONDS = 15;
 
 /**
  * The waiting state for both chat and video.
@@ -16,7 +22,7 @@ const ONLINE_COUNT_MIN = 5;
  * them something to read while the queue works. The copy changes as time
  * passes so the wait feels like progress rather than a hang.
  */
-export default function SearchingState({ mode = 'text', onlineCount = 0 }) {
+export default function SearchingState({ mode = 'text', onlineCount = 0, showRiddle = true }) {
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -30,6 +36,7 @@ export default function SearchingState({ mode = 'text', onlineCount = 0 }) {
 
   // Text chat hands over to the AI at 60s, so warn just before it happens.
   const showAiHint = mode === 'text' && elapsed >= 35;
+  const primeTimeSoon = getPrimeTimeState().status !== 'later';
 
   return (
     <div className={styles.searching}>
@@ -47,6 +54,11 @@ export default function SearchingState({ mode = 'text', onlineCount = 0 }) {
           {onlineCount} people online right now
         </p>
       )}
+
+      {showRiddle && elapsed >= RIDDLE_AFTER_SECONDS && <RiddleGame />}
+
+      {/* Only mention Prime Time when it's close enough to act on. */}
+      {elapsed >= 20 && primeTimeSoon && <PrimeTimeBanner variant="compact" />}
 
       {showAiHint && (
         <p className={styles.searchingHint}>

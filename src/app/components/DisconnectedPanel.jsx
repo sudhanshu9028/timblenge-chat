@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPanelPosts } from '@/lib/blogRegistry';
+import PushPrompt from './PushPrompt';
+import { getProfileSummary } from '@/lib/profile';
 import styles from '@/styles/chatPanels.module.scss';
 
 const ONLINE_COUNT_MIN = 5;
@@ -21,6 +23,9 @@ const ONLINE_COUNT_MIN = 5;
  * @param {'unavailable'|'available'|'pending'} reconnectState
  * @param {() => void}     onReconnect   ask to reconnect with the last stranger
  * @param {number}         onlineCount   live presence, from the socket
+ * @param {boolean}        pushEligible  true after a conversation worth
+ *                                       following up on — we only ask for
+ *                                       notification permission then
  */
 export default function DisconnectedPanel({
   mode = 'text',
@@ -29,9 +34,14 @@ export default function DisconnectedPanel({
   reconnectState = 'unavailable',
   onReconnect,
   onlineCount = 0,
+  pushEligible = false,
 }) {
   // Picked once per mount so the list doesn't reshuffle on every re-render.
   const [posts] = useState(() => getPanelPosts(3));
+  // Read after mount: the profile lives in localStorage, which the server
+  // can't see, so rendering it directly would mismatch on hydration.
+  const [summary, setSummary] = useState(null);
+  useEffect(() => setSummary(getProfileSummary()), []);
 
   const otherMode = mode === 'text' ? 'video' : 'text';
   const otherHref = otherMode === 'video' ? '/video' : '/chat';
@@ -68,6 +78,10 @@ export default function DisconnectedPanel({
           {otherMode === 'video' ? 'Try video chat instead' : 'Try text chat instead'}
         </Link>
       </div>
+
+      <PushPrompt eligible={pushEligible} />
+
+      {summary && <p className={styles.profileSummary}>{summary}</p>}
 
       {posts.length > 0 && (
         <div className={styles.panelReads}>

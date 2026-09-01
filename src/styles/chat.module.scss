@@ -103,6 +103,15 @@
   }
 }
 
+// When the Would You Rather chip sits between the transcript and the composer,
+// pull this margin in so the chip has equal, compact breathing room on both
+// sides rather than the full section gap above it. Declared after .chatBox
+// because they have the same specificity — source order is what decides.
+// Keep in sync with .gameChipRow's margin-bottom in game.module.scss.
+.chatBoxWithChip {
+  margin-bottom: $spacing-md;
+}
+
 .inputArea {
   display: flex;
   gap: $spacing-sm;
@@ -287,6 +296,10 @@
     padding: $spacing-sm;
     margin-bottom: $spacing-sm;
     gap: $spacing-xs;
+  }
+
+  .chatBoxWithChip {
+    margin-bottom: $spacing-sm;
   }
 
   .inputArea {

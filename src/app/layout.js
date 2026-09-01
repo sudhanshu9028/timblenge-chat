@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import Navigation from './components/Navigation';
+import AnalyticsBootstrap from './components/AnalyticsBootstrap';
 import Footer from './components/Footer';
 import './globals.css';
 
@@ -79,13 +80,47 @@ export default function RootLayout({ children }) {
           async
         />
 
-        {/* <!-- Google tag (gtag.js) - Deferred to improve LCP --> */}
+        {/*
+          Consent Mode v2 defaults. This runs before the tag loads, which is
+          the only point at which defaults are allowed to be set.
+
+          The `region` override lets Google resolve geography itself, so EEA
+          and UK visitors get a fully-denied default (GA4 still receives
+          cookieless modelled pings) without us needing an IP lookup or a
+          consent banner. Everywhere else keeps analytics_storage granted.
+        */}
+        <Script id="ga-consent" strategy="beforeInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'granted'
+    });
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH']
+    });
+  `}
+        </Script>
+
+        {/*
+          afterInteractive, not lazyOnload. lazyOnload waits for window load
+          plus browser idle, so visitors who bounce in the first few seconds
+          never fired a pageview at all — which shrank the numbers and, worse,
+          biased them toward whichever traffic sources bounce least.
+        */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-7LNMKJ3NBQ"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
 
-        <Script id="ga-setup" strategy="lazyOnload">
+        <Script id="ga-setup" strategy="afterInteractive">
           {`
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -95,6 +130,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body className="antialiased">
+        <AnalyticsBootstrap />
         <Navigation />
         {children}
         <Footer />

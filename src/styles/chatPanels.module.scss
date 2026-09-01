@@ -373,3 +373,118 @@
     animation: none;
   }
 }
+
+// ============================================
+// Riddle game (waiting screen)
+// ============================================
+
+.riddle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: $container-sm;
+  margin-top: $spacing-sm;
+  padding: $padding-xs;
+  border-radius: $radius-base;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.riddleLabel {
+  margin: 0;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-text-muted;
+}
+
+.riddleQuestion {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  color: $color-text-primary;
+}
+
+.riddleAnswer {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-violet-light;
+}
+
+.riddleActions {
+  display: flex;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.riddleBtn,
+.riddleBtnPrimary {
+  padding: $spacing-xs $padding-xs;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  font-family: inherit;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
+.riddleBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-accent-violet;
+  }
+}
+
+.riddleBtnPrimary {
+  background: $gradient-accent;
+  border: 1px solid transparent;
+  color: $color-text-white;
+
+  &:hover {
+    background: $gradient-accent-hover;
+  }
+}
+
+// ============================================
+// Push prompt + profile summary
+// ============================================
+
+.push {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+  max-width: $container-sm;
+}
+
+.pushHint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: $line-height-normal;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+// The visitor's own history — the closest thing an account-free product has
+// to a sense of continuity.
+.profileSummary {
+  margin: 0;
+  max-width: 34ch;
+  font-size: $font-size-xs;
+  line-height: $line-height-relaxed;
+  color: $color-accent-violet-light;
+}

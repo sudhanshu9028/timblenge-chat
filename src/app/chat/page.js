@@ -104,6 +104,31 @@ export default function ChatPage() {
           </div>
 
           <div className={styles.seoQa}>
+            <p className={styles.seoQuestion}>What happened to Omegle?</p>
+            <p className={styles.seoText}>
+              Omegle shut down in November 2023 after fourteen years, following a lawsuit and years
+              of moderation problems. Anoniz does the same one-to-one stranger matching without the
+              things that got Omegle in trouble.{' '}
+              <Link href="/blog/why-did-omegle-shut-down-where-everyone-went-2026">
+                The full story is here
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className={styles.seoQa}>
+            <p className={styles.seoQuestion}>What do I say when the conversation dies?</p>
+            <p className={styles.seoText}>
+              Change direction rather than forcing the topic along, or start a game — we build Would
+              You Rather into the chat and offer it automatically when things go quiet.{' '}
+              <Link href="/blog/what-to-say-when-conversation-dies-stranger-chat">
+                More ways to restart a stalled chat
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className={styles.seoQa}>
             <p className={styles.seoQuestion}>Can someone find me afterwards?</p>
             <p className={styles.seoText}>
               No. There are no profiles and no usernames, so there&apos;s nothing to look up once
@@ -137,6 +162,21 @@ export default function ChatPage() {
             <li>
               <Link href="/blog/how-to-practice-social-skills-and-overcome-anxiety-online">
                 Practising social skills online
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/what-to-say-when-conversation-dies-stranger-chat">
+                What to say when a conversation dies
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/would-you-rather-questions-to-get-to-know-someone">
+                Would You Rather questions that go somewhere
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/why-random-chat-sites-are-full-of-bots">
+                Why random chat sites are full of bots
               </Link>
             </li>
           </ul>

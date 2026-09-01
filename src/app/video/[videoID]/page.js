@@ -7,6 +7,8 @@ import { connectSocket, disconnectSocket } from '@/lib/socket';
 import SearchingState from '@/app/components/SearchingState';
 import DisconnectedPanel from '@/app/components/DisconnectedPanel';
 import WaitingOptions from '@/app/components/WaitingOptions';
+import { track, EVENTS } from '@/lib/analytics';
+import { bump, recordChatDuration } from '@/lib/profile';
 import styles from '@/styles/video.module.scss';
 
 // How long we search before offering something else to do. The search itself
@@ -38,6 +40,8 @@ export default function VideoPage() {
   const stoppedRef = useRef(false);
   const notifyArmedRef = useRef(false);
   const titleFlashRef = useRef(null);
+  // Set when a call actually connects, so chat_ended fires once per call.
+  const matchedAtRef = useRef(null);
 
   // Ask once, on an explicit click — browsers ignore (and users resent)
   // permission prompts that fire on page load.
@@ -55,8 +59,10 @@ export default function VideoPage() {
       if (permission === 'granted') {
         notifyArmedRef.current = true;
         setNotifyState('granted');
+        track(EVENTS.PUSH_SUBSCRIBED, { kind: 'in_tab', mode: 'video' });
       } else {
         setNotifyState('denied');
+        track(EVENTS.PUSH_DENIED, { kind: 'in_tab', mode: 'video' });
       }
     } catch {
       setNotifyState('denied');
@@ -187,6 +193,10 @@ export default function VideoPage() {
             .filter(Boolean)
         : [];
       socket.emit('video-ready', { interests });
+      track(EVENTS.QUEUE_JOINED, {
+        mode: 'video',
+        has_interests: interests.length ? 'yes' : 'no',
+      });
       setVideoReady(true);
     }
     // Only auto-join if not stopped and conditions are met
@@ -235,6 +245,9 @@ export default function VideoPage() {
       setConnected(true);
       setShowReconnectButton(false);
       setShowWaitingOptions(false);
+      matchedAtRef.current = Date.now();
+      track(EVENTS.MATCH_HUMAN, { mode: 'video' });
+      bump({ strangersMet: 1 });
       stoppedRef.current = false; // Reset stopped flag when matched
 
       try {
@@ -406,6 +419,16 @@ export default function VideoPage() {
   }, []);
 
   const endCall = () => {
+    if (matchedAtRef.current) {
+      const durationSec = Math.round((Date.now() - matchedAtRef.current) / 1000);
+      track(EVENTS.CHAT_ENDED, {
+        mode: 'video',
+        partner_type: 'human',
+        duration_sec: durationSec,
+      });
+      recordChatDuration(durationSec);
+      matchedAtRef.current = null;
+    }
     setConnected(false);
     setIsSearching(false);
     setShowReconnectButton(true);
@@ -421,6 +444,7 @@ export default function VideoPage() {
   };
 
   const handleNext = () => {
+    track(EVENTS.NEXT_CLICKED, { mode: 'video' });
     // Set stopped flag to prevent auto-rejoining
     stoppedRef.current = true;
     // Emit video-stop to notify partner
@@ -493,7 +517,7 @@ export default function VideoPage() {
 
         {isSearching && (
           <div className={styles.searchOverlay}>
-            <SearchingState mode="video" onlineCount={onlineCount} />
+            <SearchingState mode="video" onlineCount={onlineCount} showRiddle={false} />
           </div>
         )}
 

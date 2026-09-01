@@ -50,6 +50,9 @@ const PANEL_SLUGS = [
   'text-chat-vs-video-chat-which-is-better',
   'cant-sleep-late-night-chat-with-strangers',
   'best-omegle-alternatives-safe-free-random-chat',
+  'what-to-say-when-conversation-dies-stranger-chat',
+  'would-you-rather-questions-to-get-to-know-someone',
+  'why-random-chat-sites-are-full-of-bots',
 ];
 
 /**

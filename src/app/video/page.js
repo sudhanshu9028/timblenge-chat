@@ -104,6 +104,30 @@ export default function VideoPage() {
           </div>
 
           <div className={styles.seoQa}>
+            <p className={styles.seoQuestion}>How do I know I&apos;m not talking to a bot?</p>
+            <p className={styles.seoText}>
+              Video chat is human-only on Anoniz — our AI is text-only, and it is labelled with a
+              visible badge whenever it appears. Many random chat sites are not this clear about it.{' '}
+              <Link href="/blog/why-random-chat-sites-are-full-of-bots">
+                Here&apos;s how to spot a bot anywhere else
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className={styles.seoQa}>
+            <p className={styles.seoQuestion}>What happened to Omegle&apos;s video chat?</p>
+            <p className={styles.seoText}>
+              Omegle closed in November 2023 and took its video chat with it. Anoniz offers the same
+              browser-based, one-to-one random video without an app or an account.{' '}
+              <Link href="/blog/why-did-omegle-shut-down-where-everyone-went-2026">
+                Read what happened
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className={styles.seoQa}>
             <p className={styles.seoQuestion}>Does it work on a phone?</p>
             <p className={styles.seoText}>
               Yes, in any modern mobile browser. Allow camera access when prompted.
@@ -132,6 +156,11 @@ export default function VideoPage() {
             <li>
               <Link href="/blog/best-omegle-alternatives-safe-free-random-chat">
                 The best Omegle alternatives
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/why-random-chat-sites-are-full-of-bots">
+                Why random chat sites are full of bots
               </Link>
             </li>
           </ul>

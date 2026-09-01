@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import styles from '@/styles/home.module.scss';
 import HeroCTA from './components/HeroCTA';
+import PrimeTimeBanner from './components/PrimeTimeBanner';
+import ProfileLine from './components/ProfileLine';
 import { HOME_FAQ_ITEMS } from '@/lib/homeFaqData';
 
 // Homepage-specific metadata. The root layout only supplies site-wide defaults,
@@ -106,6 +108,12 @@ export default function HomePage() {
           create, and nothing stored once you disconnect. Text or video, straight from your browser.
         </p>
         <HeroCTA styles={styles} />
+
+        {/* Concentrating traffic into one advertised hour is the cheapest
+            liquidity tool available to a real-time product this size. */}
+        <PrimeTimeBanner />
+
+        <ProfileLine />
       </section>
 
       {/* Dynamic load below-the-fold content with SSR enabled to improve LCP */}

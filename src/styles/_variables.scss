@@ -112,7 +112,8 @@ $radius-base: 0.75rem;
 $radius-md: 1rem;
 $radius-lg: 1.25rem;
 $radius-xl: 1.5rem;
-$radius-full: 50%;
+$radius-full: 50%; // circles only — on a wide element this gives an ellipse
+$radius-pill: 999px; // pills: capsule ends regardless of width
 $radius-image: 10px;
 
 // Box Shadows

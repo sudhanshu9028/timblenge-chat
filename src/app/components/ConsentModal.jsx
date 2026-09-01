@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import { track, EVENTS } from '@/lib/analytics';
 import styles from '@/styles/consentModal.module.scss';
 
 export default function ConsentModal({ isOpen, onClose, chatType }) {
@@ -11,6 +12,12 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+
+  // The age gate is the first thing between a visitor and the product, so the
+  // shown/completed pair is what tells us how many bounce off it.
+  useEffect(() => {
+    if (isOpen) track(EVENTS.CONSENT_SHOWN, { chat_type: chatType });
+  }, [isOpen, chatType]);
 
   const handleClose = () => {
     if (onClose) {
@@ -31,6 +38,11 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
     }
 
     setError('');
+
+    track(EVENTS.CONSENT_COMPLETED, {
+      chat_type: chatType,
+      has_interests: interests.trim() ? 'yes' : 'no',
+    });
 
     // Store interests if provided
     if (interests.trim()) {
@@ -113,9 +125,7 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
               <span>Prefer not to say</span>
             </button>
           </div>
-          <p className={styles.genderWarning}>
-            *You cannot change your gender after you register.
-          </p>
+          <p className={styles.genderWarning}>*You cannot change your gender after you register.</p>
         </div>
 
         <div className={styles.divider}></div>
@@ -160,11 +170,7 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
           </label>
         </div>
 
-        {error && (
-          <div className={styles.errorMessage}>
-            {error}
-          </div>
-        )}
+        {error && <div className={styles.errorMessage}>{error}</div>}
 
         <button
           className={styles.proceedButton}

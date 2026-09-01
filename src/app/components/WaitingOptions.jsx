@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getPanelPosts } from '@/lib/blogRegistry';
+import RiddleGame from './RiddleGame';
 import styles from '@/styles/chatPanels.module.scss';
 
 const ONLINE_COUNT_MIN = 5;
@@ -67,6 +68,8 @@ export default function WaitingOptions({
           </button>
         )}
       </div>
+
+      <RiddleGame />
 
       {posts.length > 0 && (
         <div className={styles.panelReads}>
