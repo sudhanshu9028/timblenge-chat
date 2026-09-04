@@ -29,6 +29,25 @@
   position: relative;
 }
 
+// Identifies who you're talking to. Carries the AI badge, so it has to be
+// visible for the whole conversation rather than only at the start.
+.chatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: 0 $spacing-xs $spacing-sm;
+  margin-bottom: $spacing-xs;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 28px;
+}
+
+.chatHeaderLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
 .chatBox {
   display: flex;
   flex-direction: column;
@@ -82,6 +101,15 @@
     margin-bottom: $position-offset-sm;
     text-align: center;
   }
+}
+
+// When the Would You Rather chip sits between the transcript and the composer,
+// pull this margin in so the chip has equal, compact breathing room on both
+// sides rather than the full section gap above it. Declared after .chatBox
+// because they have the same specificity — source order is what decides.
+// Keep in sync with .gameChipRow's margin-bottom in game.module.scss.
+.chatBoxWithChip {
+  margin-bottom: $spacing-md;
 }
 
 .inputArea {
@@ -268,6 +296,10 @@
     padding: $spacing-sm;
     margin-bottom: $spacing-sm;
     gap: $spacing-xs;
+  }
+
+  .chatBoxWithChip {
+    margin-bottom: $spacing-sm;
   }
 
   .inputArea {

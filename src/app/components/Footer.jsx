@@ -4,17 +4,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import AnonizLogo from './AnonizLogo';
 import styles from '@/styles/footer.module.scss';
+import { track, EVENTS } from '@/lib/analytics';
 
 export default function Footer() {
   const pathname = usePathname();
 
-  // GA4 click tracking
-  const trackClick = (label) => {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      const platform = window.innerWidth <= 768 ? 'mweb' : 'web';
-      window.gtag('event', `footer_${label}`, { platform });
-    }
-  };
+  const trackClick = (label) => track(EVENTS.FOOTER_CLICK, { label });
 
   // Hide footer on chat and video pages
   if (pathname?.startsWith('/chat') || pathname?.startsWith('/video')) {

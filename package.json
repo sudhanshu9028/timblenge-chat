@@ -8,11 +8,11 @@
     "analyze": "cross-env ANALYZE=true next build",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "indexnow": "node scripts/indexnow.js"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^15.2.4",
-    "@react-spring/web": "^9.7.5",
     "cloudinary": "^2.6.1",
     "express": "^5.1.0",
     "next": "15.2.4",
@@ -20,10 +20,10 @@
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-tinder-card": "^1.6.4",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -5,18 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AnonizLogo from './AnonizLogo';
 import styles from '@/styles/navigation.module.scss';
+import { track, EVENTS } from '@/lib/analytics';
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // GA4 click tracking
-  const trackClick = (section, label) => {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      const platform = window.innerWidth <= 768 ? 'mweb' : 'web';
-      window.gtag('event', `${section}_${label}`, { platform });
-    }
-  };
+  // One event name, varying parameters. Interpolating the name would mint a
+  // new GA4 event for every link — the property caps out at 500 names.
+  const trackClick = (section, label) => track(EVENTS.NAV_CLICK, { section, label });
 
   const navLinks = [
     { href: '/', label: 'Home' },

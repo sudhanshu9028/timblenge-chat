@@ -1,14 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { track, EVENTS } from '@/lib/analytics';
 
 export default function HeroCTA({ styles }) {
-  const trackClick = (buttonName) => {
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      const platform = window.innerWidth <= 768 ? 'mweb' : 'web';
-      window.gtag('event', `home_${buttonName}`, { platform });
-    }
-  };
+  const trackClick = (target) => track(EVENTS.CTA_CLICK, { location: 'home', target });
 
   return (
     <div className={styles.heroCTA}>

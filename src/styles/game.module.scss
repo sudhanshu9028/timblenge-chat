@@ -1,0 +1,278 @@
+@use './variables' as *;
+
+// Would You Rather, rendered inline in the chat transcript.
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  margin: $spacing-sm 0;
+  padding: $padding-xs;
+  border-radius: $radius-base;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  text-align: center;
+}
+
+.gameRound {
+  margin: 0;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-text-muted;
+}
+
+.gameTitle {
+  margin: 0;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.gameMuted {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.gameAgreed {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: #4ade80; // green-400
+}
+
+// The running agreement score is the retention hook — it gives two strangers
+// a shared result to talk about within ninety seconds.
+.gameScore {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $color-accent-violet-light;
+  font-weight: $font-weight-semibold;
+}
+
+.gameOptions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.gameChoice {
+  width: 100%;
+  padding: $spacing-md $padding-xs;
+  border-radius: $radius-sm;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: $color-text-primary;
+  font-family: inherit;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba(168, 85, 247, 0.16);
+    border-color: $color-accent-violet;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
+.gameChoicePicked {
+  opacity: 1;
+  background: rgba(168, 85, 247, 0.22);
+  border-color: $color-accent-violet;
+}
+
+.gameOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $padding-xs;
+  border-radius: $radius-sm;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+  text-align: left;
+}
+
+.gameOptionPicked {
+  background: rgba(168, 85, 247, 0.14);
+  border-color: rgba(168, 85, 247, 0.45);
+  color: $color-text-primary;
+}
+
+.gameTags {
+  display: flex;
+  gap: $spacing-xs;
+  flex: none;
+}
+
+.gameTagYou,
+.gameTagThem {
+  padding: 2px $spacing-xs;
+  border-radius: $border-radius-small;
+  font-size: 0.7rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.gameTagYou {
+  background: rgba(236, 72, 153, 0.25);
+  color: $color-accent-light;
+}
+
+.gameTagThem {
+  background: rgba(129, 140, 248, 0.25);
+  color: $color-accent-indigo;
+}
+
+.gameActions {
+  display: flex;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gameBtn,
+.gameBtnPrimary {
+  padding: $spacing-xs $padding-xs;
+  border-radius: $radius-sm;
+  font-family: inherit;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
+.gameBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.gameBtnPrimary {
+  background: $gradient-accent;
+  border: 1px solid transparent;
+  color: $color-text-white;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background: $gradient-accent-hover;
+  }
+}
+
+// Its own row: .inputArea is a flex row, so an inline chip inside it would
+// squeeze the text input.
+.gameChipRow {
+  display: flex;
+  justify-content: center;
+  // Mirrors .chatBoxWithChip's margin-bottom in chat.module.scss, which is the
+  // gap above. .chatContainer is a flex column so these margins don't collapse
+  // — the two values have to match by hand for the chip to look centred.
+  margin-bottom: $spacing-md;
+}
+
+// A capsule, so it needs $radius-pill. $radius-full is 50%, which on a wide
+// short element renders as an ellipse rather than a pill.
+.gameChip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  max-width: 100%;
+  padding: $spacing-sm $padding-base;
+  border-radius: $radius-pill;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: $color-accent-violet-light;
+  font-family: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: $color-accent-violet;
+    transform: translateY($transform-translate-y);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
+// The die is decoration, so keep it optically smaller than the label.
+.gameChipIcon {
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+// Raised when the conversation has stalled — that's where the game earns its
+// keep. A soft halo rather than movement: a bouncing pill next to a text field
+// reads as a glitch.
+.gameChipNudge {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.6);
+  color: #f5ecff;
+  animation: chipGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes chipGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(168, 85, 247, 0.14);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .gameChip {
+    font-size: $font-size-xs;
+    padding: $spacing-sm $padding-sm;
+  }
+
+  // Mirrors the mobile .chatBoxWithChip value in chat.module.scss.
+  .gameChipRow {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gameChipNudge {
+    animation: none;
+  }
+}

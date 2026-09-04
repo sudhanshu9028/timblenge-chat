@@ -97,7 +97,9 @@ const eslintConfig = [
       // 'css-modules/no-unused-class': 'error',
       'prefer-rest-params': 'warn',
       'jsx-a11y/label-has-for': 'off',
-      camelcase: 'warn',
+      // Variables stay camelCase, but object properties are exempt: GA4 event
+      // parameters must be snake_case to be readable in reports.
+      camelcase: ['warn', { properties: 'never' }],
       'react/no-did-mount-set-state': 'warn',
     },
   },

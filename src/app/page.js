@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import styles from '@/styles/home.module.scss';
 import HeroCTA from './components/HeroCTA';
+import PrimeTimeBanner from './components/PrimeTimeBanner';
+import ProfileLine from './components/ProfileLine';
 import { HOME_FAQ_ITEMS } from '@/lib/homeFaqData';
 
 // Homepage-specific metadata. The root layout only supplies site-wide defaults,
@@ -53,11 +55,10 @@ export default function HomePage() {
           'Chat with strangers and make friends online. Anonymous video chat and text chat platform. No registration required.',
         url: 'https://anoniz.com',
         image: 'https://anoniz.com/logo.png',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.5',
-          ratingCount: '1000',
-        },
+        // No aggregateRating here on purpose. A rating with no reviews shown on
+        // the page is a self-serving rating under Google's structured data
+        // policy, and risks a manual action that would strip rich results
+        // site-wide. Add it back only alongside real, visible reviews.
         featureList: [
           'Video Chat with Strangers',
           'Text Chat',
@@ -107,6 +108,12 @@ export default function HomePage() {
           create, and nothing stored once you disconnect. Text or video, straight from your browser.
         </p>
         <HeroCTA styles={styles} />
+
+        {/* Concentrating traffic into one advertised hour is the cheapest
+            liquidity tool available to a real-time product this size. */}
+        <PrimeTimeBanner />
+
+        <ProfileLine />
       </section>
 
       {/* Dynamic load below-the-fold content with SSR enabled to improve LCP */}

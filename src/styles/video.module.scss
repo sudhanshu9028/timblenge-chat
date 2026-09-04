@@ -1,173 +1,187 @@
 @use './variables' as *;
 
 .main {
-    height: $height-chat-main;
+  position: relative;
+  height: $height-chat-main;
+  display: flex;
+  flex-direction: column;
+  padding: $margin-lg;
+  background: $gradient-primary;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoContainer {
+  position: relative;
+  width: 85%;
+  height: 50%;
+  // max-width: 600px;
+  aspect-ratio: 16/9;
+  // background: black;
+  border-radius: $radius-md;
+  overflow: hidden;
+  margin-bottom: $margin-base;
+
+  .system {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: $color-text-white;
+    font-style: italic;
+    z-index: $z-index-base;
+  }
+
+  video {
+    position: absolute;
+    width: $height-full;
+    height: $height-full;
+    object-fit: cover;
+  }
+
+  .local {
+    width: 48%;
+    height: 94%;
+    bottom: $margin-base;
+    right: $margin-base;
+    position: absolute;
+    border: $video-border-width solid $color-text-white;
+    border-radius: $radius-sm;
+    background: black;
+    z-index: $z-index-dropdown;
+    transform: scaleX(-1);
+  }
+  .remote {
+    width: 48%;
+    height: 94%;
+    bottom: $margin-base;
+    left: $margin-base;
+    position: absolute;
+    border: $video-border-width solid $color-text-white;
+    border-radius: $radius-sm;
+    background: black;
+    transform: scaleX(-1);
+  }
+
+  .remoteBlurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  }
+
+  // Sits at the top so it doesn't collide with the waiting card, which is
+  // centred in the same container.
+  .searchOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    padding: $margin-lg;
-    background: $gradient-primary;
-    align-items: center;
     justify-content: center;
-  }
-  
-  .videoContainer {
-    position: relative;
-    width: 85%;
-    height: 50%;
-    // max-width: 600px;
-    aspect-ratio: 16/9;
-    // background: black;
-    border-radius: $radius-md;
-    overflow: hidden;
-    margin-bottom: $margin-base;
-  
-    .system {
-      position: absolute;
-      top: 50%;
-      left: 25%;
-      transform: translate(-50%, -50%);
-      color: $color-text-white;
-      font-style: italic;
-      z-index: $z-index-base;
-    }
-  
-    video {
-      position: absolute;
-      width: $height-full;
-      height: $height-full;
-      object-fit: cover;
-    }
-  
-    .local {
-      width: 48%;
-      height: 94%;
-      bottom: $margin-base;
-      right: $margin-base;
-      position: absolute;
-      border: $video-border-width solid $color-text-white;
-      border-radius: $radius-sm;
-      background: black;
-      z-index: $z-index-dropdown;
-      transform: scaleX(-1);
-    }
-    .remote {
-        width: 48%;
-        height: 94%;
-        bottom: $margin-base;
-        left: $margin-base;
-        position: absolute;
-        border: $video-border-width solid $color-text-white;
-        border-radius: $radius-sm;
-        background: black;
-        transform: scaleX(-1);
-      }
-
-    .remoteBlurred {
-      filter: blur(8px);
-      -webkit-filter: blur(8px);
-    }
-
-    .reconnectButtonContainer {
-      position: absolute;
-      width: 48%;
-      height: 94%;
-      bottom: $margin-base;
-      left: $margin-base;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: $radius-sm;
-      pointer-events: none;
-      box-sizing: border-box;
-      
-      button {
-        pointer-events: auto;
-      }
-    }
-  }
-  
-  .actions {
-    display: flex;
-    gap: $margin-base;
-    button {
-      background: $gradient-accent;
-      color: $color-text-white;
-      border: none;
-      padding: $padding-md $spacing-xl;
-      border-radius: $radius-base;
-      cursor: pointer;
-      box-shadow: $shadow-pink-sm;
-      transition: $transition-fast;
-      &:hover { 
-        background: $gradient-accent-hover; 
-        box-shadow: $shadow-pink;
-      }
-      &:disabled { 
-        background: $color-border-dark; 
-        cursor: not-allowed; 
-        box-shadow: none;
-      }
-    }
+    z-index: $z-index-dropdown;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.72), transparent);
+    border-radius: $radius-md $radius-md 0 0;
   }
 
-  .findNewBtn {
+  .error {
+    position: absolute;
+    bottom: $spacing-sm;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    max-width: 90%;
+    padding: $spacing-xs $padding-xs;
+    border-radius: $radius-sm;
+    background: rgba(15, 23, 42, 0.88);
+    color: $color-accent-light;
+    font-size: $font-size-sm;
+    text-align: center;
+    z-index: $z-index-dropdown;
+  }
+}
+
+// The end-of-call overlay. It sits on .main rather than .videoContainer, which
+// is a fixed 50% of the page and would clip the panel's reading list.
+.reconnectButtonContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-sizing: border-box;
+  padding: $padding-base;
+}
+
+.actions {
+  display: flex;
+  gap: $margin-base;
+  button {
     background: $gradient-accent;
     color: $color-text-white;
     border: none;
-    padding: $padding-sm $spacing-xl;
+    padding: $padding-md $spacing-xl;
     border-radius: $radius-base;
     cursor: pointer;
-    font-weight: $font-weight-medium;
-    transition: $transition-fast;
     box-shadow: $shadow-pink-sm;
-
+    transition: $transition-fast;
     &:hover {
       background: $gradient-accent-hover;
       box-shadow: $shadow-pink;
     }
-  }
-  
-  @media (max-width: $breakpoint-md) {
-    .videoContainer {
-        height: 80%;
-        width: $height-full;
-        .local {
-            height: $video-local-height-mobile;
-            width: $video-local-width-mobile;
-            z-index: $z-index-dropdown;
-        }
-        .remote {
-            position: static;
-            width: $height-full;
-            height: $height-full;
-            border: none;
-            border-radius: $radius-sm;
-            background: black;
-            z-index: 1;
-          }
-          .remoteBlurred {
-            filter: blur(8px);
-            -webkit-filter: blur(8px);
-          }
-          .reconnectButtonContainer {
-            position: absolute;
-            width: $height-full;
-            height: $height-full;
-            bottom: 0;
-            left: 0;
-            border-radius: $radius-sm;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.3);
-            pointer-events: none;
-            
-            button {
-              pointer-events: auto;
-            }
-          }
-          .system {
-            left: 50%;
-          }
+    &:disabled {
+      background: $color-border-dark;
+      cursor: not-allowed;
+      box-shadow: none;
     }
   }
+}
+
+.findNewBtn {
+  background: $gradient-accent;
+  color: $color-text-white;
+  border: none;
+  padding: $padding-sm $spacing-xl;
+  border-radius: $radius-base;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+  transition: $transition-fast;
+  box-shadow: $shadow-pink-sm;
+
+  &:hover {
+    background: $gradient-accent-hover;
+    box-shadow: $shadow-pink;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .videoContainer {
+    height: 80%;
+    width: $height-full;
+    .local {
+      height: $video-local-height-mobile;
+      width: $video-local-width-mobile;
+      z-index: $z-index-dropdown;
+    }
+    .remote {
+      position: static;
+      width: $height-full;
+      height: $height-full;
+      border: none;
+      border-radius: $radius-sm;
+      background: black;
+      z-index: 1;
+    }
+    .remoteBlurred {
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+    }
+    .system {
+      left: 50%;
+    }
+  }
+}

@@ -1,0 +1,183 @@
+@use './variables' as *;
+
+// Prime Time banner.
+//
+// Three states, deliberately unequal in weight. `later` and `soon` are a plain
+// caption line — no box, no border, nothing that competes with the hero
+// buttons directly above them. Only `live` becomes a solid pill, because that
+// is the one hour where it has something urgent to say.
+
+.banner {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs $spacing-sm;
+  max-width: 100%;
+  margin: $spacing-xl auto 0;
+  font-family: $font-family-primary;
+  font-size: $font-size-sm;
+  line-height: 1.4;
+  transition: $transition-base;
+}
+
+.headline {
+  color: $color-text-secondary;
+  font-weight: $font-weight-semibold;
+}
+
+.detail {
+  color: $color-text-muted;
+  font-variant-numeric: tabular-nums;
+}
+
+// A hairline between the two halves. Cleaner than a bullet at this size, and
+// it collapses out of the way when the line wraps on narrow screens.
+.separator {
+  width: 1px;
+  height: 0.85em;
+  background: currentColor;
+  opacity: 0.25;
+  color: $color-text-muted;
+}
+
+.dot,
+.dotLive {
+  width: 6px;
+  height: 6px;
+  border-radius: $radius-full; // square element, so this is a true circle
+  flex: none;
+}
+
+.dot {
+  background: $color-text-muted;
+  opacity: 0.7;
+}
+
+// ============================================
+// later — the quietest state, most of the day
+// ============================================
+
+.later {
+  .headline {
+    color: $color-text-muted;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// ============================================
+// soon — same shape, warmer colour
+// ============================================
+
+.soon {
+  .dot {
+    background: $color-accent-violet;
+    opacity: 1;
+  }
+
+  .headline {
+    color: $color-accent-violet-light;
+  }
+}
+
+// ============================================
+// live — the only state that gets a container
+// ============================================
+
+.live {
+  padding: $spacing-sm $padding-base;
+  border-radius: $radius-pill;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  gap: $spacing-sm;
+
+  .headline {
+    color: #d9f7e3;
+  }
+
+  .detail {
+    color: #a7e8c0;
+  }
+
+  .separator {
+    color: #4ade80;
+    opacity: 0.4;
+  }
+}
+
+.dotLive {
+  background: #4ade80; // green-400
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+  animation: primePulse 2.4s ease-out infinite;
+}
+
+@keyframes primePulse {
+  70% {
+    box-shadow: 0 0 0 7px rgba(74, 222, 128, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+.cta {
+  padding: $spacing-xs $padding-xs;
+  border-radius: $radius-pill;
+  background: $gradient-accent;
+  color: $color-text-white;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: $transition-fast;
+
+  &:hover {
+    background: $gradient-accent-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-white;
+    outline-offset: 2px;
+  }
+}
+
+// ============================================
+// compact — inside the searching and exit panels
+// ============================================
+
+.compact {
+  margin: $spacing-xs auto 0;
+  font-size: $font-size-xs;
+
+  &.live {
+    padding: $spacing-xs $padding-xs;
+  }
+}
+
+// The visitor's own history, shown under the hero once they have one.
+.profileLine {
+  margin: $spacing-sm auto 0;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+  font-family: $font-family-primary;
+}
+
+@media (max-width: $breakpoint-sm) {
+  .banner {
+    font-size: $font-size-xs;
+    row-gap: 2px;
+  }
+
+  // On a narrow screen the line wraps, and a vertical rule between stacked
+  // rows just looks like a stray mark.
+  .separator {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotLive {
+    animation: none;
+  }
+}
