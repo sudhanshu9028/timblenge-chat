@@ -53,6 +53,7 @@ const PANEL_SLUGS = [
   'what-to-say-when-conversation-dies-stranger-chat',
   'would-you-rather-questions-to-get-to-know-someone',
   'why-random-chat-sites-are-full-of-bots',
+  'why-you-tell-strangers-things-you-wont-tell-friends',
 ];
 
 /**

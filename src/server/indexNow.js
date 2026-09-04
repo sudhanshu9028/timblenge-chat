@@ -174,10 +174,33 @@ async function submitChangedUrls({ siteUrl, sitemapUrl, force = false, dryRun = 
     return { status: 'skipped', reason: `could not reach ${keyLocation}: ${error.message}` };
   }
 
+  // The sitemap is read locally, so it describes the build we're running — not
+  // necessarily what's deployed. Running a production build on a dev machine
+  // would otherwise submit URLs that 404 publicly AND record them as done, so
+  // the real deploy would never submit them. Confirm each one resolves first.
+  const checked = await Promise.all(
+    changed.map(async (entry) => {
+      try {
+        const res = await fetch(entry.url, { method: 'HEAD', redirect: 'follow' });
+        return { entry, live: res.ok };
+      } catch {
+        // A network blip shouldn't drop a real URL — retry it next run instead.
+        return { entry, live: false };
+      }
+    })
+  );
+
+  const liveEntries = checked.filter((c) => c.live).map((c) => c.entry);
+  const missing = checked.length - liveEntries.length;
+
+  if (!liveEntries.length) {
+    return { status: 'skipped', reason: `none of the ${changed.length} changed URLs resolve yet` };
+  }
+
   let sent = 0;
 
-  for (let i = 0; i < changed.length; i += MAX_URLS_PER_REQUEST) {
-    const batch = changed.slice(i, i + MAX_URLS_PER_REQUEST);
+  for (let i = 0; i < liveEntries.length; i += MAX_URLS_PER_REQUEST) {
+    const batch = liveEntries.slice(i, i + MAX_URLS_PER_REQUEST);
 
     let code;
     try {
@@ -218,7 +241,7 @@ async function submitChangedUrls({ siteUrl, sitemapUrl, force = false, dryRun = 
 
   saveState(state);
 
-  return { status: 'ok', total: entries.length, submitted: sent, code: lastCode };
+  return { status: 'ok', total: entries.length, submitted: sent, skipped: missing, code: lastCode };
 }
 
 module.exports = { submitChangedUrls, getKey, parseSitemap };

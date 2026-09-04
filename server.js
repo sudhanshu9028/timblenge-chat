@@ -1023,8 +1023,10 @@ app.prepare().then(() => {
       submitChangedUrls({ siteUrl: SITE_URL, sitemapUrl: `http://127.0.0.1:${port}` })
         .then((result) => {
           if (result.status === 'ok') {
+            const skipped = result.skipped ? `, ${result.skipped} not live yet` : '';
             console.info(
-              `[indexnow] submitted ${result.submitted}/${result.total} URLs (HTTP ${result.code})`
+              `[indexnow] submitted ${result.submitted}/${result.total} URLs` +
+                ` (HTTP ${result.code}${skipped})`
             );
           } else if (result.status !== 'noop') {
             console.info(`[indexnow] ${result.status}: ${result.reason || ''}`);
