@@ -10,7 +10,7 @@
 .banner {
   display: inline-flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: $spacing-xs $spacing-sm;
   max-width: 100%;
@@ -35,7 +35,6 @@
 // it collapses out of the way when the line wraps on narrow screens.
 .separator {
   width: 1px;
-  align-self: center;
   height: 0.85em;
   background: currentColor;
   opacity: 0.25;
@@ -46,7 +45,6 @@
 .dotLive {
   width: 6px;
   height: 6px;
-  align-self: center;
   border-radius: $radius-full; // square element, so this is a true circle
   flex: none;
 }
@@ -123,7 +121,6 @@
 }
 
 .cta {
-  align-self: center;
   padding: $spacing-xs $padding-xs;
   border-radius: $radius-pill;
   background: $gradient-accent;

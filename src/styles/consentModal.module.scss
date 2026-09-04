@@ -31,6 +31,14 @@
   position: relative;
 }
 
+// Flex children default to flex-shrink: 1, so an over-tall modal was squashing
+// its own contents to fit instead of overflowing — which crushed the submit
+// button AND meant `overflow-y: auto` above never had anything to scroll.
+// Keeping every child at its natural height fixes both at once.
+.modalContent > * {
+  flex-shrink: 0;
+}
+
 .closeButton {
   position: absolute;
   top: $padding-md;
@@ -67,6 +75,10 @@
   color: $color-text-primary;
   margin-bottom: $spacing-xs;
   text-align: center;
+  // The close button is absolutely positioned in the corner and intrudes about
+  // 32px into the content box. Symmetric padding keeps the title centred while
+  // guaranteeing it never runs underneath the button on a narrow screen.
+  padding: 0 $padding-lg;
 }
 
 .modalSubtitle {
@@ -335,14 +347,21 @@
 
 @media (max-width: $breakpoint-sm) {
   .modalContent {
-    padding: $padding-lg $padding-md;
-    max-height: 90vh;
+    padding: $padding-md $padding-md;
+    max-height: 90vh; // fallback for browsers without dvh
+    max-height: 90dvh;
   }
 
   .modalTitle {
     font-size: $font-size-4xl;
   }
+}
 
+// Male and Female sit side by side down to 310px, which saves a row of height
+// on every real phone — the modal is tallest exactly where the screen is
+// shortest. Only below 310px, where two buttons in a row would be too narrow
+// to tap comfortably, do they stack.
+@media (max-width: #{$breakpoint-xxs - 0.02px}) {
   .genderButtonsRow {
     flex-direction: column;
   }

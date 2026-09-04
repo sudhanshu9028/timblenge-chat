@@ -33,14 +33,19 @@ function getKey() {
   return key;
 }
 
-function loadState() {
+function loadState(key) {
   try {
     const parsed = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
-    return parsed?.submitted && typeof parsed.submitted === 'object' ? parsed : { submitted: {} };
+    if (!parsed?.submitted || typeof parsed.submitted !== 'object') return { submitted: {}, key };
+    // A rotated key means everything recorded under the old one has to go
+    // again: if the key was rotated because it was rejected, those URLs were
+    // never actually indexed, however successful the submission looked.
+    if (parsed.key !== key) return { submitted: {}, key };
+    return parsed;
   } catch {
     // First run, or an unreadable file. Starting empty just means the next
     // submission covers everything, which is the safe direction to fail.
-    return { submitted: {} };
+    return { submitted: {}, key };
   }
 }
 
@@ -129,7 +134,7 @@ async function submitChangedUrls({ siteUrl, sitemapUrl, force = false, dryRun = 
     return { status: 'error', reason: 'sitemap contained no URLs' };
   }
 
-  const state = loadState();
+  const state = loadState(key);
   const changed = force ? entries : entries.filter((e) => state.submitted[e.url] !== e.lastmod);
 
   if (!changed.length) {

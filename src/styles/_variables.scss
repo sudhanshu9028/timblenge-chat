@@ -139,6 +139,8 @@ $z-index-dropdown: 10;
 $z-index-modal: 100;
 
 // Breakpoints
+// Below this, two gender buttons side by side get too cramped to tap.
+$breakpoint-xxs: 310px;
 $breakpoint-sm: 480px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
@@ -181,4 +183,3 @@ $position-offset-lg: 10px;
 $position-offset-xl: 48px;
 $transform-translate-y: -1px;
 $transform-translate-y-lg: -4px;
-
