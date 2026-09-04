@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const { startPresenceStats, getPresenceStats } = require('./src/server/presenceStats');
 const { pickQuestion } = require('./src/server/games/wouldYouRather');
 const pushStore = require('./src/server/pushStore');
+const { submitChangedUrls, getKey: getIndexNowKey } = require('./src/server/indexNow');
 const {
   getRandomPersonality,
   getAutoDisconnectTime,
@@ -46,6 +47,9 @@ const PUSH_REARM_MS = num('PUSH_REARM_MS', 60 * 60 * 1000);
 // Prime Time — keep in sync with src/lib/primeTime.js (22:00 IST = 16:30 UTC).
 const PRIME_TIME_START_UTC_MINUTES = num('PRIME_TIME_START_UTC_MINUTES', 16 * 60 + 30);
 const PRIME_TIME_REMINDER_LEAD_MINUTES = 10;
+
+// Public origin, used for IndexNow submissions and the key file location.
+const SITE_URL = process.env.SITE_URL || 'https://anoniz.com';
 
 // In-memory queue and user pairing
 const waitingUsers = new Set();
@@ -993,11 +997,40 @@ app.prepare().then(() => {
     });
   });
 
+  // IndexNow ownership proof. Served from the root as {key}.txt.
+  //
+  // Falls through to Next when the filename isn't our key — without that,
+  // this route would swallow /robots.txt and every other root .txt.
+  server.get('/:filename.txt', (req, res, next) => {
+    const key = getIndexNowKey();
+    if (!key || req.params.filename !== key) return next();
+    res.type('text/plain; charset=utf-8').send(key);
+  });
+
   server.all(/(.*)/, (req, res) => {
     return handle(req, res);
   });
 
   httpServer.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
+
+    // Tell IndexNow about anything that changed since the last deploy. Only
+    // URLs whose sitemap lastmod actually moved are sent, so restarts and
+    // redeploys of unchanged content cost nothing.
+    if (!dev) {
+      // Read the sitemap over loopback so boot doesn't wait on public DNS,
+      // but submit the public URLs the sitemap contains.
+      submitChangedUrls({ siteUrl: SITE_URL, sitemapUrl: `http://127.0.0.1:${port}` })
+        .then((result) => {
+          if (result.status === 'ok') {
+            console.info(
+              `[indexnow] submitted ${result.submitted}/${result.total} URLs (HTTP ${result.code})`
+            );
+          } else if (result.status !== 'noop') {
+            console.info(`[indexnow] ${result.status}: ${result.reason || ''}`);
+          }
+        })
+        .catch((error) => console.error('[indexnow] failed:', error.message));
+    }
   });
 });
