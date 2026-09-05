@@ -43,6 +43,7 @@ export default function HomePage() {
     '@graph': [
       {
         '@type': 'WebApplication',
+        '@id': 'https://anoniz.com/#webapp',
         name: 'Anoniz',
         applicationCategory: 'SocialNetworkingApplication',
         operatingSystem: 'Web',
@@ -59,6 +60,7 @@ export default function HomePage() {
         // the page is a self-serving rating under Google's structured data
         // policy, and risks a manual action that would strip rich results
         // site-wide. Add it back only alongside real, visible reviews.
+        publisher: { '@id': 'https://anoniz.com/#organization' },
         featureList: [
           'Video Chat with Strangers',
           'Text Chat',
@@ -70,10 +72,37 @@ export default function HomePage() {
       },
       {
         '@type': 'Organization',
+        '@id': 'https://anoniz.com/#organization',
         name: 'Anoniz',
         url: 'https://anoniz.com',
         logo: 'https://anoniz.com/logo.png',
-        sameAs: [],
+        // This is the field that tells Google which "Anoniz" we are. There is
+        // an unrelated product with the same name — our own Product Hunt slug
+        // is `anoniz-2` because `anoniz` was already taken — so leaving this
+        // empty left the brand genuinely ambiguous to search engines and to
+        // the models that increasingly answer questions about it.
+        //
+        // Only add profiles we actually control and that clearly identify us.
+        sameAs: [
+          'https://www.instagram.com/anonizchat',
+          'https://www.producthunt.com/products/anoniz-2',
+        ],
+      },
+      {
+        // Names the site as an entity distinct from the company and the app,
+        // which is what lets the three be linked together below.
+        //
+        // Deliberately no `potentialAction`/`SearchAction`: Anoniz has no site
+        // search, and claiming one we don't have is the same kind of untrue
+        // markup as the rating we removed.
+        '@type': 'WebSite',
+        '@id': 'https://anoniz.com/#website',
+        name: 'Anoniz',
+        url: 'https://anoniz.com',
+        description:
+          'Free anonymous text and video chat with random people worldwide. No app, no account, nothing stored after you disconnect.',
+        inLanguage: 'en',
+        publisher: { '@id': 'https://anoniz.com/#organization' },
       },
       {
         '@type': 'FAQPage',

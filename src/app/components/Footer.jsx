@@ -44,6 +44,32 @@ export default function Footer() {
           <Link href="/terms" className={styles.navLink} onClick={() => trackClick('terms')}>
             Terms
           </Link>
+          {/* An actual outbound link, not just a sameAs claim — this is the
+              path a crawler follows from the site to the profile. */}
+          <a
+            href="https://www.instagram.com/anonizchat"
+            className={styles.socialLink}
+            target="_blank"
+            rel="me noopener noreferrer"
+            aria-label="Anoniz on Instagram"
+            onClick={() => trackClick('instagram')}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" />
+            </svg>
+            <span>Instagram</span>
+          </a>
+
           <a
             href="mailto:support@anoniz.com"
             className={styles.contactButton}

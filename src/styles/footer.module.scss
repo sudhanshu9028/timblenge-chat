@@ -82,7 +82,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -190,3 +191,31 @@
   }
 }
 
+// Sits with the nav links rather than the CTA — it's a place to go, not an
+// action. rel="me" on the anchor is the machine-readable half of the same
+// claim `sameAs` makes in the homepage structured data.
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  color: $color-text-muted;
+  text-decoration: none;
+  font-size: $font-size-sm;
+  transition: $transition-fast;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+  }
+
+  &:hover {
+    color: $color-accent-violet-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 3px;
+    border-radius: $radius-sm;
+  }
+}
