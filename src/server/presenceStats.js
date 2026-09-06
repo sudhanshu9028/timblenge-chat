@@ -7,6 +7,12 @@
 //
 // Deliberately tiny: no database, no new dependency, and it reuses the
 // presence figure the socket server already computes.
+//
+// The local file is a convenience only — Render's filesystem is ephemeral, so
+// it is wiped on every deploy and can never accumulate the weeks of history the
+// Prime Time slot needs. The durable copy goes to the analytics project we
+// already run (lighthouse-crux-report), which stores it per hour and charts
+// peaks by day, week and month. See PRESENCE_REPORT_URL below.
 
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +22,12 @@ const FILE = path.join(DATA_DIR, 'presence-stats.json');
 
 const SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 const WRITE_DEBOUNCE_MS = 30 * 1000;
+
+// Where the durable copy goes. The site key is the same public one the RUM
+// beacon already carries in the page, so nothing new is secret here.
+const REPORT_URL =
+  process.env.PRESENCE_REPORT_URL || 'https://lighthouse-crux-report.vercel.app/api/presence';
+const REPORT_SITE_KEY = process.env.PRESENCE_SITE_KEY || '';
 
 // buckets[dayOfWeek][hourUTC] = { sum, count, peak }
 let buckets = null;
@@ -65,6 +77,26 @@ function scheduleWrite() {
  * Start sampling.
  * @param {() => number} getCount returns current concurrency
  */
+/**
+ * Send one sample to the analytics project. Fire-and-forget: this is
+ * observability, and a failed report must never disturb the chat server.
+ */
+async function report(concurrent) {
+  if (!REPORT_SITE_KEY) return;
+  try {
+    const res = await fetch(REPORT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ siteKey: REPORT_SITE_KEY, concurrent }),
+      // Don't let a hung endpoint pin an interval open.
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) console.error('[presence] report rejected:', res.status);
+  } catch (error) {
+    console.error('[presence] report failed:', error.message);
+  }
+}
+
 function startPresenceStats(getCount) {
   buckets = load();
 
@@ -76,6 +108,9 @@ function startPresenceStats(getCount) {
     bucket.count += 1;
     bucket.peak = Math.max(bucket.peak, count);
     scheduleWrite();
+
+    // The copy that actually survives a deploy.
+    report(count);
   }, SAMPLE_INTERVAL_MS);
 
   // Don't lose the current window on a deploy.
