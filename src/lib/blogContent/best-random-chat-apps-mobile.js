@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'best-random-chat-apps-android-iphone-no-signup',
   title: 'Best Random Chat Apps for Android & iPhone in 2026 (No Download, No Sign-Up)',
+  seoTitle: 'Best Random Chat Apps for Android & iPhone (2026)',
   description:
     'Want to video chat with strangers from your phone? Compare the best mobile-friendly random chat apps for Android and iPhone in 2026 — no downloads or sign-up required.',
   keywords: [

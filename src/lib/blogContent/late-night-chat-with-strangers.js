@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'cant-sleep-late-night-chat-with-strangers',
   title: "Can't Sleep? Why So Many People Chat with Strangers at 2AM (and Why It Helps)",
+  seoTitle: "Can't Sleep? Why People Chat With Strangers at 2AM",
   description:
     "Wide awake at 2AM with your mind racing? You're not alone. Discover why late-night conversations with strangers are surprisingly common, and how they can actually help.",
   keywords: [

@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'science-of-talking-to-strangers-research-benefits',
   title: "Science Says We Should Talk to Strangers More — Here's the Research That Proves It",
+  seoTitle: 'The Science of Talking to Strangers: What Research Says',
   description:
     "Research consistently shows we underestimate how much strangers enjoy talking to us — and how good it makes us feel. Here's what the science actually says.",
   keywords: [

@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'instant-stranger-matching-anonymous-identity',
   title: 'Instant Stranger Matching: Why Anonymous Identity Changes Everything',
+  seoTitle: 'Instant Stranger Matching and Anonymous Identity',
   description:
     'Instant stranger matching with anonymous identity flips the script on online connection. No profile, no history, no performance — just a real conversation.',
   keywords: [

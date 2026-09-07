@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'text-chat-vs-video-chat-which-is-better',
   title: 'Text Chat vs. Video Chat: Which Should You Choose to Meet Strangers Online?',
+  seoTitle: 'Text Chat vs Video Chat: Which Should You Choose?',
   description:
     'Not sure whether to start with text or video chat when meeting new people online? We break down the pros, cons, and best use cases for each so you can pick the right one.',
   keywords: [

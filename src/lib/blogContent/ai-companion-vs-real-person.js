@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'ai-companion-vs-real-person-which-helps-loneliness',
   title: 'AI Companion vs. Real Person: Which Actually Helps with Loneliness in 2026?',
+  seoTitle: 'AI Companion vs Real Person: Which Helps Loneliness?',
   description:
     'AI companion apps have exploded in 2026 — but do they really ease loneliness, or just delay it? We compare AI chat to talking with a real stranger.',
   keywords: [

@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'why-did-omegle-shut-down-where-everyone-went-2026',
   title: 'Why Did Omegle Shut Down? The Real Story (and Where Everyone Went in 2026)',
+  seoTitle: 'Why Did Omegle Shut Down? The Real Story',
   description:
     'Omegle shut down for good in November 2023 after 14 years online. Here is the real story behind its closure, whether it is coming back, and where its millions of users went next.',
   keywords: [

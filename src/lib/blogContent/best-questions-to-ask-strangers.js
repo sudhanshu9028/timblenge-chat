@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: '50-best-questions-to-ask-strangers-online-to-keep-conversations-going',
   title: '50 Best Questions to Ask Strangers Online to Keep the Conversation Going',
+  seoTitle: '50 Questions to Ask Strangers Online (That Work)',
   description:
     'Never run out of things to say! Explore our curated list of the best icebreakers, deep questions, and fun conversation starters to ask strangers in random chats.',
   keywords: [

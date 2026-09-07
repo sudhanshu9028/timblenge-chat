@@ -4,6 +4,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'how-to-make-friends-online-talk-to-strangers',
   title: 'How to Make Friends Online — Talk to Strangers Without the Awkwardness',
+  seoTitle: 'How to Make Friends Online by Talking to Strangers',
   description:
     'Struggle with making friends online? Learn practical tips for talking to strangers, overcoming social anxiety, and building genuine connections on random chat platforms.',
   keywords: [

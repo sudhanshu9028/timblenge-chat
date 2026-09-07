@@ -19,7 +19,14 @@ export function generateMetadata({ params }) {
   if (!post) return {};
 
   return {
-    title: `${post.title} | Anoniz Blog`,
+    // `seoTitle` when a post has one, because the headline that reads well above
+    // the article is usually too long for a search result. Google renders about
+    // 600px — roughly 60 characters — and every title here used to exceed that
+    // once "| Anoniz Blog" was appended, so the value proposition was cut off in
+    // the SERP on every single post. The suffix is gone for the same reason: 14
+    // characters of brand we can't afford, and Google appends the site name
+    // itself when it wants to.
+    title: post.seoTitle || post.title,
     description: post.description,
     keywords: post.keywords,
     authors: [{ name: post.author }],

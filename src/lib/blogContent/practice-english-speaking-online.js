@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'practice-english-speaking-online-strangers',
   title: 'Want to Improve Your English? Talk to a Stranger (Seriously)',
+  seoTitle: 'Practice English Speaking Online With Strangers (Free)',
   description:
     'You read English fine but freeze when speaking. Random chat with strangers is the free, zero-pressure way to build fluency — no tutor required.',
   keywords: [

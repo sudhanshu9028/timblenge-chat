@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'talking-to-stranger-better-than-group-chat',
   title: 'Why Talking to a Stranger Feels Better Than Texting Your Group Chat',
+  seoTitle: 'Why Talking to a Stranger Beats Your Group Chat',
   description:
     "Your group chat has 47 unread messages and you still feel lonely. Here's the psychology behind why a five-minute conversation with a stranger can do what your friends' memes can't.",
   keywords: [

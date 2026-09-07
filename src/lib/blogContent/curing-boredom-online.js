@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'fun-things-to-do-online-when-bored-random-chat',
   title: 'Ultimate Guide to Curing Boredom: Fun Things to Do Online in 2026',
+  seoTitle: "Fun Things to Do Online When You're Bored (2026)",
   description:
     "Discover engaging and fun things to do online when you're bored. Learn how talking to random strangers can instantly cure boredom and spark exciting conversations.",
   keywords: [

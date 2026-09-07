@@ -4,6 +4,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'best-omegle-alternatives-safe-free-random-chat',
   title: 'Best Omegle Alternatives in 2026 — Safe & Free Random Chat Sites',
+  seoTitle: 'Best Omegle Alternatives in 2026 — Free & Safe',
   description:
     'Looking for the best Omegle alternatives in 2026? Discover safe, free random chat sites for anonymous video chat and text chat with strangers. No signup required.',
   keywords: [

@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'spot-red-flags-random-video-chat-safety-2026',
   title: 'Deepfakes, Catfish, and Creeps — How to Spot Red Flags on Random Video Chat in 2026',
+  seoTitle: 'How to Spot Red Flags on Random Video Chat (2026)',
   description:
     'Real-time deepfakes are getting scarily good. Learn how to spot fake people, catfish, and manipulation tactics on random video chat — and what safe platforms do differently.',
   keywords: [

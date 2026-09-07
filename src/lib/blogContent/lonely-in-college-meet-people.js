@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'lonely-in-college-meet-people-online-2026',
   title: 'Lonely in College? How to Meet People Online When Campus Life Feels Isolating',
+  seoTitle: 'Lonely in College? How to Meet People Online in 2026',
   description:
     "Over half of college students report feeling lonely in 2026. If campus life isn't clicking, here's how to find real connection online — no awkward mixers required.",
   keywords: [

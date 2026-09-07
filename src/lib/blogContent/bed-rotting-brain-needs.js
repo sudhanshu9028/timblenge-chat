@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'bed-rotting-what-your-brain-needs-instead',
   title: "Bed Rotting All Weekend? Here's What Your Brain Actually Needs Instead",
+  seoTitle: 'Bed Rotting All Weekend? What Your Brain Needs Instead',
   description:
     "Bed rotting feels like rest but leaves you emptier. Here's why your brain craves active connection — and how a 5-minute anonymous chat can break the cycle.",
   keywords: [

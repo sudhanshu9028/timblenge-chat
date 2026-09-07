@@ -506,6 +506,97 @@
   line-height: $line-height-relaxed;
 }
 
+// Guides Section
+// Sits between two $bg-secondary sections, so it takes the gradient to keep the
+// page alternating rather than reading as one long slab.
+.guides {
+  padding: $padding-3xl $margin-lg;
+  background: $gradient-primary;
+  width: $height-full;
+}
+
+.guidesIntro {
+  max-width: $container-lg;
+  margin: 0 auto $spacing-3xl;
+  text-align: center;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+.guidesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $margin-lg;
+  max-width: $container-3xl;
+  margin: 0 auto;
+}
+
+// The whole card is the link, so the tap target is the card and not just the
+// title — these are read on phones far more often than on desktop.
+.guideCard {
+  display: flex;
+  flex-direction: column;
+  background: rgba(51, 65, 85, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: $margin-lg;
+  border-radius: $radius-md;
+  box-shadow: $shadow-base;
+  text-decoration: none;
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base,
+    border-color $transition-base;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY($transform-translate-y-lg);
+    box-shadow: $shadow-xl;
+    border-color: rgba(236, 72, 153, 0.3);
+  }
+}
+
+.guideTitle {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $margin-sm;
+  color: $color-text-primary;
+  line-height: $line-height-tight;
+}
+
+.guideHook {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  // Pushes the meta line to the bottom so cards of differing title length still
+  // align their footers.
+  flex: 1;
+}
+
+.guideMeta {
+  margin-top: $margin-base;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.guidesMore {
+  margin-top: $spacing-3xl;
+  text-align: center;
+}
+
+.guidesMoreLink {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 // Horizontal scroll container so wide tables never break the page on mobile
 .comparisonTableWrapper {
   max-width: $container-3xl;

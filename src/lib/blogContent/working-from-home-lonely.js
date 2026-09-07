@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'working-from-home-lonely-remote-work-loneliness-solutions',
   title: "Working From Home Is Lonelier Than Anyone Admits — Here's What's Actually Helping",
+  seoTitle: 'Working From Home Is Lonely — What Actually Helps',
   description:
     "A 2026 study across 588,000 Americans found remote work accounts for a third of post-pandemic mental distress. Here's why WFH loneliness hits so differently — and what works.",
   keywords: [

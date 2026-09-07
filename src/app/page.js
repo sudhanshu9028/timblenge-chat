@@ -34,6 +34,7 @@ const FeaturesSection = dynamic(() => import('./components/FeaturesSection'), { 
 const BenefitsSection = dynamic(() => import('./components/BenefitsSection'), { ssr: true });
 const HowItWorksSection = dynamic(() => import('./components/HowItWorksSection'), { ssr: true });
 const ComparisonSection = dynamic(() => import('./components/ComparisonSection'), { ssr: true });
+const HomeGuides = dynamic(() => import('./components/HomeGuides'), { ssr: true });
 const HomeFaqSection = dynamic(() => import('./components/HomeFaqSection'), { ssr: true });
 
 export default function HomePage() {
@@ -150,6 +151,10 @@ export default function HomePage() {
       <BenefitsSection />
       <HowItWorksSection />
       <ComparisonSection />
+      {/* The homepage is the strongest page on the domain and used to link to no
+          article at all, leaving every guide to rank on whatever equity the blog
+          index could pass. */}
+      <HomeGuides />
       <HomeFaqSection />
     </main>
   );

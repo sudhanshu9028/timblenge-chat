@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'dating-app-burnout-why-people-are-trying-random-chat-instead',
   title: "Dating App Burnout Is Real in 2026 — Here's Why People Are Trying Random Chat Instead",
+  seoTitle: 'Dating App Burnout: Why People Try Random Chat',
   description:
     'More than half of Gen Z feels burned out on dating apps. Discover why a no-profile, no-pressure space for conversation is striking such a nerve in 2026.',
   keywords: [

@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'social-battery-dead-lowest-effort-recharge',
   title: "Your Social Battery Is Dead — Here's the Lowest-Effort Way to Recharge",
+  seoTitle: 'Social Battery Dead? The Lowest-Effort Way to Recharge',
   description:
     "Your social battery is drained but you still feel lonely. Here's why anonymous chat is the lowest-energy way to get real human connection without the performance.",
   keywords: [

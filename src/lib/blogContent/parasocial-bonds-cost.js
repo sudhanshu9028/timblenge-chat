@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'parasocial-relationships-streamer-not-friend',
   title: "Your Favorite Streamer Isn't Your Friend — The Cost of Parasocial Bonds",
+  seoTitle: "Parasocial Relationships: Your Streamer Isn't a Friend",
   description:
     "Parasocial relationships feel like real friendships but only go one way. Here's what they actually cost you — and what a two-way conversation offers instead.",
   keywords: [

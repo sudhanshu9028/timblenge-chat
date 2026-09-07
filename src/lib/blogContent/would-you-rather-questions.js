@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'would-you-rather-questions-to-get-to-know-someone',
   title: 'Would You Rather Questions That Actually Get You Somewhere',
+  seoTitle: 'Would You Rather Questions to Get to Know Someone',
   description:
     '60 Would You Rather questions arranged from light to genuinely revealing, plus why the order matters more than the questions when you are talking to a stranger.',
   keywords: [

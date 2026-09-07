@@ -5,6 +5,7 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'social-media-detox-real-conversations-2026',
   title: 'Social Media Detox in 2026 — Why Gen Z Is Choosing Real Conversations Over Doomscrolling',
+  seoTitle: 'Social Media Detox: Why Gen Z Wants Real Conversations',
   description:
     'Tired of doomscrolling? Discover why millions are swapping curated feeds for real, anonymous conversations with strangers — and why it actually works.',
   keywords: [
