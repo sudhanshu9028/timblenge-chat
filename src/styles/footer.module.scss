@@ -29,7 +29,42 @@
 
 .branding {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-md;
+
+  // The container centres everything once it stacks, so the badge has to follow
+  // the logo rather than stay left-aligned under it.
+  @media (max-width: $breakpoint-md) {
+    align-items: center;
+  }
+}
+
+.productHuntBadge {
+  display: inline-block;
+  // Kills the inline-image descender gap that would otherwise add a few
+  // stray pixels under the badge.
+  line-height: 0;
+  border-radius: $radius-sm;
+
+  // The box is reserved on the LINK, not left to the image. A lazy image has no
+  // intrinsic size until it arrives, so sizing the <img> alone let the badge
+  // collapse to 99x21 and then jump to 250x54 on load — a layout shift in the
+  // footer of every page, on a site that exists to measure layout shifts.
+  width: 250px;
+  max-width: 100%;
+  aspect-ratio: 250 / 54;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 3px;
+  }
 }
 
 .logoContainer {

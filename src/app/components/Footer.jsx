@@ -27,6 +27,37 @@ export default function Footer() {
             </div>
             <span className={styles.brandName}>Anoniz</span>
           </Link>
+
+          {/* Product Hunt's own embed rather than a self-hosted copy, so the
+              badge reflects our current standing there instead of freezing on
+              the day it was pasted. Like the Instagram link below, it is also a
+              real outbound link to a profile named in the homepage `sameAs` —
+              which is what a crawler actually follows to confirm the two are
+              the same "Anoniz".
+
+              eslint-disable-next-line reason: next/image can't serve this
+              without `dangerouslyAllowSVG`, and turning that on globally would
+              let every allowed remote host push scriptable SVG through the
+              optimiser. Not a trade worth making for one badge. Width and
+              height are set so it reserves its space, and it is lazy because
+              the footer sits below the fold on every page. */}
+          <a
+            href="https://www.producthunt.com/products/anoniz-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-anoniz-chat-and-play-with-strangers"
+            className={styles.productHuntBadge}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackClick('product_hunt')}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1244951&theme=neutral&t=1788893198010"
+              alt="Anoniz — anonymous chat and video call, play games with strangers | Featured on Product Hunt"
+              width="250"
+              height="54"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         </div>
 
         {/* Navigation Links */}
