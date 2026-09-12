@@ -6,7 +6,7 @@ export const frontmatter = {
   slug: 'why-websites-verify-your-age-2026',
   title: 'Why Does Every Website Suddenly Want to Verify Your Age?',
   description:
-    'Age checks appeared almost overnight in 2026. Here is which laws caused it, what sites are allowed to ask for, and how to tell a reasonable age check from a data grab.',
+    'Age checks appeared almost overnight, and under-16 bans are spreading fast. Which laws caused it, what sites can ask for, and whether any of it is working.',
   keywords: [
     'why do websites ask for my age now',
     'online age verification 2026',
@@ -15,11 +15,14 @@ export const frontmatter = {
     'age verification laws by state',
     'is age verification safe privacy',
     'age check without id',
+    'social media ban under 16 which countries',
+    'france social media ban under 15',
+    'australia social media ban working',
   ],
   publishedDate: '2026-09-04',
-  modifiedDate: '2026-09-04',
+  modifiedDate: '2026-09-13',
   author: 'Anoniz Team',
-  readTime: '3 min read',
+  readTime: '4 min read',
   category: 'Safety',
 };
 
@@ -56,6 +59,9 @@ export default function WhyWebsitesVerifyAge({ styles }) {
             <a href="#why-now">Why is this happening now?</a>
           </li>
           <li className={styles.tocItem}>
+            <a href="#under-16-bans">The next wave: outright bans for under-16s</a>
+          </li>
+          <li className={styles.tocItem}>
             <a href="#what-law-requires">What do the laws actually require?</a>
           </li>
           <li className={styles.tocItem}>
@@ -88,6 +94,45 @@ export default function WhyWebsitesVerifyAge({ styles }) {
         Most sites serve both markets. Rather than work out where every visitor is and apply
         different rules, many simply switched the check on for everyone. That's why the change felt
         so sudden and so global.
+      </p>
+
+      <h2 id="under-16-bans">The next wave: outright bans for under-16s</h2>
+      <p>
+        Age <em>checks</em> were the first wave. The second is age <em>bans</em> — laws that stop
+        under-16s from holding social media accounts at all, rather than gating particular content.
+        Australia went first, on 10 December 2025. Since then the list has grown quickly:
+      </p>
+      <ul>
+        <li>
+          <strong>France</strong> — parliament passed an under-15 ban on 21 July 2026. New accounts
+          have been blocked since 1 September 2026, with existing accounts due to follow in January
+          2027.
+        </li>
+        <li>
+          <strong>United Kingdom</strong> — an under-16 ban was announced in June 2026, described by
+          the government as going further than any other country's.
+        </li>
+        <li>
+          <strong>Denmark, Norway, Portugal, Slovenia, Malaysia and Gabon</strong> — all at some
+          stage between agreement and law, with age limits between 14 and 16, and several planning
+          to verify through national digital ID rather than document uploads.
+        </li>
+      </ul>
+
+      <h3>Is any of it working?</h3>
+      <p>
+        Australia has now been running the world's first such ban long enough to measure, and the
+        early answer is <strong>not really</strong>. Research published in the BMJ found more than
+        85% of under-16s were still using social media three months after the ban took effect.
+        Self-reported use fell from 85.9% before the law to 81.5% in March — a four-point dip, not a
+        wall. The government has said over five million youth accounts were deleted, and moved in
+        June 2026 to strengthen enforcement.
+      </p>
+      <p>
+        That gap between the law and the outcome is the thing worth understanding, because it is
+        what drives everything in the rest of this article. When a ban does not work through account
+        deletion, the pressure shifts to <em>verification</em> — which is how a rule written about
+        teenagers ends up as a request for your ID.
       </p>
 
       <h2 id="what-law-requires">What do the laws actually require?</h2>

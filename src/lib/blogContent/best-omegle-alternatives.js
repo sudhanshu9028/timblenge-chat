@@ -345,6 +345,14 @@ export default function BestOmegleAlternatives({ styles }) {
         </p>
       </div>
 
+      <p>
+        Looking for audio rather than video? Voice is its own category with its own trade-offs — see{' '}
+        <Link href="/blog/anonymous-voice-chat-with-strangers-2026">
+          anonymous voice chat with strangers in 2026
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

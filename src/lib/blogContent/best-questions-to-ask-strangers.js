@@ -192,6 +192,16 @@ export default function QuestionsToAskStrangers({ styles }) {
       </p>
       {renderQuestions(wouldYouRatherQuestions)}
 
+      <p>
+        Want the versions people only answer when nobody knows who they are? Try{' '}
+        <Link href="/blog/questions-to-ask-anonymously">questions to ask anonymously</Link>. And for
+        the moment a promising chat goes quiet, here is{' '}
+        <Link href="/blog/what-to-say-when-conversation-dies-stranger-chat">
+          what to say when a conversation dies
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

@@ -54,6 +54,8 @@ const PANEL_SLUGS = [
   'would-you-rather-questions-to-get-to-know-someone',
   'why-random-chat-sites-are-full-of-bots',
   'why-you-tell-strangers-things-you-wont-tell-friends',
+  'questions-to-ask-anonymously',
+  'anonymous-voice-chat-with-strangers-2026',
 ];
 
 /**

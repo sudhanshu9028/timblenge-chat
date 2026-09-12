@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'AI Companion vs. Real Person: Which Actually Helps with Loneliness in 2026?',
   seoTitle: 'AI Companion vs Real Person: Which Helps Loneliness?',
   description:
-    'AI companion apps have exploded in 2026 — but do they really ease loneliness, or just delay it? We compare AI chat to talking with a real stranger.',
+    'A 2026 trial pitted an AI companion against texting a stranger for two weeks. Only one group was less lonely at the end. Here is what the research shows.',
   keywords: [
     'ai companion vs real person',
     'is talking to ai bad for loneliness',
@@ -16,11 +16,13 @@ export const frontmatter = {
     'character ai alternative real people',
     'do ai companions help with loneliness',
     'talking to a real person online',
+    'ai companion vs human study 2026',
+    'does talking to a chatbot help loneliness',
   ],
   publishedDate: '2026-06-15',
-  modifiedDate: '2026-06-15',
+  modifiedDate: '2026-09-13',
   author: 'Anoniz Team',
-  readTime: '7 min read',
+  readTime: '8 min read',
   category: 'Wellness',
 };
 
@@ -28,12 +30,12 @@ export const faqItems = [
   {
     question: 'Are AI companions bad for you?',
     answer:
-      'Not inherently. Research suggests AI companion chats can ease loneliness in the short term about as much as talking to a real person. The concern is over-reliance — heavy, exclusive use has been linked to increased signs of distress over time, and it can quietly crowd out the slower work of building real-world connections.',
+      'Not inherently, but the evidence has sharpened. AI companion chats do ease loneliness in the moment, roughly as much as talking to a person. Over two weeks, though, a 2026 trial found the effect did not last: only students who texted a human stranger were measurably less lonely at the end, while the chatbot group improved about as much as a group that journaled. The concern is not the tool — it is using it instead of people without noticing the switch.',
   },
   {
     question: 'Can talking to AI really reduce loneliness?',
     answer:
-      "For many people, yes, at least in the moment. A Harvard Business School study found AI companion conversations eased loneliness about as much as a conversation with a real person, and more than passive activities like watching videos. The key phrase is 'in the moment' — it's a tool, not a cure.",
+      "In the moment, yes. A Harvard Business School study found AI companion conversations eased loneliness about as much as a conversation with a real person, and more than passive activities like watching videos. Over a longer window the picture changes: in a 2026 University of British Columbia and University of Pennsylvania trial, two weeks of daily chatbot conversation produced no lasting reduction in loneliness, while two weeks of texting a human stranger did. 'In the moment' is doing a lot of work in that sentence.",
   },
   {
     question: "What's better for practicing social skills, AI or real conversation?",
@@ -60,6 +62,9 @@ export default function AiCompanionVsRealPerson({ styles }) {
           </li>
           <li className={styles.tocItem}>
             <a href="#does-it-help">Do AI Companions Actually Help with Loneliness?</a>
+          </li>
+          <li className={styles.tocItem}>
+            <a href="#two-week-test">The Two-Week Test: What the 2026 Research Found</a>
           </li>
           <li className={styles.tocItem}>
             <a href="#what-ai-cant-do">
@@ -150,6 +155,40 @@ export default function AiCompanionVsRealPerson({ styles }) {
         keep you engaged — doesn't replace what a relationship with another unpredictable,
         independent person provides. The risk isn't really in talking to AI. It's in talking to AI
         instead of people, without quite noticing the switch.
+      </p>
+
+      <h2 id="two-week-test">The Two-Week Test: What the 2026 Research Found</h2>
+      <p>
+        In 2026 a team from the University of British Columbia and the University of Pennsylvania
+        ran the experiment that the earlier research had left open. Nearly 300 first-semester
+        college students — a group with a well-documented loneliness problem — were split three ways
+        for two weeks. One group texted daily with an AI companion built to be warm and supportive.
+        One texted a human peer they had never met. One simply journaled.
+      </p>
+      <p>
+        In the moment, both conversation groups felt better. But after two weeks,{' '}
+        <strong>
+          only the students who had been texting a stranger reported meaningfully less loneliness.
+        </strong>{' '}
+        The AI group's improvement was roughly the same as the group that had been writing in a
+        diary. The findings were published in the Journal of Experimental Social Psychology.
+      </p>
+      <p>
+        Two details are worth sitting with. The first is that the chatbot expressed <em>more</em>{' '}
+        empathy than the human partners did — and the students still showed <em>less</em> empathy
+        back to it. Something about knowing there was nobody on the other side changed how they
+        showed up.
+      </p>
+      <p>
+        The second is what happened when the study ended and nobody was being asked to participate
+        any more. Fourteen percent kept talking to the chatbot. Thirty-three percent kept talking to
+        their human partner, and 37% had exchanged contact details. The conversations people chose
+        to keep were the ones with a person in them.
+      </p>
+      <p>
+        This does not make AI companions worthless — the in-the-moment relief is real, and the
+        earlier findings still stand. It does mean the thing they are most often marketed as fixing
+        is the one thing the trial could not show them fixing.
       </p>
 
       <h2 id="what-ai-cant-do">What AI Can't Do (Yet): The Limits of a Scripted Connection</h2>

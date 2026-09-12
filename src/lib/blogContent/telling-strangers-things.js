@@ -149,6 +149,12 @@ export default function TellingStrangersThings({ styles }) {
         . When you want one, <Link href="/chat">someone is usually around</Link>.
       </p>
 
+      <p>
+        If you want to put that to work, these are the{' '}
+        <Link href="/blog/questions-to-ask-anonymously">questions worth asking anonymously</Link> —
+        the ones that only get a straight answer when nobody knows who is asking.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

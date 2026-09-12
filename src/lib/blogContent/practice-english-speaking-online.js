@@ -156,6 +156,14 @@ export default function PracticeEnglishSpeakingOnline({ styles }) {
         </p>
       </div>
 
+      <p>
+        Comparing your options first? We have laid out{' '}
+        <Link href="/blog/practice-english-speaking-with-strangers-free">
+          every free way to practise English with strangers in 2026
+        </Link>{' '}
+        — language exchange apps, Discord servers and random chat, with the trade-offs of each.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

@@ -156,6 +156,14 @@ export default function TalkToStrangersAnyLanguage({ styles }) {
         <Link href="/chat">start a chat</Link> and see who you land on.
       </p>
 
+      <p>
+        Learning English specifically rather than chatting across languages? See{' '}
+        <Link href="/blog/practice-english-speaking-with-strangers-free">
+          the free ways to practise English speaking with strangers
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

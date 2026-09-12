@@ -234,6 +234,12 @@ export default function TextChatVsVideoChat({ styles }) {
         walks through that progression step by step.
       </p>
 
+      <p>
+        There is a third option this comparison leaves out on purpose, because we don't offer it:{' '}
+        <Link href="/blog/anonymous-voice-chat-with-strangers-2026">anonymous voice chat</Link> sits
+        between the two — warmer than text, far less exposing than video.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />
