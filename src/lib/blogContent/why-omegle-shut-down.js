@@ -12,14 +12,13 @@ export const frontmatter = {
     'why did omegle shut down',
     'what happened to omegle',
     'omegle shut down reason',
-    'is omegle coming back',
     'omegle.com shut down',
     'what replaced omegle',
     'omegle alternative 2026',
     'is omegle still around',
   ],
   publishedDate: '2026-06-14',
-  modifiedDate: '2026-06-14',
+  modifiedDate: '2026-09-17',
   author: 'Anoniz Team',
   readTime: '8 min read',
   category: 'Comparisons',
@@ -34,7 +33,7 @@ export const faqItems = [
   {
     question: 'Is Omegle coming back?',
     answer:
-      'There are no official plans for Omegle to return. The founder described the shutdown as final and said he considered the matter closed. Any site claiming to be a relaunched "official Omegle" should be treated with suspicion — it is very likely a copycat or scam.',
+      'The original founder shut the site down as final and has not been publicly linked to any relaunch. The omegle.com domain did change hands in May 2026 and now shows a "launching soon" teaser, so a new company appears to be preparing something under the name — with no published launch date, team or safety policy so far. Treat it, and any other site claiming to be "the real Omegle", as an unknown platform rather than the one you remember.',
   },
   {
     question: 'What replaced Omegle?',
@@ -61,7 +60,7 @@ export default function WhyOmegleShutDown({ styles }) {
             <a href="#real-reasons">The Real Reasons Omegle Shut Down</a>
           </li>
           <li className={styles.tocItem}>
-            <a href="#coming-back">Is Omegle Coming Back in 2026?</a>
+            <a href="#coming-back">What's Happening With Omegle.com Now</a>
           </li>
           <li className={styles.tocItem}>
             <a href="#where-everyone-went">Where Did Everyone Go? The New Random Chat Landscape</a>
@@ -146,12 +145,20 @@ export default function WhyOmegleShutDown({ styles }) {
         consequences of that gap had become too severe to keep absorbing.
       </p>
 
-      <h2 id="coming-back">Is Omegle Coming Back in 2026?</h2>
+      <h2 id="coming-back">What's Happening With Omegle.com Now</h2>
       <p>
-        Short answer: no, and there's no indication that's going to change. The founder's farewell
-        post described the decision as final, framing it as closing a chapter rather than pausing
-        for a relaunch. Omegle.com itself simply hosts that farewell message — there is no active
-        chat service behind it.
+        The founder's farewell post described the decision as final, framing it as closing a chapter
+        rather than pausing for a relaunch — and he has not been publicly linked to what happened
+        next. In May 2026, the omegle.com domain changed hands, and the address now shows an "Omegle
+        is launching soon" teaser rather than the farewell letter.
+      </p>
+      <p>
+        Whatever appears there will be a different company's product using a famous name. We went
+        through the domain record and the code the teaser loads in{' '}
+        <Link href="/blog/is-omegle-coming-back-2026">
+          Is Omegle coming back? What's behind the "launching soon" page
+        </Link>
+        .
       </p>
       <div className={styles.tipBox}>
         <p className={styles.tipLabel}>Watch out for fakes</p>
