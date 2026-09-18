@@ -16,11 +16,9 @@ export const frontmatter = {
     'is age verification safe privacy',
     'age check without id',
     'social media ban under 16 which countries',
-    'france social media ban under 15',
-    'australia social media ban working',
   ],
   publishedDate: '2026-09-04',
-  modifiedDate: '2026-09-13',
+  modifiedDate: '2026-09-18',
   author: 'Anoniz Team',
   readTime: '4 min read',
   category: 'Safety',
@@ -190,6 +188,10 @@ export default function WhyWebsitesVerifyAge({ styles }) {
 
       <p>
         Related reading:{' '}
+        <Link href="/blog/do-social-media-bans-work">
+          whether the under-16 bans are actually working
+        </Link>
+        ,{' '}
         <Link href="/blog/anonymous-chat-age-verification-2026">
           what age verification means for anonymous chat specifically
         </Link>
