@@ -72,9 +72,13 @@ export default function RootLayout({ children }) {
         {/* Preconnect only to domains we actually use */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        {/* Lighthouse CrUX Report */}
+        {/* VitalsDesk real-user monitoring. The beacon posts to `<this host>/api/rum`,
+            so the host here is the whole contract — when the product moved from
+            lighthouse-crux-report.vercel.app to vitalsdesk.com on 21 Sep 2026, the
+            old alias was released and collection silently stopped until this
+            line changed. Use the canonical domain, never a *.vercel.app alias. */}
         <Script
-          src="https://lighthouse-crux-report.vercel.app/beacon.js"
+          src="https://vitalsdesk.com/beacon.js"
           data-site="2e17dc4a-39e4-471b-9565-786b3ce54b6c"
           strategy="afterInteractive"
           async
