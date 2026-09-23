@@ -179,6 +179,13 @@ export default function ConversationDied({ styles }) {
         .
       </p>
 
+      <p>
+        If the chat keeps dying on one-word answers, the problem may be{' '}
+        <Link href="/blog/dry-texting-how-to-fix">dry texting</Link> rather than the topic. And if
+        someone simply vanished, here is{' '}
+        <Link href="/blog/why-do-people-ghost">why people ghost</Link> — it's rarely about you.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

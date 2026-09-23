@@ -206,6 +206,15 @@ export default function WhatsappUsernamesIndia({ styles }) {
         <Link href="/chat">Anoniz text chat</Link> needs no number and no account.
       </p>
 
+      <p>
+        Until usernames arrive, it's worth knowing what a number gives away before you share it. We
+        laid out{' '}
+        <Link href="/blog/give-your-number-to-a-stranger">
+          when to give your number to someone you met online
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

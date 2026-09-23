@@ -13,11 +13,10 @@ export const frontmatter = {
     'app store anonymous chat rules',
     'is anonymous chat still anonymous',
     'random chat app age restriction 2026',
-    'discord age verification privacy',
     'chat with strangers without an app',
   ],
   publishedDate: '2026-08-27',
-  modifiedDate: '2026-08-27',
+  modifiedDate: '2026-09-24',
   author: 'Anoniz Team',
   readTime: '3 min read',
   category: 'Safety',
@@ -117,8 +116,12 @@ export default function AnonymousChatAgeVerification({ styles }) {
       </p>
       <p>
         Discord learned this publicly. A breach at a third-party support vendor exposed roughly
-        70,000 government ID photos, and when the company announced mandatory global age checks in
-        February 2026, the backlash pushed the rollout back to the second half of the year.
+        70,000 government ID photos, and the backlash to its planned global age checks delayed the
+        rollout until September 2026 — here is{' '}
+        <Link href="/blog/discord-age-verification">
+          what Discord age verification now asks for
+        </Link>
+        .
       </p>
       <p>
         The lesson for anyone choosing where to chat is simple. Ask what a platform keeps, not just

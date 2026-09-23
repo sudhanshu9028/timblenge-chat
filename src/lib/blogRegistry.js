@@ -56,6 +56,8 @@ const PANEL_SLUGS = [
   'why-you-tell-strangers-things-you-wont-tell-friends',
   'questions-to-ask-anonymously',
   'anonymous-voice-chat-with-strangers-2026',
+  'why-people-skip-you-on-video-chat',
+  'why-do-people-ghost',
 ];
 
 /**

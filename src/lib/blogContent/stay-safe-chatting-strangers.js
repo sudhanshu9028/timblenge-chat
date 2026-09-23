@@ -295,6 +295,15 @@ export default function StaySafeChatting({ styles }) {
         platform is designed to keep your identity private by default.
       </p>
 
+      <p>
+        Strangers don&apos;t only reach you through chat sites. If a message from an unknown number
+        opens with &ldquo;Hi, is this Priya?&rdquo;, read{' '}
+        <Link href="/blog/wrong-number-text-scam">
+          what happens if you reply to a wrong number text
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

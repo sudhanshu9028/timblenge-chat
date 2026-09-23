@@ -240,6 +240,14 @@ export default function TextChatVsVideoChat({ styles }) {
         between the two — warmer than text, far less exposing than video.
       </p>
 
+      <p>
+        Picked video and keep getting passed over? We wrote up{' '}
+        <Link href="/blog/why-people-skip-you-on-video-chat">
+          why people get skipped on video chat
+        </Link>{' '}
+        and the small fixes that change it.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />
