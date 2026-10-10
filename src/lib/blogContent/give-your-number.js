@@ -174,6 +174,11 @@ export default function GiveYourNumber({ styles }) {
         number at all.
       </p>
 
+      <p>
+        The same care applies to the first thing most strangers ask. See{' '}
+        <Link href="/blog/asl-meaning-in-chat">what asl means and how much to share</Link>.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

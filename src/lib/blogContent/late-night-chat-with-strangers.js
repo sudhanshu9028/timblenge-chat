@@ -198,6 +198,12 @@ export default function LateNightChatWithStrangers({ styles }) {
         .
       </p>
 
+      <p>
+        If tonight feels heavier than sleeplessness, read{' '}
+        <Link href="/blog/someone-to-talk-to">where to find someone to talk to</Link>, including
+        free helplines.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

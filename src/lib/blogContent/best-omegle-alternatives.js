@@ -353,6 +353,14 @@ export default function BestOmegleAlternatives({ styles }) {
         .
       </p>
 
+      <p>
+        Searched for OmeTV and come up empty? We checked the stores ourselves. Here is{' '}
+        <Link href="/blog/ometv-app-not-in-app-store">
+          why the OmeTV app is missing from the App Store
+        </Link>
+        , and what to use in its place.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

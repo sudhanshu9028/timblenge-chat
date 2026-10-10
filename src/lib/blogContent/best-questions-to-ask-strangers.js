@@ -202,6 +202,12 @@ export default function QuestionsToAskStrangers({ styles }) {
         .
       </p>
 
+      <p>
+        Need the line that comes before any of these? Here is{' '}
+        <Link href="/blog/what-to-say-after-hi">what to say after hi</Link>. And when questions run
+        dry, try these <Link href="/blog/games-to-play-over-text">games to play over text</Link>.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

@@ -58,6 +58,9 @@ const PANEL_SLUGS = [
   'anonymous-voice-chat-with-strangers-2026',
   'why-people-skip-you-on-video-chat',
   'why-do-people-ghost',
+  'what-to-say-after-hi',
+  'games-to-play-over-text',
+  'asl-meaning-in-chat',
 ];
 
 /**

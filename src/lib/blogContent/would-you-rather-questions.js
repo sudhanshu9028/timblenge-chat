@@ -199,6 +199,12 @@ export default function WouldYouRatherQuestions({ styles }) {
         .
       </p>
 
+      <p>
+        Want more than one game? Here are eight{' '}
+        <Link href="/blog/games-to-play-over-text">games to play over text</Link> with someone you
+        have just met.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

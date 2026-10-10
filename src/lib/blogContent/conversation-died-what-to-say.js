@@ -15,10 +15,9 @@ export const frontmatter = {
     'how to restart a dead conversation',
     'running out of things to say online',
     'stranger chat conversation tips',
-    'what to say after hi in random chat',
   ],
   publishedDate: '2026-09-02',
-  modifiedDate: '2026-09-02',
+  modifiedDate: '2026-10-10',
   author: 'Anoniz Team',
   readTime: '4 min read',
   category: 'Guides',
@@ -184,6 +183,11 @@ export default function ConversationDied({ styles }) {
         <Link href="/blog/dry-texting-how-to-fix">dry texting</Link> rather than the topic. And if
         someone simply vanished, here is{' '}
         <Link href="/blog/why-do-people-ghost">why people ghost</Link> — it's rarely about you.
+      </p>
+
+      <p>
+        Stuck earlier than that, on the very first reply? Start with{' '}
+        <Link href="/blog/what-to-say-after-hi">what to say after hi</Link>.
       </p>
 
       <div className={styles.faqSection}>

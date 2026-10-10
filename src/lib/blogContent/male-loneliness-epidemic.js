@@ -193,6 +193,14 @@ export default function MaleLonelinessEpidemic({ styles }) {
         profile.
       </p>
 
+      <p>
+        Looking for somewhere to start tonight? We listed{' '}
+        <Link href="/blog/someone-to-talk-to">
+          the real options when you need someone to talk to
+        </Link>
+        .
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

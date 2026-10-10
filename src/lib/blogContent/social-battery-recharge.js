@@ -160,6 +160,12 @@ export default function SocialBatteryRecharge({ styles }) {
         </p>
       </div>
 
+      <p>
+        If saying no to plans has become your default, that has a name now:{' '}
+        <Link href="/blog/soft-hermitting">soft hermitting</Link>. Most of Gen Z say it describes
+        them.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

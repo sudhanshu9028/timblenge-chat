@@ -147,6 +147,12 @@ export default function BedRottingBrainNeeds({ styles }) {
         </p>
       </div>
 
+      <p>
+        Staying in has a newer, gentler name too. Read{' '}
+        <Link href="/blog/soft-hermitting">what soft hermitting is</Link>, and how to tell rest from
+        retreat.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

@@ -294,6 +294,12 @@ export default function BestRandomChatAppsMobile({ styles }) {
         .
       </p>
 
+      <p>
+        One app many people look for is no longer where they expect it. We explain{' '}
+        <Link href="/blog/ometv-app-not-in-app-store">what happened to the OmeTV app</Link> and
+        which lookalikes to avoid.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />

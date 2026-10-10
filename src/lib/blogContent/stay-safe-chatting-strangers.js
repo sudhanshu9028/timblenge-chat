@@ -304,6 +304,12 @@ export default function StaySafeChatting({ styles }) {
         .
       </p>
 
+      <p>
+        Most stranger chats open with three letters. Here is{' '}
+        <Link href="/blog/asl-meaning-in-chat">what asl means in chat</Link>, and how much of it to
+        answer.
+      </p>
+
       <div className={styles.faqSection}>
         <h2 id="faq">Frequently Asked Questions</h2>
         <FaqAccordion items={faqItems} />
