@@ -5,20 +5,20 @@ import FaqAccordion from '@/app/components/FaqAccordion';
 export const frontmatter = {
   slug: 'is-omegle-coming-back-2026',
   title: 'Is Omegle Coming Back? We Looked Behind the "Launching Soon" Page',
-  seoTitle: 'Is Omegle Coming Back? Inside the New Omegle Page',
+  seoTitle: 'Is Omegle Coming Back? Launch Date & Status (Oct 2026)',
   description:
-    'Is Omegle coming back? Omegle.com has a new owner and a launch teaser. We checked the domain record and the code it loads — here is what is really there.',
+    'Is Omegle coming back? No launch date is announced as of October 2026. We checked the domain record and the code omegle.com loads — here is what is there.',
   keywords: [
     'is omegle coming back',
-    'omegle relaunch 2026',
-    'new omegle',
-    'who owns omegle now',
+    'when is omegle coming back',
     'omegle launching soon',
-    'is the new omegle safe',
-    'omegle 2026',
+    'omegle launch date',
+    'is omegle back 2026',
+    'who owns omegle now',
+    'omegle relaunch 2026',
   ],
   publishedDate: '2026-09-17',
-  modifiedDate: '2026-09-17',
+  modifiedDate: '2026-10-12',
   author: 'Anoniz Team',
   readTime: '3 min read',
   category: 'Culture',
@@ -26,9 +26,9 @@ export const frontmatter = {
 
 export const faqItems = [
   {
-    question: 'Is Omegle coming back in 2026?',
+    question: 'When is the new Omegle launching?',
     answer:
-      'A site called Omegle is being prepared, but it is not the original. The omegle.com domain changed hands in May 2026 — the public WHOIS record lists RC Tech America Inc. as registrant — and the address now shows a "launching soon" teaser. No launch date, operating team or safety policy has been published.',
+      'No launch date has been announced. The omegle.com domain changed hands in May 2026 — the public WHOIS record lists RC Tech America Inc. as registrant — and on 17 September 2026 the address showed a "launching soon" teaser. As of 12 October 2026 we could find no date, operating team or safety policy published anywhere, and whatever launches will not be the original site.',
   },
   {
     question: 'Who owns omegle.com now?',
@@ -52,6 +52,9 @@ export default function IsOmegleComingBack({ styles }) {
             <a href="#short-answer">The short answer</a>
           </li>
           <li className={styles.tocItem}>
+            <a href="#launch-date">When is Omegle coming back?</a>
+          </li>
+          <li className={styles.tocItem}>
             <a href="#verified">What we can verify</a>
           </li>
           <li className={styles.tocItem}>
@@ -71,16 +74,30 @@ export default function IsOmegleComingBack({ styles }) {
 
       <p>
         Omegle.com has a new owner and a new promise: "Omegle is launching soon." So is Omegle
-        coming back? On 17 September 2026 we checked the domain record and the code the page loads,
-        and found more than a teaser.
+        coming back, and when? We checked the domain record and the code the page loads on 17
+        September 2026, and again on 12 October.
       </p>
 
       <h2 id="short-answer">The short answer</h2>
       <p>
         Is Omegle coming back? Something wearing the name is, but it isn't the site people remember.
-        The omegle.com domain changed hands in May 2026 and now shows a launch teaser. No launch
-        date, team or safety policy has been published, and the original founder shut his site down
+        The omegle.com domain changed hands in May 2026, and the original founder shut his site down
         for good in November 2023.
+      </p>
+      <p>
+        If you only want to talk to a stranger today, you don't have to wait. Anoniz has free{' '}
+        <Link href="/chat">text chat</Link> and <Link href="/video">video chat</Link>, with no
+        account.
+      </p>
+
+      <h2 id="launch-date">When is Omegle coming back?</h2>
+      <p>
+        Nobody has said. As of 12 October 2026 we could find no launch date, no named team and no
+        published safety policy.
+      </p>
+      <p>
+        Work on the site is continuing, though. The files omegle.com serves were last updated on 12
+        October 2026, the day of our latest check.
       </p>
 
       <h2 id="verified">What we can verify</h2>
@@ -94,20 +111,20 @@ export default function IsOmegleComingBack({ styles }) {
           .
         </li>
         <li>
-          <strong>A teaser, not a service.</strong> Visiting the site today still shows "Omegle is
+          <strong>A teaser, not a service.</strong> On 17 September the page showed "Omegle is
           launching soon" above a line about meeting new people and staying safe.
         </li>
         <li>
-          <strong>Nothing about who runs it.</strong> The page names no team, gives no launch date,
-          and links to no terms or privacy policy.
+          <strong>Nothing about who runs it.</strong> The teaser named no team, gave no launch date,
+          and linked to no terms or privacy policy.
         </li>
       </ul>
 
       <h2 id="code">Inside the code the page already loads</h2>
       <p>
-        The teaser sits on top of a full web app, and its code is served to every visitor. It
-        includes sign-in with Google, Apple or Facebook, an 18+ age verification step, gender
-        selection, random video chat and live streaming rooms.
+        The teaser sat on top of a full web app, and its code is served to every visitor. On 12
+        October it still included sign-in with Google, Apple or Facebook, an 18+ age verification
+        step, gender selection, random video chat and live streaming rooms.
       </p>
       <p>
         It also contains a paid PLUS subscription with gender filters, a coin store, and an option
@@ -115,8 +132,9 @@ export default function IsOmegleComingBack({ styles }) {
         OmegleWeb.io," the name of a separate Omegle-branded site registered in January 2024.
       </p>
       <p>
-        None of that has launched, and code can change before release. But it reads much more like
-        today's account-based, freemium chat apps than the free, no-login site that shut down.
+        None of it was open to visitors when we first looked, and code can change before release.
+        But it reads much more like today's account-based, freemium chat apps than the free,
+        no-login site that shut down.
       </p>
 
       <h2 id="as-it-was">Is Omegle coming back the way it was?</h2>
@@ -164,8 +182,12 @@ export default function IsOmegleComingBack({ styles }) {
 
       <h2 id="where-that-leaves-you">Where that leaves you</h2>
       <p>
-        So, is Omegle coming back? A new product wearing the old name probably is. Judge it on what
-        it publishes about safety and money, not on the nostalgia.
+        So, is Omegle coming back? A new product wearing the old name probably is, with no date
+        attached.
+      </p>
+      <p>
+        Until a date is published, "is Omegle coming back" has one honest answer: not yet, and not
+        as it was. Judge it on what it publishes about safety and money, not on the nostalgia.
       </p>
       <div className={styles.tipBox}>
         <p className={styles.tipLabel}>Where we stand</p>

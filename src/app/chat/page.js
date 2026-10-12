@@ -8,11 +8,11 @@ export default function ChatPage() {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.seoContent}>
-        <h1 className={styles.seoTitle}>Text Chat with Strangers Online</h1>
+        <h1 className={styles.seoTitle}>Anonymous Text Chat with Strangers Online</h1>
         <p className={styles.seoDescription}>
-          Anoniz pairs you with a random person for a one-to-one text conversation. There is nothing
-          to download and no account to make — confirm you&apos;re over 18 and you&apos;re talking
-          to someone within seconds.
+          Anoniz is free anonymous text chat: we pair you with a random person for a one-to-one
+          conversation. There is nothing to download and no account to make — confirm you&apos;re
+          over 18 and you&apos;re talking to someone within seconds.
         </p>
 
         <section className={styles.seoSection}>
