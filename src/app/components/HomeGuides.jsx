@@ -65,9 +65,8 @@ export default function HomeGuides() {
     <section className={styles.guides}>
       <h2 className={styles.sectionTitle}>Not Sure What to Say?</h2>
       <p className={styles.guidesIntro}>
-        Nobody is naturally good at talking to strangers — it is a skill, and it is a
-        learnable one. These are the guides people find most useful before their first
-        conversation.
+        Nobody is naturally good at talking to strangers — it is a skill, and it is a learnable one.
+        These are the guides people find most useful before their first conversation.
       </p>
 
       <div className={styles.guidesGrid}>
@@ -79,6 +78,12 @@ export default function HomeGuides() {
           </Link>
         ))}
       </div>
+
+      <p className={styles.guidesTools}>
+        Rather skip the reading? Draw a question from the{' '}
+        <Link href="/random-question-generator">random question generator</Link>, or settle it with
+        the <Link href="/would-you-rather">Would You Rather generator</Link>.
+      </p>
 
       <p className={styles.guidesMore}>
         <Link href="/blog" className={styles.guidesMoreLink}>

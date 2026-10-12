@@ -179,6 +179,12 @@ export default function ChatPage() {
                 Why random chat sites are full of bots
               </Link>
             </li>
+            <li>
+              <Link href="/random-question-generator">Random question generator</Link>
+            </li>
+            <li>
+              <Link href="/would-you-rather">Would You Rather generator</Link>
+            </li>
           </ul>
         </section>
       </div>

@@ -581,8 +581,29 @@
   color: $color-text-muted;
 }
 
+// The two tool pages. Same measure and tone as the intro above the grid, so it
+// reads as the section's closing line rather than a second call to action.
+.guidesTools {
+  max-width: $container-lg;
+  margin: $spacing-3xl auto 0;
+  text-align: center;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+
+  a {
+    color: $color-accent-light;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-text-white;
+    }
+  }
+}
+
 .guidesMore {
-  margin-top: $spacing-3xl;
+  margin-top: $spacing-xl;
   text-align: center;
 }
 

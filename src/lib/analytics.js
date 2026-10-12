@@ -74,6 +74,11 @@ export const EVENTS = {
   RIDDLE_SOLVED: 'riddle_solved',
   PRIME_TIME_CLICK: 'prime_time_click',
 
+  // Tool pages (/would-you-rather, /random-question-generator)
+  TOOL_NEXT: 'tool_next',
+  TOOL_ANSWERED: 'tool_answered',
+  TOOL_COPIED: 'tool_copied',
+
   // Navigation
   NAV_CLICK: 'nav_click',
   FOOTER_CLICK: 'footer_click',

@@ -62,6 +62,20 @@ export default function Footer() {
 
         {/* Navigation Links */}
         <nav className={styles.navLinks}>
+          <Link
+            href="/would-you-rather"
+            className={styles.navLink}
+            onClick={() => trackClick('would_you_rather')}
+          >
+            Would You Rather
+          </Link>
+          <Link
+            href="/random-question-generator"
+            className={styles.navLink}
+            onClick={() => trackClick('random_question')}
+          >
+            Questions
+          </Link>
           <Link href="/blog" className={styles.navLink} onClick={() => trackClick('blog')}>
             Blog
           </Link>

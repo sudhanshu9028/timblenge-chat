@@ -136,6 +136,11 @@ export default function WhatToSayAfterHi({ styles }) {
         <li>Hi! Learned anything odd lately?</li>
         <li>Hello. What would you be doing if you weren't here?</li>
       </ul>
+      <p>
+        Used all twelve? The{' '}
+        <Link href="/random-question-generator">random question generator</Link> has more, sorted by
+        how much effort they take to answer.
+      </p>
 
       <h2 id="avoid">Replies that end it early</h2>
       <p>

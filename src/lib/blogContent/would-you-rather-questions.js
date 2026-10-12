@@ -202,7 +202,8 @@ export default function WouldYouRatherQuestions({ styles }) {
       <p>
         Want more than one game? Here are eight{' '}
         <Link href="/blog/games-to-play-over-text">games to play over text</Link> with someone you
-        have just met.
+        have just met. To draw one question at a time, use the{' '}
+        <Link href="/would-you-rather">Would You Rather generator</Link>.
       </p>
 
       <div className={styles.faqSection}>

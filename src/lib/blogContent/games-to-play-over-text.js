@@ -131,7 +131,9 @@ export default function GamesToPlayOverText({ styles }) {
       </ul>
       <p>
         Start with the quick ones. This or That takes ten seconds a turn, which suits a chat that
-        has only just begun.
+        has only just begun. For ready-made dilemmas, the{' '}
+        <Link href="/would-you-rather">Would You Rather generator</Link> sorts them from playful to
+        deep.
       </p>
 
       <h2 id="skip">Two kinds of game to skip with strangers</h2>
