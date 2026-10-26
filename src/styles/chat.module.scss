@@ -338,17 +338,3 @@
   }
 }
 
-.imageUploading {
-  font-style: italic;
-  color: $color-text-white;
-}
-
-.imageWrapper {
-  position: relative;
-  width: auto;
-  height: auto;
-
-  img {
-    border-radius: $radius-image;
-  }
-}

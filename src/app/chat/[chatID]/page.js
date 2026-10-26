@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { connectSocket, disconnectSocket } from '@/lib/socket';
 import SearchingState from '@/app/components/SearchingState';
@@ -12,6 +11,8 @@ import { AI_DISPLAY_NAME } from '@/lib/aiIdentity';
 import { track, EVENTS } from '@/lib/analytics';
 import { bump, recordChatDuration } from '@/lib/profile';
 import WouldYouRather from '@/app/components/WouldYouRather';
+import ViewOnceViewer, { ViewOnceBubble } from '@/app/components/ViewOnceViewer';
+import { prepareImage, emitWithAck } from '@/lib/viewOnce';
 import gameStyles from '@/styles/game.module.scss';
 import styles from '@/styles/chat.module.scss';
 
@@ -44,6 +45,8 @@ export default function ChatPage() {
   // Raised when the conversation has gone quiet, which is where the game is
   // actually useful — stranger chats tend to die around message four.
   const [stalled, setStalled] = useState(false);
+  // The view-once photo currently on screen: { id, mime, data } or null.
+  const [viewing, setViewing] = useState(null);
 
   const chatRef = useRef(null);
   const exitPanelRef = useRef(null);
@@ -98,44 +101,55 @@ export default function ChatPage() {
     }
   };
 
+  const updateViewOnce = (id, patch) =>
+    setMessages((prev) =>
+      prev.map((msg) =>
+        msg.viewOnce?.id === id ? { ...msg, viewOnce: { ...msg.viewOnce, ...patch } } : msg
+      )
+    );
+
+  // Photos are view-once: the bytes go to the server over the socket and are
+  // held in memory until the stranger opens them once. Neither side keeps a
+  // copy, and there's no URL to lift from the page.
   const handleImageUpload = async (event) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    event.target.value = '';
+    if (!file || !file.type.startsWith('image/')) return;
 
-    const tempId = Date.now();
-    setMessages((prev) => [...prev, { from: 'me', loading: true, tempId }]);
-    const formData = new FormData();
-    formData.append('file', file);
+    const tempId = uuidv4();
+    setMessages((prev) => [...prev, { from: 'me', viewOnce: { id: tempId, status: 'sending' } }]);
+
+    if (isBotChat) {
+      // The AI never sees the photo, only that one was sent.
+      updateViewOnce(tempId, { status: 'sent' });
+      sendBotMessage('[user sent an image]');
+      return;
+    }
 
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.url) {
-        setMessages((prev) =>
-          prev.map((msg) => (msg.tempId === tempId ? { from: 'me', image: data.url } : msg))
-        );
-
-        if (isBotChat) {
-          // Let bot react to the image
-          sendBotMessage('[user sent an image]');
-        } else {
-          connectSocket().emit('image', data.url);
-        }
-      } else {
-        throw new Error('Upload failed');
-      }
+      const payload = await prepareImage(file);
+      const res = await emitWithAck(connectSocket(), 'view-once:send', payload);
+      if (!res?.ok) throw new Error(res?.error || 'send failed');
+      updateViewOnce(tempId, { id: res.id, status: 'sent' });
     } catch {
-      setMessages((prev) =>
-        prev.map((msg) =>
-          msg.tempId === tempId ? { from: 'system', text: 'Image upload failed 😓' } : msg
-        )
-      );
+      updateViewOnce(tempId, { status: 'failed' });
     }
+  };
+
+  const openViewOnce = async (id) => {
+    updateViewOnce(id, { status: 'opening' });
+    try {
+      const res = await emitWithAck(connectSocket(), 'view-once:open', { id });
+      if (!res?.ok) throw new Error('gone');
+      updateViewOnce(id, { status: 'opened' });
+      setViewing({ id, mime: res.mime, data: res.data });
+    } catch {
+      updateViewOnce(id, { status: 'expired' });
+    }
+  };
+
+  const reportCapture = () => {
+    if (viewing) connectSocket().emit('view-once:capture', { id: viewing.id });
   };
 
   useEffect(() => {
@@ -533,8 +547,17 @@ export default function ChatPage() {
       setReconnectState(data && data.canReconnect ? 'available' : 'unavailable');
       setMessages((prev) => [...prev, { from: 'system', text: 'Stranger disconnected.' }]);
     });
-    socket.on('image', (base64) => {
-      setMessages((prev) => [...prev, { from: 'stranger', image: base64 }]);
+    socket.on('view-once:new', ({ id }) => {
+      setMessages((prev) => [...prev, { from: 'stranger', viewOnce: { id, status: 'unopened' } }]);
+    });
+
+    socket.on('view-once:status', ({ id, status }) => updateViewOnce(id, { status }));
+
+    socket.on('view-once:capture', () => {
+      setMessages((prev) => [
+        ...prev,
+        { from: 'system', text: 'Stranger may have tried to screenshot your photo.' },
+      ]);
     });
 
     socket.on('stranger-typing', () => {
@@ -630,23 +653,12 @@ export default function ChatPage() {
               }
             >
               {msg.text && <span>{msg.text}</span>}
-              {msg.loading && <div className={styles.imageUploading}>Uploading image...</div>}
-              {msg.image && (
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={msg.image}
-                    alt="shared"
-                    width={200}
-                    height={0}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      borderRadius: '10px',
-                      objectFit: 'contain',
-                    }}
-                    unoptimized
-                  />
-                </div>
+              {msg.viewOnce && (
+                <ViewOnceBubble
+                  mine={msg.from === 'me'}
+                  status={msg.viewOnce.status}
+                  onOpen={() => openViewOnce(msg.viewOnce.id)}
+                />
               )}
             </div>
           ))}
@@ -758,6 +770,16 @@ export default function ChatPage() {
           </div>
         </div>
       </div>
+
+      {viewing && (
+        <ViewOnceViewer
+          key={viewing.id}
+          data={viewing.data}
+          mime={viewing.mime}
+          onCapture={reportCapture}
+          onClose={() => setViewing(null)}
+        />
+      )}
     </div>
   );
 }

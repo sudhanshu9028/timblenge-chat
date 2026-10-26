@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const { startPresenceStats, getPresenceStats } = require('./src/server/presenceStats');
 const { pickQuestion } = require('./src/server/games/wouldYouRather');
 const pushStore = require('./src/server/pushStore');
+const viewOnce = require('./src/server/viewOnceImages');
 const { submitChangedUrls, getKey: getIndexNowKey } = require('./src/server/indexNow');
 const {
   getRandomPersonality,
@@ -330,10 +331,21 @@ app.prepare().then(() => {
     cors: {
       origin: '*',
     },
+    // View-once photos travel over the socket, so allow a little headroom
+    // above the per-image cap (default is 1 MB).
+    maxHttpBufferSize: viewOnce.MAX_IMAGE_BYTES + 100_000,
   });
 
   // Start periodic cleanup
   startPeriodicCleanup(io);
+
+  // Unopened view-once photos don't wait around forever.
+  setInterval(() => {
+    for (const img of viewOnce.sweepExpired()) {
+      io.to(img.from).emit('view-once:status', { id: img.id, status: 'expired' });
+      io.to(img.to).emit('view-once:status', { id: img.id, status: 'expired' });
+    }
+  }, 30_000);
 
   // Presence. The socket only connects on /chat and /video, so this is a
   // genuine count of people in a conversation or a queue right now.
@@ -491,6 +503,9 @@ app.prepare().then(() => {
       // A fresh pairing never inherits a game from a previous conversation.
       endGame(io, socketId, { notify: false });
       endGame(io, peerId, { notify: false });
+      // ...nor a photo someone sent in it.
+      viewOnce.purgeFor(socketId);
+      viewOnce.purgeFor(peerId);
 
       waitingUsers.delete(socketId);
       waitingUsers.delete(peerId);
@@ -512,6 +527,7 @@ app.prepare().then(() => {
     socket.on('leave-chat', () => {
       clearBotTimers(socket.id);
       endGame(io, socket.id);
+      viewOnce.purgeFor(socket.id);
       const partnerId = userSocketMap.get(socket.id);
       if (partnerId) {
         // Both sides are still online here, so either can offer to reconnect.
@@ -822,6 +838,7 @@ app.prepare().then(() => {
       // Validate socket is still connected
       if (!isSocketConnected(io, socket.id)) return;
 
+      viewOnce.purgeFor(socket.id);
       const partnerId = userSocketMap.get(socket.id);
 
       if (partnerId && isSocketConnected(io, partnerId)) {
@@ -874,6 +891,7 @@ app.prepare().then(() => {
       clearBotTimers(socket.id);
 
       endGame(io, socket.id);
+      viewOnce.purgeFor(socket.id);
 
       // They closed the tab — anyone holding a reconnect offer needs to know.
       cancelReconnect(io, socket.id);
@@ -903,11 +921,37 @@ app.prepare().then(() => {
       broadcastOnlineCount();
     });
 
-    socket.on('image', (base64Image) => {
+    // View-once photos. The partner only ever receives an opaque id; the bytes
+    // are handed over once, on open, and then deleted. See viewOnceImages.js.
+    socket.on('view-once:send', (payload, ack) => {
+      const reply = typeof ack === 'function' ? ack : () => {};
       const partnerId = userSocketMap.get(socket.id);
-      if (partnerId) {
-        io.to(partnerId).emit('image', base64Image);
+      if (!partnerId || !isSocketConnected(io, partnerId)) {
+        return reply({ ok: false, error: 'no_partner' });
       }
+      const result = viewOnce.store(socket.id, partnerId, payload);
+      if (result.error) return reply({ ok: false, error: result.error });
+      io.to(partnerId).emit('view-once:new', { id: result.id });
+      reply({ ok: true, id: result.id });
+    });
+
+    socket.on('view-once:open', ({ id } = {}, ack) => {
+      const reply = typeof ack === 'function' ? ack : () => {};
+      const img = viewOnce.take(
+        String(id || ''),
+        socket.id,
+        (from, to) => userSocketMap.get(to) === from
+      );
+      if (!img) return reply({ ok: false });
+      reply({ ok: true, mime: img.mime, data: img.data });
+      io.to(img.from).emit('view-once:status', { id, status: 'opened' });
+    });
+
+    // Best-effort: the viewer's page saw a screenshot shortcut or lost focus
+    // while the photo was up. Let the sender know.
+    socket.on('view-once:capture', ({ id } = {}) => {
+      const partnerId = userSocketMap.get(socket.id);
+      if (partnerId) io.to(partnerId).emit('view-once:capture', { id: String(id || '') });
     });
 
     socket.on('typing', () => {
