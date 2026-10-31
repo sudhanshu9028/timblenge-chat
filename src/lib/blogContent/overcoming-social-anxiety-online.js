@@ -6,7 +6,7 @@ export const frontmatter = {
   slug: 'how-to-practice-social-skills-and-overcome-anxiety-online',
   title: 'How to Overcome Social Anxiety by Chatting Anonymously',
   description:
-    'Struggling with social anxiety? Learn how anonymous text and video chat platforms provide a safe, low-pressure environment for practicing social skills and building confidence.',
+    'Struggling with social anxiety? How anonymous text and video chat give you a low-pressure place to practise social skills and build your confidence.',
   keywords: [
     'how to overcome social anxiety',
     'practicing social skills online',

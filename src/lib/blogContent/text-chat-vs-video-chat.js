@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Text Chat vs. Video Chat: Which Should You Choose to Meet Strangers Online?',
   seoTitle: 'Text Chat vs Video Chat: Which Should You Choose?',
   description:
-    'Not sure whether to start with text or video chat when meeting new people online? We break down the pros, cons, and best use cases for each so you can pick the right one.',
+    'Text chat vs video chat: which should you start with when meeting new people online? The pros, cons and best uses of each, so you can pick the right one.',
   keywords: [
     'text chat vs video chat',
     'anonymous text chat online',

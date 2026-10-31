@@ -6,7 +6,7 @@ export const frontmatter = {
   title: 'Best Omegle Alternatives in 2026 — Safe & Free Random Chat Sites',
   seoTitle: 'Best Omegle Alternatives in 2026 — Free & Safe',
   description:
-    'Looking for the best Omegle alternatives in 2026? Discover safe, free random chat sites for anonymous video chat and text chat with strangers. No signup required.',
+    'The best Omegle alternatives in 2026: safe, free random chat sites for anonymous video and text chat with strangers, and which ones need no signup.',
   keywords: [
     'best omegle alternatives 2026',
     'safe free random chat',

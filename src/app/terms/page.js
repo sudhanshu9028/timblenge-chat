@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 export const metadata = {
-  title: 'Terms of Service | Anoniz - User Agreement & Terms and Conditions',
+  title: 'Terms of Service | Anoniz',
   description:
-    'Read the Terms of Service for Anoniz anonymous chat and video chat platform. Understand our user agreement, rules, guidelines, and terms and conditions before using our service to chat with strangers online.',
+    'The rules for using Anoniz: adults only, what is not allowed in text and video chats, how we handle safety, and what happens if someone breaks the rules.',
   keywords: [
     'terms of service',
     'terms and conditions',
@@ -19,11 +20,12 @@ export const metadata = {
     canonical: 'https://anoniz.com/terms',
   },
   openGraph: {
-    title: 'Terms of Service | Anoniz - User Agreement & Terms and Conditions',
+    title: 'Terms of Service | Anoniz',
     description:
-      'Read the Terms of Service for Anoniz anonymous chat and video chat platform. Understand our user agreement and terms and conditions before using our service.',
+      'The rules for using Anoniz: adults only, what is not allowed in text and video chats, how we handle safety, and what happens if someone breaks the rules.',
     url: 'https://anoniz.com/terms',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -37,14 +39,7 @@ export default function TermsPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Terms of Service</h1>
-          <p className={styles.lastUpdated}>
-            Last Updated:{' '}
-            {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
+          <p className={styles.lastUpdated}>Last Updated: November 1, 2026</p>
         </div>
 
         <div className={styles.content}>
@@ -141,22 +136,32 @@ export default function TermsPage() {
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>6. Moderation and Safety</h2>
+            <h2 className={styles.sectionTitle}>6. Safety and Enforcement</h2>
             <p className={styles.sectionContent}>
-              We employ automated and manual moderation systems to maintain a safe environment.
-              However, we cannot guarantee that all inappropriate content or behavior will be
-              prevented or removed immediately. You use the service at your own risk.
+              Anoniz does not monitor conversations as they happen, and messages are not stored. The
+              protections we provide are built into the service: an 18+ confirmation before every
+              chat, no profiles or usernames, view-once photos, and the ability to leave any chat
+              instantly. We cannot guarantee that inappropriate content or behavior will be
+              prevented, and you use the service at your own risk.
             </p>
-            <p className={styles.sectionContent}>We reserve the right to:</p>
+            <p className={styles.sectionContent}>
+              To report a problem, email{' '}
+              <a href="mailto:support@anoniz.com" className={styles.link}>
+                support@anoniz.com
+              </a>
+              . We reserve the right to:
+            </p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Monitor, review, and moderate conversations and content
-              </li>
-              <li className={styles.listItem}>Remove or block users who violate these terms</li>
+              <li className={styles.listItem}>Review reports sent to us and act on them</li>
+              <li className={styles.listItem}>Block access for users who violate these terms</li>
               <li className={styles.listItem}>
                 Terminate access to the service without notice for violations
               </li>
               <li className={styles.listItem}>Report illegal activities to law enforcement</li>
+              <li className={styles.listItem}>
+                Introduce moderation or reporting tools, in which case we will update these Terms
+                and our Privacy Policy
+              </li>
             </ul>
           </section>
 

@@ -41,10 +41,10 @@ export default function FeaturesSection() {
           </p>
         </article>
         <article className={styles.featureCard}>
-          <h3 className={styles.featureTitle}>18+, Moderated, Ad-Free</h3>
+          <h3 className={styles.featureTitle}>18+, Anonymous, Ad-Free</h3>
           <p className={styles.featureDescription}>
-            Every chat starts behind an age confirmation, with content moderation and reporting
-            tools in place. No ads, no premium tier, no upsell mid-conversation.
+            Every chat starts behind an age confirmation, there are no profiles to look anyone up
+            by, and photos are view-once. No ads, no premium tier, no upsell mid-conversation.
           </p>
         </article>
       </div>

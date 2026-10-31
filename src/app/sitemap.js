@@ -24,11 +24,11 @@ const STATIC_PAGE_DATES = {
   '/video': '2026-09-02',
   '/would-you-rather': '2026-10-12',
   '/random-question-generator': '2026-10-12',
-  '/blog': '2026-08-26',
+  '/blog': '2026-11-01',
   '/about': '2026-02-08',
   '/support': '2026-02-08',
-  '/terms': '2026-02-08',
-  '/privacy-policy': '2026-02-08',
+  '/terms': '2026-11-01',
+  '/privacy-policy': '2026-11-01',
 };
 
 export default function sitemap() {

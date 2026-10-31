@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Why Talking to a Stranger Feels Better Than Texting Your Group Chat',
   seoTitle: 'Why Talking to a Stranger Beats Your Group Chat',
   description:
-    "Your group chat has 47 unread messages and you still feel lonely. Here's the psychology behind why a five-minute conversation with a stranger can do what your friends' memes can't.",
+    "Your group chat has 47 unread messages and you still feel lonely. Why a five-minute chat with a stranger can do what your friends' memes can't.",
   keywords: [
     'why talking to strangers feels good',
     'stranger conversation psychology',

@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import styles from '@/styles/legal.module.scss';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 export const metadata = {
-  title: 'Privacy Policy | Anoniz - Data Protection & User Privacy Information',
+  title: 'Privacy Policy | Anoniz',
   description:
-    'Read the Privacy Policy for Anoniz anonymous chat and video chat platform. Learn how we collect, use, protect, and handle your data. Understand our commitment to user privacy and data protection.',
+    'What Anoniz collects when you chat, how long it keeps it, which third-party services run on the site, and the rights you have over your data.',
   keywords: [
     'privacy policy',
     'data protection',
@@ -20,11 +21,12 @@ export const metadata = {
     canonical: 'https://anoniz.com/privacy-policy',
   },
   openGraph: {
-    title: 'Privacy Policy | Anoniz - Data Protection & User Privacy Information',
+    title: 'Privacy Policy | Anoniz',
     description:
-      'Read the Privacy Policy for Anoniz anonymous chat and video chat platform. Learn how we collect, use, and protect your data.',
+      'What Anoniz collects when you chat, how long it keeps it, which third-party services run on the site, and the rights you have over your data.',
     url: 'https://anoniz.com/privacy-policy',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -38,150 +40,190 @@ export default function PrivacyPolicyPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>
-          <p className={styles.lastUpdated}>
-            Last Updated:{' '}
-            {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
+          <p className={styles.lastUpdated}>Last Updated: November 1, 2026</p>
         </div>
 
         <div className={styles.content}>
           <div className={styles.intro}>
             <p>
-              At Anoniz, we are committed to protecting your privacy. This Privacy Policy explains
-              how we collect, use, and safeguard your information when you use our anonymous chat
-              and video chat platform.
+              Anoniz is built to know as little about you as possible. This policy explains what we
+              do collect when you use our anonymous text and video chat, why, how long we keep it,
+              and which outside services are involved.
             </p>
           </div>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>1. Information We Collect</h2>
             <p className={styles.sectionContent}>
-              Anoniz is designed to be anonymous. We collect minimal information necessary to
-              provide our service:
+              There are no accounts. We never ask for your name, email address or phone number. What
+              we do handle is listed below.
             </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Gender Preference:</span> We collect your gender
-                selection to help match you with compatible users. This is stored temporarily in
-                your browser session.
+                <span className={styles.strong}>Gender:</span> We ask for it when you start a chat.
+                It is kept in your browser&apos;s session storage and cleared when you close the
+                tab. It is not sent to our servers.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Technical Data:</span> We automatically collect
-                technical information such as IP address, browser type, device information, and
-                usage patterns for service functionality and security purposes.
+                <span className={styles.strong}>Interests:</span> Any interest tags you add are sent
+                to our server so we can try to match you with someone who shares them. They are held
+                in memory only while you are connected.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Chat Content:</span> Messages and video streams are
-                transmitted in real-time and are not permanently stored on our servers. We do not
-                record or save your conversations.
+                <span className={styles.strong}>Text messages:</span> Messages are relayed through
+                our server in real time and are not stored or logged. When the chat ends, they are
+                gone.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>No Personal Information:</span> We do not require
-                registration, email addresses, names, or any personally identifiable information.
+                <span className={styles.strong}>Photos:</span> Photos you send are view-once. Your
+                browser re-encodes each photo before sending it, which removes location and camera
+                details (EXIF data). The photo is held only in our server&apos;s memory, never
+                written to disk or a third-party service, and has no web address. It is deleted as
+                soon as the other person opens it, when either of you leaves the chat, or after five
+                minutes if it is never opened. The viewer closes if the other person switches away
+                or presses a screenshot shortcut, and you are told if we notice a likely screenshot,
+                but no website can fully prevent someone from photographing their screen.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Video:</span> Video and audio travel directly
+                between your browser and the other person&apos;s where possible (WebRTC), not
+                through our server, and are never recorded by us. To set up that direct connection,
+                both browsers contact Google&apos;s public STUN servers, which see your IP address.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>AI chats:</span> When no person is free, text chat
+                may offer a clearly labelled AI chat partner. Messages you send to it are passed to
+                Google&apos;s Gemini API to generate its replies, so they are processed by Google
+                under its own terms. We do not store them.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Notifications:</span> If you choose to turn on
+                browser notifications, we store the push subscription your browser gives us, your
+                timezone offset (so we never notify you at night), and when we last sent you one.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Technical data:</span> Like any website, our servers
+                and hosting provider receive your IP address, browser type and device details when
+                you connect.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>On your device only:</span> A small profile of
+                counters, such as how many strangers you have talked to, is kept in your
+                browser&apos;s local storage. It never leaves your device.
               </li>
             </ul>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>2. How We Use Your Information</h2>
-            <p className={styles.sectionContent}>
-              We use the limited information we collect for the following purposes:
-            </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
-                To provide and maintain our chat and video chat services
+                To connect you with another person and run the chat
+              </li>
+              <li className={styles.listItem}>To match you on shared interests</li>
+              <li className={styles.listItem}>To generate replies in AI chats</li>
+              <li className={styles.listItem}>To send the notifications you asked for</li>
+              <li className={styles.listItem}>
+                To keep the service secure, prevent abuse and fix problems
               </li>
               <li className={styles.listItem}>
-                To match you with other users based on gender preferences
+                To understand how the site is used and how fast it loads, so we can improve it
               </li>
-              <li className={styles.listItem}>To ensure platform security and prevent abuse</li>
-              <li className={styles.listItem}>To analyze usage patterns and improve our service</li>
               <li className={styles.listItem}>
-                To comply with legal obligations and respond to law enforcement requests
+                To comply with legal obligations and respond to lawful requests
               </li>
             </ul>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>3. Data Storage and Retention</h2>
+            <ul className={styles.list}>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Text messages and video:</span> Not stored.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Photos:</span> Deleted on opening, when either
+                person leaves, or after five minutes unopened.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Interests:</span> Held in memory while you are
+                connected, then discarded.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Gender and session details:</span> Kept in your
+                browser&apos;s session storage and cleared when you close the tab.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Notification subscriptions:</span> Kept until you
+                turn notifications off in your browser or the subscription stops working, at which
+                point we delete it.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Technical logs:</span> Our hosting provider may keep
+                server logs, including IP addresses and timestamps, for security and troubleshooting
+                for a limited period, typically not exceeding 90 days.
+              </li>
+            </ul>
             <p className={styles.sectionContent}>
-              <span className={styles.strong}>Chat Messages:</span> Text messages and video streams
-              are transmitted in real-time and are not stored on our servers. Once a conversation
-              ends, the content is not retained.
-            </p>
-            <p className={styles.sectionContent}>
-              <span className={styles.strong}>Session Data:</span> Gender preferences and session
-              identifiers are stored temporarily in your browser&apos;s session storage and are
-              cleared when you close your browser.
-            </p>
-            <p className={styles.sectionContent}>
-              <span className={styles.strong}>Technical Logs:</span> We may retain technical logs
-              (IP addresses, timestamps) for security and troubleshooting purposes for a limited
-              period, typically not exceeding 90 days.
+              We also keep anonymous counts of how many people are online at each hour, with no
+              identifiers attached, to learn when the site is busiest.
             </p>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>4. Data Security</h2>
             <p className={styles.sectionContent}>
-              We implement reasonable security measures to protect your information:
-            </p>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Encrypted connections (HTTPS) for all data transmission
-              </li>
-              <li className={styles.listItem}>
-                Secure socket connections for real-time chat and video
-              </li>
-              <li className={styles.listItem}>Regular security assessments and updates</li>
-              <li className={styles.listItem}>Access controls and monitoring systems</li>
-            </ul>
-            <p className={styles.sectionContent}>
-              However, no method of transmission over the internet is 100% secure. While we strive
-              to protect your information, we cannot guarantee absolute security.
+              All connections to Anoniz use HTTPS, and chat runs over encrypted connections. Keeping
+              almost nothing is our main protection: data we never store cannot leak. No method of
+              transmission over the internet is completely secure, however, and we cannot guarantee
+              absolute security.
             </p>
           </section>
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>5. Third-Party Services</h2>
-            <p className={styles.sectionContent}>
-              We may use third-party services that collect information:
-            </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Analytics:</span> We use analytics services to
-                understand how our platform is used. These services may collect anonymous usage
-                data.
+                <span className={styles.strong}>Google Analytics:</span> Measures visits and how the
+                site is used. In the EEA, the UK and Switzerland it runs with analytics storage
+                denied by default, which means no analytics cookies are set there.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Hosting:</span> Our service is hosted on third-party
-                infrastructure. These providers have their own privacy policies regarding data
-                handling.
+                <span className={styles.strong}>VitalsDesk:</span> Measures how fast pages load for
+                real visitors. It records the page address, speed measurements, device type and an
+                approximate country and city derived from the request. It does not set cookies.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Google Gemini API:</span> Generates replies in AI
+                chats, as described above.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Google STUN servers:</span> Help two browsers find
+                each other for video chat.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Hosting:</span> The site runs on Render, which
+                processes connection data to serve it.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Product Hunt:</span> The badge in our footer is
+                loaded from Product Hunt, which receives a standard request from your browser.
               </li>
             </ul>
             <p className={styles.sectionContent}>
               We do not sell, rent, or share your personal information with third parties for their
-              marketing purposes.
+              marketing purposes, and we show no ads.
             </p>
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>6. Cookies and Tracking Technologies</h2>
+            <h2 className={styles.sectionTitle}>6. Cookies and Similar Technologies</h2>
             <p className={styles.sectionContent}>
-              We use cookies and similar tracking technologies to:
-            </p>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>Maintain your session and preferences</li>
-              <li className={styles.listItem}>Analyze platform usage and performance</li>
-              <li className={styles.listItem}>Provide security features</li>
-            </ul>
-            <p className={styles.sectionContent}>
-              You can control cookies through your browser settings. However, disabling cookies may
-              affect the functionality of our service.
+              Anoniz itself does not use cookies. Google Analytics may set cookies to measure usage,
+              except where analytics storage is denied as described above. We use your
+              browser&apos;s session storage for your gender, interests and chat session, and local
+              storage for the on-device profile. You can clear all of these in your browser settings
+              at any time.
             </p>
           </section>
 

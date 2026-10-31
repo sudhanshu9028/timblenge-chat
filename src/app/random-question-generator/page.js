@@ -4,6 +4,7 @@ import ToolCta from '../components/ToolCta';
 import FaqAccordion from '../components/FaqAccordion';
 import styles from '@/styles/tools.module.scss';
 import { QUESTION_GROUPS, TOTAL_QUESTIONS } from '@/lib/questionBank';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 const URL = 'https://anoniz.com/random-question-generator';
 const TITLE = `Random Question Generator: ${TOTAL_QUESTIONS} Conversation Starters | Anoniz`;
@@ -18,6 +19,7 @@ export const metadata = {
     description: DESCRIPTION,
     url: URL,
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',

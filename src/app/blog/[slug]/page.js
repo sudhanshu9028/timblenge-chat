@@ -42,20 +42,11 @@ export function generateMetadata({ params }) {
       modifiedTime: post.modifiedDate,
       authors: [post.author],
       siteName: 'Anoniz',
-      images: [
-        {
-          url: '/logo.png',
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: ['/logo.png'],
     },
   };
 }
@@ -113,6 +104,21 @@ export default function BlogPostPage({ params }) {
         },
         image: 'https://anoniz.com/logo.png',
         keywords: post.keywords.join(', '),
+      },
+      // Mirrors the visible breadcrumb above the headline, so search results can
+      // show "Anoniz › Blog" instead of a bare URL.
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://anoniz.com' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://anoniz.com/blog' },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: `https://anoniz.com/blog/${post.slug}`,
+          },
+        ],
       },
       // Only emit an FAQPage node when the post actually has FAQs — an empty
       // one is invalid structured data.

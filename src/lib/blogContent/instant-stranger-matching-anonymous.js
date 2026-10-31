@@ -180,10 +180,10 @@ export default function InstantStrangerMatchingAnonymous({ styles }) {
       <div className={styles.tipBox}>
         <p className={styles.tipLabel}>A note on safety</p>
         <p>
-          Anonymous doesn't mean unmoderated. On Anoniz, AI moderation runs continuously, and
-          reporting tools are always available. But basic rules still apply: don't share personal
-          information you wouldn't give to someone you just met on the street, and trust your
-          instincts if something feels off. Our{' '}
+          Anonymity protects you, but it doesn't make a stranger trustworthy. On Anoniz you can
+          leave any chat instantly with Next, and there is no profile anyone can follow you by.
+          Basic rules still apply: don't share personal information you wouldn't give to someone you
+          just met on the street, and trust your instincts if something feels off. Our{' '}
           <Link href="/blog/how-to-stay-safe-chatting-with-strangers-online">safety guide</Link>{' '}
           covers this in detail.
         </p>

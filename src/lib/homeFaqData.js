@@ -17,7 +17,7 @@ export const HOME_FAQ_ITEMS = [
   {
     question: 'Is Anoniz safe for chatting with strangers?',
     answer:
-      "Anoniz prioritizes user safety with content moderation, reporting tools, and community guidelines. Your conversations aren't stored, and you can disconnect from anyone instantly. We recommend following basic online safety practices like not sharing personal information.",
+      "Every chat starts behind an 18+ confirmation, and there are no profiles or usernames anyone could look you up by. Photos are view-once, and conversations aren't stored. If someone makes you uncomfortable, press Next and they can't find you again. Keep personal details to yourself, and email support@anoniz.com if something goes wrong.",
   },
   {
     question: 'Can I choose who I talk to based on my interests?',
@@ -37,6 +37,6 @@ export const HOME_FAQ_ITEMS = [
   {
     question: 'What makes Anoniz different from Omegle?',
     answer:
-      'Anoniz improves on what Omegle offered with better moderation, interest-based matching for more meaningful conversations, a clean ad-free interface, and a stronger focus on user privacy and safety.',
+      'Anoniz keeps what made Omegle easy, one-to-one chat with no account, and adds interest-based matching, an 18+ age confirmation, view-once photos and an ad-free interface. Nothing you say is stored after you disconnect.',
   },
 ];

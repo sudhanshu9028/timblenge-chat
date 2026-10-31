@@ -77,6 +77,16 @@ export default function HomePage() {
         name: 'Anoniz',
         url: 'https://anoniz.com',
         logo: 'https://anoniz.com/logo.png',
+        // A plain statement of what the company makes, for the same reason as
+        // `sameAs` below: search engines and AI assistants describe a brand from
+        // what it says about itself, and this one shares its name.
+        description:
+          'Anoniz runs anoniz.com, a free browser-based site for anonymous one-to-one text and video chat between adults.',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: 'support@anoniz.com',
+        },
         // This is the field that tells Google which "Anoniz" we are. There is
         // an unrelated product with the same name — our own Product Hunt slug
         // is `anoniz-2` because `anoniz` was already taken — so leaving this

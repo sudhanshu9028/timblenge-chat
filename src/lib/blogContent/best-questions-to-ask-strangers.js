@@ -7,7 +7,7 @@ export const frontmatter = {
   title: '50 Best Questions to Ask Strangers Online to Keep the Conversation Going',
   seoTitle: '50 Questions to Ask Strangers Online (That Work)',
   description:
-    'Never run out of things to say! Explore our curated list of the best icebreakers, deep questions, and fun conversation starters to ask strangers in random chats.',
+    'Never run out of things to say. The best icebreakers, deep questions and fun conversation starters to ask strangers in random chats, all in one list.',
   keywords: [
     '50 questions to ask strangers online',
     'best conversation starters for chat',

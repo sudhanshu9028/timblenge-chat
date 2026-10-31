@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import styles from '@/styles/support.module.scss';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 export const metadata = {
-  title: 'Support & Help Center | Anoniz - Get Assistance with Chat & Video Chat',
+  title: 'Anoniz Help and Support: Contact Us',
   description:
-    'Get help and support for Anoniz anonymous chat and video chat platform. Contact our support team via email for assistance with questions, technical issues, or account help. We respond within 24 hours.',
+    'Need help with Anoniz? Email our support team about a problem with text or video chat, a bug, or something you saw in a chat, and we will get back to you.',
   keywords: [
     'anoniz support',
     'anoniz help',
@@ -19,11 +20,12 @@ export const metadata = {
     canonical: 'https://anoniz.com/support',
   },
   openGraph: {
-    title: 'Support & Help Center | Anoniz',
+    title: 'Anoniz Help and Support: Contact Us',
     description:
-      'Get help and support for Anoniz anonymous chat and video chat platform. Contact our support team via email for assistance.',
+      'Need help with Anoniz? Email our support team about a problem with text or video chat, a bug, or something you saw in a chat, and we will get back to you.',
     url: 'https://anoniz.com/support',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

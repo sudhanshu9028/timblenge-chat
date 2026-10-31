@@ -6,7 +6,7 @@ export const frontmatter = {
   title: 'How to Make Friends Online — Talk to Strangers Without the Awkwardness',
   seoTitle: 'How to Make Friends Online by Talking to Strangers',
   description:
-    'Struggle with making friends online? Learn practical tips for talking to strangers, overcoming social anxiety, and building genuine connections on random chat platforms.',
+    'Struggling to make friends online? Practical tips for talking to strangers, getting past social anxiety and building real connections on random chat.',
   keywords: [
     'how to make friends online',
     'talk to strangers without awkwardness',

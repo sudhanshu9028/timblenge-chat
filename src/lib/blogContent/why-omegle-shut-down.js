@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Why Did Omegle Shut Down? The Real Story (and Where Everyone Went in 2026)',
   seoTitle: 'Why Did Omegle Shut Down? The Real Story',
   description:
-    'Omegle shut down for good in November 2023 after 14 years online. Here is the real story behind its closure, whether it is coming back, and where its millions of users went next.',
+    'Omegle shut down in November 2023 after 14 years. The real story behind its closure, whether it is coming back, and where its millions of users went.',
   keywords: [
     'why did omegle shut down',
     'what happened to omegle',

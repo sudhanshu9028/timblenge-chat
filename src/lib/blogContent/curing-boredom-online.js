@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Ultimate Guide to Curing Boredom: Fun Things to Do Online in 2026',
   seoTitle: "Fun Things to Do Online When You're Bored (2026)",
   description:
-    "Discover engaging and fun things to do online when you're bored. Learn how talking to random strangers can instantly cure boredom and spark exciting conversations.",
+    "Fun things to do online when you're bored, and why talking to random strangers is one of the quickest ways to cure boredom and start a good conversation.",
   keywords: [
     'curing boredom online',
     'fun things to do online when bored',

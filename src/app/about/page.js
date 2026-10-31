@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import styles from '@/styles/about.module.scss';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 export const metadata = {
-  title: 'About Anoniz | Anonymous Chat & Video Chat Platform | Connect with Strangers',
+  title: 'About Anoniz: Anonymous Text and Video Chat',
   description:
-    'Learn about Anoniz - the leading anonymous chat and video chat platform connecting strangers worldwide. Discover our mission to create safe, meaningful connections through text and video chat. No registration required.',
+    'Anoniz is a free, anonymous text and video chat site for adults. What it does, how matching works, and why nothing is kept once you disconnect.',
   keywords: [
     'about anoniz',
     'anoniz platform',
@@ -19,11 +20,12 @@ export const metadata = {
     canonical: 'https://anoniz.com/about',
   },
   openGraph: {
-    title: 'About Anoniz | Anonymous Chat & Video Chat Platform',
+    title: 'About Anoniz: Anonymous Text and Video Chat',
     description:
-      'Learn about Anoniz - the leading anonymous chat and video chat platform connecting strangers worldwide. Discover our mission, features, and values.',
+      'Anoniz is a free, anonymous text and video chat site for adults. What it does, how matching works, and why nothing is kept once you disconnect.',
     url: 'https://anoniz.com/about',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -127,10 +129,11 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className={styles.valueItem}>
-                <h3 className={styles.valueTitle}>Safety & Moderation</h3>
+                <h3 className={styles.valueTitle}>Safety by Design</h3>
                 <p className={styles.valueDescription}>
-                  We work to maintain a safe environment for all users through moderation tools and
-                  community guidelines.
+                  No profiles, no stored conversations and view-once photos leave little about you
+                  for anyone to keep. Every chat starts behind an 18+ confirmation, and one tap
+                  moves you on.
                 </p>
               </div>
               <div className={styles.valueItem}>

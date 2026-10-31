@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Lonely in College? How to Meet People Online When Campus Life Feels Isolating',
   seoTitle: 'Lonely in College? How to Meet People Online in 2026',
   description:
-    "Over half of college students report feeling lonely in 2026. If campus life isn't clicking, here's how to find real connection online — no awkward mixers required.",
+    "Over half of college students report feeling lonely in 2026. If campus life isn't clicking, here's how to find real connection online, no mixers needed.",
   keywords: [
     'lonely in college',
     'college loneliness 2026',

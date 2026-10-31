@@ -7,7 +7,7 @@ export const frontmatter = {
   title: 'Deepfakes, Catfish, and Creeps — How to Spot Red Flags on Random Video Chat in 2026',
   seoTitle: 'How to Spot Red Flags on Random Video Chat (2026)',
   description:
-    'Real-time deepfakes are getting scarily good. Learn how to spot fake people, catfish, and manipulation tactics on random video chat — and what safe platforms do differently.',
+    'Real-time deepfakes are getting good. How to spot fake people, catfish and manipulation on random video chat, and what safer platforms do differently.',
   keywords: [
     'random video chat safety',
     'deepfake video chat',

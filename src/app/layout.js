@@ -42,14 +42,6 @@ export const metadata = {
     siteName: 'Anoniz',
     type: 'website',
     locale: 'en_US',
-    images: [
-      {
-        url: '/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Anoniz - Chat with Strangers, Make Friends Online',
-      },
-    ],
   },
   robots: {
     index: true,
@@ -61,7 +53,6 @@ export const metadata = {
     title: 'Anoniz | Talk to Strangers Online – Free Anonymous Chat',
     description:
       'Talk to strangers and make friends online. Video chat and text chat with random people worldwide. No registration required - start chatting instantly!',
-    images: ['/logo.png'],
   },
 };
 

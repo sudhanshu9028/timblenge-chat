@@ -6,7 +6,7 @@ export const frontmatter = {
   slug: 'why-talking-to-people-feels-harder-now',
   title: 'Why Does Talking to People Feel So Much Harder Now?',
   description:
-    "Over half of Gen Z say their in-person social skills have declined, and nine in ten would rather text than call. Here is what's actually happening — and how it reverses.",
+    "Over half of Gen Z say their in-person social skills have declined, and nine in ten would rather text than call. What's happening, and how it reverses.",
   keywords: [
     'why is talking to people so hard now',
     'phone call anxiety gen z',

@@ -7,7 +7,7 @@ export const frontmatter = {
   title: "Can't Sleep? Why So Many People Chat with Strangers at 2AM (and Why It Helps)",
   seoTitle: "Can't Sleep? Why People Chat With Strangers at 2AM",
   description:
-    "Wide awake at 2AM with your mind racing? You're not alone. Discover why late-night conversations with strangers are surprisingly common, and how they can actually help.",
+    "Wide awake at 2AM with your mind racing? You're not alone. Why late-night conversations with strangers are so common, and how they can actually help.",
   keywords: [
     "can't sleep talk to someone",
     'who to talk to when you cant sleep',

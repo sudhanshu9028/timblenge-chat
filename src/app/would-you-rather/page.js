@@ -6,6 +6,7 @@ import styles from '@/styles/tools.module.scss';
 // The same bank the in-chat game draws from, so the page can never promise a
 // question the chat doesn't have, or the other way round.
 import { QUESTIONS, TOTAL_QUESTIONS } from '@/server/games/wouldYouRather';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 const URL = 'https://anoniz.com/would-you-rather';
 const TITLE = `Would You Rather Generator – ${TOTAL_QUESTIONS} Questions, Free | Anoniz`;
@@ -20,6 +21,7 @@ export const metadata = {
     description: DESCRIPTION,
     url: URL,
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',

@@ -107,8 +107,8 @@ export default function ChatPage() {
             <p className={styles.seoQuestion}>What happened to Omegle?</p>
             <p className={styles.seoText}>
               Omegle shut down in November 2023 after fourteen years, following a lawsuit and years
-              of moderation problems. Anoniz does the same one-to-one stranger matching without the
-              things that got Omegle in trouble.{' '}
+              of moderation problems. Anoniz does the same one-to-one stranger matching, with an 18+
+              confirmation, no profiles and nothing stored afterwards.{' '}
               <Link href="/blog/why-did-omegle-shut-down-where-everyone-went-2026">
                 The full story is here
               </Link>

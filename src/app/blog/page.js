@@ -1,6 +1,7 @@
 import { BLOG_POSTS } from '@/lib/blogRegistry';
 import styles from '@/styles/blog.module.scss';
 import BlogList from './BlogList';
+import { DEFAULT_OG_IMAGE } from '@/lib/ogImage';
 
 export const metadata = {
   title: 'Blog | Anoniz — Tips, Guides & Insights on Random Chat',
@@ -25,6 +26,7 @@ export const metadata = {
       'Explore articles on random chat safety, Omegle alternatives, making friends online, and more.',
     url: 'https://anoniz.com/blog',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

@@ -1,80 +1,92 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/blog.module.scss';
 
-const POSTS_PER_PAGE = 10;
+// Nine fills the 3 × 3 grid on desktop exactly.
+const LATEST_COUNT = 9;
 
+// Categories with only a post or two read as noise in a topic list, so they
+// share one group at the end instead of each getting a heading.
+const MIN_GROUP_SIZE = 3;
+const MISC_LABEL = 'More';
+
+const formatDate = (iso) =>
+  new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const anchorFor = (label) => `topic-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
+/**
+ * The blog index: the newest posts as cards, then every post as a plain link
+ * grouped by topic.
+ *
+ * This used to be a client component that paged through ten cards at a time
+ * with buttons. Buttons aren't links, so a crawler saw the ten newest posts and
+ * nothing else — everything older was reachable only from the sitemap and the
+ * odd in-post link, and eight posts had no internal link at all. Every post is
+ * now an `<a href>` in the server-rendered HTML.
+ */
 export default function BlogList({ posts }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const latest = posts.slice(0, LATEST_COUNT);
 
-  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-  const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
-
-  const goToPage = (page) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const byCategory = new Map();
+  for (const post of posts) {
+    const list = byCategory.get(post.category) || [];
+    list.push(post);
+    byCategory.set(post.category, list);
+  }
+  const groups = [];
+  const misc = [];
+  for (const [label, list] of byCategory) {
+    if (list.length >= MIN_GROUP_SIZE) groups.push({ label, posts: list });
+    else misc.push(...list);
+  }
+  groups.sort((a, b) => b.posts.length - a.posts.length);
+  if (misc.length) groups.push({ label: MISC_LABEL, posts: misc });
 
   return (
     <>
+      <h2 className={styles.sectionHeading}>Latest</h2>
       <div className={styles.postsGrid}>
-        {currentPosts.map((post) => (
+        {latest.map((post) => (
           <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.postCard}>
             <div className={styles.postCategory}>{post.category}</div>
-            <h2 className={styles.postTitle}>{post.title}</h2>
+            <h3 className={styles.postTitle}>{post.title}</h3>
             <p className={styles.postDescription}>{post.description}</p>
             <div className={styles.postMeta}>
-              <span className={styles.postDate}>
-                {new Date(post.publishedDate).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </span>
+              <span className={styles.postDate}>{formatDate(post.publishedDate)}</span>
               <span className={styles.postReadTime}>{post.readTime}</span>
             </div>
           </Link>
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <nav className={styles.pagination} aria-label="Blog pagination">
-          <button
-            className={`${styles.pageBtn} ${currentPage === 1 ? styles.pageBtnDisabled : ''}`}
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            aria-label="Previous page"
-          >
-            ← Prev
-          </button>
-
-          <div className={styles.pageNumbers}>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                className={`${styles.pageNumber} ${page === currentPage ? styles.pageNumberActive : ''}`}
-                onClick={() => goToPage(page)}
-                aria-label={`Page ${page}`}
-                aria-current={page === currentPage ? 'page' : undefined}
-              >
-                {page}
-              </button>
-            ))}
-          </div>
-
-          <button
-            className={`${styles.pageBtn} ${currentPage === totalPages ? styles.pageBtnDisabled : ''}`}
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            aria-label="Next page"
-          >
-            Next →
-          </button>
+      <section className={styles.allPosts} aria-labelledby="all-posts">
+        <h2 id="all-posts" className={styles.sectionHeading}>
+          All {posts.length} articles by topic
+        </h2>
+        <nav className={styles.topicNav} aria-label="Topics">
+          {groups.map((group) => (
+            <a key={group.label} href={`#${anchorFor(group.label)}`} className={styles.topicChip}>
+              {group.label} <span className={styles.topicCount}>{group.posts.length}</span>
+            </a>
+          ))}
         </nav>
-      )}
+
+        {groups.map((group) => (
+          <div key={group.label} id={anchorFor(group.label)} className={styles.topicGroup}>
+            <h3 className={styles.topicTitle}>{group.label}</h3>
+            <ul className={styles.topicList}>
+              {group.posts.map((post) => (
+                <li key={post.slug}>
+                  <Link href={`/blog/${post.slug}`} className={styles.topicLink}>
+                    {post.title}
+                  </Link>
+                  <span className={styles.topicMeta}>{post.readTime}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
     </>
   );
 }

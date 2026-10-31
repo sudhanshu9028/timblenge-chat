@@ -6,7 +6,7 @@ export const frontmatter = {
   slug: 'what-to-say-when-conversation-dies-stranger-chat',
   title: 'What to Say When a Conversation With a Stranger Dies',
   description:
-    'Every stranger chat hits the same wall around message four. Here is how to restart a dead conversation, what to say instead of "so...", and when to just move on.',
+    'Every stranger chat hits the same wall around message four. How to restart a dead conversation, what to say instead of "so...", and when to move on.',
   keywords: [
     'what to say when a conversation dies',
     'how to keep a conversation going with a stranger',
