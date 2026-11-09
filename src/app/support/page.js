@@ -34,7 +34,7 @@ export default function SupportPage() {
     <div className={styles.supportPage}>
       <div className={styles.container}>
         <div className={styles.headerCard}>
-          <h1 className={styles.headerTitle}>We&apos;re Here to Help</h1>
+          <h1 className={styles.headerTitle}>We&apos;re here to help</h1>
           <p className={styles.headerDescription}>
             Need assistance? Our support team is ready to help you with any questions or issues you
             may have.
@@ -44,55 +44,33 @@ export default function SupportPage() {
         <div className={styles.emailCard}>
           <div className={styles.iconContainer}>
             <svg
-              width="32"
-              height="32"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
             >
-              <path
-                d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M22 6L12 13L2 6"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-10 6L2 7" />
             </svg>
           </div>
-          <h2 className={styles.emailTitle}>Email Support</h2>
+          <h2 className={styles.emailTitle}>Email support</h2>
           <p className={styles.emailDescription}>
             Prefer email? Reach out to our support team directly. We typically respond to all
             inquiries within 24 hours.
           </p>
-          <a href="mailto:support@anoniz.com" className={styles.emailButton}>
-            Email Us
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 12H19M19 12L12 5M19 12L12 19"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+          <div className={styles.emailRow}>
+            <a href="mailto:support@anoniz.com" className={styles.emailButton}>
+              Email us
+            </a>
+            <span className={styles.emailAddress}>support@anoniz.com</span>
+          </div>
         </div>
 
         <div className={styles.backLink}>
-          <Link href="/">← Back to Home</Link>
+          <Link href="/">← Back to home</Link>
         </div>
       </div>
     </div>

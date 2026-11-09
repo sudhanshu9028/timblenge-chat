@@ -18,6 +18,11 @@ $color-accent-violet-dark: #9333ea; // violet-600
 $color-accent-violet-light: #c084fc; // violet-400
 $color-accent-indigo: #818cf8; // indigo-400
 
+// Hairlines. Borders are primary text at low opacity, so they sit on any slate
+// step without reading as a colour of their own.
+$hairline: rgba(241, 245, 249, 0.08);
+$hairline-strong: rgba(241, 245, 249, 0.14);
+
 // Text Colors
 $color-text-primary: #f1f5f9; // slate-100
 $color-text-secondary: #cbd5e1; // slate-300
@@ -27,13 +32,15 @@ $color-text-white: #ffffff;
 // Background Colors
 $bg-primary: $color-primary-dark;
 $bg-secondary: $color-secondary-dark;
-$bg-card: rgba(51, 65, 85, 0.4); // glass morphism effect
+// A raised slate step. No backdrop blur: depth comes from the step and a
+// hairline, which also spares phones the cost of blurring behind every card.
+$bg-card: rgba(51, 65, 85, 0.32);
+$bg-card-hover: rgba(51, 65, 85, 0.48);
 $bg-card-solid: $color-card-dark;
 $bg-input: $color-secondary-dark;
 $bg-input-disabled: $color-card-dark;
 $bg-button-secondary: rgba(255, 255, 255, 0.05);
 $bg-button-disabled: $color-card-dark;
-$bg-glass: rgba(15, 23, 42, 0.4);
 
 // Message Colors
 $color-message-user: $color-accent-primary;
@@ -41,36 +48,48 @@ $color-message-other: $color-border-dark;
 $color-message-system: $color-text-muted;
 
 // Gradients
-$gradient-primary: linear-gradient(135deg, $color-primary-dark, $color-secondary-dark);
-$gradient-accent: linear-gradient(to right, $color-accent-primary, $color-accent-violet);
-$gradient-accent-hover: linear-gradient(to right, $color-accent-hover, $color-accent-violet-dark);
-$gradient-text: linear-gradient(to right, $color-accent-light, $color-accent-violet-light);
-$gradient-text-alt: linear-gradient(to right, $color-accent-violet-light, $color-accent-indigo);
+// The pink→violet gradient is the brand's one loud gesture, so it is spent
+// only on the primary action of a screen. Headings, links, surfaces and
+// secondary buttons stay solid.
+//
+// It runs on the 600 steps of the same two hues: white on pink-500 is 3.5:1,
+// below the 4.5:1 button labels need, while pink-600 and violet-600 clear it.
+$gradient-accent: linear-gradient(to right, $color-accent-hover, $color-accent-violet-dark);
+$gradient-accent-hover: linear-gradient(to right, #be185d, #7e22ce); // pink-700, violet-700
 
 // Fonts
-$font-family-primary: 'Segoe UI', sans-serif;
-$font-family-body: Arial, Helvetica, sans-serif;
+// Figtree is self-hosted through next/font in the root layout, which sets
+// --font-sans on <html>.
+$font-family-primary:
+  var(--font-sans),
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif;
+$font-family-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
 // Font Sizes
-$font-size-xs: 0.85rem;
-$font-size-sm: 0.875rem;
-$font-size-base: 1rem;
-$font-size-lg: 1.1rem;
-$font-size-xl: 1.2rem;
-$font-size-2xl: 1.25rem;
-$font-size-3xl: 1.3rem;
-$font-size-4xl: 1.4rem;
-$font-size-5xl: 1.5rem;
-$font-size-6xl: 1.8rem;
-$font-size-7xl: 2rem;
-$font-size-8xl: 2.5rem;
-$font-size-9xl: 3rem;
+// One scale: 13, 14, 16, 18, 20, 24, 28, 32, 36, 56. Some names share a step
+// on purpose, since they were near-duplicates (1.2rem beside 1.25rem).
+$font-size-xs: 0.8125rem; // 13
+$font-size-sm: 0.875rem; // 14
+$font-size-base: 1rem; // 16
+$font-size-lg: 1.125rem; // 18
+$font-size-xl: 1.125rem; // 18
+$font-size-2xl: 1.25rem; // 20
+$font-size-3xl: 1.25rem; // 20
+$font-size-4xl: 1.5rem; // 24
+$font-size-5xl: 1.5rem; // 24
+$font-size-6xl: 1.75rem; // 28
+$font-size-7xl: 2rem; // 32
+$font-size-8xl: 2.25rem; // 36
+$font-size-9xl: 3.5rem; // 56
 
 // Font Weights
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
-$font-weight-bold: 700;
+$font-weight-bold: 600; // the ceiling: hierarchy comes from size and colour
 
 // Line Heights
 $line-height-tight: 1.2;
@@ -82,7 +101,7 @@ $spacing-xs: 0.25rem;
 $spacing-sm: 0.5rem;
 $spacing-md: 0.75rem;
 $spacing-base: 1rem;
-$spacing-lg: 1.2rem;
+$spacing-lg: 1.25rem;
 $spacing-xl: 1.5rem;
 $spacing-2xl: 2rem;
 $spacing-3xl: 2.5rem;
@@ -117,21 +136,46 @@ $radius-pill: 999px; // pills: capsule ends regardless of width
 $radius-image: 10px;
 
 // Box Shadows
-$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-$shadow-base: 0 4px 12px rgba(0, 0, 0, 0.3);
-$shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
-$shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
-$shadow-xl: 0 8px 20px rgba(0, 0, 0, 0.5);
-$shadow-accent: 0 4px 12px rgba(236, 72, 153, 0.4);
-$shadow-accent-sm: 0 1px 3px rgba(236, 72, 153, 0.3);
-$shadow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
-$shadow-pink-sm: 0 4px 12px rgba(236, 72, 153, 0.25);
-$shadow-pink-lg: 0 8px 25px rgba(236, 72, 153, 0.25);
+// On a dark ground depth comes from slate steps and hairlines. Shadows stay
+// neutral, small on things in the page and soft only on things that float
+// (modals, menus). No coloured glows.
+$shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.3);
+$shadow-base: 0 1px 2px rgba(2, 6, 23, 0.3);
+$shadow-md: 0 1px 2px rgba(2, 6, 23, 0.3);
+$shadow-lg: 0 16px 48px rgba(2, 6, 23, 0.5);
+$shadow-xl: 0 16px 48px rgba(2, 6, 23, 0.5);
+// A soft top edge for filled buttons, in place of a glow.
+$shadow-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 
-// Transitions
-$transition-fast: all 0.2s ease;
-$transition-base: all 0.3s ease;
-$transition-slow: all 0.4s ease;
+// Motion
+// One curve for everything. Transitions name their properties instead of
+// `all`, so layout never animates.
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+$duration-fast: 160ms;
+$duration-base: 200ms;
+$duration-slow: 400ms;
+$transition-fast:
+  color $duration-fast $ease,
+  background-color $duration-fast $ease,
+  border-color $duration-fast $ease,
+  box-shadow $duration-fast $ease,
+  opacity $duration-fast $ease,
+  transform $duration-fast $ease;
+$transition-base:
+  color $duration-base $ease,
+  background-color $duration-base $ease,
+  border-color $duration-base $ease,
+  box-shadow $duration-base $ease,
+  opacity $duration-base $ease,
+  transform $duration-base $ease;
+$transition-slow:
+  color $duration-slow $ease,
+  background-color $duration-slow $ease,
+  border-color $duration-slow $ease,
+  box-shadow $duration-slow $ease,
+  opacity $duration-slow $ease,
+  transform $duration-slow $ease;
+$press-scale: 0.98;
 
 // Z-Index
 $z-index-base: 1;
@@ -175,11 +219,9 @@ $chat-padding-top: 50px;
 $chat-padding-bottom: 50px;
 $video-local-height-mobile: 150px;
 $video-local-width-mobile: 120px;
-$border-radius-small: 0.2rem;
+$border-radius-small: 0.25rem;
 $position-offset-xs: 2px;
 $position-offset-sm: 4px;
 $position-offset-md: 6px;
 $position-offset-lg: 10px;
 $position-offset-xl: 48px;
-$transform-translate-y: -1px;
-$transform-translate-y-lg: -4px;

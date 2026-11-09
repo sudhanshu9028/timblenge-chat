@@ -50,7 +50,7 @@ export default function ConversationDied({ styles }) {
   return (
     <>
       <nav className={styles.toc}>
-        <h2 className={styles.tocTitle}>In This Article</h2>
+        <h2 className={styles.tocTitle}>In this article</h2>
         <ol className={styles.tocList}>
           <li className={styles.tocItem}>
             <a href="#why-die">Why conversations with strangers die at message four</a>

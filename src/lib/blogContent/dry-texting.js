@@ -46,7 +46,7 @@ export default function DryTexting({ styles }) {
   return (
     <>
       <nav className={styles.toc}>
-        <h2 className={styles.tocTitle}>In This Article</h2>
+        <h2 className={styles.tocTitle}>In this article</h2>
         <ol className={styles.tocList}>
           <li className={styles.tocItem}>
             <a href="#what-counts">What counts as dry texting</a>

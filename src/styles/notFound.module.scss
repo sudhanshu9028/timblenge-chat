@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $gradient-primary;
+  background: $bg-primary;
   font-family: $font-family-primary;
   padding: $padding-xl $padding-lg;
 }
@@ -21,28 +21,20 @@
 }
 
 .errorCode {
-  display: block;
-  margin: 0;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  height: clamp(4rem, 18vw, 8rem);
-  width: 100%;
-  max-width: 400px;
-  position: relative;
-  
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+  margin: 0 0 $spacing-sm;
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  font-variant-numeric: tabular-nums;
+  color: $color-accent-light;
 }
 
 .errorTitle {
-  font-size: $font-size-3xl;
-  font-weight: $font-weight-semibold;
-  color: $color-text-white;
+  font-size: $font-size-8xl;
+  font-weight: $font-weight-medium;
+  letter-spacing: -0.02em;
+  color: $color-text-primary;
   margin: 0;
-  line-height: $line-height-tight;
+  line-height: 1.15;
 }
 
 .errorMessage {
@@ -53,28 +45,29 @@
   max-width: 500px;
 }
 
+// Off-white on slate: a primary action that doesn't need the gradient.
 .backButton {
-  display: inline-block;
-  background: $color-text-white;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 $padding-md;
+  margin-top: $padding-base;
+  background: $color-text-primary;
   color: $color-primary-dark;
   font-size: $font-size-base;
-  font-weight: $font-weight-semibold;
-  padding: $padding-md $padding-xl;
-  border-radius: $radius-base;
+  font-weight: $font-weight-medium;
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
-  transition: $transition-base;
-  margin-top: $spacing-sm;
+  transition: $transition-fast;
   border: none;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    background: $color-text-secondary;
   }
 
   &:active {
-    transform: translateY(0);
+    transform: scale($press-scale);
   }
 }
 
@@ -88,13 +81,8 @@
     gap: $spacing-sm;
   }
 
-  .errorCode {
-    height: 6rem;
-    max-width: 300px;
-  }
-
   .errorTitle {
-    font-size: $font-size-2xl;
+    font-size: $font-size-6xl;
   }
 
   .errorMessage {
@@ -102,20 +90,12 @@
   }
 
   .backButton {
-    padding: $padding-sm $padding-lg;
-    font-size: $font-size-sm;
-    margin-top: $spacing-xs;
+    margin-top: $spacing-sm;
   }
 }
 
 @media (max-width: $breakpoint-sm) {
-  .errorCode {
-    height: 5rem;
-    max-width: 250px;
-  }
-
   .errorTitle {
-    font-size: $font-size-xl;
+    font-size: $font-size-4xl;
   }
 }
-

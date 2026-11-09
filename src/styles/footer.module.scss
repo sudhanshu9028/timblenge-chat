@@ -2,8 +2,8 @@
 
 .footer {
   background: $bg-primary;
-  border-top: 1px solid $color-border-dark;
-  padding: $padding-lg $padding-base;
+  border-top: 1px solid $hairline;
+  padding: $padding-xl $padding-lg;
   margin-top: auto;
   width: 100%;
 
@@ -73,7 +73,7 @@
   gap: 0;
   text-decoration: none;
   color: $color-text-primary;
-  transition: $transition-base;
+  transition: $transition-fast;
 
   &:hover {
     opacity: 0.8;
@@ -104,38 +104,10 @@
   }
 }
 
-.statusDot {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  background: $color-accent-primary;
-  border-radius: $radius-full;
-  border: 2px solid $color-primary-dark;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(0.9);
-  }
-}
-
 .brandName {
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -162,67 +134,35 @@
   color: $color-text-secondary;
   text-decoration: none;
   font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  transition: $transition-base;
-  position: relative;
+  font-weight: $font-weight-normal;
+  transition: $transition-fast;
   padding: $padding-xs 0;
 
   &:hover {
     color: $color-text-primary;
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: $gradient-accent;
-    transition: $transition-base;
-  }
-
-  &:hover::after {
-    width: 100%;
-  }
 }
 
 .contactButton {
-  background: $gradient-accent;
-  border: none;
-  color: $color-text-white;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 $padding-base;
+  border-radius: 10px;
+  background: $bg-card;
+  border: 1px solid $hairline-strong;
+  color: $color-text-primary;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
-  padding: $padding-xs $padding-md;
-  border-radius: $radius-base;
-  cursor: pointer;
   text-decoration: none;
-  transition: $transition-base;
-  box-shadow: $shadow-pink-sm;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-  }
+  transition: $transition-fast;
 
   &:hover {
-    background: $gradient-accent-hover;
-    transform: translateY($transform-translate-y);
-    box-shadow: $shadow-pink;
+    background: $bg-card-hover;
+  }
 
-    &::before {
-      transform: translateY(0);
-    }
+  &:active {
+    transform: scale($press-scale);
   }
 }
 
@@ -245,7 +185,7 @@
   }
 
   &:hover {
-    color: $color-accent-violet-light;
+    color: $color-text-primary;
   }
 
   &:focus-visible {

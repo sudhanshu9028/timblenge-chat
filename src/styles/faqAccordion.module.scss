@@ -5,7 +5,7 @@
 }
 
 .faqItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid $hairline;
 
   &:last-child {
     border-bottom: none;
@@ -17,20 +17,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $spacing-lg;
-  padding: $spacing-xl 0;
+  gap: $spacing-base;
+  padding: $spacing-lg 0;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  color: $color-text-primary;
   font-family: $font-family-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: 1.4;
+  color: $color-text-primary;
   transition: $transition-fast;
 
-  &:hover {
-    color: $color-accent-light;
+  &:hover .chevron {
+    color: $color-text-primary;
   }
 
   span {
@@ -41,37 +42,42 @@
 .chevron {
   flex-shrink: 0;
   color: $color-text-muted;
-  transition: transform 0.3s ease;
+  transition: $transition-base;
 
   .open & {
     transform: rotate(180deg);
   }
 }
 
+// Closed answers stay in the DOM for search engines; they are only hidden.
+// Opening fades the answer in instead of animating its height.
 .faqAnswerWrapper {
-  max-height: 0;
-  overflow: hidden;
-  transition:
-    max-height 0.35s ease,
-    opacity 0.25s ease;
-  opacity: 0;
+  display: none;
 
   .open & {
-    max-height: 300px;
-    opacity: 1;
+    display: block;
+    animation: answerIn $duration-base $ease;
+  }
+}
+
+@keyframes answerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
   }
 }
 
 .faqAnswer {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
+  max-width: 44rem;
   margin: 0;
-  padding-bottom: $spacing-xl;
+  padding-bottom: $spacing-lg;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
 }
 
 @media (max-width: $breakpoint-md) {
   .faqQuestion {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
   }
 }

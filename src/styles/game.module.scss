@@ -19,15 +19,13 @@
 .gameRound {
   margin: 0;
   font-size: $font-size-xs;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: $color-text-muted;
 }
 
 .gameTitle {
   margin: 0;
   font-size: $font-size-base;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   color: $color-text-primary;
 }
 
@@ -40,7 +38,7 @@
 .gameAgreed {
   margin: 0;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   color: #4ade80; // green-400
 }
 
@@ -50,7 +48,8 @@
   margin: 0;
   font-size: $font-size-xs;
   color: $color-accent-violet-light;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
+  font-variant-numeric: tabular-nums;
 }
 
 .gameOptions {
@@ -62,10 +61,10 @@
 
 .gameChoice {
   width: 100%;
-  padding: $spacing-md $padding-xs;
+  padding: $spacing-md $padding-sm;
   border-radius: $radius-sm;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $hairline-strong;
   color: $color-text-primary;
   font-family: inherit;
   font-size: $font-size-sm;
@@ -127,21 +126,20 @@
 .gameTagThem {
   padding: 2px $spacing-xs;
   border-radius: $border-radius-small;
-  font-size: 0.7rem;
-  font-weight: $font-weight-bold;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  font-weight: $font-weight-medium;
   white-space: nowrap;
 }
 
+// Same colours as the chat bubbles: you in slate, the stranger in pink.
 .gameTagYou {
-  background: rgba(236, 72, 153, 0.25);
-  color: $color-accent-light;
+  background: rgba(255, 255, 255, 0.1);
+  color: $color-text-primary;
 }
 
 .gameTagThem {
-  background: rgba(129, 140, 248, 0.25);
-  color: $color-accent-indigo;
+  background: rgba(236, 72, 153, 0.2);
+  color: $color-accent-light;
 }
 
 .gameActions {
@@ -181,7 +179,6 @@
   background: $gradient-accent;
   border: 1px solid transparent;
   color: $color-text-white;
-  font-weight: $font-weight-semibold;
 
   &:hover {
     background: $gradient-accent-hover;
@@ -199,21 +196,20 @@
   margin-bottom: $spacing-md;
 }
 
-// A capsule, so it needs $radius-pill. $radius-full is 50%, which on a wide
-// short element renders as an ellipse rather than a pill.
 .gameChip {
   display: inline-flex;
   align-items: center;
   gap: $spacing-sm;
   max-width: 100%;
-  padding: $spacing-sm $padding-base;
-  border-radius: $radius-pill;
+  height: 36px;
+  padding: 0 $padding-sm;
+  border-radius: 10px;
   background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.35);
   color: $color-accent-violet-light;
   font-family: inherit;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   line-height: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -224,7 +220,6 @@
   &:hover {
     background: rgba(168, 85, 247, 0.2);
     border-color: $color-accent-violet;
-    transform: translateY($transform-translate-y);
   }
 
   &:focus-visible {
@@ -233,46 +228,29 @@
   }
 }
 
-// The die is decoration, so keep it optically smaller than the label.
 .gameChipIcon {
-  font-size: 0.95em;
-  line-height: 1;
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 
 // Raised when the conversation has stalled — that's where the game earns its
-// keep. A soft halo rather than movement: a bouncing pill next to a text field
-// reads as a glitch.
+// keep. A stronger fill and the new label carry it; no motion, since anything
+// pulsing next to a text field reads as a glitch or an alarm.
 .gameChipNudge {
-  background: rgba(168, 85, 247, 0.2);
-  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(168, 85, 247, 0.22);
+  border-color: $color-accent-violet;
   color: #f5ecff;
-  animation: chipGlow 2.8s ease-in-out infinite;
-}
-
-@keyframes chipGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
-  }
-  50% {
-    box-shadow: 0 0 0 5px rgba(168, 85, 247, 0.14);
-  }
 }
 
 @media (max-width: $breakpoint-sm) {
   .gameChip {
+    height: 32px;
     font-size: $font-size-xs;
-    padding: $spacing-sm $padding-sm;
   }
 
   // Mirrors the mobile .chatBoxWithChip value in chat.module.scss.
   .gameChipRow {
     margin-bottom: $spacing-sm;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gameChipNudge {
-    animation: none;
   }
 }

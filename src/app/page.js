@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import styles from '@/styles/home.module.scss';
 import HeroCTA from './components/HeroCTA';
+import HeroChatPreview from './components/HeroChatPreview';
 import PrimeTimeBanner from './components/PrimeTimeBanner';
 import ProfileLine from './components/ProfileLine';
 import { HOME_FAQ_ITEMS } from '@/lib/homeFaqData';
@@ -139,21 +140,23 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>
-          Talk to <span className={styles.gradientStrangers}>Strangers</span> Online, Make{' '}
-          <span className={styles.gradientFriends}>Friends</span> Anywhere
-        </h1>
-        <p className={styles.heroSubtitle}>
-          Free anonymous chat with random people worldwide — no app to install, no account to
-          create, and nothing stored once you disconnect. Text or video, straight from your browser.
-        </p>
-        <HeroCTA styles={styles} />
+        <div className={styles.heroText}>
+          <h1 className={styles.heroTitle}>Talk to Strangers Online, Make Friends Anywhere</h1>
+          <p className={styles.heroSubtitle}>
+            Free anonymous chat with random people worldwide — no app to install, no account to
+            create, and nothing stored once you disconnect. Text or video, straight from your
+            browser.
+          </p>
+          <HeroCTA styles={styles} />
 
-        {/* Concentrating traffic into one advertised hour is the cheapest
-            liquidity tool available to a real-time product this size. */}
-        <PrimeTimeBanner />
+          {/* Concentrating traffic into one advertised hour is the cheapest
+              liquidity tool available to a real-time product this size. */}
+          <PrimeTimeBanner />
 
-        <ProfileLine />
+          <ProfileLine />
+        </div>
+
+        <HeroChatPreview />
       </section>
 
       {/* Dynamic load below-the-fold content with SSR enabled to improve LCP */}

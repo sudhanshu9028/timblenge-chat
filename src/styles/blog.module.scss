@@ -2,47 +2,42 @@
 
 .blogPage {
   min-height: 94vh;
-  padding: $padding-3xl $margin-lg;
-  background: $gradient-primary;
+  padding: $padding-3xl $padding-lg 96px;
+  background: $bg-primary;
   font-family: $font-family-primary;
   color: $color-text-primary;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
 .header {
-  text-align: center;
-  margin-bottom: $margin-xl;
-  padding-bottom: $margin-lg;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: $padding-3xl;
 }
 
 .title {
+  margin: 0 0 $spacing-base;
   font-size: $font-size-8xl;
-  font-weight: $font-weight-bold;
-  margin-bottom: $spacing-md;
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: $font-weight-medium;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: $font-size-xl;
-  color: $color-text-secondary;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 40rem;
+  margin: 0;
+  font-size: $font-size-lg;
   line-height: $line-height-relaxed;
+  color: $color-text-secondary;
 }
 
 // One column on phones, two on tablets, 3 × 3 on desktop.
 .postsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-lg;
+  gap: $spacing-base;
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -58,54 +53,42 @@
 .postCard {
   display: flex;
   flex-direction: column;
-  background: rgba(51, 65, 85, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: $padding-md;
-  border-radius: $radius-lg;
+  border-radius: $radius-md;
+  background: $bg-card;
+  border: 1px solid $hairline;
   text-decoration: none;
   color: inherit;
-  transition: $transition-base;
-  box-shadow: $shadow-sm;
+  transition: $transition-fast;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: $shadow-pink-sm;
-    border-color: rgba(236, 72, 153, 0.25);
-    background: rgba(51, 65, 85, 0.45);
+    background: $bg-card-hover;
+    border-color: $hairline-strong;
   }
 }
 
 .postCategory {
-  align-self: flex-start;
-  display: inline-block;
+  margin-bottom: $spacing-sm;
   font-size: $font-size-xs;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   color: $color-accent-light;
-  background: rgba(236, 72, 153, 0.12);
-  padding: 0.2rem 0.6rem;
-  border-radius: $radius-sm;
-  margin-bottom: $spacing-md;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .postTitle {
-  font-size: $font-size-2xl;
-  font-weight: $font-weight-bold;
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: 1.35;
   color: $color-text-primary;
-  margin-bottom: $spacing-md;
-  margin-top: 0;
-  line-height: $line-height-tight;
 }
 
 // Clamped so one long description can't stretch its whole row of cards.
 .postDescription {
   flex: 1;
+  margin: 0 0 $spacing-lg;
   font-size: $font-size-sm;
-  color: $color-text-secondary;
   line-height: $line-height-relaxed;
-  margin-bottom: $spacing-lg;
+  color: $color-text-secondary;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -116,8 +99,10 @@
 .postMeta {
   display: flex;
   align-items: center;
-  gap: $spacing-lg;
-  font-size: $font-size-sm;
+  gap: $spacing-sm;
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-variant-numeric: tabular-nums;
   color: $color-text-muted;
 }
 
@@ -126,29 +111,26 @@
 }
 
 .postReadTime {
-  position: relative;
-
   &::before {
     content: '·';
-    position: absolute;
-    left: -0.7rem;
-    color: $color-text-muted;
+    margin-right: $spacing-sm;
   }
 }
 
 .sectionHeading {
-  font-size: $font-size-5xl;
-  font-weight: $font-weight-bold;
-  color: $color-text-primary;
   margin: 0 0 $spacing-lg;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-medium;
+  letter-spacing: -0.01em;
+  color: $color-text-primary;
 }
 
 // Every post as a plain link, grouped by topic. This is the part crawlers rely
 // on, so it has to stay server-rendered and made of real <a href>s.
 .allPosts {
-  margin-top: $margin-xl;
-  padding-top: $margin-lg;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: $padding-3xl;
+  padding-top: $padding-2xl;
+  border-top: 1px solid $hairline;
   scroll-margin-top: 80px;
 }
 
@@ -156,53 +138,54 @@
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-sm;
-  margin-bottom: $spacing-xl;
+  margin-bottom: $padding-2xl;
 }
 
 .topicChip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  min-height: 40px;
-  padding: 0 $padding-base;
-  border-radius: $radius-pill;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(51, 65, 85, 0.35);
+  gap: $spacing-sm;
+  height: 36px;
+  padding: 0 $padding-sm;
+  border-radius: 8px;
+  border: 1px solid $hairline-strong;
+  background: transparent;
   color: $color-text-secondary;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   text-decoration: none;
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
+  transition: $transition-fast;
 
   &:hover {
-    border-color: rgba(236, 72, 153, 0.45);
+    background: rgba(255, 255, 255, 0.04);
     color: $color-text-primary;
   }
 }
 
 .topicCount {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
   font-variant-numeric: tabular-nums;
   color: $color-text-muted;
 }
 
 .topicGroup {
-  margin-bottom: $spacing-xl;
+  margin-bottom: $padding-xl;
   scroll-margin-top: 80px;
 }
 
 .topicTitle {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  color: $color-accent-light;
-  margin: 0 0 $spacing-sm;
+  margin: 0 0 $spacing-xs;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
 }
 
 .topicList {
   list-style: none;
   margin: 0;
   padding: 0;
+  max-width: 52rem;
 
   li {
     display: flex;
@@ -210,25 +193,27 @@
     justify-content: space-between;
     gap: $spacing-base;
     padding: $spacing-md 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid $hairline;
   }
 }
 
 .topicLink {
-  color: $color-text-primary;
-  font-size: $font-size-base;
+  color: $color-text-secondary;
+  font-size: 15px;
   line-height: $line-height-normal;
   text-decoration: none;
+  transition: $transition-fast;
 
   &:hover {
-    color: $color-accent-light;
+    color: $color-text-primary;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
   }
 }
 
 .topicMeta {
   flex-shrink: 0;
+  font-family: $font-family-mono;
   font-size: $font-size-xs;
   color: $color-text-muted;
   white-space: nowrap;
@@ -236,7 +221,11 @@
 
 @media (max-width: $breakpoint-md) {
   .blogPage {
-    padding: $padding-lg $margin-base;
+    padding: $padding-xl $padding-md $padding-3xl;
+  }
+
+  .header {
+    margin-bottom: $padding-xl;
   }
 
   .title {

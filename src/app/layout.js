@@ -1,8 +1,13 @@
 import Script from 'next/script';
+import { Figtree } from 'next/font/google';
 import Navigation from './components/Navigation';
 import AnalyticsBootstrap from './components/AnalyticsBootstrap';
 import Footer from './components/Footer';
 import './globals.css';
+
+// Self-hosted at build time, so there is no request to Google from the
+// visitor's browser. The variable is what the SCSS font tokens read.
+const figtree = Figtree({ subsets: ['latin'], display: 'swap', variable: '--font-sans' });
 
 export const viewport = {
   themeColor: '#A78BFA',
@@ -58,7 +63,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={figtree.variable}>
       <head>
         {/* Preconnect only to domains we actually use */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />

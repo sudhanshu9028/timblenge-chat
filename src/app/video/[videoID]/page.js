@@ -110,7 +110,8 @@ export default function VideoPage() {
     if (!titleFlashRef.current) {
       let on = false;
       titleFlashRef.current = setInterval(() => {
-        document.title = on ? 'Anoniz' : '👋 Stranger connected!';
+        // "(1)" is the tab-title convention for something new waiting.
+        document.title = on ? 'Anoniz' : '(1) Stranger connected';
         on = !on;
       }, 900);
     }
