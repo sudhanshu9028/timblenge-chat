@@ -52,7 +52,7 @@ export default function StaySafeChatting({ styles }) {
   return (
     <>
       <nav className={styles.toc}>
-        <h2 className={styles.tocTitle}>In This Article</h2>
+        <h2 className={styles.tocTitle}>In this article</h2>
         <ol className={styles.tocList}>
           <li className={styles.tocItem}>
             <a href="#why-safety-matters">Why Online Chat Safety Matters More Than Ever</a>

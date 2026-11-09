@@ -11,10 +11,10 @@
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: $spacing-xs $spacing-sm;
   max-width: 100%;
-  margin: $spacing-xl auto 0;
+  // Left-aligned under the hero buttons. The compact variant centres itself.
+  margin: $spacing-xl 0 0;
   font-family: $font-family-primary;
   font-size: $font-size-sm;
   line-height: 1.4;
@@ -87,7 +87,7 @@
 .live {
   padding: $spacing-sm $padding-base;
   border-radius: $radius-pill;
-  background: rgba(74, 222, 128, 0.1);
+  background: rgba(74, 222, 128, 0.08);
   border: 1px solid rgba(74, 222, 128, 0.35);
   gap: $spacing-sm;
 
@@ -146,6 +146,7 @@
 // ============================================
 
 .compact {
+  justify-content: center;
   margin: $spacing-xs auto 0;
   font-size: $font-size-xs;
 
@@ -156,8 +157,7 @@
 
 // The visitor's own history, shown under the hero once they have one.
 .profileLine {
-  margin: $spacing-sm auto 0;
-  text-align: center;
+  margin: $spacing-sm 0 0;
   color: $color-text-muted;
   font-size: $font-size-sm;
   font-family: $font-family-primary;

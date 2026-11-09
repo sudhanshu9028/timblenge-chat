@@ -701,9 +701,19 @@ export default function ChatPage() {
               onClick={handleGameOffer}
               className={`${gameStyles.gameChip} ${stalled ? gameStyles.gameChipNudge : ''}`}
             >
-              <span className={gameStyles.gameChipIcon} aria-hidden="true">
-                🎲
-              </span>
+              <svg
+                className={gameStyles.gameChipIcon}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M8 8h.01M16 8h.01M12 12h.01M8 16h.01M16 16h.01" strokeWidth="2.5" />
+              </svg>
               {stalled ? 'Gone quiet? Play a game' : 'Would You Rather'}
             </button>
           </div>
@@ -714,7 +724,7 @@ export default function ChatPage() {
             <input
               type="text"
               ref={inputRef}
-              placeholder={connected ? 'Type a message...' : 'Waiting for a stranger...'}
+              placeholder={connected ? 'Type a message' : 'Waiting for a stranger…'}
               value={input}
               disabled={!connected}
               onChange={(e) => {
@@ -763,10 +773,10 @@ export default function ChatPage() {
 
         <div className={styles.actions}>
           <div onClick={handleStop} className={styles.stopBtn}>
-            Stop Chat
+            Stop chat
           </div>
           <div onClick={handleNext} className={styles.nextBtn}>
-            Next Chat
+            Next chat
           </div>
         </div>
       </div>

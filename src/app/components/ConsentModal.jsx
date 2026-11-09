@@ -85,13 +85,13 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
-        <h2 className={styles.modalTitle}>Before you start...</h2>
+        <h2 className={styles.modalTitle}>Before you start</h2>
         <p className={styles.modalSubtitle}>
           Select your gender so we can match you with the right people.
         </p>
 
         <div className={styles.genderSection}>
-          <p className={styles.genderLabel}>I am:</p>
+          <p className={styles.genderLabel}>I am</p>
           <div className={styles.genderButtonsRow}>
             <button
               className={`${styles.genderButton} ${gender === 'male' ? styles.genderButtonActive : ''}`}
@@ -100,7 +100,6 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
                 setError('');
               }}
             >
-              <span className={styles.genderIcon}>♂</span>
               <span>Male</span>
             </button>
             <button
@@ -110,7 +109,6 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
                 setError('');
               }}
             >
-              <span className={styles.genderIcon}>♀</span>
               <span>Female</span>
             </button>
           </div>
@@ -125,7 +123,7 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
               <span>Prefer not to say</span>
             </button>
           </div>
-          <p className={styles.genderWarning}>*You cannot change your gender after you register.</p>
+          <p className={styles.genderWarning}>You can’t change this later.</p>
         </div>
 
         <div className={styles.divider}></div>
@@ -177,7 +175,7 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
           onClick={handleProceed}
           disabled={!gender || !isAgeConfirmed}
         >
-          I AGREE, LET&apos;S GO!
+          I agree, let’s go
         </button>
       </div>
     </div>

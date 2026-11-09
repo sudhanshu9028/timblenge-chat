@@ -63,7 +63,7 @@ export default function HomeGuides() {
 
   return (
     <section className={styles.guides}>
-      <h2 className={styles.sectionTitle}>Not Sure What to Say?</h2>
+      <h2 className={styles.sectionTitle}>Not sure what to say?</h2>
       <p className={styles.guidesIntro}>
         Nobody is naturally good at talking to strangers — it is a skill, and it is a learnable one.
         These are the guides people find most useful before their first conversation.

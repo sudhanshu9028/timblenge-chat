@@ -42,7 +42,7 @@ const ROWS = [
 export default function ComparisonSection() {
   return (
     <section className={styles.comparison}>
-      <h2 className={styles.sectionTitle}>How Anoniz Compares</h2>
+      <h2 className={styles.sectionTitle}>How Anoniz compares</h2>
       <p className={styles.comparisonIntro}>
         Omegle closed in November 2023, and the random chat apps that replaced it now sit under
         stricter app store rules — Google Play began treating anonymous and random chat apps as

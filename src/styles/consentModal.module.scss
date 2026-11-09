@@ -2,26 +2,30 @@
 
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: $margin-base;
+  padding: $padding-base;
+  animation: overlayIn $duration-base $ease;
 }
 
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+}
+
+// A solid slate panel. It used to be translucent, which let the page behind
+// show through the form at exactly the moment it needs to be read.
 .modalContent {
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius-xl;
-  padding: $padding-lg $padding-xl;
-  max-width: 500px;
+  background: $bg-secondary;
+  border: 1px solid $hairline-strong;
+  border-radius: 20px;
+  padding: $padding-lg;
+  max-width: 460px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
@@ -29,6 +33,14 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  animation: modalIn $duration-slow $ease;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 
 // Flex children default to flex-shrink: 1, so an over-tall modal was squashing
@@ -41,26 +53,25 @@
 
 .closeButton {
   position: absolute;
-  top: $padding-md;
-  right: $padding-md;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: $radius-full;
+  top: $padding-base;
+  right: $padding-base;
   width: 32px;
   height: 32px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: $color-text-muted;
   cursor: pointer;
-  color: $color-text-primary;
   transition: $transition-fast;
   z-index: 10;
-  padding: 0;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text-primary;
   }
 
   svg {
@@ -70,33 +81,33 @@
 }
 
 .modalTitle {
-  font-size: $font-size-5xl;
-  font-weight: $font-weight-bold;
+  margin: 0 0 $spacing-xs;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-medium;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: $color-text-primary;
-  margin-bottom: $spacing-xs;
-  text-align: center;
-  // The close button is absolutely positioned in the corner and intrudes about
-  // 32px into the content box. Symmetric padding keeps the title centred while
-  // guaranteeing it never runs underneath the button on a narrow screen.
-  padding: 0 $padding-lg;
+  // Clears the close button in the corner.
+  padding-right: $padding-lg;
 }
 
 .modalSubtitle {
+  margin: 0 0 $padding-md;
   font-size: $font-size-sm;
+  line-height: 1.5;
   color: $color-text-secondary;
-  margin-bottom: $spacing-md;
-  text-align: center;
 }
 
 .genderSection {
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-base;
 }
 
-.genderLabel {
+.genderLabel,
+.interestsLabel {
+  margin: 0 0 $spacing-sm;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   color: $color-text-primary;
-  margin-bottom: $spacing-sm;
 }
 
 .genderButtonsRow {
@@ -107,73 +118,61 @@
 
 .genderButton {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius-sm;
-  padding: $padding-sm $spacing-sm;
-  color: $color-text-primary;
+  height: 44px;
+  padding: 0 $padding-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-primary;
+  border: 1px solid $hairline-strong;
+  border-radius: 10px;
+  color: $color-text-secondary;
+  font-family: inherit;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   cursor: pointer;
   transition: $transition-fast;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-xs;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text-primary;
+    border-color: rgba(241, 245, 249, 0.24);
   }
 }
 
+// The selection is the one place in the form that takes the accent.
 .genderButtonActive {
-  background: rgba(236, 72, 153, 0.2);
-  border-color: rgba(236, 72, 153, 0.5);
-  color: $color-text-white;
-  box-shadow: $shadow-pink;
+  background: rgba(236, 72, 153, 0.12);
+  border-color: $color-accent-primary;
+  color: $color-text-primary;
 
   &:hover {
-    background: rgba(236, 72, 153, 0.25);
-    border-color: rgba(236, 72, 153, 0.6);
-    box-shadow: $shadow-pink;
+    border-color: $color-accent-light;
   }
 }
 
-.genderIcon {
-  font-size: $font-size-2xl;
-}
-
-.genderWarning {
-  font-size: 0.7rem;
+.genderWarning,
+.interestsHint {
+  margin: $spacing-xs 0 0;
+  font-size: $font-size-xs;
+  line-height: 1.4;
   color: $color-text-muted;
-  margin-top: $spacing-xs;
 }
 
 .interestsSection {
-  margin-bottom: $spacing-md;
-}
-
-.interestsLabel {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
-  color: $color-text-primary;
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-base;
 }
 
 .interestsInput {
   width: 100%;
-  padding: $padding-sm $padding-base;
-  border-radius: $radius-sm;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
+  height: 44px;
+  padding: 0 $padding-sm;
+  border-radius: 10px;
+  border: 1px solid $hairline-strong;
+  background: $bg-primary;
   color: $color-text-primary;
+  font-family: inherit;
   font-size: $font-size-sm;
   transition: $transition-fast;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   outline: none;
   box-sizing: border-box;
 
@@ -182,35 +181,29 @@
   }
 
   &:focus {
-    border-color: rgba(236, 72, 153, 0.5);
-    box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.15);
+    border-color: $color-accent-primary;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.18);
   }
-}
-
-.interestsHint {
-  font-size: 0.7rem;
-  color: $color-text-muted;
-  margin-top: $spacing-xs;
 }
 
 .divider {
   height: 1px;
-  background: $color-border-dark;
-  margin: $spacing-md 0;
+  background: $hairline;
+  margin: $spacing-xs 0 $spacing-base;
 }
 
 .consentSection {
-  margin-bottom: $spacing-md;
+  margin-bottom: $padding-md;
 }
 
 .consentCheckbox {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-xs;
+  gap: $spacing-sm;
   cursor: pointer;
 
   input[type='checkbox'] {
-    margin-top: 2px;
+    margin: 2px 0 0;
     accent-color: $color-accent-primary;
     cursor: pointer;
     width: 16px;
@@ -220,140 +213,91 @@
 }
 
 .consentText {
-  font-size: 0.75rem;
-  color: $color-text-primary;
-  line-height: $line-height-tight;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: $color-text-secondary;
 }
 
 .ageHighlight {
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
 }
 
 .link {
-  color: $color-accent-primary;
+  color: $color-accent-light;
   text-decoration: underline;
+  text-decoration-color: rgba(244, 114, 182, 0.4);
+  text-underline-offset: 2px;
   cursor: pointer;
 
   &:hover {
-    color: $color-accent-hover;
+    text-decoration-color: currentColor;
   }
 }
 
 .proceedButton {
   width: 100%;
+  height: 48px;
+  padding: 0 $padding-base;
   background: $gradient-accent;
   border: none;
-  border-radius: $radius-base;
-  padding: $padding-sm $padding-base;
+  border-radius: 10px;
+  box-shadow: $shadow-highlight;
   color: $color-text-white;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-bold;
+  font-family: inherit;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
   cursor: pointer;
   transition: $transition-fast;
-  margin-bottom: $spacing-xs;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  box-shadow: $shadow-pink-lg;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-  }
 
   &:hover {
     background: $gradient-accent-hover;
-    transform: translateY($transform-translate-y);
-    box-shadow: $shadow-pink;
+  }
 
-    &::before {
-      transform: translateY(0);
-    }
+  &:active {
+    transform: scale($press-scale);
   }
 
   &:disabled {
-    background: $color-border-dark;
+    background: $color-card-dark;
     color: $color-text-muted;
-    cursor: not-allowed;
-    opacity: 0.5;
-    transform: none;
     box-shadow: none;
-
-    &::before {
-      display: none;
-    }
-
-    &:hover {
-      background: $color-border-dark;
-      transform: none;
-      box-shadow: none;
-    }
+    cursor: not-allowed;
+    transform: none;
   }
 }
 
 .loginPrompt {
+  margin-top: $spacing-sm;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: $font-size-xs;
   color: $color-text-secondary;
-  margin-top: $spacing-xs;
 
   .link {
-    color: $color-accent-primary;
+    color: $color-accent-light;
   }
 }
 
 .errorMessage {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: $radius-sm;
-  padding: $padding-xs $padding-sm;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-base;
+  padding: $spacing-sm $padding-sm;
+  border-radius: 8px;
+  background: rgba(229, 72, 77, 0.12);
+  border: 1px solid rgba(229, 72, 77, 0.32);
   color: #fca5a5;
-  font-size: 0.8rem;
+  font-size: $font-size-sm;
   text-align: center;
-  animation: shake 0.4s ease-in-out;
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(-6px);
-  }
-  40% {
-    transform: translateX(6px);
-  }
-  60% {
-    transform: translateX(-4px);
-  }
-  80% {
-    transform: translateX(4px);
-  }
 }
 
 @media (max-width: $breakpoint-sm) {
   .modalContent {
-    padding: $padding-md $padding-md;
+    padding: $padding-md;
     max-height: 90vh; // fallback for browsers without dvh
     max-height: 90dvh;
   }
 
   .modalTitle {
-    font-size: $font-size-4xl;
+    font-size: $font-size-2xl;
   }
 }
 

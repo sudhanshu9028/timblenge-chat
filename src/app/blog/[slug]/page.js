@@ -172,17 +172,17 @@ export default function BlogPostPage({ params }) {
 
           {/* CTA */}
           <div className={styles.ctaSection}>
-            <h2 className={styles.ctaTitle}>Ready to Start Chatting?</h2>
+            <h2 className={styles.ctaTitle}>Ready to start chatting?</h2>
             <p className={styles.ctaText}>
               Join thousands of people chatting with strangers on Anoniz. No registration, no
               downloads — just real conversations with real people.
             </p>
             <div className={styles.ctaButtons}>
               <Link href="/chat" className={styles.ctaButton}>
-                Start Text Chat
+                Start text chat
               </Link>
               <Link href="/video" className={styles.ctaButtonSecondary}>
-                Start Video Chat
+                Start video chat
               </Link>
             </div>
           </div>

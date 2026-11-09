@@ -1,55 +1,595 @@
 @use './variables' as *;
 
+// Every section shares one content width. Padding does the centring, so a
+// section can still run a full-bleed background band.
+$page-width: 1120px;
+$page-gutter: $padding-lg;
+$page-gutter-mobile: $padding-md;
+$section-space: 96px;
+$section-space-mobile: $padding-3xl;
+// A softer step than slate-800, so alternating bands separate sections
+// without turning the page into stripes.
+$bg-band: rgba(30, 41, 59, 0.45);
+
+@mixin page-width {
+  padding-inline: max(#{$page-gutter}, calc((100% - #{$page-width}) / 2));
+
+  @media (max-width: $breakpoint-md) {
+    padding-inline: $page-gutter-mobile;
+  }
+}
+
 .main {
-  min-height: $height-main;
   display: flex;
   flex-direction: column;
-  background: $gradient-primary;
+  background: $bg-primary;
   font-family: $font-family-primary;
 }
 
+// ============================================
+// Hero
+// ============================================
+
+.hero {
+  @include page-width;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  column-gap: $padding-3xl;
+  // The nav is 64px tall; the hero fills the rest of the first screen.
+  min-height: calc(100svh - 64px);
+  padding-block: $padding-3xl;
+  box-sizing: border-box;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heroTitle {
+  margin: 0 0 $spacing-xl;
+  font-size: $font-size-9xl;
+  font-weight: $font-weight-medium;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: $color-text-primary;
+  text-wrap: balance;
+}
+
+.heroSubtitle {
+  margin: 0 0 $spacing-2xl;
+  max-width: 36rem;
+  font-size: $font-size-2xl;
+  line-height: 1.5;
+  color: $color-text-secondary;
+}
+
+.heroCTA {
+  display: flex;
+}
+
+.actionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 48px;
+  padding: 0 $padding-md;
+  border-radius: 10px;
+  background: $gradient-accent;
+  box-shadow: $shadow-highlight;
+  color: $color-text-white;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: $transition-fast;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+
+  &:hover {
+    background: $gradient-accent-hover;
+  }
+
+  &:active {
+    transform: scale($press-scale);
+  }
+}
+
+// ============================================
+// Hero chat preview — the page's one bright moment
+// ============================================
+
+.preview {
+  justify-self: end;
+  width: 100%;
+  max-width: 440px;
+}
+
+.previewWindow {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: $bg-secondary;
+  border: 1px solid $hairline-strong;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 52px;
+  padding: 0 $padding-md;
+  border-bottom: 1px solid $hairline;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+// The signature: a green dot only where someone is actually there.
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  background: #4ade80;
+  flex: none;
+}
+
+.previewMeta {
+  margin-left: auto;
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: $color-text-muted;
+}
+
+.previewThread {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $padding-md $padding-md $spacing-base;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.previewSystem {
+  align-self: center;
+  margin: 0 0 $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.bubbleTheirs,
+.bubbleMine {
+  max-width: 78%;
+  margin: 0;
+  padding: $spacing-sm $padding-sm;
+  border-radius: 16px;
+  color: $color-text-white;
+}
+
+.bubbleTheirs {
+  align-self: flex-start;
+  background: $color-accent-hover;
+  border-bottom-left-radius: 4px;
+}
+
+.bubbleMine {
+  align-self: flex-end;
+  background: $color-border-dark;
+  border-bottom-right-radius: 4px;
+}
+
+.previewTyping {
+  display: inline-flex;
+  gap: 4px;
+  align-self: flex-start;
+  padding: $padding-sm $padding-sm;
+  border-radius: 16px 16px 16px 4px;
+  background: $bg-card-hover;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: $color-text-muted;
+  }
+}
+
+.previewChip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin: 0 $padding-md $spacing-md;
+  align-self: flex-start;
+  height: 32px;
+  padding: 0 $padding-sm;
+  border-radius: 8px;
+  border: 1px solid $hairline-strong;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: $color-text-muted;
+  }
+}
+
+.previewComposer {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $padding-sm $padding-md $padding-md;
+  border-top: 1px solid $hairline;
+}
+
+.previewInput {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 $padding-sm;
+  border-radius: 10px;
+  background: $bg-primary;
+  border: 1px solid $hairline;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.previewSend {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 $padding-base;
+  border-radius: 10px;
+  background: $gradient-accent;
+  box-shadow: $shadow-highlight;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+// ============================================
+// Sections
+// ============================================
+
+.features,
+.benefits,
+.howItWorks,
+.comparison,
+.guides {
+  @include page-width;
+  padding-block: $section-space;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.features,
+.howItWorks,
+.guides {
+  background: $bg-band;
+}
+
+.sectionTitle {
+  margin: 0 0 $spacing-3xl;
+  max-width: 24ch;
+  font-size: $font-size-8xl;
+  font-weight: $font-weight-medium;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: $color-text-primary;
+  text-wrap: balance;
+}
+
+// Features: six short claims, read as a list rather than six boxes.
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $spacing-3xl $padding-xl;
+}
+
+.featureCard {
+  padding-top: $padding-md;
+  border-top: 1px solid $hairline-strong;
+}
+
+.featureTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: 1.35;
+  color: $color-text-primary;
+}
+
+.featureDescription {
+  margin: 0;
+  font-size: 15px;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+}
+
+// Benefits: heading on the left, the four reasons on the right, so this
+// section reads differently from the one above it.
+.benefits {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  column-gap: $padding-3xl;
+  align-items: start;
+
+  .sectionTitle {
+    margin: 0;
+  }
+}
+
+.benefitsContent {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-3xl $padding-xl;
+}
+
+.benefitItem {
+  margin: 0;
+}
+
+.benefitTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-medium;
+  line-height: 1.3;
+  color: $color-text-primary;
+}
+
+.benefitDescription {
+  margin: 0;
+  font-size: 15px;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+}
+
+// How it works: three numbered steps on one line.
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $padding-xl;
+}
+
+.step {
+  padding-top: $padding-md;
+  border-top: 1px solid $hairline-strong;
+}
+
+.stepNumber {
+  margin-bottom: $spacing-base;
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  font-variant-numeric: tabular-nums;
+  color: $color-accent-light;
+}
+
+.stepTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-medium;
+  line-height: 1.3;
+  color: $color-text-primary;
+}
+
+.stepDescription {
+  margin: 0;
+  font-size: 15px;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+}
+
+// Comparison
+.comparison .sectionTitle,
+.guides .sectionTitle {
+  margin-bottom: $spacing-base;
+}
+
+.comparisonIntro,
+.guidesIntro {
+  max-width: 40rem;
+  margin: 0 0 $spacing-3xl;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+}
+
+// Horizontal scroll container so wide tables never break the page on mobile
+.comparisonTableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid $hairline;
+  border-radius: $radius-md;
+  background: $bg-card;
+}
+
+.comparisonTable {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 15px;
+  color: $color-text-muted;
+
+  th,
+  td {
+    padding: $padding-base $padding-md;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid $hairline;
+    line-height: $line-height-normal;
+  }
+
+  thead th {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  // The Anoniz column is the point of the table, so it alone gets the accent.
+  thead th:nth-child(2) {
+    color: $color-accent-light;
+  }
+
+  tbody th {
+    font-weight: $font-weight-normal;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.comparisonHighlight {
+  color: $color-text-primary;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+// Guides
+.guidesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $spacing-base;
+}
+
+// The whole card is the link, so the tap target is the card and not just the
+// title — these are read on phones far more often than on desktop.
+.guideCard {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-md;
+  border-radius: $radius-md;
+  background: $bg-card;
+  border: 1px solid $hairline;
+  text-decoration: none;
+  transition: $transition-fast;
+
+  &:hover {
+    background: $bg-card-hover;
+    border-color: $hairline-strong;
+  }
+}
+
+.guideTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: 1.35;
+  color: $color-text-primary;
+}
+
+.guideHook {
+  margin: 0;
+  font-size: 15px;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+  // Pushes the meta line to the bottom so cards of differing title length still
+  // align their footers.
+  flex: 1;
+}
+
+.guideMeta {
+  margin-top: $padding-base;
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+// The two tool pages. Same measure and tone as the intro above the grid, so it
+// reads as the section's closing line rather than a second call to action.
+.guidesTools {
+  max-width: 40rem;
+  margin: $spacing-3xl 0 0;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+
+  a {
+    color: $color-accent-light;
+    text-decoration: underline;
+    text-decoration-color: rgba(244, 114, 182, 0.4);
+    text-underline-offset: 3px;
+    transition: $transition-fast;
+
+    &:hover {
+      color: $color-text-primary;
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+.guidesMore {
+  margin: $spacing-base 0 0;
+}
+
+.guidesMoreLink {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  text-decoration: none;
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ============================================
+// Gender selector card (GenderSelector.jsx)
+// ============================================
+
 .card {
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: $padding-xl $padding-xl;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-md;
+  background: $bg-card;
+  border: 1px solid $hairline;
+  padding: $padding-xl;
+  border-radius: $radius-lg;
   text-align: center;
   min-width: $card-min-width;
   margin: $margin-lg $margin-base;
+
   .tagline {
-    font-size: $tagline-font-size;
-    font-weight: $font-weight-medium;
-    color: $color-text-secondary;
-    padding-bottom: $tagline-padding-bottom;
-    text-align: center;
+    padding-bottom: $spacing-base;
+    font-size: $font-size-sm;
     line-height: $line-height-normal;
+    color: $color-text-secondary;
 
     .highlight {
-      background: $gradient-text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: $font-weight-semibold;
-      font-style: italic;
+      color: $color-accent-light;
+      font-weight: $font-weight-medium;
     }
   }
 }
 
 .heading {
-  font-size: $font-size-7xl;
-  font-weight: $font-weight-semibold;
   margin-bottom: $margin-base;
+  font-size: $font-size-7xl;
+  font-weight: $font-weight-medium;
   color: $color-text-primary;
 }
 
 .label {
-  font-weight: $font-weight-medium;
-  font-size: $font-size-base;
-  color: $color-text-secondary;
   margin-bottom: $margin-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
 }
 
 .radioGroup {
@@ -71,608 +611,124 @@
     accent-color: $color-accent-primary;
   }
 }
+
 .buttons {
   display: flex;
   justify-content: center;
-  gap: $margin-base;
+  gap: $spacing-md;
   margin: $margin-base 0 $margin-lg;
 
   .button {
-    background: $gradient-accent;
+    height: 44px;
+    padding: 0 $padding-md;
     border: none;
+    border-radius: 10px;
+    background: $gradient-accent;
+    box-shadow: $shadow-highlight;
     color: $color-text-white;
     font-size: $font-size-base;
     font-weight: $font-weight-medium;
-    padding: $padding-md $margin-lg;
-    border-radius: $radius-base;
     cursor: pointer;
-    transition: $transition-base;
-    box-shadow: $shadow-pink-sm;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
+    transition: $transition-fast;
 
     &:hover {
       background: $gradient-accent-hover;
-      transform: translateY($transform-translate-y);
-      box-shadow: $shadow-pink;
+    }
 
-      &::before {
-        transform: translateY(0);
-      }
+    &:active {
+      transform: scale($press-scale);
     }
   }
 }
 
-// Hero Section
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $padding-3xl $margin-lg;
-  text-align: center;
-  min-height: $hero-min-height;
-  position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 1) 0%,
-    rgba(30, 41, 59, 0.95) 50%,
-    rgba(51, 65, 85, 0.9) 100%
-  );
+// ============================================
+// Responsive
+// ============================================
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(236, 72, 153, 0.1) 0%,
-      rgba(168, 85, 247, 0.08) 50%,
-      rgba(129, 140, 248, 0.06) 100%
-    );
-    z-index: 0;
+@media (max-width: $breakpoint-lg) {
+  .hero {
+    column-gap: $padding-xl;
   }
 
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.heroTitle {
-  font-size: $font-size-9xl;
-  font-weight: $font-weight-bold;
-  margin-bottom: $spacing-xl;
-  color: $color-text-primary;
-  line-height: $line-height-tight;
-  font-family: $font-family-primary;
-}
-
-.gradientStrangers {
-  background: linear-gradient(to right, #ec4899, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
-}
-
-.gradientFriends {
-  background: linear-gradient(to right, #c084fc, #a855f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
-}
-
-.heroSubtitle {
-  font-size: $font-size-2xl;
-  color: $color-text-secondary;
-  margin-bottom: $spacing-3xl;
-  max-width: $container-xl;
-  line-height: $line-height-relaxed;
-}
-
-.heroCTA {
-  width: $height-full;
-  display: flex;
-  justify-content: center;
-}
-
-.actionButtons {
-  display: flex;
-  gap: $margin-base;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.actionButton {
-  background: $gradient-accent;
-  border: none;
-  color: $color-text-white;
-  font-size: 20px;
-  font-weight: $font-weight-semibold;
-  padding: 0.5rem 1rem;
-  border-radius: $radius-base;
-  cursor: pointer;
-  transition: $transition-base;
-  width: fit-content;
-  min-width: 130px;
-  max-width: 150px;
-  box-shadow: $shadow-pink-lg;
-  position: relative;
-  overflow: hidden;
-  will-change: transform;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    will-change: transform;
+  .heroTitle {
+    font-size: 2.75rem;
   }
 
-  &:hover {
-    background: $gradient-accent-hover;
-    transform: translateY($transform-translate-y);
-    box-shadow: $shadow-pink;
+  .featuresGrid,
+  .guidesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-    &::before {
-      transform: translateY(0);
+  .benefits {
+    grid-template-columns: minmax(0, 1fr);
+
+    .sectionTitle {
+      margin-bottom: $spacing-3xl;
     }
   }
-}
-
-// Features Section
-.features {
-  padding: $padding-3xl $margin-lg;
-  background: $bg-secondary;
-  width: $height-full;
-}
-
-.sectionTitle {
-  font-size: $font-size-8xl;
-  font-weight: $font-weight-bold;
-  text-align: center;
-  margin-bottom: $spacing-3xl;
-  color: $color-text-primary;
-}
-
-.featuresGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: $margin-lg;
-  max-width: $container-3xl;
-  margin: 0 auto;
-}
-
-.featureCard {
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: $margin-lg;
-  border-radius: $radius-md;
-  box-shadow: $shadow-base;
-  transition:
-    transform $transition-base,
-    box-shadow $transition-base,
-    border-color $transition-base;
-  will-change: transform;
-
-  &:hover {
-    transform: translateY($transform-translate-y-lg);
-    box-shadow: $shadow-xl;
-    border-color: rgba(236, 72, 153, 0.3);
-  }
-}
-
-.featureTitle {
-  font-size: $font-size-5xl;
-  font-weight: $font-weight-semibold;
-  margin-bottom: $margin-base;
-  color: $color-text-primary;
-}
-
-.featureDescription {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-}
-
-// Benefits Section
-.benefits {
-  padding: $padding-3xl $margin-lg;
-  background: $gradient-primary;
-  width: $height-full;
-}
-
-.benefitsContent {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $spacing-3xl;
-  max-width: $container-3xl;
-  margin: 0 auto;
-}
-
-.benefitItem {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: $margin-lg;
-  border-radius: $radius-md;
-  box-shadow: $shadow-base;
-  transition:
-    border-color $transition-base,
-    background $transition-base;
-  will-change: background, border-color;
-
-  &:hover {
-    border-color: rgba(236, 72, 153, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-  }
-}
-
-.benefitTitle {
-  font-size: $font-size-4xl;
-  font-weight: $font-weight-semibold;
-  margin-bottom: $margin-base;
-  color: $color-text-primary;
-}
-
-.benefitDescription {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-}
-
-// How It Works Section
-.howItWorks {
-  padding: $padding-3xl $margin-lg;
-  background: $bg-secondary;
-  width: $height-full;
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: $spacing-3xl;
-  max-width: $container-2xl;
-  margin: 0 auto;
-}
-
-.step {
-  text-align: center;
-  position: relative;
-}
-
-.stepNumber {
-  width: $step-number-size;
-  height: $step-number-size;
-  border-radius: $radius-full;
-  background: $color-accent-primary;
-  color: $color-text-white;
-  font-size: $font-size-6xl;
-  font-weight: $font-weight-bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto $spacing-xl;
-  box-shadow: $shadow-accent;
-}
-
-.stepTitle {
-  font-size: $font-size-3xl;
-  font-weight: $font-weight-semibold;
-  margin-bottom: $margin-base;
-  color: $color-text-primary;
-}
-
-.stepDescription {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-}
-
-// CTA Section
-.ctaSection {
-  padding: $padding-3xl $margin-lg;
-  background: $gradient-primary;
-  width: $height-full;
-  text-align: center;
-}
-
-.ctaTitle {
-  font-size: $font-size-8xl;
-  font-weight: $font-weight-bold;
-  margin-bottom: $spacing-xl;
-  color: $color-text-primary;
-}
-
-.ctaDescription {
-  font-size: $font-size-xl;
-  color: $color-text-secondary;
-  margin-bottom: $spacing-3xl;
-  max-width: $container-lg;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: $line-height-relaxed;
-}
-
-.ctaButtons {
-  display: flex;
-  justify-content: center;
-  width: $height-full;
 }
 
 @media (max-width: $breakpoint-md) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: $padding-xl;
+    min-height: 0;
+    padding-block: $padding-2xl $section-space-mobile;
+  }
+
   .heroTitle {
-    font-size: $font-size-7xl;
+    font-size: 2.375rem;
+    letter-spacing: -0.025em;
   }
 
   .heroSubtitle {
     font-size: $font-size-lg;
+    margin-bottom: $padding-lg;
   }
 
-  .sectionTitle {
-    font-size: $font-size-7xl;
+  .actionButtons {
+    width: 100%;
   }
 
-  .featuresGrid {
-    grid-template-columns: 1fr;
+  .actionButton {
+    flex: 1;
+    justify-content: center;
   }
 
-  .benefitsContent {
-    grid-template-columns: 1fr;
+  .preview {
+    justify-self: stretch;
+    max-width: none;
   }
 
-  .steps {
-    grid-template-columns: 1fr;
-  }
-
-  .ctaTitle {
-    font-size: $font-size-7xl;
-  }
-
-  .ctaDescription {
-    font-size: $font-size-lg;
-  }
-
-  .buttons {
-    display: grid;
-  }
-
-  .hero {
-    padding: $margin-lg $margin-base;
-    min-height: $hero-min-height-mobile;
+  // A shorter thread on phones, so the preview doesn't push the page below
+  // it out of reach. It keeps the opening exchange and drops the last two
+  // messages, so the conversation still reads from its start.
+  .previewThread > :nth-child(5),
+  .previewThread > :nth-child(6) {
+    display: none;
   }
 
   .features,
   .benefits,
   .howItWorks,
-  .ctaSection {
-    padding: $padding-2xl $margin-base;
+  .comparison,
+  .guides {
+    padding-block: $section-space-mobile;
   }
 
-  .actionButtons {
-    flex-direction: column;
-    width: 100%;
+  .sectionTitle {
+    font-size: $font-size-6xl;
+    margin-bottom: $padding-lg;
   }
 
-  .actionButton {
-    width: auto;
-    min-width: auto;
-  }
-}
-
-// Comparison Section
-.comparison {
-  padding: $padding-3xl $margin-lg;
-  background: $bg-secondary;
-  width: $height-full;
-}
-
-.comparisonIntro {
-  max-width: $container-lg;
-  margin: 0 auto $spacing-3xl;
-  text-align: center;
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-}
-
-// Guides Section
-// Sits between two $bg-secondary sections, so it takes the gradient to keep the
-// page alternating rather than reading as one long slab.
-.guides {
-  padding: $padding-3xl $margin-lg;
-  background: $gradient-primary;
-  width: $height-full;
-}
-
-.guidesIntro {
-  max-width: $container-lg;
-  margin: 0 auto $spacing-3xl;
-  text-align: center;
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-}
-
-.guidesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $margin-lg;
-  max-width: $container-3xl;
-  margin: 0 auto;
-}
-
-// The whole card is the link, so the tap target is the card and not just the
-// title — these are read on phones far more often than on desktop.
-.guideCard {
-  display: flex;
-  flex-direction: column;
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: $margin-lg;
-  border-radius: $radius-md;
-  box-shadow: $shadow-base;
-  text-decoration: none;
-  transition:
-    transform $transition-base,
-    box-shadow $transition-base,
-    border-color $transition-base;
-  will-change: transform;
-
-  &:hover {
-    transform: translateY($transform-translate-y-lg);
-    box-shadow: $shadow-xl;
-    border-color: rgba(236, 72, 153, 0.3);
-  }
-}
-
-.guideTitle {
-  font-size: $font-size-3xl;
-  font-weight: $font-weight-semibold;
-  margin-bottom: $margin-sm;
-  color: $color-text-primary;
-  line-height: $line-height-tight;
-}
-
-.guideHook {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-  // Pushes the meta line to the bottom so cards of differing title length still
-  // align their footers.
-  flex: 1;
-}
-
-.guideMeta {
-  margin-top: $margin-base;
-  font-size: $font-size-sm;
-  color: $color-text-muted;
-}
-
-// The two tool pages. Same measure and tone as the intro above the grid, so it
-// reads as the section's closing line rather than a second call to action.
-.guidesTools {
-  max-width: $container-lg;
-  margin: $spacing-3xl auto 0;
-  text-align: center;
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: $line-height-relaxed;
-
-  a {
-    color: $color-accent-light;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-
-    &:hover {
-      color: $color-text-white;
-    }
-  }
-}
-
-.guidesMore {
-  margin-top: $spacing-xl;
-  text-align: center;
-}
-
-.guidesMoreLink {
-  font-size: $font-size-base;
-  font-weight: $font-weight-semibold;
-  color: $color-text-primary;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-// Horizontal scroll container so wide tables never break the page on mobile
-.comparisonTableWrapper {
-  max-width: $container-3xl;
-  margin: 0 auto;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius-md;
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: $shadow-base;
-}
-
-.comparisonTable {
-  width: $height-full;
-  min-width: 640px;
-  border-collapse: collapse;
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-
-  th,
-  td {
-    padding: $padding-base $margin-base;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    line-height: $line-height-normal;
+  .featuresGrid,
+  .benefitsContent,
+  .steps,
+  .guidesGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $padding-lg;
   }
 
-  thead th {
-    color: $color-text-primary;
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-lg;
-    background: rgba(255, 255, 255, 0.04);
-    white-space: nowrap;
-  }
-
-  tbody th {
-    color: $color-text-primary;
-    font-weight: $font-weight-medium;
-    white-space: nowrap;
-  }
-
-  tbody tr:last-child th,
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
-}
-
-.comparisonHighlight {
-  color: $color-accent-light;
-  font-weight: $font-weight-medium;
-}
-
-@media (max-width: $breakpoint-md) {
   .comparisonTable {
     font-size: $font-size-sm;
   }

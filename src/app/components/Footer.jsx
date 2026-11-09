@@ -84,7 +84,7 @@ export default function Footer() {
             className={styles.navLink}
             onClick={() => trackClick('privacy_policy')}
           >
-            Privacy Policy
+            Privacy policy
           </Link>
           <Link href="/terms" className={styles.navLink} onClick={() => trackClick('terms')}>
             Terms
@@ -103,7 +103,7 @@ export default function Footer() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.8"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
@@ -120,7 +120,7 @@ export default function Footer() {
             className={styles.contactButton}
             onClick={() => trackClick('contact_us')}
           >
-            Contact Us
+            Contact us
           </a>
         </nav>
       </div>

@@ -10,7 +10,7 @@
 .page {
   min-height: $height-main;
   padding: $padding-lg $margin-sm $padding-3xl;
-  background: $gradient-primary;
+  background: $bg-primary;
   font-family: $font-family-primary;
   color: $color-text-primary;
 
@@ -31,13 +31,10 @@
 
 .title {
   font-size: $font-size-7xl;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
+  font-weight: $font-weight-medium;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin-bottom: $spacing-md;
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 
   @media (min-width: $breakpoint-md) {
     font-size: $font-size-8xl;
@@ -55,12 +52,9 @@
 // --- The deck -------------------------------------------------------------
 
 .deck {
-  background: rgba(51, 65, 85, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius-lg;
-  box-shadow: $shadow-md;
+  background: $bg-card;
+  border: 1px solid $hairline;
+  border-radius: 20px;
   padding: $padding-base;
 
   @media (min-width: $breakpoint-md) {
@@ -80,20 +74,17 @@
   flex: 0 0 auto;
   min-height: 44px;
   padding: 0 $padding-base;
-  border-radius: $radius-pill;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  border: 1px solid $hairline-strong;
   background: $bg-button-secondary;
   color: $color-text-secondary;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
+  transition: $transition-fast;
 
   &:hover {
-    border-color: rgba(236, 72, 153, 0.45);
+    border-color: rgba(241, 245, 249, 0.24);
     color: $color-text-primary;
   }
 
@@ -104,9 +95,9 @@
 }
 
 .chipActive {
-  background: rgba(236, 72, 153, 0.16);
-  border-color: rgba(236, 72, 153, 0.6);
-  color: $color-text-white;
+  background: rgba(236, 72, 153, 0.12);
+  border-color: $color-accent-primary;
+  color: $color-text-primary;
 }
 
 // The hint and the counter share a line. The counter used to sit beside the
@@ -132,9 +123,9 @@
   justify-content: center;
   min-height: 250px;
   padding: $padding-md $padding-base;
-  border-radius: $radius-md;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: $bg-primary;
+  border: 1px solid $hairline;
 
   @media (min-width: $breakpoint-md) {
     min-height: 230px;
@@ -144,7 +135,8 @@
 
 .question {
   font-size: $font-size-5xl;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
+  text-wrap: balance;
   line-height: 1.35;
   text-align: center;
   color: $color-text-primary;
@@ -157,9 +149,7 @@
 .lead {
   margin-bottom: $spacing-base;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: $font-weight-medium;
   text-align: center;
   color: $color-accent-light;
 }
@@ -179,22 +169,19 @@
 .option {
   min-height: 64px;
   padding: $padding-sm $padding-base;
-  border-radius: $radius-base;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  border: 1px solid $hairline-strong;
   background: $bg-button-secondary;
   color: $color-text-primary;
   font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   line-height: $line-height-normal;
   text-align: center;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: $transition-fast;
 
   &:hover {
-    border-color: rgba(236, 72, 153, 0.5);
+    border-color: rgba(241, 245, 249, 0.24);
     background: rgba(255, 255, 255, 0.08);
   }
 
@@ -208,14 +195,14 @@
   }
 }
 
+// A selection, not an action, so a solid fill rather than the button gradient.
 .optionChosen {
-  background: $gradient-accent;
+  background: $color-accent-hover;
   border-color: transparent;
   color: $color-text-white;
-  box-shadow: $shadow-pink-sm;
 
   &:hover {
-    background: $gradient-accent;
+    background: $color-accent-hover;
     border-color: transparent;
   }
 }
@@ -224,9 +211,7 @@
   align-self: center;
   justify-self: center;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-weight: $font-weight-normal;
   color: $color-text-muted;
 }
 
@@ -249,21 +234,23 @@
   min-height: 48px;
   padding: 0 $padding-md;
   border: none;
-  border-radius: $radius-base;
+  border-radius: 10px;
   background: $gradient-accent;
   color: $color-text-white;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
+  font-family: inherit;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: $shadow-pink-sm;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  box-shadow: $shadow-highlight;
+  transition: $transition-fast;
 
   &:hover {
     background: $gradient-accent-hover;
-    transform: translateY($transform-translate-y);
+  }
+
+  &:active {
+    transform: scale($press-scale);
   }
 
   &:focus-visible {
@@ -281,16 +268,14 @@
 .copy {
   min-height: 48px;
   width: 88px;
-  border-radius: $radius-base;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  border: 1px solid $hairline-strong;
   background: $bg-button-secondary;
   color: $color-text-primary;
   font-size: $font-size-base;
   font-weight: $font-weight-medium;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+  transition: $transition-fast;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -316,9 +301,9 @@
   margin-top: $margin-base;
   padding: $padding-md $padding-base;
   text-align: center;
-  border-radius: $radius-lg;
-  border: 1px solid rgba(236, 72, 153, 0.28);
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.12), rgba(168, 85, 247, 0.12));
+  border-radius: 20px;
+  border: 1px solid $hairline-strong;
+  background: $bg-card;
 
   @media (min-width: $breakpoint-md) {
     padding: $padding-lg;
@@ -327,8 +312,9 @@
 
 .ctaTitle {
   font-size: $font-size-5xl;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
+  font-weight: $font-weight-medium;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   margin-bottom: $spacing-md;
   color: $color-text-primary;
 }
@@ -346,21 +332,22 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 0 $padding-lg;
-  border-radius: $radius-base;
+  padding: 0 $padding-md;
+  border-radius: 10px;
   background: $gradient-accent;
   color: $color-text-white;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
   text-decoration: none;
-  box-shadow: $shadow-pink-lg;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  box-shadow: $shadow-highlight;
+  transition: $transition-fast;
 
   &:hover {
     background: $gradient-accent-hover;
-    transform: translateY($transform-translate-y);
+  }
+
+  &:active {
+    transform: scale($press-scale);
   }
 
   &:focus-visible {
@@ -383,8 +370,9 @@
 
 .sectionTitle {
   font-size: $font-size-5xl;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
+  font-weight: $font-weight-medium;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   margin-bottom: $spacing-base;
   color: $color-text-primary;
 }
@@ -392,8 +380,8 @@
 .groupTitle {
   margin: $margin-base 0 $spacing-sm;
   font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  color: $color-accent-light;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
 }
 
 .text {
@@ -405,10 +393,11 @@
   a {
     color: $color-accent-light;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-color: rgba(244, 114, 182, 0.4);
+    text-underline-offset: 3px;
 
     &:hover {
-      color: $color-text-white;
+      text-decoration-color: currentColor;
     }
   }
 }
@@ -422,7 +411,7 @@
   line-height: $line-height-relaxed;
 
   li {
-    padding: 0.3rem 0 0.3rem 0.25rem;
+    padding: $spacing-xs 0 $spacing-xs $spacing-xs;
 
     &::marker {
       color: $color-text-muted;
@@ -432,6 +421,6 @@
 
   strong {
     color: $color-text-primary;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-medium;
   }
 }

@@ -57,45 +57,45 @@ export default function AboutPage() {
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Our Features</h2>
+            <h2 className={styles.sectionTitle}>Our features</h2>
             <div className={styles.featuresGrid}>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>Video Chat</h3>
+                <h3 className={styles.featureTitle}>Video chat</h3>
                 <p className={styles.featureDescription}>
                   Connect face-to-face with strangers through our secure video chat platform. See
                   and hear your conversation partner in real-time.
                 </p>
               </div>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>Text Chat</h3>
+                <h3 className={styles.featureTitle}>Text chat</h3>
                 <p className={styles.featureDescription}>
                   Prefer typing? Our text chat feature allows you to have real-time conversations
                   with strangers through instant messaging.
                 </p>
               </div>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>Anonymous & Private</h3>
+                <h3 className={styles.featureTitle}>Anonymous and private</h3>
                 <p className={styles.featureDescription}>
                   Chat anonymously without revealing your identity. We prioritize your privacy and
                   don&apos;t require any personal information.
                 </p>
               </div>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>No Registration</h3>
+                <h3 className={styles.featureTitle}>No registration</h3>
                 <p className={styles.featureDescription}>
                   Start chatting immediately without creating an account. No email, no sign-up, no
                   hassle - just instant access to conversations.
                 </p>
               </div>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>Global Connections</h3>
+                <h3 className={styles.featureTitle}>Global connections</h3>
                 <p className={styles.featureDescription}>
                   Meet people from around the world. Our platform connects you with strangers from
                   different countries and cultures.
                 </p>
               </div>
               <div className={styles.featureCard}>
-                <h3 className={styles.featureTitle}>Real-time Messaging</h3>
+                <h3 className={styles.featureTitle}>Real-time messaging</h3>
                 <p className={styles.featureDescription}>
                   Experience instant messaging with no delays. Our real-time technology ensures
                   smooth and responsive conversations.
@@ -105,7 +105,7 @@ export default function AboutPage() {
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Our Mission</h2>
+            <h2 className={styles.sectionTitle}>Our mission</h2>
             <p className={styles.sectionContent}>
               At Anoniz, our mission is to break down barriers and create meaningful connections
               between people worldwide. We believe that everyone deserves the opportunity to meet
@@ -119,17 +119,17 @@ export default function AboutPage() {
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Our Values</h2>
+            <h2 className={styles.sectionTitle}>Our values</h2>
             <div className={styles.valuesList}>
               <div className={styles.valueItem}>
-                <h3 className={styles.valueTitle}>Privacy First</h3>
+                <h3 className={styles.valueTitle}>Privacy first</h3>
                 <p className={styles.valueDescription}>
                   Your privacy is our priority. We collect minimal information and don&apos;t
                   require registration, ensuring you can chat anonymously.
                 </p>
               </div>
               <div className={styles.valueItem}>
-                <h3 className={styles.valueTitle}>Safety by Design</h3>
+                <h3 className={styles.valueTitle}>Safety by design</h3>
                 <p className={styles.valueDescription}>
                   No profiles, no stored conversations and view-once photos leave little about you
                   for anyone to keep. Every chat starts behind an 18+ confirmation, and one tap
@@ -137,14 +137,14 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className={styles.valueItem}>
-                <h3 className={styles.valueTitle}>Global Community</h3>
+                <h3 className={styles.valueTitle}>Global community</h3>
                 <p className={styles.valueDescription}>
                   We celebrate diversity and connect people from different backgrounds, cultures,
                   and countries.
                 </p>
               </div>
               <div className={styles.valueItem}>
-                <h3 className={styles.valueTitle}>User Experience</h3>
+                <h3 className={styles.valueTitle}>User experience</h3>
                 <p className={styles.valueDescription}>
                   We focus on creating a simple, intuitive, and enjoyable experience for all our
                   users.
@@ -154,18 +154,18 @@ export default function AboutPage() {
           </section>
 
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Get Started</h2>
+            <h2 className={styles.sectionTitle}>Get started</h2>
             <p className={styles.sectionContent}>
               Ready to start chatting? Choose between text or video chat and begin connecting with
               strangers from around the world. No registration required - just click and start
-              talking!
+              talking.
             </p>
             <div className={styles.ctaButtons}>
               <Link href="/" className={styles.ctaButton}>
-                Start Chatting
+                Start chatting
               </Link>
               <Link href="/support" className={styles.ctaButtonSecondary}>
-                Need Help?
+                Need help?
               </Link>
             </div>
           </section>
