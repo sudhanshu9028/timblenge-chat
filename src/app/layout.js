@@ -3,6 +3,7 @@ import { Figtree } from 'next/font/google';
 import Navigation from './components/Navigation';
 import AnalyticsBootstrap from './components/AnalyticsBootstrap';
 import Footer from './components/Footer';
+import { REELZ_GEO_SCRIPT } from '@/lib/reelzPromo';
 import './globals.css';
 
 // Self-hosted at build time, so there is no request to Google from the
@@ -63,8 +64,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={figtree.variable}>
+    // suppressHydrationWarning: the Reelz geo script below adds data-rz to
+    // <html> before React hydrates, which would otherwise be reported as an
+    // attribute mismatch. It only covers this element's own attributes.
+    <html lang="en" className={figtree.variable} suppressHydrationWarning>
       <head>
+        {/* Flags visitors in India for the Reelz promo, before first paint so
+            CSS can reserve the banner's space. A plain inline script on
+            purpose: next/script's beforeInteractive runs too late for that.
+            See src/lib/reelzPromo.js. */}
+        <script dangerouslySetInnerHTML={{ __html: REELZ_GEO_SCRIPT }} />
+
         {/* Preconnect only to domains we actually use */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 

@@ -4,6 +4,7 @@ import HeroCTA from './components/HeroCTA';
 import HeroChatPreview from './components/HeroChatPreview';
 import PrimeTimeBanner from './components/PrimeTimeBanner';
 import ProfileLine from './components/ProfileLine';
+import ReelzPromo from './components/ReelzPromo';
 import { HOME_FAQ_ITEMS } from '@/lib/homeFaqData';
 
 // Homepage-specific metadata. The root layout only supplies site-wide defaults,
@@ -154,6 +155,9 @@ export default function HomePage() {
           <PrimeTimeBanner />
 
           <ProfileLine />
+
+          {/* India only; renders nothing for everyone else. */}
+          <ReelzPromo variant="strip" slot="home_hero" />
         </div>
 
         <HeroChatPreview />

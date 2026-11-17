@@ -74,6 +74,11 @@ export const EVENTS = {
   RIDDLE_SOLVED: 'riddle_solved',
   PRIME_TIME_CLICK: 'prime_time_click',
 
+  // Reelz cross-promotion (India only). Params: slot, banner; clicks on the
+  // topic box add has_topic. Register slot and banner as custom dimensions.
+  PROMO_SHOWN: 'promo_shown',
+  PROMO_CLICK: 'promo_click',
+
   // Tool pages (/would-you-rather, /random-question-generator)
   TOOL_NEXT: 'tool_next',
   TOOL_ANSWERED: 'tool_answered',
