@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getBlogBySlug, getAllSlugs } from '@/lib/blogRegistry';
 import BLOG_CONTENT from '@/lib/blogContent';
+import ReelzPromo from '@/app/components/ReelzPromo';
 import styles from '@/styles/blogPost.module.scss';
 
 // ---------------------------------------------------------------------------
@@ -169,6 +170,9 @@ export default function BlogPostPage({ params }) {
         {/* Article Content */}
         <article className={styles.articleContent}>
           <ContentComponent styles={styles} />
+
+          {/* India only; renders nothing for everyone else. */}
+          <ReelzPromo variant="card" slot="blog_end" />
 
           {/* CTA */}
           <div className={styles.ctaSection}>

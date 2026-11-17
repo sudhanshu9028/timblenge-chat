@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPanelPosts } from '@/lib/blogRegistry';
 import PushPrompt from './PushPrompt';
+import ReelzPromo from './ReelzPromo';
 import { getProfileSummary } from '@/lib/profile';
 import styles from '@/styles/chatPanels.module.scss';
 
@@ -82,6 +83,10 @@ export default function DisconnectedPanel({
       <PushPrompt eligible={pushEligible} />
 
       {summary && <p className={styles.profileSummary}>{summary}</p>}
+
+      {/* India only. Below the chat actions so it never competes with them,
+          and its links open a new tab so this session survives a click. */}
+      <ReelzPromo variant="topic" slot={mode === 'video' ? 'end_of_video_chat' : 'end_of_chat'} />
 
       {posts.length > 0 && (
         <div className={styles.panelReads}>

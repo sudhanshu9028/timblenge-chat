@@ -1,0 +1,597 @@
+@use './variables' as *;
+
+// Reelz cross-promotion (see src/lib/reelzPromo.js).
+//
+// Reelz's own palette lives here rather than in _variables: these colours
+// belong to the other product, and nothing else on Anoniz should use them.
+$rz-pink: #d81b60; // white on it is 5:1
+$rz-pink-dark: #b0164f;
+$rz-sun: #ffb300;
+$rz-ink: #14121f;
+$rz-paper: #ffffff;
+$rz-body: #4a4458;
+$rz-fine: #6b6478;
+$rz-butter: #fff1c7;
+$rz-blush: #fde4ec;
+$font-reelz: var(--font-reelz), $font-family-primary;
+
+// ============================================
+// Slot
+// ============================================
+
+// Hidden for everyone outside India. The flag is set on <html> by an inline
+// script before first paint, so these rules apply from the first frame.
+.slot {
+  display: none;
+}
+
+:global(html[data-rz='in']) .slot {
+  display: block;
+}
+
+// The homepage slot reserves the strip's height up front. The hero is
+// vertically centred, so a banner arriving after hydration would otherwise
+// nudge the whole hero.
+:global(html[data-rz='in']) .slotStrip {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 36rem;
+  min-height: 52px;
+  margin-top: $spacing-xl;
+}
+
+:global(html[data-rz='in']) .slotCard {
+  container-type: inline-size;
+  max-width: 36rem;
+  margin-top: $padding-3xl;
+}
+
+:global(html[data-rz='in']) .slotTopic {
+  width: 100%;
+  max-width: $container-sm;
+  margin-top: $spacing-xs;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+// Copy swaps for the strip: the long lines need about 420px.
+.narrow {
+  display: inline;
+}
+
+.wide {
+  display: none;
+}
+
+@container (min-width: 420px) {
+  .narrow {
+    display: none;
+  }
+
+  .wide {
+    display: inline;
+  }
+}
+
+// ============================================
+// Strip (homepage)
+// ============================================
+
+.strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: $spacing-md;
+  min-height: 52px;
+  padding: $spacing-sm $padding-sm;
+  box-sizing: border-box;
+  border-radius: 14px;
+  background: $rz-sun;
+  color: $rz-ink;
+  font-family: $font-family-primary;
+  text-decoration: none;
+  transition: $transition-fast;
+
+  &:hover .stripCta {
+    background: $rz-pink;
+  }
+
+  &:active {
+    transform: scale($press-scale);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $rz-sun;
+    outline-offset: 3px;
+  }
+}
+
+@container (min-width: 420px) {
+  .strip {
+    padding-inline: $padding-base;
+  }
+}
+
+.stripSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stripEnd {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.stripBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+// 18px keeps each side at 35px tall, inside the 52px the slot reserves.
+.stripMark {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.stripName {
+  font-family: $font-reelz;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.stripNote {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1.25;
+  color: rgba(20, 18, 31, 0.78);
+}
+
+.stripCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: $radius-pill;
+  background: $rz-ink;
+  color: #fff;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: $transition-fast;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@container (min-width: 420px) {
+  .stripName {
+    font-size: 16px;
+  }
+
+  .stripCta {
+    padding-inline: 18px;
+  }
+}
+
+// ============================================
+// Card (blog posts)
+// ============================================
+
+// Selectors are scoped under the slot so they outrank `.articleContent a`,
+// which the card sits inside.
+.slotCard .card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 16px 18px 20px;
+  border: 2px solid $rz-ink;
+  border-radius: 20px;
+  background: $rz-paper;
+  box-shadow: 0 4px 0 $rz-sun;
+  color: $rz-ink;
+  font-family: $font-family-primary;
+  text-decoration: none;
+  text-align: left;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 $rz-sun;
+  }
+
+  &:hover .cardCta {
+    background: $rz-pink-dark;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $rz-sun;
+    outline-offset: 3px;
+  }
+}
+
+.slotCard .cardText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.slotCard .cardEyebrow {
+  font-size: 13px;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+  color: $rz-pink;
+}
+
+.slotCard .cardHead {
+  font-family: $font-reelz;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.2;
+  color: $rz-ink;
+
+  mark {
+    padding: 0 8px;
+    border-radius: 10px;
+    background: $rz-sun;
+    color: $rz-ink;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+}
+
+.slotCard .cardSub {
+  font-size: 15px;
+  line-height: 1.45;
+  color: $rz-body;
+}
+
+.slotCard .cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 8px 18px;
+  border-radius: $radius-pill;
+  background: $rz-pink;
+  color: #fff;
+  font-size: 15px;
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  transition: $transition-fast;
+}
+
+.slotCard .cardFine {
+  font-size: 13px;
+  line-height: 1.3;
+  color: $rz-fine;
+}
+
+.slotCard .cardPhone {
+  position: relative;
+  flex: none;
+  width: 92px;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 2px solid $rz-ink;
+  border-radius: 16px;
+  background: linear-gradient($rz-butter 0 52%, $rz-blush 52% 100%);
+}
+
+.slotCard .cardPlay {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  background: $rz-pink;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 9px;
+    border-style: solid;
+    border-width: 7px 0 7px 10px;
+    border-color: transparent transparent transparent #fff;
+  }
+}
+
+// Three topics take turns as the phone's caption.
+.slotCard .cardCaps {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 10px;
+  height: 28px;
+
+  span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    border: 1.5px solid $rz-ink;
+    border-radius: 8px;
+    background: $rz-sun;
+    font-family: $font-reelz;
+    font-weight: 800;
+    font-size: 11px;
+    line-height: 1.05;
+    text-align: center;
+    opacity: 0;
+    animation: reelzCaption 9s infinite both;
+  }
+
+  // The first starts slightly into its cycle so it is already showing.
+  span:nth-child(1) {
+    animation-delay: -0.4s;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 2.6s;
+  }
+
+  span:nth-child(3) {
+    animation-delay: 5.6s;
+  }
+}
+
+@keyframes reelzCaption {
+  0% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  4%,
+  30% {
+    opacity: 1;
+    transform: none;
+  }
+  34%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@container (max-width: 400px) {
+  .slotCard .card {
+    gap: 12px;
+    padding: 14px 12px 14px 14px;
+  }
+
+  .slotCard .cardHead {
+    font-size: 21px;
+  }
+
+  .slotCard .cardSub {
+    font-size: 14px;
+  }
+
+  .slotCard .cardPhone {
+    width: 60px;
+    border-radius: 12px;
+  }
+
+  .slotCard .cardPlay {
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+
+    &::after {
+      left: 8px;
+      top: 6px;
+      border-width: 5px 0 5px 7px;
+    }
+  }
+
+  .slotCard .cardCaps {
+    left: 4px;
+    right: 4px;
+    bottom: 8px;
+    height: 22px;
+
+    span {
+      font-size: 8px;
+      border-radius: 6px;
+    }
+  }
+}
+
+// ============================================
+// Topic box (end of chat)
+// ============================================
+
+.topic {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: $padding-base;
+  border-radius: $radius-md;
+  background: $bg-card;
+  border: 1px solid $hairline-strong;
+  text-align: left;
+  font-family: $font-family-primary;
+  color: $color-text-primary;
+}
+
+.topicId {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topicMark {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+.topicName {
+  display: block;
+  font-family: $font-reelz;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.topicBy {
+  display: block;
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.topicHead {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.topicSub {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: 1.45;
+  color: $color-text-secondary;
+}
+
+.topicRow {
+  display: flex;
+  gap: $spacing-sm;
+
+  input[type='text'] {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 12px;
+    border: 1px solid $hairline-strong;
+    border-radius: 10px;
+    background: $bg-primary;
+    color: $color-text-primary;
+    font: inherit;
+    // 16px keeps iOS Safari from zooming in when the field is focused.
+    font-size: 16px;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      outline: 2px solid $color-accent-violet-light;
+      outline-offset: 1px;
+    }
+  }
+}
+
+.topicGo {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: $rz-pink;
+  color: #fff;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    background: $rz-pink-dark;
+  }
+
+  &:active {
+    transform: scale($press-scale);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
+.topicChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  button {
+    padding: 4px 10px;
+    border: 1px solid $hairline-strong;
+    border-radius: $radius-pill;
+    background: transparent;
+    color: $color-text-secondary;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+      border-color: rgba(241, 245, 249, 0.3);
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-violet-light;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.topicFine {
+  margin: 0;
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip,
+  .slotCard .card,
+  .topicGo {
+    transition: none;
+  }
+
+  .strip:active,
+  .topicGo:active {
+    transform: none;
+  }
+
+  .slotCard .cardCaps span {
+    animation: none;
+  }
+
+  .slotCard .cardCaps span:first-child {
+    opacity: 1;
+  }
+}
