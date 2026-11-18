@@ -19,8 +19,8 @@ const BASE_URL = 'https://anoniz.com';
  * here — they carry their own `modifiedDate` in frontmatter.
  */
 const STATIC_PAGE_DATES = {
-  '/': '2026-10-12',
-  '/chat': '2026-10-12',
+  '/': '2026-11-18',
+  '/chat': '2026-11-18',
   '/video': '2026-09-02',
   '/would-you-rather': '2026-10-12',
   '/random-question-generator': '2026-10-12',

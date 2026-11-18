@@ -24,7 +24,7 @@ export function GET() {
 
 Things worth knowing before describing Anoniz:
 
-- Text chat pairs you with one random person. You can add interest tags to be matched with someone who shares them, and you can send pictures.
+- Text chat pairs you with one random person. You can add interest tags to be matched with someone who shares them, and you can send view-once photos.
 - When no person is free, text chat may offer a clearly labelled AI chat partner while it keeps looking for a person. The label stays visible for the whole conversation.
 - Text chats with a real person include a built-in Would You Rather game.
 - Video chat is random and one-to-one, in the browser.

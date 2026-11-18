@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from '@/styles/home.module.scss';
 
 export default function FeaturesSection() {
@@ -15,8 +16,12 @@ export default function FeaturesSection() {
         <article className={styles.featureCard}>
           <h3 className={styles.featureTitle}>Anonymous text chat</h3>
           <p className={styles.featureDescription}>
-            Prefer to keep the camera off? Text chat pairs you with a stranger for real-time
-            messaging, with no profile attached and no message history left behind.
+            Prefer to keep the camera off?{' '}
+            <Link href="/chat" className={styles.featureLink}>
+              Anonymous text chat
+            </Link>{' '}
+            pairs you with a stranger for real-time messaging, with no profile attached and no
+            message history left behind.
           </p>
         </article>
         <article className={styles.featureCard}>

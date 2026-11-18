@@ -321,6 +321,21 @@ $bg-band: rgba(30, 41, 59, 0.45);
   color: $color-text-secondary;
 }
 
+.featureLink {
+  color: $color-accent-light;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-violet-light;
+    outline-offset: 2px;
+  }
+}
+
 // Benefits: heading on the left, the four reasons on the right, so this
 // section reads differently from the one above it.
 .benefits {

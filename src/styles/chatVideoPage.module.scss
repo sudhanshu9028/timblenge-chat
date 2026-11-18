@@ -64,6 +64,32 @@
   line-height: $line-height-relaxed;
   color: $color-text-secondary;
   margin-bottom: $spacing-md;
+
+  a {
+    color: $color-accent-light;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-violet-light;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.seoFeature {
+  margin-top: $spacing-lg;
+}
+
+.seoSubheading {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
 }
 
 // Numbered steps for the "how it works" section — ordered because the order
@@ -108,8 +134,8 @@
   }
 }
 
-// Question/answer pairs rendered as plain content. Deliberately not marked up
-// as FAQPage — that schema is single-sourced on the blog slug pages.
+// Question/answer pairs. On /chat these come from lib/chatFaqData.js, which also
+// feeds the page's FAQPage structured data.
 .seoQa {
   margin-bottom: $spacing-lg;
 }

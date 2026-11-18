@@ -87,7 +87,7 @@ export default function ConsentModal({ isOpen, onClose, chatType }) {
         </button>
         <h2 className={styles.modalTitle}>Before you start</h2>
         <p className={styles.modalSubtitle}>
-          Select your gender so we can match you with the right people.
+          A couple of quick things, then we&apos;ll find someone to talk to.
         </p>
 
         <div className={styles.genderSection}>
