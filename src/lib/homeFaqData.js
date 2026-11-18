@@ -37,6 +37,6 @@ export const HOME_FAQ_ITEMS = [
   {
     question: 'What makes Anoniz different from Omegle?',
     answer:
-      'Anoniz keeps what made Omegle easy, one-to-one chat with no account, and adds interest-based matching, an 18+ age confirmation, view-once photos and an ad-free interface. Nothing you say is stored after you disconnect.',
+      'Anoniz keeps what made Omegle easy, one-to-one chat with no account, and adds interest-based matching, an 18+ age confirmation, view-once photos and a clean interface with no ad networks. Nothing you say is stored after you disconnect.',
   },
 ];

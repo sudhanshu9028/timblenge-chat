@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>
-          <p className={styles.lastUpdated}>Last Updated: November 1, 2026</p>
+          <p className={styles.lastUpdated}>Last Updated: November 18, 2026</p>
         </div>
 
         <div className={styles.content}>
@@ -209,10 +209,18 @@ export default function PrivacyPolicyPage() {
                 <span className={styles.strong}>Product Hunt:</span> The badge in our footer is
                 loaded from Product Hunt, which receives a standard request from your browser.
               </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Reelz:</span> Visitors whose device is set to
+                India&apos;s time zone may see promotions for Reelz, an AI reel maker from the
+                Anoniz team. The time zone check happens in your browser. Google Analytics counts
+                how often these promotions are seen and clicked, but never receives a topic you
+                type. If you open Reelz, the link shows which promotion you used, any topic you
+                typed is passed to Reelz, and Reelz&apos;s own terms and privacy policy apply.
+              </li>
             </ul>
             <p className={styles.sectionContent}>
               We do not sell, rent, or share your personal information with third parties for their
-              marketing purposes, and we show no ads.
+              marketing purposes, and we do not use advertising networks.
             </p>
           </section>
 

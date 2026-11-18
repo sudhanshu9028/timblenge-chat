@@ -30,7 +30,7 @@ export const faqItems = [
   {
     question: 'What is the best Omegle alternative in 2026?',
     answer:
-      'Based on our testing, Anoniz is the best overall Omegle alternative in 2026. It offers instant anonymous video and text chat with no registration, interest-based matching, and a clean, ad-free interface.',
+      'Based on our testing, Anoniz is the best overall Omegle alternative in 2026. It offers instant anonymous video and text chat with no registration, interest-based matching, and a clean interface with no ad networks.',
   },
   {
     question: 'Are Omegle alternatives safe to use?',
@@ -178,17 +178,17 @@ export default function BestOmegleAlternatives({ styles }) {
           Conversations tend to go deeper when you have a shared starting point.
         </p>
         <p>
-          The interface is clean and uncluttered. There are no banner ads covering half your screen,
-          no pop-ups asking you to upgrade, and no dark patterns pushing you toward paid features.
-          It works just as well on a phone browser as it does on a laptop.
+          The interface is clean and uncluttered. There are no ad-network banners covering half your
+          screen, no pop-ups asking you to upgrade, and no dark patterns pushing you toward paid
+          features. It works just as well on a phone browser as it does on a laptop.
         </p>
         <ul>
           <li>No registration required — start chatting instantly</li>
           <li>Both video chat and text chat available</li>
           <li>Interest-based matching for better conversations</li>
           <li>Works on desktop and mobile browsers</li>
-          <li>Clean, ad-free interface</li>
-          <li>Privacy-first design — no data collection</li>
+          <li>Clean interface with no ad networks</li>
+          <li>Privacy-first design: no accounts, and chats aren&apos;t stored</li>
         </ul>
         <p>
           <strong>Best for:</strong> Anyone who wants the classic random chat experience without the
