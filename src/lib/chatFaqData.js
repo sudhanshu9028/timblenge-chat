@@ -29,7 +29,7 @@ export const CHAT_FAQ_ITEMS = [
   {
     question: 'Can I choose to chat with girls or boys?',
     answer:
-      "No. There is no gender filter, and your gender isn't used for matching or shown to the other person. Who you meet is random.",
+      "No. There is no gender filter and we don't ask for your gender, so who you meet is random.",
   },
   {
     question: 'Am I talking to a real person or an AI?',

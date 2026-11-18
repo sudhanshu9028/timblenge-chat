@@ -123,8 +123,8 @@ export default function ChatPage() {
           <h2 className={styles.seoHeading}>How it works</h2>
           <ol className={styles.seoSteps}>
             <li>
-              <strong>Answer two quick things.</strong> Pick a gender option and confirm you&apos;re
-              18 or older. You can also add a few interests, such as music, gaming or travel.
+              <strong>Confirm you&apos;re 18 or older.</strong> You can also add a few interests,
+              such as music, gaming or travel.
             </li>
             <li>
               <strong>We look for a real person.</strong> Matching usually takes a few seconds. If

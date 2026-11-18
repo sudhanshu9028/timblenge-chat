@@ -98,11 +98,6 @@
   color: $color-text-secondary;
 }
 
-.genderSection {
-  margin-bottom: $spacing-base;
-}
-
-.genderLabel,
 .interestsLabel {
   margin: 0 0 $spacing-sm;
   font-size: $font-size-sm;
@@ -110,47 +105,6 @@
   color: $color-text-primary;
 }
 
-.genderButtonsRow {
-  display: flex;
-  gap: $spacing-sm;
-  margin-bottom: $spacing-sm;
-}
-
-.genderButton {
-  flex: 1;
-  height: 44px;
-  padding: 0 $padding-sm;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $bg-primary;
-  border: 1px solid $hairline-strong;
-  border-radius: 10px;
-  color: $color-text-secondary;
-  font-family: inherit;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  cursor: pointer;
-  transition: $transition-fast;
-
-  &:hover {
-    color: $color-text-primary;
-    border-color: rgba(241, 245, 249, 0.24);
-  }
-}
-
-// The selection is the one place in the form that takes the accent.
-.genderButtonActive {
-  background: rgba(236, 72, 153, 0.12);
-  border-color: $color-accent-primary;
-  color: $color-text-primary;
-
-  &:hover {
-    border-color: $color-accent-light;
-  }
-}
-
-.genderWarning,
 .interestsHint {
   margin: $spacing-xs 0 0;
   font-size: $font-size-xs;
@@ -298,15 +252,5 @@
 
   .modalTitle {
     font-size: $font-size-2xl;
-  }
-}
-
-// Male and Female sit side by side down to 310px, which saves a row of height
-// on every real phone — the modal is tallest exactly where the screen is
-// shortest. Only below 310px, where two buttons in a row would be too narrow
-// to tap comfortably, do they stack.
-@media (max-width: #{$breakpoint-xxs - 0.02px}) {
-  .genderButtonsRow {
-    flex-direction: column;
   }
 }

@@ -1,7 +1,7 @@
 import styles from '@/styles/home.module.scss';
 
 // The steps follow the real flow: the chat type is picked on this page, then
-// the consent modal asks for gender, interests and the 18+ confirmation.
+// the consent modal asks for optional interests and the 18+ confirmation.
 const STEPS = [
   {
     title: 'Pick text or video',
@@ -11,7 +11,7 @@ const STEPS = [
   {
     title: 'Confirm you are 18 or older',
     description:
-      'Choose your gender if you like, add a few interests to match on, and tick the age box. No email, no account.',
+      'Add a few interests to match on if you like, then tick the age box. No email, no account.',
   },
   {
     title: 'Start talking',

@@ -60,11 +60,6 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className={styles.list}>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Gender:</span> We ask for it when you start a chat.
-                It is kept in your browser&apos;s session storage and cleared when you close the
-                tab. It is not sent to our servers.
-              </li>
-              <li className={styles.listItem}>
                 <span className={styles.strong}>Interests:</span> Any interest tags you add are sent
                 to our server so we can try to match you with someone who shares them. They are held
                 in memory only while you are connected.
@@ -150,8 +145,8 @@ export default function PrivacyPolicyPage() {
                 connected, then discarded.
               </li>
               <li className={styles.listItem}>
-                <span className={styles.strong}>Gender and session details:</span> Kept in your
-                browser&apos;s session storage and cleared when you close the tab.
+                <span className={styles.strong}>Session details:</span> Kept in your browser&apos;s
+                session storage and cleared when you close the tab.
               </li>
               <li className={styles.listItem}>
                 <span className={styles.strong}>Notification subscriptions:</span> Kept until you
@@ -229,9 +224,9 @@ export default function PrivacyPolicyPage() {
             <p className={styles.sectionContent}>
               Anoniz itself does not use cookies. Google Analytics may set cookies to measure usage,
               except where analytics storage is denied as described above. We use your
-              browser&apos;s session storage for your gender, interests and chat session, and local
-              storage for the on-device profile. You can clear all of these in your browser settings
-              at any time.
+              browser&apos;s session storage for your interests and chat session, and local storage
+              for the on-device profile. You can clear all of these in your browser settings at any
+              time.
             </p>
           </section>
 
