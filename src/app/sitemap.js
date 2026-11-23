@@ -28,7 +28,7 @@ const STATIC_PAGE_DATES = {
   '/about': '2026-02-08',
   '/support': '2026-02-08',
   '/terms': '2026-11-01',
-  '/privacy-policy': '2026-11-18',
+  '/privacy-policy': '2026-11-23',
 };
 
 export default function sitemap() {

@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
 
         <div className={styles.header}>
           <h1 className={styles.title}>Privacy Policy</h1>
-          <p className={styles.lastUpdated}>Last Updated: November 18, 2026</p>
+          <p className={styles.lastUpdated}>Last Updated: November 23, 2026</p>
         </div>
 
         <div className={styles.content}>
@@ -160,8 +160,10 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
             <p className={styles.sectionContent}>
-              We also keep anonymous counts of how many people are online at each hour, with no
-              identifiers attached, to learn when the site is busiest.
+              We also keep anonymous hourly counts, with no identifiers attached: how many people
+              are online, how many chats start, whether they end with a person or with the AI, how
+              long people wait for a match, and how long chats last. We use them to learn when the
+              site is busiest and how often visitors find someone to talk to.
             </p>
           </section>
 
@@ -203,6 +205,11 @@ export default function PrivacyPolicyPage() {
               <li className={styles.listItem}>
                 <span className={styles.strong}>Product Hunt:</span> The badge in our footer is
                 loaded from Product Hunt, which receives a standard request from your browser.
+              </li>
+              <li className={styles.listItem}>
+                <span className={styles.strong}>Supabase:</span> Hosts our database, which holds the
+                notification subscriptions and the anonymous counts described above. No chat content
+                is stored there.
               </li>
               <li className={styles.listItem}>
                 <span className={styles.strong}>Reelz:</span> Visitors whose device is set to

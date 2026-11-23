@@ -8,12 +8,13 @@
 // Deliberately tiny: no database, no new dependency, and it reuses the
 // presence figure the socket server already computes.
 //
-// NOTE: Render's filesystem is ephemeral, so this file is wiped on every deploy
-// and cannot accumulate the weeks of history the Prime Time slot needs. Durable
-// storage for it is still an open item.
+// Render's filesystem is wiped on every restart, so with DATABASE_URL set each
+// sample goes to Postgres (presence_hourly) and the history survives. Without
+// it, the old JSON file is still used, which is fine for local dev.
 
 const fs = require('fs');
 const path = require('path');
+const db = require('./db');
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const FILE = path.join(DATA_DIR, 'presence-stats.json');
@@ -72,10 +73,30 @@ function scheduleWrite() {
 function startPresenceStats(getCount) {
   buckets = load();
 
-  setInterval(() => {
+  setInterval(async () => {
     const now = new Date();
-    const bucket = buckets[now.getUTCDay()][now.getUTCHours()];
     const count = getCount();
+
+    const client = await db.ready();
+    if (client) {
+      const hourStart = new Date(now);
+      hourStart.setUTCMinutes(0, 0, 0);
+      try {
+        await client`
+          insert into presence_hourly (hour_start, samples, online_sum, online_peak)
+          values (${hourStart}, 1, ${count}, ${count})
+          on conflict (hour_start) do update set
+            samples = presence_hourly.samples + 1,
+            online_sum = presence_hourly.online_sum + excluded.online_sum,
+            online_peak = greatest(presence_hourly.online_peak, excluded.online_peak)
+        `;
+      } catch (error) {
+        console.error('presence-stats write failed:', error.message);
+      }
+      return;
+    }
+
+    const bucket = buckets[now.getUTCDay()][now.getUTCHours()];
     bucket.sum += count;
     bucket.count += 1;
     bucket.peak = Math.max(bucket.peak, count);
@@ -91,7 +112,22 @@ function startPresenceStats(getCount) {
  * The histogram plus the peak hour it implies — this is what you read to
  * decide where Prime Time should actually sit.
  */
-function getPresenceStats() {
+async function getPresenceStats() {
+  const client = await db.ready();
+  if (client) {
+    // The last four weeks, folded into the same [dayOfWeek][hourUTC] shape
+    // the file version keeps, so everything below works on either.
+    const rows = await client`
+      select extract(dow from hour_start at time zone 'UTC')::int as dow,
+        extract(hour from hour_start at time zone 'UTC')::int as hour,
+        sum(online_sum)::int as sum, sum(samples)::int as count, max(online_peak)::int as peak
+      from presence_hourly
+      where hour_start >= now() - interval '28 days'
+      group by 1, 2
+    `;
+    buckets = emptyBuckets();
+    for (const r of rows) buckets[r.dow][r.hour] = { sum: r.sum, count: r.count, peak: r.peak };
+  }
   if (!buckets) return { samples: 0, hourlyAverage: [], peakHourUtc: null, byDay: [] };
 
   // Collapse the days into a single 24-hour profile; day-of-week detail stays

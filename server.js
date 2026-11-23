@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const { startPresenceStats, getPresenceStats } = require('./src/server/presenceStats');
 const { pickQuestion } = require('./src/server/games/wouldYouRather');
 const pushStore = require('./src/server/pushStore');
+const matchStats = require('./src/server/matchStats');
 const viewOnce = require('./src/server/viewOnceImages');
 const { submitChangedUrls, getKey: getIndexNowKey } = require('./src/server/indexNow');
 const {
@@ -435,9 +436,27 @@ app.prepare().then(() => {
   // Turns the Prime Time guess into a measured fact. Read this after a couple
   // of weeks and move START_UTC_MINUTES in src/lib/primeTime.js to match.
   startPresenceStats(getOnlineCount);
-  server.get('/api/presence-stats', (req, res) => {
+  server.get('/api/presence-stats', async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
-    res.json(getPresenceStats());
+    res.json(await getPresenceStats());
+  });
+
+  // How searches end: with a person, with the AI, or with someone giving up.
+  // Business numbers rather than secrets, but there's no reason to publish
+  // them, so set STATS_TOKEN and pass it as ?token=… to read this.
+  matchStats.startMatchStats();
+  server.get('/api/match-stats', async (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    const token = process.env.STATS_TOKEN;
+    if (token && req.query.token !== token) return res.status(404).end();
+    try {
+      const days = await matchStats.getMatchStats(req.query.days);
+      if (!days) return res.status(503).json({ error: 'No database: set DATABASE_URL' });
+      return res.json({ days });
+    } catch (error) {
+      console.error('[match-stats] read failed:', error.message);
+      return res.status(500).json({ error: 'read failed' });
+    }
   });
 
   io.on('connection', (socket) => {
@@ -478,6 +497,7 @@ app.prepare().then(() => {
           });
           // They're in a conversation now, so they can't be reconnected with.
           cancelReconnect(io, socketId);
+          matchStats.matchedWithAi(socketId);
           socket.emit('bot-matched', { personalityIndex: index });
 
           // Auto-end bot chat after 3-5 minutes
@@ -518,6 +538,7 @@ app.prepare().then(() => {
 
       userSocketMap.set(socketId, peerId);
       userSocketMap.set(peerId, socketId);
+      matchStats.paired(socketId, peerId, { mode: 'text', peerWasWithAi: fromBot });
 
       io.to(socketId).emit('matched');
       io.to(peerId).emit(fromBot ? 'bot-replaced' : 'matched');
@@ -525,6 +546,7 @@ app.prepare().then(() => {
 
     // Leave chat handler - properly remove from chat queues
     socket.on('leave-chat', () => {
+      matchStats.left(socket.id);
       clearBotTimers(socket.id);
       endGame(io, socket.id);
       viewOnce.purgeFor(socket.id);
@@ -542,6 +564,7 @@ app.prepare().then(() => {
 
     // Leave video handler - properly remove from video queues
     socket.on('leave-video', () => {
+      matchStats.left(socket.id);
       const partnerId = videoUserSocketMap.get(socket.id);
       if (partnerId) {
         io.to(partnerId).emit('video-partner-left');
@@ -673,6 +696,7 @@ app.prepare().then(() => {
 
         userSocketMap.set(socket.id, exId);
         userSocketMap.set(exId, socket.id);
+        matchStats.paired(socket.id, exId, { mode: 'text' });
         lastPartner.delete(socket.id);
         lastPartner.delete(exId);
 
@@ -693,6 +717,8 @@ app.prepare().then(() => {
 
       // Make sure the user isn't already in the queue
       if (waitingUsers.has(socket.id)) return;
+
+      matchStats.searchStarted(socket.id, 'text');
 
       // Store interests if provided
       const interests = (data && data.interests) || [];
@@ -722,6 +748,7 @@ app.prepare().then(() => {
     socket.on('message', (msg) => {
       const partnerId = userSocketMap.get(socket.id);
       if (partnerId) {
+        matchStats.messageSent(socket.id);
         io.to(partnerId).emit('message', msg);
       }
     });
@@ -839,6 +866,8 @@ app.prepare().then(() => {
       if (!isSocketConnected(io, socket.id)) return;
 
       viewOnce.purgeFor(socket.id);
+      matchStats.conversationEnded(socket.id);
+      matchStats.searchStarted(socket.id, 'text');
       const partnerId = userSocketMap.get(socket.id);
 
       if (partnerId && isSocketConnected(io, partnerId)) {
@@ -887,6 +916,7 @@ app.prepare().then(() => {
     });
 
     socket.on('disconnect', () => {
+      matchStats.left(socket.id);
       // Clear bot timers
       clearBotTimers(socket.id);
 
@@ -980,6 +1010,7 @@ app.prepare().then(() => {
       }
 
       videoUserReady.add(socket.id);
+      matchStats.searchStarted(socket.id, 'video');
 
       // Remove socket from waiting users before finding peer (prevents self-matching)
       videoWaitingUsers.delete(socket.id);
@@ -1001,6 +1032,7 @@ app.prepare().then(() => {
 
         videoUserSocketMap.set(socket.id, peerId);
         videoUserSocketMap.set(peerId, socket.id);
+        matchStats.paired(socket.id, peerId, { mode: 'video' });
 
         socket.emit('video-matched', { peerId, initiator: true });
         io.to(peerId).emit('video-matched', { peerId: socket.id, initiator: false });
@@ -1024,6 +1056,7 @@ app.prepare().then(() => {
       io.to(to).emit('new-ice-candidate', { from: socket.id, candidate })
     );
     socket.on('video-stop', () => {
+      matchStats.left(socket.id);
       const partnerId = videoUserSocketMap.get(socket.id);
       if (partnerId && isSocketConnected(io, partnerId)) {
         // Notify partner that they should stop too

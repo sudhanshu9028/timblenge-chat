@@ -2,7 +2,10 @@
 //
 // Everything else on this server is in-memory and disposable. Subscriptions
 // are not: losing them on a restart means silently losing the only channel
-// that can bring an anonymous visitor back, so they persist to disk.
+// that can bring an anonymous visitor back. They used to persist to a JSON
+// file, but Render wipes the disk on every restart, so with DATABASE_URL set
+// they live in Postgres (push_subscriptions) and the file is only a local
+// fallback. The in-memory map stays the working copy either way.
 //
 // The sending rules matter as much as the plumbing. Notifying people every
 // time the site gets busy is the fastest way to get unsubscribed, so there is
@@ -12,6 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const webpush = require('web-push');
+const db = require('./db');
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const FILE = path.join(DATA_DIR, 'push-subscriptions.json');
@@ -25,6 +29,7 @@ const QUIET_END_HOUR = 8;
 let subscriptions = new Map();
 let writeTimer = null;
 let configured = false;
+let useDb = false;
 
 function configure() {
   const publicKey = process.env.VAPID_PUBLIC_KEY || process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
@@ -69,7 +74,34 @@ function persist() {
   }
 }
 
+async function loadFromDb(client) {
+  const rows = await client`
+    select endpoint, subscription, tz_offset, created_at, last_sent_at from push_subscriptions
+  `;
+  for (const r of rows) {
+    subscriptions.set(r.endpoint, {
+      subscription: r.subscription,
+      tzOffset: r.tz_offset,
+      createdAt: new Date(r.created_at).getTime(),
+      lastSentAt: r.last_sent_at ? new Date(r.last_sent_at).getTime() : 0,
+    });
+  }
+  return rows.length;
+}
+
+/** Runs a write against Postgres when it's in use; failures are logged, not thrown. */
+async function dbWrite(label, fn) {
+  if (!useDb) return;
+  try {
+    const client = await db.ready();
+    if (client) await fn(client);
+  } catch (error) {
+    console.error(`[push] ${label} failed:`, error.message);
+  }
+}
+
 function scheduleWrite() {
+  if (useDb) return;
   if (writeTimer) return;
   writeTimer = setTimeout(() => {
     writeTimer = null;
@@ -80,8 +112,18 @@ function scheduleWrite() {
 function initPushStore() {
   configured = configure();
   subscriptions = load();
-  process.on('SIGTERM', persist);
-  process.on('SIGINT', persist);
+  process.on('SIGTERM', () => useDb || persist());
+  process.on('SIGINT', () => useDb || persist());
+  db.ready().then(async (client) => {
+    if (!client) return;
+    try {
+      const loaded = await loadFromDb(client);
+      useDb = true;
+      console.info(`[push] ${loaded} subscriptions loaded from the database`);
+    } catch (error) {
+      console.error('[push] could not load subscriptions, using the local file:', error.message);
+    }
+  });
   return configured;
 }
 
@@ -101,12 +143,27 @@ function addSubscription(subscription, tzOffset) {
     lastSentAt: existing?.lastSentAt || 0,
   });
   scheduleWrite();
+  const record = subscriptions.get(subscription.endpoint);
+  dbWrite(
+    'save',
+    (client) => client`
+    insert into push_subscriptions (endpoint, subscription, tz_offset)
+    values (${subscription.endpoint}, ${client.json(subscription)}, ${record.tzOffset})
+    on conflict (endpoint) do update set
+      subscription = excluded.subscription,
+      tz_offset = excluded.tz_offset
+  `
+  );
   return true;
 }
 
 function removeSubscription(endpoint) {
   const removed = subscriptions.delete(endpoint);
   if (removed) scheduleWrite();
+  dbWrite(
+    'delete',
+    (client) => client`delete from push_subscriptions where endpoint = ${endpoint}`
+  );
   return removed;
 }
 
@@ -147,17 +204,22 @@ async function broadcast(payload) {
     return false;
   });
 
+  const sentEndpoints = [];
+  const prunedEndpoints = [];
+
   await Promise.all(
     targets.map(async (record) => {
       try {
         await webpush.sendNotification(record.subscription, body);
         record.lastSentAt = now;
+        sentEndpoints.push(record.subscription.endpoint);
         sent += 1;
       } catch (error) {
         // 404/410 mean the browser threw the subscription away. Keeping dead
         // endpoints forever would slow every later send down.
         if (error.statusCode === 404 || error.statusCode === 410) {
           subscriptions.delete(record.subscription.endpoint);
+          prunedEndpoints.push(record.subscription.endpoint);
           pruned += 1;
         } else {
           console.error('[push] send failed:', error.statusCode || error.message);
@@ -167,6 +229,23 @@ async function broadcast(payload) {
   );
 
   if (sent || pruned) scheduleWrite();
+  if (sentEndpoints.length) {
+    await dbWrite(
+      'mark sent',
+      (client) => client`
+      update push_subscriptions set last_sent_at = ${new Date(now)}
+      where endpoint in ${client(sentEndpoints)}
+    `
+    );
+  }
+  if (prunedEndpoints.length) {
+    await dbWrite(
+      'prune',
+      (client) => client`
+      delete from push_subscriptions where endpoint in ${client(prunedEndpoints)}
+    `
+    );
+  }
   return { sent, skipped, pruned };
 }
 
