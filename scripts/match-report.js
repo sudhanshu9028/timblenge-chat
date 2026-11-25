@@ -6,6 +6,9 @@
 // Reads DATABASE_URL from .env.local. The same numbers are served by
 // GET /api/match-stats?days=7&token=STATS_TOKEN on the live site.
 
+// This only reads, so it may use the live database from a laptop (see db.js).
+process.env.DATABASE_OUTSIDE_PRODUCTION = '1';
+
 const { getMatchStats } = require('../src/server/matchStats');
 
 (async () => {

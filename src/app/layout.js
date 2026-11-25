@@ -2,6 +2,7 @@ import Script from 'next/script';
 import { Figtree } from 'next/font/google';
 import Navigation from './components/Navigation';
 import AnalyticsBootstrap from './components/AnalyticsBootstrap';
+import PushResync from './components/PushResync';
 import Footer from './components/Footer';
 import { REELZ_GEO_SCRIPT } from '@/lib/reelzPromo';
 import './globals.css';
@@ -141,6 +142,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased">
         <AnalyticsBootstrap />
+        <PushResync />
         <Navigation />
         {children}
         <Footer />

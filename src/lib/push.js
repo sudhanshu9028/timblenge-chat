@@ -78,18 +78,55 @@ export async function subscribeToPush() {
         applicationServerKey: urlBase64ToUint8Array(PUBLIC_KEY),
       }));
 
-    const res = await fetch('/api/push/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        subscription,
-        // Lets the server keep quiet hours local to this person.
-        tzOffset: new Date().getTimezoneOffset(),
-      }),
-    });
-
-    return res.ok ? 'subscribed' : 'error';
+    return (await sendToServer(subscription)) ? 'subscribed' : 'error';
   } catch {
     return 'error';
+  }
+}
+
+async function sendToServer(subscription) {
+  const res = await fetch('/api/push/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      subscription,
+      // Lets the server keep quiet hours local to this person.
+      tzOffset: new Date().getTimezoneOffset(),
+    }),
+  });
+  return res.ok;
+}
+
+const RESYNC_KEY = 'anoniz-push-resynced';
+
+/**
+ * Tell the server again about a subscription this browser already holds.
+ *
+ * The browser keeps a subscription until the person revokes it, but the
+ * server's list has been lost before (Render wiped it on every restart), and
+ * the opt-in prompt never shows again once permission is granted. Without
+ * this, anyone dropped from the list could never be reached again. Silent:
+ * it never asks for permission or creates a subscription. Once per visit.
+ */
+export async function resyncPushSubscription() {
+  if (getPushCapability() !== 'granted') return;
+  try {
+    if (sessionStorage.getItem(RESYNC_KEY)) return;
+  } catch {
+    // Storage blocked: resyncing on every page is harmless, just wasteful.
+  }
+  try {
+    const registration = await navigator.serviceWorker.getRegistration();
+    const subscription = await registration?.pushManager.getSubscription();
+    if (!subscription) return;
+    if (await sendToServer(subscription)) {
+      try {
+        sessionStorage.setItem(RESYNC_KEY, '1');
+      } catch {
+        // See above.
+      }
+    }
+  } catch {
+    // Nothing to do: the next visit tries again.
   }
 }

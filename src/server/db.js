@@ -12,6 +12,12 @@
 //
 // On Render, use Supabase's *pooler* connection string, not the direct one:
 // the direct host is IPv6-only and Render can't reach it.
+//
+// Only the production server connects. `yarn dev` loads .env.local too, and a
+// dev server on the live database would add local test chats to the real
+// stats and send the Prime Time push to real subscribers a second time, from
+// a laptop. Scripts that only read (scripts/match-report.js) opt in with
+// DATABASE_OUTSIDE_PRODUCTION=1.
 
 const postgres = require('postgres');
 
@@ -21,6 +27,11 @@ let readyPromise = null;
 function getSql() {
   const url = process.env.DATABASE_URL;
   if (!url) return null;
+  const production = process.env.NODE_ENV === 'production';
+  if (!production && process.env.DATABASE_OUTSIDE_PRODUCTION !== '1') {
+    console.info('[db] DATABASE_URL ignored outside production, using local files');
+    return null;
+  }
   if (!sql) {
     const local = /@(localhost|127\.0\.0\.1)[:/]/.test(url);
     sql = postgres(url, {
